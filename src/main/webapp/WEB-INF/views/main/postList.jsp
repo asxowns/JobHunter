@@ -15,7 +15,7 @@
     <%@ include file="../sub/header.jsp" %>
 </header>
 <section>
-    <h2> postList page </h2>
+    <h2> this is postList page </h2>
     
 </section>
 <footer>
