@@ -9,6 +9,10 @@ public class MainController {
     public String root(){
         return "./main/postList";  
     }
+    @RequestMapping("/registForm")
+    public String regForm(){
+        return "./main/registForm";  
+    }
     
     
     
