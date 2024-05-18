@@ -5,7 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,7 +22,7 @@ public class Enterprise{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long enter_code;
 	
-	@ManyToMany
+	@OneToOne
 	@JoinColumn(name="member_id")
 	@ToString.Exclude
 	private Member eid;
