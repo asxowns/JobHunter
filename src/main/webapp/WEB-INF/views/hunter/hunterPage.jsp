@@ -7,6 +7,17 @@
     <meta charset="UTF-8">
     <title>구직자 마이페이지</title>
 <style>
+//노멀라이즈 시작
+	body, ul, li{
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	
+	a{
+		color: inherit;		//부모 엘리먼트 값을 물려받는다 
+		text-decoration: none;		//밑줄 제거
+	}
 
 </style>
 </head>
