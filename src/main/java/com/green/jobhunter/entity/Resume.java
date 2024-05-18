@@ -25,7 +25,7 @@ public class Resume{
 	private Long resume_code;
 	
 	@ManyToOne
-	@JoinColumn(name="member_id")
+	@JoinColumn(name="hid")
 	@ToString.Exclude
 	private Member hid;
 	private String edu_name;
