@@ -28,8 +28,10 @@ public class Application{
 	private Posting post_code;
 	
 	@OneToOne
-	@JoinColumn(name="id")
+	@JoinColumn(name="hid")
 	@ToString.Exclude
 	private Member hid;
+
+	private String result;
 	
 }

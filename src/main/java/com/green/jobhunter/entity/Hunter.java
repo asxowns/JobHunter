@@ -23,7 +23,7 @@ public class Hunter{
 	private Long hunter_code;
 	
 	@OneToOne
-	@JoinColumn(name="member_id")
+	@JoinColumn(name="hid")
 	@ToString.Exclude
 	private Member hid;
 	private String user_name;

@@ -23,12 +23,12 @@ public class Favorite{
 	private Long favor_code;
 	
 	@ManyToOne
-	@JoinColumn(name="pcode")
+	@JoinColumn(name="post_code")
 	@ToString.Exclude
-	private Posting pcode;
+	private Posting post_code;
 	
 	@ManyToOne
-	@JoinColumn(name="member_id")
+	@JoinColumn(name="hid")
 	@ToString.Exclude
 	private Member hid;
 	

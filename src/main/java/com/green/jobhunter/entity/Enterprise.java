@@ -23,7 +23,7 @@ public class Enterprise{
 	private Long enter_code;
 	
 	@OneToOne
-	@JoinColumn(name="member_id")
+	@JoinColumn(name="eid")
 	@ToString.Exclude
 	private Member eid;
 	private String company_name;

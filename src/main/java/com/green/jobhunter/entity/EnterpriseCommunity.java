@@ -23,7 +23,7 @@ public class EnterpriseCommunity{
 	private Long ec_code;
 	
 	@ManyToOne
-	@JoinColumn(name="member_id")
+	@JoinColumn(name="writer")
 	@ToString.Exclude
 	private Member writer;
 	private String title;

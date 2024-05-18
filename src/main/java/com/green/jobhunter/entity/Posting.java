@@ -25,7 +25,7 @@ public class Posting{
 	private Long post_code;
 	
 	@OneToOne
-	@JoinColumn(name="id")
+	@JoinColumn(name="eid")
 	@ToString.Exclude
 	private Member eid;
 	private String title;

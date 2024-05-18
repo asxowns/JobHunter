@@ -25,12 +25,12 @@ public class Inform{
 	private Long if_code;
 	
 	@ManyToOne
-	@JoinColumn(name="member_id")
+	@JoinColumn(name="sender")
 	@ToString.Exclude
 	private Member sender;
 	
 	@ManyToOne
-	@JoinColumn(name="member_id")
+	@JoinColumn(name="resiever")
 	@ToString.Exclude
 	private Member resiever;
 	private String message;

@@ -24,13 +24,13 @@ public class CommunityReply{
 	private Long cmr_code;
 	
 	@OneToOne
-	@JoinColumn(name="cmcode")
+	@JoinColumn(name="cm_code")
 	@ToString.Exclude
-	private Community cmcode;
+	private Community cm_code;
 	private String comment;
 	
 	@ManyToOne
-	@JoinColumn(name="member_id")
+	@JoinColumn(name="writer")
 	@ToString.Exclude
 	private Member writer;
 	

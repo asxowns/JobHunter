@@ -25,15 +25,17 @@ public class Position{
 	private Long position_code;
 	
 	@ManyToOne
-	@JoinColumn(name="member_id")
+	@JoinColumn(name="eid")
 	@ToString.Exclude
 	private Member eid;
 	
 	@ManyToOne
-	@JoinColumn(name="member_id")
+	@JoinColumn(name="hid")
 	@ToString.Exclude
 	private Member hid;
 	private String msg;
 	private String managetel;
-	
+	private String result;
+
+	private LocalDateTime deadline;
 }

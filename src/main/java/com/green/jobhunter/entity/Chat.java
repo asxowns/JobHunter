@@ -25,13 +25,13 @@ public class Chat{
 	private Long ch_code;
 	
 	@ManyToOne
-	@JoinColumn(name="member_id")
+	@JoinColumn(name="hid")
 	@ToString.Exclude
-	private Member ID;
+	private Member hid;
 	private String message;
 	
 	@ManyToOne
-	@JoinColumn(name="member_id")
+	@JoinColumn(name="writer_manager")
 	@ToString.Exclude
 	private Member writer_manager;
 	private LocalDateTime timelog;

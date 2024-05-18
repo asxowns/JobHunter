@@ -25,7 +25,7 @@ public class CoverLetter{
 	@OneToOne
 	@JoinColumn(name="resume_code")
 	@ToString.Exclude
-	private Resume resume_no;
+	private Resume resume_code;
 	private String title;
 	private String content;
 	

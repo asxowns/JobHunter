@@ -25,9 +25,9 @@ public class Cs{
 	private Long cs_code;
 	
 	@ManyToOne
-	@JoinColumn(name="id")
+	@JoinColumn(name="hid")
 	@ToString.Exclude
-	private Member ID;
+	private Member hid;
 	private String title;
 	private String content;
 	private char type;

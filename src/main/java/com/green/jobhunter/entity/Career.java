@@ -8,7 +8,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,12 +25,12 @@ public class Career{
 	private Long car_code;
 	
 	@ManyToOne
-	@JoinColumn(name="resume_no")
+	@JoinColumn(name="resume_code")
 	@ToString.Exclude
-	private Resume resume_no;
+	private Resume resume_code;
 	
 	@ManyToOne
-	@JoinColumn(name="id")
+	@JoinColumn(name="hid")
 	@ToString.Exclude
 	private Member hid;
 	private String companyname;

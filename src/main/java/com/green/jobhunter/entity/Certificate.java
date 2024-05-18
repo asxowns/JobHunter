@@ -23,12 +23,12 @@ public class Certificate{
 	private Long certi_code;
 	
 	@ManyToOne
-	@JoinColumn(name="resume_no")
+	@JoinColumn(name="resume_code")
 	@ToString.Exclude
-	private Resume resume_no;
+	private Resume resume_code;
 	
 	@ManyToOne
-	@JoinColumn(name="member_id")
+	@JoinColumn(name="hid")
 	@ToString.Exclude
 	private Member hid;
 	

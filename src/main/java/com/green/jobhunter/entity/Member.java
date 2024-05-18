@@ -1,5 +1,6 @@
 package com.green.jobhunter.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
@@ -14,8 +15,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Member{
 	@Id
-	private Long member_id;
-	private String password;
-	private char role;
+    @Column(length = 20) // member_id 필드의 길이 설정
+    private String member_id;
+    
+    @Column(length = 16) // password 필드의 길이 설정
+    private String password;
+    
+    private char role;
 
 }
