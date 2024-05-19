@@ -63,6 +63,7 @@ td{
             </c:forEach>
         </tbody>
     </table>
+    <a href="/cs/forumWriteForm">문의글 작성</a>
 </section>
 </main>
 <footer>
