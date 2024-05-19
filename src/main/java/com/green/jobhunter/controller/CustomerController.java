@@ -69,9 +69,28 @@ public class CustomerController {
     }
     
     @RequestMapping("/cs/write")
-    public String write(Cs cs) {
-        cs.setCs_date(LocalDateTime.now());
-        csRepository.save(cs);
+    public String write(@RequestParam("cs_code") String cs_code
+    		,@RequestParam("content") String content
+    		,@RequestParam("public_type") char public_type
+    		,@RequestParam("title") String title
+    		,@RequestParam("type") char type
+    		,@RequestParam("id") String id
+    		,Model model
+    		){
+    	
+    	LocalDateTime cs_date = LocalDateTime.now();
+
+        char result = 'N';
+
+        model.addAttribute("cs_code", cs_code);
+        model.addAttribute("content", content);
+        model.addAttribute("cs_date", cs_date);
+        model.addAttribute("public_type", public_type);
+        model.addAttribute("result", result);
+        model.addAttribute("title", title);
+        model.addAttribute("type", type);
+        model.addAttribute("id", id);
+        		
         return "redirect:/csList";
     }
     
