@@ -8,8 +8,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HunterController {
     @RequestMapping("/")
     public String root(){
-        return "home";  
+        return "/home";  
     }
 
+    @RequestMapping("/hunterpage")
+    public String goHunterPage(){
+        return "/hunter/hunterPage";  
+    }
     
+    @RequestMapping("/resumeWriteForm")
+    public String writeResume() {
+    	
+    	return "/hunter/resumeWriteForm";
+    }
 }

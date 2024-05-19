@@ -7,15 +7,102 @@
     <meta charset="UTF-8">
     <title></title>
 <style>
-
+	body, html {
+    height: 100%;
+    margin: 0;
+  }
+  .container, h2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; 
+  }
+  
+  .container form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .container form input[type="submit"] {
+    align-self: center; 
+    margin-top: 7px; 
+  }
+  .container form .input-row {
+    display: flex; 
+    align-items: center; 
+    margin-bottom: 10px; 
+  }
+  .container form .input-row label {
+    width: 100px; 
+    text-align: left; 
+  }
+  .container form .input-row input[type="text"] {
+    flex: 1; 
+    margin-left: 10px; 
+  }
+  .container form input[type="text"] {
+        width: 200px; 
+        height: 20px; 
+        padding: 10px; 
+        border: 1px solid gray;
+        border-radius: 30px; 
+        outline: none; 
+        font-size: 16px; 
+    }
+    .container form label {
+        text-align: left; 
+    }
+    .container form input[type="submit"] {
+        width: 200px; 
+        height: 20px; 
+        border-radius: 30px; 
+        border: 1px solid gray;
+        padding: 20px; 
+        text-align: center; 
+    }
 </style>
 </head>
 <body>
 <header>
-    <%@ include file="sub/header.jsp" %>
+    <%@ include file="../sub/header.jsp" %>
 </header>
 <section>
-    <h2> index page </h2>
+    <h2> enterpriseInfoWriteForm page </h2> <!-- 기업정보 수정폼 페이지  -->
+    <br>
+    <div class="container">
+		<form action="enterpriseUpdate" method="post">
+			<div class="input-row">
+				<label for="id">아이디</label>
+				<input type="text" id="eid" name="eid" value="${enterprise.eid }">
+			</div>
+			<div class="input-row">
+				<label for="pw">비밀번호</label>
+				<input type="text" id="password" name="password">
+			</div>
+			<div class="input-row">
+				<label for="cname">기업명</label>
+				<input type="text" id="company_name" name="company_name">
+			</div>
+			<div class="input-row">
+				<label for="industry">산업군</label>
+				<input type="text" id="industry" name="industry">
+			</div>
+			<div class="input-row">
+				<label for="btel">담당자 연락처</label>
+				<input type="text" id="manager_tel" name="manager_tel">
+			</div>
+			<div class="input-row">
+				<label for="bemail">이메일</label>
+				<input type="text" id="manager_email" name="manager_email">
+			</div>
+			<div class="input-row">
+				<label for="breginum">사업자등록번호</label>
+				<input type="text" id="business_number" name="business_number">
+			</div>
+			<input type="submit" value="수정하기">
+		</form>
+	</div>
+</section>
     
 </section>
 <footer>

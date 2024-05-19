@@ -5,18 +5,57 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>구직자 마이페이지</title>
 <style>
+//노멀라이즈 시작
+	body, ul, li{
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	
+	a{
+		color: inherit;		//부모 엘리먼트 값을 물려받는다 
+		text-decoration: none;		//밑줄 제거
+	}
 
 </style>
 </head>
 <body>
 <header>
-    <%@ include file="sub/header.jsp" %>
+    <%@ include file="../sub/header.jsp" %>
 </header>
 <section>
-    <h2> index page </h2>
-    
+    <h2> 구직자 마이페이지 </h2>
+     	<aside class ="side-bar">
+ 		<section class="side-bar__icon-box">
+ 			<section class="side-bar__icon-1">
+ 				<div></div>
+ 				<div></div>
+ 				<div></div>
+ 			</section>
+ 		</section>
+ 		<ul>
+ 			<li>
+ 				<a href="resumeList.jsp">이력서 관리</a>
+ 			</li>
+ 			<li>
+ 				<a href="jobApplication.jsp">입사 지원 관리</a>
+ 			</li>
+ 			<li>
+ 				<a href="subscribeList.jsp">관심기업 관리</a>
+ 			</li>
+ 			<li>
+ 				<a href="positionList.jsp">입사 제안 현황</a>
+ 			</li>
+ 			<li>
+ 				<a href="favorList.jsp">스크랩한 채용 공고</a>
+ 			</li>
+ 			<li>
+ 				<a href="informList.jsp">내정보 관리</a>
+ 			</li>
+ 		</ul>
+ 	</aside>
 </section>
 <footer>
 
