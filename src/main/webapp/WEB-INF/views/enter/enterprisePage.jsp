@@ -7,16 +7,28 @@
     <meta charset="UTF-8">
     <title></title>
 <style>
-
+	body, html {
+    height: 100%;
+    margin: 0;
+  }
+  .container, h2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; 
+  }
 </style>
 </head>
 <body>
 <header>
-    <%@ include file="sub/header.jsp" %>
+    <%@ include file="../sub/header.jsp" %>
 </header>
 <section>
-    <h2> index page </h2>
-    
+    <h2> enterprise page </h2>
+    <br>
+	<a href="enterprisePostList"><button>채용공고관리</button></a>
+	<a href="enterpriseInfoWriteForm"><button>기업정보관리</button></a>
+	<a href="hunterList"><button>인재정보관리</button></a>
 </section>
 <footer>
 
