@@ -1,6 +1,5 @@
 package com.green.jobhunter.controller;
 
-
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -27,15 +26,7 @@ public class CustomerController {
 	
 	@Autowired
 	private MemberRepository memberRepository;
-	
-    /*@RequestMapping("/csList")
-    public String selectAll(Model model){
-    	List<Cs> list = csRepository.findAll();
-    	System.out.println(list);
-    	model.addAttribute("list", list);
-        return "/cs/csList";  
-    } <<<<<<<<<<<<<<<이게 실제로 쓸거 매우 중요 */
-    
+
 	@RequestMapping("/home")
 	public String home() {
 		return "/home";
@@ -43,22 +34,19 @@ public class CustomerController {
 	
 	@RequestMapping("/csList")
 	public String csList(HttpServletRequest request,Model model) {
-		List<Cs> list = csRepository.findAll();
-		List<Cs> list2 = csRepository.findByTypeAndPublictype('A', 'Y');
+		List<Cs> a = csRepository.findAll();
+		List<Cs> b = csRepository.findByTypeAndPublictype('A', 'Y');
 		HttpSession session = request.getSession();
-		String logged = (String)session.getAttribute("hid");
+		String logged = (String)session.getAttribute("id");
 		Member logged_member = memberRepository.findByMemberid(logged);
-		 List<Cs> list3 = csRepository.findByHid(logged_member);
-         model.addAttribute("list3", list3);
-    	System.out.println(list);
-    	model.addAttribute("list", list);
-    	model.addAttribute("list2", list2);
-    	model.addAttribute("list3", list3);
+		 List<Cs> c = csRepository.findByHid(logged_member);
+
+    	model.addAttribute("list", a);
+    	model.addAttribute("list2", b);
+    	model.addAttribute("list3", c);
 
 		return "/cs/csList";
 	}
-	
-	
 	
 	@RequestMapping("/forumDetail")
 	public String forumDetail(Model model) {
@@ -70,23 +58,6 @@ public class CustomerController {
 		return "/cs/forumWriteForm";
 	}
    
-    @RequestMapping("/logindo")
-    public String selectid(HttpServletRequest request, @RequestParam("memberid") String memberid,
-    		@RequestParam("role") char role, Model model) {
-    	List<Cs> list = csRepository.findAll();
-    	System.out.println(list);
-    	model.addAttribute("list", list);
-    	Member member = memberRepository.findByMemberIdAndRole(memberid,role);
-    	if(member != null) {
-    		HttpSession session = request.getSession();
-    		session.setAttribute("id", memberid);
-    		session.setAttribute("role", role);
-    		return "/cs/csList";
-    	}else {
-    		return "/home";
-    	}
-    
-    }
     
     @RequestMapping("/write")
     public String write(@RequestParam("content") String content
