@@ -2,6 +2,7 @@ package com.green.jobhunter.entity;
 
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.ManyToAny;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -39,8 +41,9 @@ public class Posting{
 	private String industry;
 	private String job;
 	private LocalDateTime deadline;
-	private String manager_tel;
+	private String managertel;
 	private String maincontent;
 	private String mainurl;
+
 	
 }

@@ -1,5 +1,8 @@
 package com.green.jobhunter.controller;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,7 +48,7 @@ public class EnterpriseController {
     public String root3(Model model, HttpServletRequest request){
     	HttpSession session = request.getSession();
     	String id = (String)session.getAttribute("id");
-    	Posting posting = postingRepository.findByEid(id);
+    	List <Posting> posting = postingRepository.findByEid(id);
     	System.out.println(posting);
     	model.addAttribute("posting", posting);
     	return "/enter/enterprisePostList";  
@@ -68,9 +71,16 @@ public class EnterpriseController {
     
     //기업정보페이지 수정하기
     @RequestMapping("enterpriseUpdate")
-    public String enterpriseUpdate(HttpServletRequest request, Enterprise enterprise) {
-    	enterpriseRepository.save(enterprise);
-    	return "redirect:/enter/enterpriseInfoWriteForm";
+    public String enterpriseUpdate(Model model, HttpServletRequest request, Enterprise enterprise) {
+    	//enterpriseRepository.save(enterprise);
+    	
+    	//model.addAttribute("enterprise", enterprise);
+    	//return "redirect:/enter/enterpriseInfoWriteForm";
+        //enterpriseRepository.save(enterprise);
+        Enterprise enterprise2 = enterpriseRepository.findByEid(enterprise.getEid().getMemberid());
+        System.out.println("=================enterprise2"+enterprise2);
+        model.addAttribute("enterprise", enterprise2);
+        return "/enter/enterpriseInfoWriteForm";
     }
     
     //인재정보페이지
@@ -84,23 +94,53 @@ public class EnterpriseController {
     public String root6() {
     	return "/enter/hunterPerPostList";
     }
-    
-    //해당공고별 지원자 관리페이지 
+    //채용공고 등록 폼
     @RequestMapping("/enterprisePostWriteForm")
     public String root7() {
     	return "/enter/enterprisePostWriteForm";
     }
     
+    //채용공고 등록  
+    @RequestMapping("/enterprisePostWrite")
+    public String enterpriseWrite(HttpServletRequest request, Model model) {
+    	Posting posting = new Posting();
+    	posting.setTitle(request.getParameter("title"));
+    	
+    	int headcount_ = Integer.parseInt(request.getParameter("headcount"));
+    	posting.setHeadcount(headcount_);
+    	posting.setEdutype(request.getParameter("edutype"));
+    	posting.setCareer(request.getParameter("career"));
+    	posting.setEmploymenttype(request.getParameter("employmenttype"));
+    	
+    	int pay_ = Integer.parseInt(request.getParameter("pay"));
+    	posting.setPay(pay_);
+    	posting.setArea(request.getParameter("area"));
+    	posting.setJob(request.getParameter("job"));
+    	
+    	String deadlineString = request.getParameter("deadline");
+        LocalDateTime deadline = LocalDateTime.parse(deadlineString.replace(" ", "T")); // 공백을 'T'로 대체하여 LocalDateTime으로 변환
+        posting.setDeadline(deadline);
+    	
+    	posting.setManagertel(request.getParameter("managertel"));
+    	posting.setMainurl(request.getParameter("mainurl"));
+    	posting.setMaincontent(request.getParameter("maincontent"));
+    	
+    	postingRepository.save(posting);
+    	
+    	
+    	return "/enter/enterprisePostList";
+    }
+    
     //해당공고 수정 폼
-    @RequestMapping("enterprisePostUpdate")
+    @RequestMapping("/enterprisePostUpdateForm")
     public String enterprisePostWriteForm() {
-    	return "/enter/enterprisePostWriteForm";
+    	return "/enter/enterprisePostUpdateForm";
     }
     //채용공고 삭제
     /*@RequestMapping("/enterprisePostDelete")
 	public String delete(@RequestParam("eid") String eid) {
 		memberRepository.deleteById(eid);
-		return "redirect:/enter/enterprisePostWriteForm";
+		return "redirect:/enter/enterprisePost";
 	}*/
    
 

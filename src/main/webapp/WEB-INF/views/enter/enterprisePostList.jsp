@@ -17,14 +17,17 @@
 <section>
     <h2> enterprisePostList page </h2>
     <br>
+    <c:forEach var="posting" items="${posting }">
     <div>
+    	${posting.postcode }
     	${posting.title }   
     </div>
+    </c:forEach>	
     <div>
     	<a href="hunterPerPostList"><button>지원자보기</button></a>
     	<a href="enterprisePostWriteForm"><button>채용공고등록</button></a>
-    	<a href="enterprisePostUpdate?postcode=${posting.postcode }"><button>수정</button></a>
-    	<a href="enterprisePostDelete?postcode=${posting.postcode }"><button>삭제</button></a>
+    	<a href="enterprisePostUpdate"><button>수정</button></a>
+    	<a href="enterprisePostDelete"><button>삭제</button></a>
     </div>
 </section>
 <footer>
