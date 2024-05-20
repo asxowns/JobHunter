@@ -12,7 +12,7 @@ import com.green.jobhunter.entity.Member;
 public interface CsRepository extends JpaRepository<Cs, Long>{
 
 
-	 List<Cs> findByTypeAndPublictype(char type, char publictype);
+	List<Cs> findByTypeAndPublictype(char type, char publictype);
 
 	List<Cs> findByHid(Member member);
 	
