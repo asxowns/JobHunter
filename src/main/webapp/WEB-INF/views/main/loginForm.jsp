@@ -65,7 +65,7 @@ ul.tabs li.current {
 		</ul>
 		<div id="tab-1" class="tab-content current">
 			<h1>기업 login</h1>
-			<form action="login" method="post">
+			<form action="loginEnterprise" method="post">
 				아이디<input type="text" name="id"><br> 비밀번호<input
 					type="text" name="pw"><br> <input type="submit"
 					value="로그인"><br>
@@ -74,7 +74,7 @@ ul.tabs li.current {
 
 		<div id="tab-2" class="tab-content">
 			<h1>일반 login</h1>
-				<form action="login" method="post">
+				<form action="loginHunter" method="post">
 					아이디<input type="text" name="id"><br> 비밀번호<input
 						type="text" name="pw"><br> <input type="submit"
 						value="로그인"><br>

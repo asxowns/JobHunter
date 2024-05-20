@@ -98,12 +98,21 @@ input[type="radio"] {
 			<li class="tab-link current" data-tab="tab-1">메뉴1</li>
 			<li class="tab-link" data-tab="tab-2">메뉴2</li>
 		</ul>
+		
 		<div id="tab-1" class="tab-content current">
 			<h1>일반회원 signUpForm</h1>
 			<form action="signUp" method="post">
-				이름<input type="text" name="name"><br> 아이디<input
-					type="text" id="inputFieldId" name="id"><br> 비밀번호<input type="text"
-					name="pw"><br>
+				이름<input type="text" id="inputFieldName" name="name"><br> 
+				<div id="outputDivName"></div>
+				
+				아이디<input
+					type="text" id="inputFieldId" name="id"><br> 
+				<div id="outputDivId"></div>
+					
+				비밀번호<input type="text" id = "inputFieldPw" name="pw"><br>
+				<div id="outputDivPw"></div>
+				
+				</div>
 				<div class="gender-box">
 					<div class="radio-container">
 						<input type="radio" id="male" name="gender" value="male">
@@ -121,13 +130,15 @@ input[type="radio"] {
 		<div id="tab-2" class="tab-content">
 			<h1>기업 signUpForm</h1>
 			<form action="signUp" method="post">
-				아이디<input type="text" name="id"><br> 비밀번호<input
-					type="text" name="pw"><br> 기업명<input type="text"
-					name="corname"><br> 산업군<input type="text"
-					name="industryName"><br> 담당자연락처<input type="text"
-					name="corTel"><br> 이메일<input type="text" name="email"><br>
-				사업자등록번호<input type="text" name="corNum"><br> <input
-					type="submit" value="회원가입"><br>
+				아이디<input type="text" name="id"><br>
+				<div id="outputDivId"></div>
+				비밀번호<input type="text" name="pw"><br> 
+				기업명<input type="text" name="corname"><br> 
+				산업군<input type="text" name="industryName"><br> 
+				담당자연락처<input type="text" name="corTel"><br> 
+				이메일<input type="text" name="email"><br>
+				사업자등록번호<input type="text" name="corNum"><br> 
+				<input type="submit" value="회원가입"><br>
 			</form>
 		</div>
 
@@ -143,8 +154,8 @@ input[type="radio"] {
 	const btn2 = document.querySelector("[data-tab='tab-2']");
 	const tabContent1 = document.getElementById("tab-1");
 	const tabContent2 = document.getElementById("tab-2");
-	var inputFieldPw = document.getElementById('inputFieldPw');
     var outputPwDiv = document.getElementById('outputDivPw');
+    
 	btn1.addEventListener("click", function() {
 		btn1.classList.add("current");
 		btn2.classList.remove("current");
@@ -159,34 +170,38 @@ input[type="radio"] {
 		tabContent1.classList.remove("current");
 	});
 	 
-	    
-	    
-	    document.getElementById("inputFieldId").addEventListener('blur', function() {
-	        var inputFieldId = document.getElementById('inputFieldId');
-	        var outputIdDiv = document.getElementById('outputDivId');
 
-	        if (inputFieldId.value.trim() !== "") {
-	            outputDivId.textContent = "사용불가";
-	            outputDivId.classList.add('unavailable');
-	        } else {
-	            outputDivId.textContent = "";
-	            outputDivId.classList.remove('unavailable');
-	        }
-	    });
+	
+	document.getElementById("inputFieldId").addEventListener('blur', function(e) {
+		e.preventDefault();
+		var outputDivId = document.getElementById('outputDivId');
+		const id = document.getElementById("inputFieldId").value;
+		const xhttp = new XMLHttpRequest();
+		xhttp.onload = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				document.getElementById("outputDivId").innerHTML = this.responseText;
+			}
+		};
+		xhttp.open("GET", "checkId?id=" + id, true);
+		xhttp.send();
+    }); 
+	   
+	document.getElementById("inputFieldPw").addEventListener('blur', function(e) {
+		e.preventDefault();
+		var outputDivPw = document.getElementById('outputDivPw');
+		const pw = document.getElementById("inputFieldPw").value;
+		const xhttp = new XMLHttpRequest();
+		xhttp.onload = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				document.getElementById("outputDivPw").innerHTML = this.responseText;
+			}
+		};
+		xhttp.open("GET", "checkPw?pw=" + pw, true);
+		xhttp.send();
+    }); 
 	    
-	    document.getElementById("inputFieldPw").addEventListener('blur', function() {
-	        var inputFieldPw = document.getElementById('inputFieldPw');
-	        var outputIdDivPw = document.getElementById('outputDivId');
-
-	        
-	        if (inputFieldPw.value.trim() !== "") {
-	            outputDivPw.textContent = "사용불가";
-	            outputDivPw.classList.add('unavailable');
-	        } else {
-	            outputDivPw.textContent = "";
-	            outputDivPw.classList.remove('unavailable');
-	        }
-	    });
+	    
+	
 	
 </script>
 <!--  
