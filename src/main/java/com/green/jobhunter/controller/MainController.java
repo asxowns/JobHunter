@@ -57,7 +57,7 @@ public class MainController {
 		if (member != null & member.getRole() == 'h') {
 			HttpSession session = request.getSession();
 
-			session.setAttribute("id", id);
+			session.setAttribute("logged", id);
 			session.setAttribute("pw", pw);
 			return "main/postList";
 		}
@@ -79,7 +79,7 @@ public class MainController {
 			// model.addAttribute("msg", "로그인에 성공하였습니다");
 			// model.addAttribute("msg2", "메인으로");
 			// model.addAttribute("url", "main");
-			session.setAttribute("id", id);
+			session.setAttribute("logged", id);
 			session.setAttribute("pw", pw);
 			return "enter/enterprisePage";
 		}
