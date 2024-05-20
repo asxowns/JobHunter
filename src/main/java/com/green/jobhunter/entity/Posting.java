@@ -22,24 +22,24 @@ import lombok.ToString;
 public class Posting{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long post_code;
+	private Long postcode;
 	
 	@OneToOne
 	@JoinColumn(name="eid")
 	@ToString.Exclude
 	private Member eid;
 	private String title;
-	private int head_count;
-	private String edu_type;
+	private int headcount;
+	private String edutype;
 	private String career;
-	private String employment_type;
+	private String employmenttype;
 	private int pay;
 	private String area;
 	private String industry;
 	private String job;
 	private LocalDateTime deadline;
 	private String manager_tel;
-	private String main_content;
-	private String main_url;
+	private String maincontent;
+	private String mainurl;
 	
 }

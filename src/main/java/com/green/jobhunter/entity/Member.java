@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -16,7 +17,7 @@ import lombok.NoArgsConstructor;
 public class Member{
 	@Id
     @Column(length = 20) // member_id 필드의 길이 설정
-    private String member_id;
+    private String memberid;
     
     @Column(length = 16) // password 필드의 길이 설정
     private String password;

@@ -21,12 +21,12 @@ import lombok.ToString;
 public class CommunityReply{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long cmr_code;
+	private Long cmrcode;
 	
 	@OneToOne
-	@JoinColumn(name="cm_code")
+	@JoinColumn(name="cmcode")
 	@ToString.Exclude
-	private Community cm_code;
+	private Community cmcode;
 	private String comment;
 	
 	@ManyToOne

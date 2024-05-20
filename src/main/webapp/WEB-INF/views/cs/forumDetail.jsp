@@ -11,9 +11,7 @@
 </style>
 </head>
 <body>
-<header>
-    <%@ include file="sub/header.jsp" %>
-</header>
+
 <section>
     <h2> index page </h2>
     

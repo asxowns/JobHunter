@@ -20,25 +20,25 @@ import lombok.ToString;
 public class Enterprise{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long enter_code;
+	private Long entercode;
 	
 	@OneToOne
 	@JoinColumn(name="eid")
-	@ToString.Exclude
+	//@ToString.Exclude
 	private Member eid;
-	private String company_name;
+	private String companyname;
 	private String size;
-	private String corporate_type;
-	private String business_item;
-	private String business_number;
+	private String corporatetype;
+	private String businessitem;
+	private String businessnumber;
 	private String ceo;
 	private String tel;
 	private String address;
-	private int emp_num;
+	private int empnum;
 	private int sales;
-	private String manager_name;
-	private String manager_tel;
-	private String manager_email;
-	private int report_num;
+	private String managername;
+	private String managertel;
+	private String manageremail;
+	private int reportnum;
 	
 }
