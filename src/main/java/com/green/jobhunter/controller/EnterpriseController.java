@@ -1,6 +1,7 @@
 package com.green.jobhunter.controller;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -47,7 +48,7 @@ public class EnterpriseController {
     public String root3(Model model, HttpServletRequest request){
     	HttpSession session = request.getSession();
     	String id = (String)session.getAttribute("id");
-    	Posting posting = postingRepository.findByEid(id);
+    	List <Posting> posting = postingRepository.findByEid(id);
     	System.out.println(posting);
     	model.addAttribute("posting", posting);
     	return "/enter/enterprisePostList";  
@@ -116,15 +117,18 @@ public class EnterpriseController {
     	posting.setArea(request.getParameter("area"));
     	posting.setJob(request.getParameter("job"));
     	
-    	LocalDateTime deadline_ = LocalDateTime.parse(request.getParameter("deadline"));
-    	posting.setDeadline(deadline_);
+    	String deadlineString = request.getParameter("deadline");
+        LocalDateTime deadline = LocalDateTime.parse(deadlineString.replace(" ", "T")); // 공백을 'T'로 대체하여 LocalDateTime으로 변환
+        posting.setDeadline(deadline);
     	
     	posting.setManagertel(request.getParameter("managertel"));
     	posting.setMainurl(request.getParameter("mainurl"));
     	posting.setMaincontent(request.getParameter("maincontent"));
     	
     	postingRepository.save(posting);
-    	return "redirect:/enter/enterprisePostList";
+    	
+    	
+    	return "/enter/enterprisePostList";
     }
     
     //해당공고 수정 폼
@@ -136,7 +140,7 @@ public class EnterpriseController {
     /*@RequestMapping("/enterprisePostDelete")
 	public String delete(@RequestParam("eid") String eid) {
 		memberRepository.deleteById(eid);
-		return "redirect:/enter/enterprisePostWriteForm";
+		return "redirect:/enter/enterprisePost";
 	}*/
    
 
