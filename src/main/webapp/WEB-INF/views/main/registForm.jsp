@@ -92,7 +92,7 @@ input[type="radio"] {
     <%@ include file="../sub/header.jsp" %>
 </header>
 <section>
-    <h2> signUp page </h2>
+    <h2> regist page </h2>
     <div class="container">
 		<ul class="tabs">
 			<li class="tab-link current" data-tab="tab-1">메뉴1</li>
@@ -102,7 +102,7 @@ input[type="radio"] {
 			<h1>일반회원 signUpForm</h1>
 			<form action="signUp" method="post">
 				이름<input type="text" name="name"><br> 아이디<input
-					type="text" name="id"><br> 비밀번호<input type="text"
+					type="text" id="inputFieldId" name="id"><br> 비밀번호<input type="text"
 					name="pw"><br>
 				<div class="gender-box">
 					<div class="radio-container">
@@ -138,12 +138,13 @@ input[type="radio"] {
 </footer>
 
 </body>
-<script type="text/javascript">
+<script>
 	const btn1 = document.querySelector("[data-tab='tab-1']");
 	const btn2 = document.querySelector("[data-tab='tab-2']");
 	const tabContent1 = document.getElementById("tab-1");
 	const tabContent2 = document.getElementById("tab-2");
-
+	var inputFieldPw = document.getElementById('inputFieldPw');
+    var outputPwDiv = document.getElementById('outputDivPw');
 	btn1.addEventListener("click", function() {
 		btn1.classList.add("current");
 		btn2.classList.remove("current");
@@ -157,5 +158,83 @@ input[type="radio"] {
 		tabContent2.classList.add("current");
 		tabContent1.classList.remove("current");
 	});
+	 
+	    
+	    
+	    document.getElementById("inputFieldId").addEventListener('blur', function() {
+	        var inputFieldId = document.getElementById('inputFieldId');
+	        var outputIdDiv = document.getElementById('outputDivId');
+
+	        if (inputFieldId.value.trim() !== "") {
+	            outputDivId.textContent = "사용불가";
+	            outputDivId.classList.add('unavailable');
+	        } else {
+	            outputDivId.textContent = "";
+	            outputDivId.classList.remove('unavailable');
+	        }
+	    });
+	    
+	    document.getElementById("inputFieldPw").addEventListener('blur', function() {
+	        var inputFieldPw = document.getElementById('inputFieldPw');
+	        var outputIdDivPw = document.getElementById('outputDivId');
+
+	        
+	        if (inputFieldPw.value.trim() !== "") {
+	            outputDivPw.textContent = "사용불가";
+	            outputDivPw.classList.add('unavailable');
+	        } else {
+	            outputDivPw.textContent = "";
+	            outputDivPw.classList.remove('unavailable');
+	        }
+	    });
+	
 </script>
+<!--  
+<body>
+    <h1>login</h1>
+    <form action="login" method="post">
+        아이디 <input type="text" id="inputFieldId" name="id"><br>
+        <div id="outputDivId"></div>
+        비밀번호 <input type="password" id="inputFieldPw" name="pw"><br>
+        <div id="outputDivPw"></div>
+        <input type="submit" value="로그인"><br>
+    </form>
+    <a href="signUpForm">회원가입</a>
+    
+    <script>
+    var inputFiePw = document.getElementById('inputFieldPw');
+    var outputPwDiv = document.getElementById('outputDivPw');
+    
+    
+    document.getElementById("inputFieldId").addEventListener('blur', function() {
+        var inputFieldId = document.getElementById('inputFieldId');
+        var outputIdDiv = document.getElementById('outputDivId');
+
+        if (inputFieldId.value.trim() !== "") {
+            outputDivId.textContent = "사용불가";
+            outputDivId.classList.add('unavailable');
+        } else {
+            outputDivId.textContent = "";
+            outputDivId.classList.remove('unavailable');
+        }
+    });
+    
+    document.getElementById("inputFieldPw").addEventListener('blur', function() {
+        var inputFieldPw = document.getElementById('inputFieldPw');
+        var outputIdDivPw = document.getElementById('outputDivId');
+
+        
+        if (inputFieldPw.value.trim() !== "") {
+            outputDivPw.textContent = "사용불가";
+            outputDivPw.classList.add('unavailable');
+        } else {
+            outputDivPw.textContent = "";
+            outputDivPw.classList.remove('unavailable');
+        }
+    });
+    </script>
+    -->
+</body>
+
+
 </html>
