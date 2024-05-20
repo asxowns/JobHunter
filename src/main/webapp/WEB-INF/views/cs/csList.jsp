@@ -76,9 +76,9 @@ th, td {
             </tr>
         </thead>
         <tbody>
-            <c:forEach var="cs" items="${list}">
+            <c:forEach var="cs" items="${list}" varStatus="stat">
                 <tr>
-                    <td>${cs.getCscode()}</td>
+                    <td>${stat.count}</td>
                     <td>${cs.getTitle()}</td>
                     <td>${cs.getHid().getMemberid()}</td>
                 <tr>
@@ -96,9 +96,9 @@ th, td {
             </tr>
         </thead>
         <tbody>
-            <c:forEach var="cs" items="${list2}">
+            <c:forEach var="cs" items="${list2}"  varStatus="stat">
                 <tr>
-                    <td>${cs.getCscode()}</td>
+                    <td>${stat.count}</td>
                     <td>${cs.getTitle()}</td>
                     <td>${cs.getResult()}</td>
                     <td>${cs.getHid().getMemberid()}</td>
@@ -118,9 +118,9 @@ th, td {
             </tr>
         </thead>
         <tbody>
-            <c:forEach var="cs" items="${list3}">
+            <c:forEach var="cs" items="${list3}"  varStatus="stat">
                 <tr>
-                    <td>${cs.getCscode()}</td>
+                    <td>${stat.count}</td>
                     <td>${cs.getType()}</td>
                     <td>${cs.getTitle()}</td>
                     <td>${cs.getResult()}</td>
