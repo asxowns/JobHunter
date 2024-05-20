@@ -35,4 +35,8 @@ public class Cs{
 	private char result;
 	private char publictype;
 	
+	
+	
+
+	
 }

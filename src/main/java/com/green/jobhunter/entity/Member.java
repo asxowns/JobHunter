@@ -24,4 +24,6 @@ public class Member{
     
     private char role;
 
+	
+
 }

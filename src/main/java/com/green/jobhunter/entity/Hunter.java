@@ -20,13 +20,13 @@ import lombok.ToString;
 public class Hunter{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long hunter_code;
+	private Long huntercode;
 	
 	@OneToOne
 	@JoinColumn(name="hid")
 	@ToString.Exclude
 	private Member hid;
-	private String user_name;
+	private String username;
 	private int age;
 	private String tel;
 	private String tel2;
@@ -34,6 +34,6 @@ public class Hunter{
 	private String email;
 	private char gender;
 	private char military;
-	private int report_num;
+	private int reportnum;
 	
 }
