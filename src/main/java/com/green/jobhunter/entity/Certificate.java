@@ -1,5 +1,7 @@
 package com.green.jobhunter.entity;
 
+import java.sql.Date;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -31,5 +33,7 @@ public class Certificate{
 	@JoinColumn(name="hid")
 	@ToString.Exclude
 	private Member hid;
+	private String publisher;
+	private Date issuedate;
 	
 }

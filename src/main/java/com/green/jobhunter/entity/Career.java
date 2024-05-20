@@ -35,9 +35,11 @@ public class Career{
 	private Member hid;
 	private String companyname;
 	private LocalDateTime cardate;
-	private int duration;
+	private LocalDateTime enddate;
 	private String industry;
 	private String position;
 	private String job;
+	private String work;
+	private String salary;
 	
 }
