@@ -224,7 +224,7 @@ header {
 						<li><a href="#">인재정보</a></li>
 					</ul>
 					<ul>
-						<li><a href="#">자유게시판</a></li>
+						<li><a href="board/openForum">자유게시판</a></li>
 						<li><a href="#">공지사항</a></li>
 					</ul>
 					<ul>
