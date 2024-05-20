@@ -114,6 +114,7 @@ th, td {
                 <th>분류</th>
                 <th>제목</th>
                 <th>상태</th>
+                <th>공개여부</th>
                 <th>날짜</th>
             </tr>
         </thead>
@@ -122,8 +123,9 @@ th, td {
                 <tr>
                     <td>${stat.count}</td>
                     <td>${cs.getType()}</td>
-                    <td>${cs.getTitle()}</td>
+                    <td><a href="/cs/forumMyDetail?cscode=${cs.cscode}">${cs.title}</a></td>
                     <td>${cs.getResult()}</td>
+                    <td>${cs.getPublictype()}</td>
                     <td>${cs.getCsdate()}</td>
                 <tr>
             </c:forEach>

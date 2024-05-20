@@ -1,5 +1,6 @@
 package com.green.jobhunter.entity;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Entity;
@@ -31,11 +32,9 @@ public class Cs{
 	private String title;
 	private String content;
 	private char type;
-	private LocalDateTime csdate;
+	private LocalDate csdate;
 	private char result;
 	private char publictype;
-	
-	
 	
 
 	
