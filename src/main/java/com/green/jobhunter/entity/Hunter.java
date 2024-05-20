@@ -26,6 +26,8 @@ public class Hunter{
 	@JoinColumn(name="hid")
 	@ToString.Exclude
 	private Member hid;
+
+	private String title;
 	private String username;
 	private int age;
 	private String tel;

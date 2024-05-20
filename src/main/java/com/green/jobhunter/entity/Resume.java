@@ -28,6 +28,8 @@ public class Resume{
 	@JoinColumn(name="hid")
 	@ToString.Exclude
 	private Member hid;
+
+	private String title;
 	private String eduname;
 	private String edutype;
 	private String edumajor;
