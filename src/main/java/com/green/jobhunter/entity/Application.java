@@ -20,12 +20,12 @@ import lombok.ToString;
 public class Application{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long app_code;
+	private Long appcode;
 	
 	@OneToOne
-	@JoinColumn(name="post_code")
+	@JoinColumn(name="postcode")
 	@ToString.Exclude
-	private Posting post_code;
+	private Posting postcode;
 	
 	@OneToOne
 	@JoinColumn(name="hid")

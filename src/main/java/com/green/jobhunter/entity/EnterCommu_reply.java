@@ -20,7 +20,7 @@ import lombok.ToString;
 public class EnterCommu_reply{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long ec_code;
+	private Long eccode;
 	
 	@ManyToOne
 	@JoinColumn(name="writer")

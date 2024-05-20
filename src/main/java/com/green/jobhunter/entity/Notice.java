@@ -1,7 +1,8 @@
 package com.green.jobhunter.entity;
 
-import java.time.LocalDateTime;
+import java.sql.Date;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,10 +20,15 @@ import lombok.NoArgsConstructor;
 public class Notice{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long nt_code;
+	private Long ntcode;
+
+	@Column(nullable = false)
 	private String title;
-	private LocalDateTime regdate;
+	
+	@Column(columnDefinition = "TEXT", nullable = false)
 	private String content;
-	
-	
+
+	@Column(columnDefinition = "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP")
+    private Date regdate;
+
 }

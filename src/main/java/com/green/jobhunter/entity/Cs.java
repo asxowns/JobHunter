@@ -22,7 +22,7 @@ import lombok.ToString;
 public class Cs{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long cs_code;
+	private Long cscode;
 	
 	@ManyToOne
 	@JoinColumn(name="hid")
@@ -31,8 +31,8 @@ public class Cs{
 	private String title;
 	private String content;
 	private char type;
-	private LocalDateTime cs_date;
+	private LocalDateTime csdate;
 	private char result;
-	private char public_type;
+	private char publictype;
 	
 }

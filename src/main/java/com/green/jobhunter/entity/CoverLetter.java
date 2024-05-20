@@ -20,12 +20,12 @@ import lombok.ToString;
 public class CoverLetter{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long cl_code;
+	private Long clcode;
 	
 	@OneToOne
-	@JoinColumn(name="resume_code")
+	@JoinColumn(name="resumecode")
 	@ToString.Exclude
-	private Resume resume_code;
+	private Resume resumecode;
 	private String title;
 	private String content;
 	

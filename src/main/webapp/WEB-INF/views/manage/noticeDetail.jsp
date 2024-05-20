@@ -15,7 +15,9 @@
     <%@ include file="../sub/header.jsp" %>
 </header>
 <section>
-    <h2> index page </h2>
+    <h2> ${notice.ntcode} </h2>
+    <h2> ${notice.title} </h2><br>
+    <h3> ${notice.content} </h3>
     
 </section>
 <footer>
