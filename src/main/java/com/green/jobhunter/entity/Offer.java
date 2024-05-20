@@ -19,10 +19,10 @@ import lombok.ToString;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Position{
+public class Offer{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long position_code;
+	private Long offercode;
 	
 	@ManyToOne
 	@JoinColumn(name="eid")

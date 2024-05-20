@@ -26,17 +26,25 @@ public class CustomerController {
 	
 	@Autowired
 	private MemberRepository memberRepository;
+
+	@RequestMapping("/home")
+	public String home() {
+		return "/home";
+	}
 	
-    /*@RequestMapping("/csList")
-    public String selectAll(Model model){
-    	List<Cs> list = csRepository.findAll();
-    	System.out.println(list);
-    	model.addAttribute("list", list);
-        return "/cs/csList";  
-    } <<<<<<<<<<<<<<<이게 실제로 쓸거 매우 중요 */
-    
 	@RequestMapping("/csList")
-	public String csList() {
+	public String csList(HttpServletRequest request,Model model) {
+		List<Cs> a = csRepository.findAll();
+		List<Cs> b = csRepository.findByTypeAndPublictype('A', 'Y');
+		HttpSession session = request.getSession();
+		String logged = (String)session.getAttribute("id");
+		Member logged_member = memberRepository.findByMemberid(logged);
+		 List<Cs> c = csRepository.findByHid(logged_member);
+
+    	model.addAttribute("list", a);
+    	model.addAttribute("list2", b);
+    	model.addAttribute("list3", c);
+
 		return "/cs/csList";
 	}
 	
@@ -50,48 +58,31 @@ public class CustomerController {
 		return "/cs/forumWriteForm";
 	}
    
-    @RequestMapping("/logindo")
-    public String selectid(HttpServletRequest request, @RequestParam("member_id") String member_id,
-    		@RequestParam("role") char role, Model model) {
-    	List<Cs> list = csRepository.findAll();
-    	System.out.println(list);
-    	model.addAttribute("list", list);
-    	Member member = memberRepository.findByMemberIdAndRole(member_id,role);
-    	if(member != null) {
-    		HttpSession session = request.getSession();
-    		session.setAttribute("member_id", member_id);
-    		session.setAttribute("role", role);
-    		return "/cs/csList";
-    	}else {
-    		return "home";
-    	}
     
-    }
-    
-    @RequestMapping("/cs/write")
-    public String write(@RequestParam("cs_code") String cs_code
-    		,@RequestParam("content") String content
-    		,@RequestParam("public_type") char public_type
+    @RequestMapping("/write")
+    public String write(@RequestParam("content") String content
+    		,@RequestParam("public_type") char publictype
     		,@RequestParam("title") String title
     		,@RequestParam("type") char type
-    		,@RequestParam("id") String id
-    		,Model model
+    		,@RequestParam("hid") String hid
     		){
     	
-    	LocalDateTime cs_date = LocalDateTime.now();
-
-        char result = 'N';
-
-        model.addAttribute("cs_code", cs_code);
-        model.addAttribute("content", content);
-        model.addAttribute("cs_date", cs_date);
-        model.addAttribute("public_type", public_type);
-        model.addAttribute("result", result);
-        model.addAttribute("title", title);
-        model.addAttribute("type", type);
-        model.addAttribute("id", id);
-        		
-        return "redirect:/csList";
+    	LocalDateTime csdate = LocalDateTime.now();
+    	char result = 'N';
+    	Cs cs = new Cs();
+    	cs.setContent(content);
+    	cs.setPublictype(publictype);
+    	cs.setTitle(title);
+    	cs.setType(type);
+    	cs.setCsdate(csdate);
+    	cs.setResult(result);
+    	Member member = memberRepository.findByMemberid(hid);
+    	member.setMemberid(hid);
+    	cs.setHid(member);
+    	csRepository.save(cs);
+        
+        
+        return "redirect:/cs/csList";
     }
     
 }
