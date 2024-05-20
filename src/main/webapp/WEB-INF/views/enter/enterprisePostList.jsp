@@ -16,7 +16,16 @@
 </header>
 <section>
     <h2> enterprisePostList page </h2>
-    
+    <br>
+    <div>
+    	${posting.title }   
+    </div>
+    <div>
+    	<a href="hunterPerPostList"><button>지원자보기</button></a>
+    	<a href="enterprisePostWriteForm"><button>채용공고등록</button></a>
+    	<a href="enterprisePostUpdate?postcode=${posting.postcode }"><button>수정</button></a>
+    	<a href="enterprisePostDelete?postcode=${posting.postcode }"><button>삭제</button></a>
+    </div>
 </section>
 <footer>
 

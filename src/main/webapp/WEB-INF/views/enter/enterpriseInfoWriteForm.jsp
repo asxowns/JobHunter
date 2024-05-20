@@ -77,7 +77,7 @@
 			</div>
 			<div class="input-row">
 				<label for="pw">비밀번호</label>
-				<input type="text" id="password" name="password" >
+				<input type="text" id="password" name="password" value="${enterprise.getEid().getPassword()}">
 			</div>
 			<div class="input-row">
 				<label for="cname">기업명</label>
