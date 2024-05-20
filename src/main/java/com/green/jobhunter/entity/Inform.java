@@ -22,7 +22,7 @@ import lombok.ToString;
 public class Inform{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long if_code;
+	private Long ifcode;
 	
 	@ManyToOne
 	@JoinColumn(name="sender")

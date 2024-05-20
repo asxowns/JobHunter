@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 public class Faq{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long faq_code;
+	private Long faqcode;
 	
 	private String title;
 	private String content;
