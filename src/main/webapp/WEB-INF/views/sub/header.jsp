@@ -105,16 +105,19 @@ header {
 	justify-content:space-between;
 	padding-top:50px;
 }
-.head_bottom .menu_list ul{
+.head_bottom .menu_list #menu_list_item{
 	display:flex;
 }
-.head_bottom .menu_list ul li a{
+.head_bottom .menu_list #menu_list_item li a{
 	padding:0px 25px;
-	
 	font-size:18px;
 	font-weight:600;
 }
-.head_bottom .menu_list ul li:first-child a{
+.head_bottom .menu_list #menu_list_item li a:hover{
+	color:#D44958;
+}
+
+.head_bottom .menu_list #menu_list_item li:first-child a{
 	padding-left:15px;
 }
 
@@ -130,7 +133,11 @@ header {
 
 #head_menu_slide_container{
 	width:100%;
-	background-color:#fff;
+	background:#fff;
+	z-index: 9999;
+	border-bottom:1px solid #D44958;
+}
+.active{
 	display:none;
 }
 #head_menu_slide{
@@ -155,8 +162,15 @@ header {
 
 #head_menu_slide ul li{
 	text-align:center;
+}
+#head_menu_slide ul li a{
+	display:inline-block;
 	font-size:18px;
-	padding-bottom:10px;
+	padding-bottom:15px;
+	color:#666;
+}
+#head_menu_slide ul li a:hover{
+	color:#D44958;
 }
 </style>
 </head>
@@ -165,7 +179,7 @@ header {
 		<div class="head">
 			<div class="head_top">
 				<div class="logo">
-					<a href="#"><img src="resource/img/logo.png"></a>
+					<a href="#"><img src="/resource/img/logo.png"></a>
 				</div>
 				<div class="search_bar">
 					<label for="search" class="search_label">
@@ -175,16 +189,16 @@ header {
 							<option value="기업">기업</option>
 							<option value="공고">공고</option>
 						</select>
-						<img src="resource/img/search.png" class="search_glasses">
+						<img src="/resource/img/search.png" class="search_glasses">
 					</label>
 				</div>
 				<div class="logo2">
-					<a href="#"><img src="resource/img/logo2.png"></a>
+					<a href="#"><img src="/resource/img/logo2.png"></a>
 				</div>
 			</div>
 			<div class="head_bottom">
 				<div class="menu_list">
-						<ul>
+						<ul id="menu_list_item">
 							<li><a href="#">채용공고</a></li>
 							<li><a href="#">인재정보</a></li>
 							<li><a href="#">커뮤니티</a></li>
@@ -200,26 +214,41 @@ header {
 					</div>
 				</div>
 		</div>
-	</header>
-	<div id="head_menu_slide_container">
-		<div id="head_menu_slide">
-				<ul>
-					<li><a href="#">추천공고</a></li>
-				</ul>
-				<ul>
-					<li><a href="#">인재정보</a></li>
-				</ul>
-				<ul>
-					<li><a href="#">자유게시판</a></li>
-					<li><a href="#">공지사항</a></li>
-				</ul>
-				<ul>
-					<li><a href="#">FAQ</a></li>
-					<li><a href="#">문의/신고</a></li>
-					<li><a href="#">나의문의</a></li>
-				</ul>
-			</div>
+		<div id="head_menu_slide_container" class="active">
+			<div id="head_menu_slide">
+					<ul>
+						<li><a href="#">추천공고</a></li>
+					</ul>
+					<ul>
+						<li><a href="#">인재정보</a></li>
+					</ul>
+					<ul>
+						<li><a href="#">자유게시판</a></li>
+						<li><a href="#">공지사항</a></li>
+					</ul>
+					<ul>
+						<li><a href="#">FAQ</a></li>
+						<li><a href="#">문의/신고</a></li>
+						<li><a href="#">나의문의</a></li>
+					</ul>
+				</div>
 		</div>
+	</header>
+	
+<script>
 
+	const slide = document.getElementById("head_menu_slide_container");
+	const menu = document.getElementById("menu_list_item");
+	
+	menu.addEventListener("mouseover", () => {
+		slide.classList.remove("active");
+	});
+	slide.addEventListener("mouseleave", () => {
+		slide.classList.add("active");
+	});
+	
+	
+	
+</script>
 </body>
 </html>
