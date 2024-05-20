@@ -93,6 +93,9 @@ header {
 	box-sizing:border-box;
 	cursor: pointer;
 }
+.search_bar_select:focus{
+	outline:none;
+}
 .search_glasses{
 	position:absolute;
 	right:10px;
@@ -180,7 +183,7 @@ header {
 		<div class="head">
 			<div class="head_top">
 				<div class="logo">
-					<a href="#"><img src="/resource/img/logo.png"></a>
+					<a href="/"><img src="/resource/img/logo.png"></a>
 				</div>
 				<div class="search_bar">
 					<label for="search" class="search_label">
@@ -194,23 +197,23 @@ header {
 					</label>
 				</div>
 				<div class="logo2">
-					<a href="#"><img src="/resource/img/logo2.png"></a>
+					<a href="/"><img src="/resource/img/logo2.png"></a>
 				</div>
 			</div>
 			<div class="head_bottom">
 				<div class="menu_list">
 						<ul id="menu_list_item">
-							<li><a href="#">채용공고</a></li>
-							<li><a href="#">인재정보</a></li>
-							<li><a href="#">커뮤니티</a></li>
-							<li><a href="#">고객센터</a></li>
+							<li><a href="/">채용공고</a></li>
+							<li><a href="/enter/hunterList">인재정보</a></li>
+							<li><a href="/board/openForumList">커뮤니티</a></li>
+							<li><a href="/cs/csList">고객센터</a></li>
 						</ul>
 					</div>
 					
 					<div class="user_log_list">
 						<ul>
-							<li><a href="#">로그인</a></li>
-							<li><a href="#">회원가입</a></li>
+							<li><a href="/loginForm">로그인</a></li>
+							<li><a href="/registForm">회원가입</a></li>
 						</ul>
 					</div>
 				</div>
@@ -218,19 +221,19 @@ header {
 		<div id="head_menu_slide_container" class="active">
 			<div id="head_menu_slide">
 					<ul>
-						<li><a href="#">추천공고</a></li>
+						<li><a href="/">추천공고</a></li>
 					</ul>
 					<ul>
-						<li><a href="#">인재정보</a></li>
+						<li><a href="/enter/hunterList">인재정보</a></li>
 					</ul>
 					<ul>
-						<li><a href="board/openForum">자유게시판</a></li>
-						<li><a href="#">공지사항</a></li>
+						<li><a href="/board/openForum">자유게시판</a></li>
+						<li><a href="/manage/noticeList">공지사항</a></li>
 					</ul>
 					<ul>
-						<li><a href="#">FAQ</a></li>
-						<li><a href="#">문의/신고</a></li>
-						<li><a href="#">나의문의</a></li>
+						<li><a href="/cs/csList">FAQ</a></li>
+						<li><a href="/cs/csList">문의/신고</a></li>
+						<li><a href="/cs/csList">나의문의</a></li>
 					</ul>
 				</div>
 		</div>
