@@ -1,5 +1,6 @@
 package com.green.jobhunter.entity;
 
+import java.sql.Date;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Entity;
@@ -22,22 +23,22 @@ import lombok.ToString;
 public class Resume{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long resume_code;
+	private Long resumecode;
 	
 	@ManyToOne
 	@JoinColumn(name="hid")
 	@ToString.Exclude
 	private Member hid;
-	private String edu_name;
-	private String edu_type;
-	private String edu_major;
-	private String edu_state;
-	private String graduate_date;
-	private String employment_type;
-	private LocalDateTime modifydate;
+	private String eduname;
+	private String edutype;
+	private String edumajor;
+	private String edustate;
+	private Date graduatedate;
+	private String employmenttype;
+	private Date modifydate;
 	private String photourl;
-	private int desire_pay;
-	private char public_type;
+	private int desirepay;
+	private char publictype;
 	
 	
 }

@@ -20,12 +20,12 @@ import lombok.ToString;
 public class Favorite{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long favor_code;
+	private Long favorcode;
 	
 	@ManyToOne
 	@JoinColumn(name="post_code")
 	@ToString.Exclude
-	private Posting post_code;
+	private Posting postcode;
 	
 	@ManyToOne
 	@JoinColumn(name="hid")
