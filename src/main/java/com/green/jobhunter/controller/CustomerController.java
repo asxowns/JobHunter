@@ -1,5 +1,6 @@
 package com.green.jobhunter.controller;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -16,6 +17,8 @@ import com.green.jobhunter.repository.MemberRepository;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.web.bind.annotation.RequestMethod;
+
 
 @Controller
 @RequestMapping("/cs")
@@ -48,16 +51,46 @@ public class CustomerController {
 		return "/cs/csList";
 	}
 	
-	@RequestMapping("/forumDetail")
-	public String forumDetail(Model model) {
-		return "/cs/forumDetail";
+	@RequestMapping("/forumMyDetail")
+	public String forumMyDetail(@RequestParam("cscode") Long cscode, Model model) {
+		
+		Cs cs = csRepository.findByCscode(cscode);
+		System.out.println("============================"+cs);
+		model.addAttribute("cs", cs);
+		return "/cs/forumMyDetail";
 	}
-	
+
+
 	@RequestMapping("/forumWriteForm")
 	public String forumWriteForm(Model model) {
 		return "/cs/forumWriteForm";
 	}
+
+	@RequestMapping("/forumUpdateForm")
+	public void forumUpdateForm(){
+		
+		
+	}
    
+	@RequestMapping("/Update")
+	public String forumUpdateForm(@RequestParam("cscode") Long cscode
+			,@RequestParam("title") String title
+			,@RequestParam("content") String content
+			,Model model
+			){
+		Cs cs = csRepository.findByCscode(cscode);
+		System.out.println(cs + "====================================================");
+		model.addAttribute("cs", cs);
+		
+		LocalDate csdate = LocalDate.now();
+		
+		cs.setTitle(title);
+		cs.setContent(content);
+		cs.setCsdate(csdate);
+		csRepository.save(cs);
+		return "redirect:/cs/csList";
+
+	}	
     
     @RequestMapping("/write")
     public String write(@RequestParam("content") String content
@@ -67,7 +100,7 @@ public class CustomerController {
     		,@RequestParam("hid") String hid
     		){
     	
-    	LocalDateTime csdate = LocalDateTime.now();
+    	LocalDate csdate = LocalDate.now();
     	char result = 'N';
     	Cs cs = new Cs();
     	cs.setContent(content);
