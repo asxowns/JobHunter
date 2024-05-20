@@ -75,7 +75,7 @@
     </div>
 	<hr>
 	
-	
+	<a href="loginForm">로그인</a>
 
 </section>
 <footer>
