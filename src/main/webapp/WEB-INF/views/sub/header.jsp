@@ -134,8 +134,9 @@ header {
 #head_menu_slide_container{
 	width:100%;
 	background:#fff;
-	z-index: 9999;
 	border-bottom:1px solid #D44958;
+	position:relative;
+	z-index: 9999;
 }
 .active{
 	display:none;
