@@ -1,6 +1,5 @@
 package com.green.jobhunter.controller;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,9 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.green.jobhunter.entity.Notice;
+import com.green.jobhunter.repository.MemberRepository;
 import com.green.jobhunter.repository.NoticeRepository;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/manage")
@@ -21,8 +22,15 @@ public class ManagerController {
     @Autowired
     private NoticeRepository noticeRepo;
 
+    @Autowired
+    private MemberRepository memberRepo;
+
     @RequestMapping("/")
-    public String root(){
+    public String root(HttpServletRequest req,Model model){
+        HttpSession session = req.getSession();
+        String logged = (String) session.getAttribute("id");
+        char role = memberRepo.findByMemId(logged).getRole();
+        model.addAttribute("role",role);
         return "/manage/managerPage";  
     }
 

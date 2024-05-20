@@ -39,7 +39,7 @@
     <%@ include file="../sub/header.jsp" %>
 </header>
 <section>
-    <h2> Manager page </h2>
+    <h2> Manager page ROLE : ${role}</h2>
     <div id="manager-menu">
         <a class="a-button" href="/"> 권한 관리 버튼 </a>
         <a class="a-button" href="/"> 채팅 문의 버튼 </a>
