@@ -1,5 +1,7 @@
 package com.green.jobhunter.controller;
 
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -68,9 +70,16 @@ public class EnterpriseController {
     
     //기업정보페이지 수정하기
     @RequestMapping("enterpriseUpdate")
-    public String enterpriseUpdate(HttpServletRequest request, Enterprise enterprise) {
-    	enterpriseRepository.save(enterprise);
-    	return "redirect:/enter/enterpriseInfoWriteForm";
+    public String enterpriseUpdate(Model model, HttpServletRequest request, Enterprise enterprise) {
+    	//enterpriseRepository.save(enterprise);
+    	
+    	//model.addAttribute("enterprise", enterprise);
+    	//return "redirect:/enter/enterpriseInfoWriteForm";
+        //enterpriseRepository.save(enterprise);
+        Enterprise enterprise2 = enterpriseRepository.findByEid(enterprise.getEid().getMemberid());
+        System.out.println("=================enterprise2"+enterprise2);
+        model.addAttribute("enterprise", enterprise2);
+        return "/enter/enterpriseInfoWriteForm";
     }
     
     //인재정보페이지
@@ -84,17 +93,44 @@ public class EnterpriseController {
     public String root6() {
     	return "/enter/hunterPerPostList";
     }
-    
-    //해당공고별 지원자 관리페이지 
+    //채용공고 등록 폼
     @RequestMapping("/enterprisePostWriteForm")
     public String root7() {
     	return "/enter/enterprisePostWriteForm";
     }
     
+    //채용공고 등록  
+    @RequestMapping("/enterprisePostWrite")
+    public String enterpriseWrite(HttpServletRequest request, Model model) {
+    	Posting posting = new Posting();
+    	posting.setTitle(request.getParameter("title"));
+    	
+    	int headcount_ = Integer.parseInt(request.getParameter("headcount"));
+    	posting.setHeadcount(headcount_);
+    	posting.setEdutype(request.getParameter("edutype"));
+    	posting.setCareer(request.getParameter("career"));
+    	posting.setEmploymenttype(request.getParameter("employmenttype"));
+    	
+    	int pay_ = Integer.parseInt(request.getParameter("pay"));
+    	posting.setPay(pay_);
+    	posting.setArea(request.getParameter("area"));
+    	posting.setJob(request.getParameter("job"));
+    	
+    	LocalDateTime deadline_ = LocalDateTime.parse(request.getParameter("deadline"));
+    	posting.setDeadline(deadline_);
+    	
+    	posting.setManagertel(request.getParameter("managertel"));
+    	posting.setMainurl(request.getParameter("mainurl"));
+    	posting.setMaincontent(request.getParameter("maincontent"));
+    	
+    	postingRepository.save(posting);
+    	return "redirect:/enter/enterprisePostList";
+    }
+    
     //해당공고 수정 폼
-    @RequestMapping("enterprisePostUpdate")
+    @RequestMapping("/enterprisePostUpdateForm")
     public String enterprisePostWriteForm() {
-    	return "/enter/enterprisePostWriteForm";
+    	return "/enter/enterprisePostUpdateForm";
     }
     //채용공고 삭제
     /*@RequestMapping("/enterprisePostDelete")

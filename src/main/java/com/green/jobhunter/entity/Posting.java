@@ -41,8 +41,9 @@ public class Posting{
 	private String industry;
 	private String job;
 	private LocalDateTime deadline;
-	private String manager_tel;
+	private String managertel;
 	private String maincontent;
 	private String mainurl;
+
 	
 }
