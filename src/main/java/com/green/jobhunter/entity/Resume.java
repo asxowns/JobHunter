@@ -1,7 +1,6 @@
 package com.green.jobhunter.entity;
 
 import java.sql.Date;
-import java.time.LocalDateTime;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
