@@ -21,12 +21,12 @@ import lombok.ToString;
 public class DesiredIndustry{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long di_code;
+	private Long dicode;
 	
 	@OneToOne
-	@JoinColumn(name="resume_code")
+	@JoinColumn(name="resumecode")
 	@ToString.Exclude
-	private Resume resume_code;
+	private Resume resumecode;
 	
 	@ManyToOne
 	@JoinColumn(name="hid")
