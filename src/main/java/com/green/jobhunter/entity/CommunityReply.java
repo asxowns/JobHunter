@@ -18,7 +18,7 @@ import lombok.ToString;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CommunityReply{
+public class CommunityReply extends BaseTimeEntity{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long cmrcode;
@@ -33,6 +33,5 @@ public class CommunityReply{
 	@JoinColumn(name="writer")
 	@ToString.Exclude
 	private Member writer;
-	
 	
 }

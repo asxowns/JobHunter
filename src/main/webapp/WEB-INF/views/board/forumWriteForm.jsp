@@ -102,19 +102,21 @@ a{
     <div class="title">
     	<h1>게시물 작성</h1>
     </div>
-    <form action="write">
+    
+    <form action="write?boardtype=${boardtype }" method="post">
     	<div class="write_container">
     		<h4>일반</h4>
     		<article>
 	    		<p>제목</p>
 	    		<input type="text" name="title">
 	    		<p>내용</p>
-	    		<textarea></textarea>
+	    		<textarea name="content"></textarea>
     		</article>
     	</div>
+    	
     	<div class="btn_box">
     		<input type="submit" value="작성" class="btn_submit btn">
-    		<a href="#" class="btn_cancel btn">취소</a>
+    		<a href="openForum" class="btn_cancel btn">취소</a>
     	</div>
     </form>
     

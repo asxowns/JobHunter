@@ -4,13 +4,6 @@
 <head>
 <meta charset="UTF-8">
 <title>header</title>
-<!-- 폰트 첨부 -->
-<link
-	href="https://fonts.googleapis.com/css2?family=Poor+Story&display=swap"
-	rel="stylesheet">
-<link
-	href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap"
-	rel="stylesheet">
 <style>
 * {
 	margin: 0;
@@ -102,6 +95,9 @@ header {
 	top:5px;
 	cursor: pointer;
 }
+.search_glass_label input[type="submit"]{
+	display:none;
+}
 
 .head_bottom{
 	display:flex;
@@ -185,17 +181,22 @@ header {
 				<div class="logo">
 					<a href="/"><img src="/resource/img/logo.png"></a>
 				</div>
+				<form action="" method="get">
 				<div class="search_bar">
-					<label for="search" class="search_label">
-						<input type="text" id="search" name="search">
-						<select class="search_bar_select">
-							<option value="전체">전체</option>
-							<option value="기업">기업</option>
-							<option value="공고">공고</option>
-						</select>
-						<img src="/resource/img/search.png" class="search_glasses">
-					</label>
-				</div>
+						<label for="search" class="search_label">
+							<input type="text" id="search" name="search">
+							<select class="search_bar_select">
+								<option value="전체">전체</option>
+								<option value="기업">기업</option>
+								<option value="공고">공고</option>
+							</select>
+							<label id="search_glass_label">
+								<input type="submit" value="">
+								<img src="/resource/img/search.png" class="search_glasses">
+							</label>
+						</label>
+					</div>
+				</form>
 				<div class="logo2">
 					<a href="/"><img src="/resource/img/logo2.png"></a>
 				</div>
