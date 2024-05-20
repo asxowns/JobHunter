@@ -81,7 +81,7 @@ ul.tabs li.current {
 				</form>
 			</div>
 		</div>
-			<a href="signUpForm">회원가입</a>
+			<a href="registForm">회원가입</a>
 </section>
 <footer>
 
@@ -107,5 +107,7 @@ ul.tabs li.current {
 		tabContent2.classList.add("current");
 		tabContent1.classList.remove("current");
 	});
+	
+	
 </script>
 </html>

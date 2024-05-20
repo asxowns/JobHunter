@@ -22,7 +22,7 @@ import lombok.ToString;
 public class Chat{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long ch_code;
+	private Long chcode;
 	
 	@ManyToOne
 	@JoinColumn(name="hid")
@@ -33,6 +33,6 @@ public class Chat{
 	@ManyToOne
 	@JoinColumn(name="writer_manager")
 	@ToString.Exclude
-	private Member writer_manager;
+	private Member writermanager;
 	private LocalDateTime timelog;
 }

@@ -20,7 +20,7 @@ import lombok.ToString;
 public class Community{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long cm_code;
+	private Long cmcode;
 	
 	@ManyToOne
 	@JoinColumn(name="writer")

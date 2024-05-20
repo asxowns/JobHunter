@@ -84,7 +84,6 @@ public class Cs{
 		this.publictype = publictype;
 	}
 	
-	
-	
+
 	
 }

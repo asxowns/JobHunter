@@ -73,31 +73,31 @@
 		<form action="enterpriseUpdate" method="post">
 			<div class="input-row">
 				<label for="id">아이디</label>
-				<input type="text" id="eid" name="eid" value="${enterprise.eid }">
+				<input type="text" id="id" name="id" value="${enterprise.getEid().getMemberid()}">
 			</div>
 			<div class="input-row">
 				<label for="pw">비밀번호</label>
-				<input type="text" id="password" name="password">
+				<input type="text" id="password" name="password" value="${enterprise.getEid().getPassword()}">
 			</div>
 			<div class="input-row">
 				<label for="cname">기업명</label>
-				<input type="text" id="company_name" name="company_name">
+				<input type="text" id="companyname" name="companyname" value="${enterprise.companyname }">
 			</div>
 			<div class="input-row">
 				<label for="industry">산업군</label>
-				<input type="text" id="industry" name="industry">
+				<input type="text" id="corporatetype" name="corporatetype" value="${enterprise.corporatetype }">
 			</div>
 			<div class="input-row">
 				<label for="btel">담당자 연락처</label>
-				<input type="text" id="manager_tel" name="manager_tel">
+				<input type="text" id="managertel" name="managertel" value="${enterprise.managertel }">
 			</div>
 			<div class="input-row">
 				<label for="bemail">이메일</label>
-				<input type="text" id="manager_email" name="manager_email">
+				<input type="text" id="manageremail" name="manageremail" value="${enterprise.manageremail }">
 			</div>
 			<div class="input-row">
 				<label for="breginum">사업자등록번호</label>
-				<input type="text" id="business_number" name="business_number">
+				<input type="text" id="businessnumber" name="businessnumber" value="${enterprise.businessnumber }">
 			</div>
 			<input type="submit" value="수정하기">
 		</form>
