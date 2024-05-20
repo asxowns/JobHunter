@@ -1,6 +1,8 @@
 package com.green.jobhunter.entity;
 
-import java.sql.Date;
+import java.time.LocalDate;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,17 +31,18 @@ public class Resume{
 	@ToString.Exclude
 	private Member hid;
 
-	private String title;
 	private String eduname;
 	private String edutype;
 	private String edumajor;
 	private String edustate;
-	private Date graduatedate;
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
+	private LocalDate graduatedate;
 	private String employmenttype;
-	private Date modifydate;
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
+	private LocalDate modifydate;
 	private String photourl;
 	private int desirepay;
 	private char publictype;
 	
-	
+		
 }

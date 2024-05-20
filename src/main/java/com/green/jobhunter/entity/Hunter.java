@@ -1,5 +1,9 @@
 package com.green.jobhunter.entity;
 
+import java.time.LocalDate;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -29,6 +33,8 @@ public class Hunter{
 
 	private String title;
 	private String username;
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
+	private LocalDate birth;
 	private int age;
 	private String tel;
 	private String tel2;
@@ -37,5 +43,6 @@ public class Hunter{
 	private char gender;
 	private char military;
 	private int reportnum;
+	private String newOrExp;
 	
 }

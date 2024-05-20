@@ -23,7 +23,7 @@
   			</div>
   			<div class="personal_info">
 	  			<p>인적사항</p>
-	  			<input type="text" name="name" value="이름">
+	  			<input type="text" name="username" value="이름">
 	  			<input type="date" name="birth" value="생년월일">
 	  			<select >
 	  				<option value="gender">남자</option>
