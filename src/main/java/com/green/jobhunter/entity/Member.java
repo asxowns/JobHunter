@@ -24,4 +24,30 @@ public class Member{
     
     private char role;
 
+	public String getMemberid() {
+		return memberid;
+	}
+
+	public void setMemberid(String memberid) {
+		this.memberid = memberid;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public char getRole() {
+		return role;
+	}
+
+	public void setRole(char role) {
+		this.role = role;
+	}
+    
+    
+
 }
