@@ -17,11 +17,37 @@ import lombok.NoArgsConstructor;
 public class Member{
 	@Id
     @Column(length = 20) // member_id 필드의 길이 설정
-    private String member_id;
+    private String memberid;
     
     @Column(length = 16) // password 필드의 길이 설정
     private String password;
     
     private char role;
+
+	public String getMemberid() {
+		return memberid;
+	}
+
+	public void setMemberid(String memberid) {
+		this.memberid = memberid;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public char getRole() {
+		return role;
+	}
+
+	public void setRole(char role) {
+		this.role = role;
+	}
+    
+    
 
 }
