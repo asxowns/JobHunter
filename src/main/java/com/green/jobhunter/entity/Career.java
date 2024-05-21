@@ -1,6 +1,6 @@
 package com.green.jobhunter.entity;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -34,8 +34,8 @@ public class Career{
 	@ToString.Exclude
 	private Member hid;
 	private String companyname;
-	private LocalDateTime cardate;
-	private LocalDateTime enddate;
+	private LocalDate cardate;
+	private LocalDate enddate;
 	private String industry;
 	private String position;
 	private String job;

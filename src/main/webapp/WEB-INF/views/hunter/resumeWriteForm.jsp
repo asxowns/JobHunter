@@ -47,7 +47,7 @@
   					<option value="industry" name="industry1">
   				</select>
   			</div>
-  			
+  			<input type="submit" value="등록">
   		</form>
   	</div> 
    
