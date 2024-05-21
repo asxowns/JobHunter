@@ -73,7 +73,8 @@ public class EnterpriseController {
     	enter.setManageremail(manageremail);
     	enter.setBusinessnumber(businessnumber);
     	
-    	Member member = memberRepository.findByMemberid("logged");
+    	String id = (String)session.getAttribute("logged");
+    	Member member = memberRepository.findByMemberid(id);
     	member.setPassword(password);
     	
     	memberRepository.save(member);
@@ -111,46 +112,71 @@ public class EnterpriseController {
     @RequestMapping("/enterprisePostWrite")
     public String enterpriseWrite(HttpServletRequest request, Model model) {
     	session = request.getSession();
-    	String eid = (String)request.getAttribute("logged");
+    	Member eid = (Member)request.getAttribute("logged");
+    	Posting posting = new Posting();
     	
-    	Posting posting = postingRepository.findByEid(eid);
-    	posting.setTitle(request.getParameter("title"));
-    	
-    	int headcount_ = Integer.parseInt(request.getParameter("headcount"));
-    	posting.setHeadcount(headcount_);
-    	posting.setEdutype(request.getParameter("edutype"));
-    	posting.setCareer(request.getParameter("career"));
-    	posting.setEmploymenttype(request.getParameter("employmenttype"));
-    	
-    	int pay_ = Integer.parseInt(request.getParameter("pay"));
-    	posting.setPay(pay_);
-    	posting.setArea(request.getParameter("area"));
-    	posting.setJob(request.getParameter("job"));
-    	
-    	String deadlineString = request.getParameter("deadline");
-        LocalDateTime deadline = LocalDateTime.parse(deadlineString.replace(" ", "T")); // 공백을 'T'로 대체하여 LocalDateTime으로 변환
+    	// 기업 아이디 설정
+        posting.setEid(eid);
+        // 폼으로부터 전달된 데이터를 채용공고 객체에 설정합니다.
+        posting.setTitle(request.getParameter("title"));
+        int headcount_ = Integer.parseInt(request.getParameter("headcount"));
+        posting.setHeadcount(headcount_);
+        posting.setEdutype(request.getParameter("edutype"));
+        posting.setCareer(request.getParameter("career"));
+        posting.setEmploymenttype(request.getParameter("employmenttype"));
+        int pay_ = Integer.parseInt(request.getParameter("pay"));
+        posting.setPay(pay_);
+        posting.setJob(request.getParameter("job"));
+        String deadlineString = request.getParameter("deadline");
+        LocalDateTime deadline = LocalDateTime.parse(deadlineString.replace(" ", "T"));
         posting.setDeadline(deadline);
-    	
-    	posting.setManagertel(request.getParameter("managertel"));
-    	posting.setMainurl(request.getParameter("mainurl"));
-    	posting.setMaincontent(request.getParameter("maincontent"));
-    	
-    	postingRepository.save(posting);
-    	System.out.println(posting+"++++++++");
-    	
+        posting.setManagertel(request.getParameter("managertel"));
+        posting.setMainurl(request.getParameter("mainurl"));
+        posting.setMaincontent(request.getParameter("maincontent"));
+        // 채용공고 저장
+        postingRepository.save(posting);
+        model.addAttribute("posting", posting);
     	return "redirect:/enter/enterprisePostList";
     }
     
     //해당공고 수정 폼
     @RequestMapping("/enterprisePostUpdateForm")
-    public String enterprisePostWriteForm(Model model, HttpServletRequest request) {
+    public String enterprisePostWriteForm() {
     	return "/enter/enterprisePostUpdateForm";
     }
     //해당공고 수정 기능 
     @RequestMapping("/enterprisePostUpdate")
-    public String enterprisePostUpdate(){
-    	
-    	return "/enter/enterprisePostList";
+    public String enterprisePostUpdate(@RequestParam("postcode") Long postcode, Model model, HttpServletRequest request){
+    	HttpSession session = request.getSession();
+        String eid = (String) session.getAttribute("logged");
+        
+        Posting posting = postingRepository.findByPostcode(postcode);
+        
+        posting.setTitle("title");
+            
+        int headcount_ = Integer.parseInt(request.getParameter("headcount"));
+        posting.setHeadcount(headcount_);
+        posting.setEdutype(request.getParameter("edutype"));
+        posting.setCareer(request.getParameter("career"));
+        posting.setEmploymenttype(request.getParameter("employmenttype"));
+            
+        int pay_ = Integer.parseInt(request.getParameter("pay"));
+        posting.setPay(pay_);
+        posting.setArea(request.getParameter("area"));
+        posting.setJob(request.getParameter("job"));
+            
+        String deadlineString = request.getParameter("deadline");
+        LocalDateTime deadline = LocalDateTime.parse(deadlineString.replace(" ", "T"));
+        posting.setDeadline(deadline);
+            
+        posting.setManagertel(request.getParameter("managertel"));
+        posting.setMainurl(request.getParameter("mainurl"));
+        posting.setMaincontent(request.getParameter("maincontent"));
+            
+        // 수정된 채용공고를 저장
+        postingRepository.save(posting);
+           
+    	return "redirect:/enter/enterprisePostList";
     }
     
     //채용공고 삭제
