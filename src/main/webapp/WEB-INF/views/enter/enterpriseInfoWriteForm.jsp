@@ -70,14 +70,15 @@
     <h2> enterpriseInfoWriteForm page </h2> <!-- 기업정보 수정폼 페이지  -->
     <br>
     <div class="container">
-		<form action="enterpriseUpdate" method="post">
+		<form action="/enter/enterpriseUpdate" method="post">
+			<input type="hidden" id="entercode" name="entercode"value="${enterprise.entercode }">
 			<div class="input-row">
 				<label for="id">아이디</label>
-				<input type="text" id="id" name="id" value="${enterprise.getEid().getMemberid()}">
+				<input type="text" id="eid" name="eid" value="${enterprise.eid.memberid}" readonly>
 			</div>
 			<div class="input-row">
 				<label for="pw">비밀번호</label>
-				<input type="text" id="password" name="password" value="${enterprise.getEid().getPassword()}">
+				<input type="text" id="password" name="password" value="${enterprise.eid.password}">
 			</div>
 			<div class="input-row">
 				<label for="cname">기업명</label>

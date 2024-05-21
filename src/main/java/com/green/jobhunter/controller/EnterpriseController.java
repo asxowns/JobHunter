@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.green.jobhunter.entity.Enterprise;
+import com.green.jobhunter.entity.Member;
 import com.green.jobhunter.entity.Posting;
 import com.green.jobhunter.repository.EnterpriseRepository;
 import com.green.jobhunter.repository.MemberRepository;
@@ -58,29 +59,37 @@ public class EnterpriseController {
     public String root4(Model model, HttpServletRequest request){
     	
     	HttpSession session = request.getSession();
-    	session.setAttribute("id", "aaa");
-    	String id = (String)session.getAttribute("id");
-    	Enterprise enterprise = enterpriseRepository.findByEid(id);
+    	//String id = (String)session.getAttribute("logged");
+    	String id = "aaa";
+    	Enterprise enterprises = enterpriseRepository.findByEid(id);
+    	
     	System.out.println(id+"===================");
-    	System.out.println(enterprise+"===================");
-    	System.out.println(enterprise.getEid()+"===================");
-    	model.addAttribute("enterprise", enterprise);
+    	System.out.println(enterprises+"===================");
+    	model.addAttribute("enterprise", enterprises);
     	
     	return "/enter/enterpriseInfoWriteForm";  
     }
     
     //기업정보페이지 수정하기
-    @RequestMapping("enterpriseUpdate")
-    public String enterpriseUpdate(Model model, HttpServletRequest request, Enterprise enterprise) {
-    	//enterpriseRepository.save(enterprise);
+    @RequestMapping("/enterpriseUpdate")
+    public String enterpriseUpdate(Model model, @RequestParam("entercode") Long entercode,
+    		@RequestParam("password") String password, @RequestParam("companyname") String companyname, 
+    		@RequestParam("corporatetype") String corporatetype, @RequestParam("managertel") String managertel, 
+    		@RequestParam("manageremail") String manageremail, @RequestParam("businessnumber") String businessnumber) {
     	
-    	//model.addAttribute("enterprise", enterprise);
-    	//return "redirect:/enter/enterpriseInfoWriteForm";
-        //enterpriseRepository.save(enterprise);
-        Enterprise enterprise2 = enterpriseRepository.findByEid(enterprise.getEid().getMemberid());
-        System.out.println("=================enterprise2"+enterprise2);
-        model.addAttribute("enterprise", enterprise2);
-        return "/enter/enterpriseInfoWriteForm";
+    	Enterprise enter = enterpriseRepository.findByEntercode(entercode);
+    	enter.setCompanyname(companyname);
+    	enter.setCorporatetype(corporatetype);
+    	enter.setManagertel(managertel);
+    	enter.setManageremail(manageremail);
+    	enter.setBusinessnumber(businessnumber);
+    	
+    	Member member = memberRepository.findByMemberid("aaa");
+    	member.setPassword(password);
+    	
+    	memberRepository.save(member);
+    	enterpriseRepository.save(enter);
+        return "redirect:/enter/enterpriseInfoWriteForm";
     }
     
     //인재정보페이지
@@ -127,8 +136,7 @@ public class EnterpriseController {
     	
     	postingRepository.save(posting);
     	
-    	
-    	return "/enter/enterprisePostList";
+    	return "redirect:/enter/enterprisePostList";
     }
     
     //해당공고 수정 폼
