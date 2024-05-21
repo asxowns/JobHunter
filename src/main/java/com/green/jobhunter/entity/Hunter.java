@@ -31,7 +31,6 @@ public class Hunter{
 	@ToString.Exclude
 	private Member hid;
 
-	private String title;
 	private String username;
 	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
 	private LocalDate birth;

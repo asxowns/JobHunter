@@ -1,6 +1,6 @@
 package com.green.jobhunter.entity;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -34,6 +34,6 @@ public class Certificate{
 	@ToString.Exclude
 	private Member hid;
 	private String publisher;
-	private Date issuedate;
+	private LocalDate issuedate;
 	
 }
