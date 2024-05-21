@@ -59,11 +59,13 @@ a{
 		width:100%;
 		height:45px;
 		margin-bottom:40px;
+		padding-left:5px;
 	}
 	
 	textarea{
 		width:100%;
 		height:350px;
+		padding:5px;
 	}
 	
 	
@@ -103,20 +105,35 @@ a{
     	<h1>게시물 작성</h1>
     </div>
     
-    <form action="write?boardtype=${boardtype }" method="post">
+    <form action="write?boardtype=${boardtype }&regdate=${community.regdate}" method="post">
     	<div class="write_container">
     		<h4>일반</h4>
     		<article>
 	    		<p>제목</p>
-	    		<input type="text" name="title">
+	    		<c:if test="${community.title ne null }">
+	    			<input type="text" name="title" value="${community.title }">
+	    		</c:if>
+	    		<c:if test="${community.title eq null }">
+	    			<input type="text" name="title">
+	    		</c:if>
 	    		<p>내용</p>
-	    		<textarea name="content"></textarea>
+	    		<c:if test="${community.content ne null }">
+	    			<textarea name="content">${community.content }</textarea>
+	    		</c:if>
+	    		<c:if test="${community.content eq null }">
+	    			<textarea name="content"></textarea>
+	    		</c:if>
 	    		<input type="hidden" name="writer" value="${sessionScope.logged }">
     		</article>
     	</div>
     	
     	<div class="btn_box">
-    		<input type="submit" value="작성" class="btn_submit btn">
+    		<c:if test="${community.title eq null }">
+    			<input type="submit" value="작성" class="btn_submit btn">
+    		</c:if>
+    		<c:if test="${community.title ne null }">
+    			<input type="submit" value="수정" class="btn_submit btn">
+    		</c:if>
     		<a href="openForum" class="btn_cancel btn">취소</a>
     	</div>
     </form>
