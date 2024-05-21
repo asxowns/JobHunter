@@ -41,10 +41,10 @@
 <section>
     <h2> Manager page ROLE : ${role}</h2>
     <div id="manager-menu">
-        <a class="a-button" href="/"> 권한 관리 버튼 </a>
-        <a class="a-button" href="/"> 채팅 문의 버튼 </a>
-        <a class="a-button" href="/manage/noticeList"> 공지사항 버튼 </a>
-        <a class="a-button" href="/"> 고객센터 버튼 </a>
+        <a class="a-button" href="/manage/noticeList"> 공지사항 관리 </a>
+        <a class="a-button" href="/manage/managerCSList"> 고객센터 관리 </a>
+        <a class="a-button" href="/manage/chat"> 채팅 문의 관리  </a>
+        <a class="a-button" href="/manage/accessHub"> 권한 관리 </a>
     </div>
     <div class="chart-container">
         <div class="chart">

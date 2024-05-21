@@ -15,7 +15,7 @@
     <%@ include file="../sub/header.jsp" %>
 </header>
 <section>
-    <h2> index page </h2>
+    <h2> 권한 관리 Hub</h2>
     
 </section>
 <footer>
