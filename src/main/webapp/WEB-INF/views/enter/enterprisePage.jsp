@@ -26,9 +26,9 @@
 <section>
     <h2> enterprise page (${sessionScope.logged })</h2>
     <br>
-	<a href="enterprisePostList"><button>채용공고관리</button></a>
-	<a href="enterpriseInfoWriteForm"><button>기업정보관리</button></a>
-	<a href="hunterList"><button>인재정보관리</button></a>
+	<a href="/enter/enterprisePostList"><button>채용공고관리</button></a>
+	<a href="/enter/enterpriseInfoWriteForm"><button>기업정보관리</button></a>
+	<a href="/enter/hunterList"><button>인재정보관리</button></a>
 </section>
 <footer>
 
