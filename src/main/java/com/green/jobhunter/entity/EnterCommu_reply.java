@@ -17,7 +17,7 @@ import lombok.ToString;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class EnterCommu_reply{
+public class EnterCommu_reply extends BaseTimeEntity{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long eccode;
@@ -28,6 +28,5 @@ public class EnterCommu_reply{
 	private Member writer;
 	private String title;
 	private String content;
-	
 	
 }

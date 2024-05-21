@@ -149,11 +149,11 @@ main b {
 	<section>
 
 		<div class="title">
-			<h1>일반 게시판</h1>
+			<h1>기업 게시판</h1>
 		</div>
 
 		<main>
-			<b>일반 게시판</b>
+			<b>기업 게시판</b>
 
 			<div class="myInfo">
 				<div class="myInfo_me">

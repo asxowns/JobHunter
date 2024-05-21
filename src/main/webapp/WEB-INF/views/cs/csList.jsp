@@ -99,7 +99,7 @@ th, td {
             <c:forEach var="cs" items="${list2}"  varStatus="stat">
                 <tr>
                     <td>${stat.count}</td>
-                    <td>${cs.getTitle()}</td>
+                    <td><a href="/cs/forumDetail?cscode=${cs.cscode}">${cs.title}</a></td>
                     <td>${cs.getResult()}</td>
                     <td>${cs.getHid().getMemberid()}</td>
                     <td>${cs.getCsdate()}</td>

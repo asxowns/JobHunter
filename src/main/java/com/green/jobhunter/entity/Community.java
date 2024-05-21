@@ -1,5 +1,6 @@
 package com.green.jobhunter.entity;
 
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,7 +18,7 @@ import lombok.ToString;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Community{
+public class Community extends BaseTimeEntity{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long cmcode;
@@ -28,6 +29,7 @@ public class Community{
 	private Member writer;
 	private String title;
 	private String content;
+	private int boardtype;
 	
 	
 }

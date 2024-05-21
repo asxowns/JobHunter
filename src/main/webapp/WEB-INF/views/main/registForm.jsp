@@ -101,43 +101,57 @@ input[type="radio"] {
 		
 		<div id="tab-1" class="tab-content current">
 			<h1>일반회원 signUpForm</h1>
-			<form action="signUp" method="post">
-				이름<input type="text" id="inputFieldName" name="name"><br> 
+			<form action="hunterregist" method="post">
+				이름<input type="text" id="inputFieldName" name="username"><br> 
 				<div id="outputDivName"></div>
 				
-				아이디<input
-					type="text" id="inputFieldId" name="id"><br> 
+				아이디<input type="text" id="inputFieldId" name="memberid"><br> 
 				<div id="outputDivId"></div>
-					
-				비밀번호<input type="text" id = "inputFieldPw" name="pw"><br>
+				
+				비밀번호<input type="text" id = "inputFieldPw" name="password"><br>
 				<div id="outputDivPw"></div>
 				
-				</div>
-				<div class="gender-box">
-					<div class="radio-container">
-						<input type="radio" id="male" name="gender" value="male">
-						<label for="male">남자</label>
-					</div>
-					<div class="radio-container">
-						<input type="radio" id="female" name="gender" value="female">
-						<label for="female">여자</label>
-					</div>
-					<br> <input type="submit" value="회원가입"><br>
-				</div>
+				생년월일<input type="text" id = "inputFieldBirth" name="birth"><br>
+				<div id="outputDivPw"></div>
+				
+				휴대폰번호<input type="text" id = "inputFieldTel" name="tel"><br>
+				<div id="outputDivPw"></div>
+				
+				이메일<input type="text" id = "inputFieldEmail" name="email"><br>
+				<div id="outputDivPw"></div>
+				<div id="outputDivPw"></div>
+				 <input type="submit" value="회원가입">
 			</form>
 		</div>
 
 		<div id="tab-2" class="tab-content">
 			<h1>기업 signUpForm</h1>
-			<form action="signUp" method="post">
-				아이디<input type="text" name="id"><br>
+			<form action="enterregist" method="post">
+				기업명<input type="text" name="companyname"><br>
+				대표자명<input type="text" name="ceo"><br>
+				기업전화번호<input type="text" name="tel"><br>
+				기업크기<input type="text" name="size"><br>
+				기업형태<input type="text" name="corporatetype"><br>
+				산업<input type="text" name="businessitem"><br>
+				사업자등록번호<input type="text" name="businessnumber"><br>
+				회사주소<input type="text" name="address"><br>
+				사원수<input type="text" name="empnum"><br>
+				매출액<input type="text" name="sales"><br>
+				
+				담당자정보<br>
+				아이디<input type="text" name="memberid"><br>
+				비밀번호<input type="text" name="password"><br>
+				담당자 이름<input type="text" name="managername"><br>
+				담당자 연락처<input type="text" name="managertel"><br>
+				담당자 이메일<input type="text" name="manageremail"><br>
+	
+
 				<div id="outputDivId"></div>
 				비밀번호<input type="text" name="pw"><br> 
 				기업명<input type="text" name="corname"><br> 
 				산업군<input type="text" name="industryName"><br> 
 				담당자연락처<input type="text" name="corTel"><br> 
 				이메일<input type="text" name="email"><br>
-				사업자등록번호<input type="text" name="corNum"><br> 
 				<input type="submit" value="회원가입"><br>
 			</form>
 		</div>

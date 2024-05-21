@@ -10,7 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.green.jobhunter.entity.Enterprise;
+import com.green.jobhunter.entity.Hunter;
 import com.green.jobhunter.entity.Member;
+import com.green.jobhunter.repository.EnterpriseRepository;
+import com.green.jobhunter.repository.HunterRepository;
 import com.green.jobhunter.repository.MemberRepository;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -22,6 +26,10 @@ public class MainController {
 
 	@Autowired
 	MemberRepository memberrepository;
+	@Autowired
+	EnterpriseRepository enterrepository;
+	@Autowired
+	HunterRepository hunterrepository;
 
 	@Autowired
 	HttpServletRequest request;
@@ -45,12 +53,39 @@ public class MainController {
 		return "main/loginForm";
 	}
 
+	@RequestMapping("/hunterregist")
+	public String regist(Hunter hunter,Member member,Model model) {
+		System.out.println("===================================헌터"+hunter);
+		System.out.println("===================================멤버"+member);
+		member.setRole('h'); 
+		hunter.setHid(member);
+		memberrepository.save(member);
+		hunterrepository.save(hunter);
+		
+
+		return "main/registForm";
+	}
+	
+	@RequestMapping("/enterregist")
+	public String regist(Member member,Enterprise enterprise) {
+		
+		
+		member.setRole('e'); 
+		enterprise.setEid(member);
+		memberrepository.save(member);
+		enterrepository.save(enterprise);
+		return "main/registForm";
+	}
+	
+	
+	
+	
 	@RequestMapping("/loginHunter")
 	public String loginHunter(@RequestParam("id") String id, @RequestParam("pw") String pw, Model model) throws IOException {
 		Member member = memberrepository.findByMem(id, pw);
 		System.out.println("==========================member : " + member);
 		if (member == null) {
-			return "main/loginForm";
+			return "/main/loginForm";
 		}
 		
 		PrintWriter out = response.getWriter();
@@ -62,9 +97,10 @@ public class MainController {
 			return "main/postList";
 		}
 		else if(member.getRole() != 'h') {
-		out.print(String.format("<script>alert('일반회원이 아닙니다');</script>"));
+		String msg="일반회원이 아닙니다";
+		model.addAttribute("msg",msg);
 		}
-		return "";
+		return "loginForm";
 	}
 
 	@RequestMapping("/loginEnterprise")

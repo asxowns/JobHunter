@@ -17,7 +17,7 @@ import lombok.ToString;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class EnterpriseCommunity{
+public class EnterpriseCommunity extends BaseTimeEntity{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long eccode;
@@ -28,5 +28,6 @@ public class EnterpriseCommunity{
 	private Member writer;
 	private String title;
 	private String content;
+	private int boardtype;
 	
 }
