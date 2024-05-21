@@ -15,7 +15,7 @@
     <%@ include file="../sub/header.jsp" %>
 </header>
 <section>
-    <h2> index page </h2>
+    <h2> 스크랩한 채용 공고 </h2>
     
 </section>
 <footer>

@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.green.jobhunter.entity.Career;
 import com.green.jobhunter.entity.Certificate;
@@ -18,7 +20,6 @@ import com.green.jobhunter.entity.MainCategory;
 import com.green.jobhunter.entity.Member;
 import com.green.jobhunter.entity.Resume;
 import com.green.jobhunter.entity.ResumeSkill;
-import com.green.jobhunter.entity.SubCategory;
 import com.green.jobhunter.repository.CareerRepository;
 import com.green.jobhunter.repository.CertificateRepository;
 import com.green.jobhunter.repository.CoverLetterRepository;
@@ -55,7 +56,7 @@ public class HunterController {
 	@Autowired
 	ResumeSkillRepository resumeSkillRepository;
 	@Autowired
-	MemberRepository memberRepo;
+	MemberRepository memberRepository;
 	@Autowired
 	MainCategoryRepository mainCategoryRepository;
 	@Autowired
@@ -75,14 +76,16 @@ public class HunterController {
     @RequestMapping("/resumeWriteForm")
     public String writeResume(Model model) {
     	//DesiredIndustry desiredIndustry;
+    	//List<MainCategory> mainList = mainCategoryRepository.findMainCategory();
+    	//List<SubCategory> subList = subCategoryRepository.findSubCategory();
     	List<MainCategory> mainList = mainCategoryRepository.findAll();
-    	List<SubCategory> middleList = subCategoryRepository.findAll();
+    	List<String> subList = subCategoryRepository.findSubCategory();
     	
-    	System.out.println("Main List: " + mainList);  // 로그로 데이터 확인
-    	System.out.println("Middle List: " + middleList);  // 로그로 데이터 확인
+    	//System.out.println("Main List: " + mainList);  // 로그로 데이터 확인
+    	//System.out.println("Middle List: " + subList);  // 로그로 데이터 확인
     	
-    	model.addAttribute("main", mainList);
-    	model.addAttribute("middle", middleList);
+    	model.addAttribute("mainList", mainList);
+    	model.addAttribute("subList", subList);
     	
     	return "/hunter/resumeWriteForm";
     }
@@ -191,17 +194,89 @@ public class HunterController {
     }
      
     @RequestMapping("/resumeList")
-    public String goResumeList(HttpServletRequest req) {
+    public String goResumeList(HttpServletRequest req, Model model) {
     	HttpSession session = req.getSession();
     	String logged = (String)session.getAttribute("logged");
-    	Long resumecode = Long.parseLong(req.getParameter("resumecode"));
-    	Member member = memberRepo.findByMemberid(logged);
-    	resumeRepository.findTitle(member);
+    	//Long resumecode = Long.parseLong(req.getParameter("resumecode"));
+    	Member member = memberRepository.findByMemberid(logged);
+    	String title = resumeRepository.findTitle(member);
+    	//번호(자동부여), 이력서 제목, 작성일/최종수정일 나오게 하고 싶으니까 join해야하나
+    	
+    	model.addAttribute("title", title);
     	
     	return "/hunter/resumeList";
+    }
+    
+    @RequestMapping("/getSubList")
+    @ResponseBody
+    public List<String> getSubList(@RequestParam("mccode") String mccode) {
+       Long mccodeLong = Long.parseLong(mccode); // String을 Long으로 변환
+       System.out.println("mccodeLong: " + mccodeLong);
+       List<String> subList = null ;
+       if(mccode != null){
+          subList = subCategoryRepository.findSubCategoryBymccode(mccodeLong); 
+          System.out.println(subList);
+          
+       }
+         return subList;
+     }
+    
+    @RequestMapping("/resumeManagement")
+    public String resumeManagement() {
+    	
+        return "/hunter/resumeManagement";
+    }
+    
+    @RequestMapping("/jobApplication")
+    public String jobApplication() {
+    	
+        return "/hunter/jobApplication";
+    }
+    
+    @RequestMapping("/subscribeList")
+    public String subscribeList() {
+    	
+        return "/hunter/subscribeList";
+    }
+    
+    @RequestMapping("/positionList")
+    public String positionList() {
+    	
+        return "/hunter/positionList";
+    }
+    
+    @RequestMapping("/favorList")
+    public String favorList() {
+    	
+        return "/hunter/favorList";
+    }
+    
+    @RequestMapping("/informList")
+    public String informList() {
+    	
+        return "/hunter/informList";
     }
     
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
+
+    

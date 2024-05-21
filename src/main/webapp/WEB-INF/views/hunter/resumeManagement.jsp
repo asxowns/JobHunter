@@ -15,8 +15,12 @@
     <%@ include file="../sub/header.jsp" %>
 </header>
 <section>
-    <h2> 입사 제안 현황 </h2>
-    
+    <h2> 이력서 관리 </h2>
+    <button type=button><a href="</button>
+    <c:forEach var="title" items="${title }">
+    	
+    	${title }
+    </c:forEach>
 </section>
 <footer>
 
