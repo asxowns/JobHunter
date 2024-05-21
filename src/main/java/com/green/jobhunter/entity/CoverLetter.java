@@ -1,5 +1,6 @@
 package com.green.jobhunter.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,15 +19,24 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CoverLetter{
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long clcode;
-	
-	@OneToOne
-	@JoinColumn(name="resumecode")
-	@ToString.Exclude
-	private Resume resumecode;
-	private String title;
-	private String content;
-	
+   @Id
+   @GeneratedValue(strategy=GenerationType.IDENTITY)
+   private Long clcode;
+   
+   @OneToOne
+   @JoinColumn(name="resumecode")
+   @ToString.Exclude
+   private Resume resumecode;
+
+
+   @Column(length = 1000)
+   private String growth;
+   
+   @Column(length = 1000)
+   private String motive;
+
+   
+   @Column(length = 1000)
+   private String prosAndCons;
+   
 }

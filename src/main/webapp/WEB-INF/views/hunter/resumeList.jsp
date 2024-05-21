@@ -23,11 +23,11 @@
 				<th>작성일/최종수정일</th>
 			</tr>
 
-			<c:forEach var="list" items="${리스트 }">
+			<c:forEach var="resume" items="${resume }">
 				<tr>
-					<td>${번호 }</td>
-					<td>${title }</td>
-					<td>${작성일/최종수정일 }</td>
+					<td>${resume.resumecode }</td>
+					<td>${resume.title  }</td>
+					<td>${resume.modifydate }</td>
 				</tr>
 			</c:forEach>
 		</table>
