@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.green.jobhunter.entity.DesiredArea;
 import com.green.jobhunter.entity.DesiredIndustry;
 import com.green.jobhunter.entity.Hunter;
-import com.green.jobhunter.entity.Member;
 import com.green.jobhunter.entity.Resume;
 import com.green.jobhunter.repository.DesiredAreaRepository;
 import com.green.jobhunter.repository.DesiredIndustryRepository;
@@ -76,12 +75,6 @@ public class HunterController {
     	hunterRepository.save(hunter);
     	
     	//resume 정보
-    	HttpSession session = req.getSession();
-    	String logged = (String)session.getAttribute("id");
-    	resumeRepository.findById((Long)session.getAttribute("huntercode"));    	
-    	//모르겠다.....
-    	
-    	
     	String pay_ = req.getParameter("pay");
     	resume.setDesirepay(Integer.parseInt(pay_));
     	resume.setEduname("eduname");
@@ -103,13 +96,16 @@ public class HunterController {
     	
     	resumeRepository.save(resume);
     	
+    	//desiredArea 정보
+    	dArea.setArea1(req.getParameter("area1"));
+    	dArea.setArea1(req.getParameter("area2"));
     	
+    	desiredAreaRepository.save(dArea);
     	
-    	
-    	
-    	
-    	
-    	
+    	//desiredIndustry 정보
+    	dIndustry.setIndustry1(req.getParameter("industry1"));
+    	dIndustry.setIndustry2(req.getParameter("industry2"));
+    	//dIndustry.setIndustry3(req.getParameter("industry3"));
     	
     	
     	
