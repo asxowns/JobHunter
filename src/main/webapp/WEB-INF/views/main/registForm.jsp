@@ -104,7 +104,7 @@ input[type="radio"] {
 		
 		<div id="tab-1" class="tab-content current">
 			<h1>일반회원 signUpForm</h1>
-			<form action="hunterregist" method="post">
+			<form action="/hunterregist" method="post">
 				이름<input type="text" id="inputFieldName" name="username"><br> 
 				<div id="outputDivName"></div>
 				
@@ -127,7 +127,7 @@ input[type="radio"] {
 
 		<div id="tab-2" class="tab-content">
 			<h1>기업 signUpForm</h1>
-			<form action="enterregist" method="post">
+			<form action="/enterregist" method="post">
 				기업명<input type="text" name="companyname"><br>
 				대표자명<input type="text" name="ceo"><br>
 				기업전화번호<input type="text" name="tel"><br>
@@ -197,7 +197,7 @@ input[type="radio"] {
 				document.getElementById("outputDivId").innerHTML = this.responseText;
 			}
 		};
-		xhttp.open("GET", "checkId?id=" + id, true);
+		xhttp.open("GET", "/checkId?id=" + id, true);
 		xhttp.send();
     }); 
 	   
@@ -211,7 +211,7 @@ input[type="radio"] {
 				document.getElementById("outputDivPw").innerHTML = this.responseText;
 			}
 		};
-		xhttp.open("GET", "checkPw?pw=" + pw, true);
+		xhttp.open("GET", "/checkPw?pw=" + pw, true);
 		xhttp.send();
     }); 
 	    

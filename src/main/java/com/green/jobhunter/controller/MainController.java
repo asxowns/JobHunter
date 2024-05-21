@@ -88,7 +88,7 @@ public class MainController {
 			return "/main/loginForm";
 		}
 		
-		PrintWriter out = response.getWriter();
+		
 		if (member != null & member.getRole() == 'h') {
 			HttpSession session = request.getSession();
 
