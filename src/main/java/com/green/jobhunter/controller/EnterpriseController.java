@@ -143,7 +143,7 @@ public class EnterpriseController {
     }
     //해당공고 수정 기능 
     @RequestMapping("/enterprisePostUpdate")
-    public String enterprisePostUpdate(Model model, @RequestParam() ) {
+    public String enterprisePostUpdate(){
     	
     	return "/enter/enterprisePostList";
     }
