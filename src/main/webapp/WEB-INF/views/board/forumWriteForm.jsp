@@ -111,6 +111,7 @@ a{
 	    		<input type="text" name="title">
 	    		<p>내용</p>
 	    		<textarea name="content"></textarea>
+	    		<input type="hidden" name="writer" value="${sessionScope.logged }">
     		</article>
     	</div>
     	

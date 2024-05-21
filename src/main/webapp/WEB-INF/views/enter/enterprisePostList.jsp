@@ -27,7 +27,7 @@
     		<td>${posting.regdate }
     		<td>
     			<a href="hunterPerPostList?postcode=${posting.postcode }"><button>지원자보기</button></a>
-    			<a href="enterprisePostUpdate?postcode=${posting.postcode }"><button>수정</button></a>
+    			<a href="enterprisePostUpdateForm?postcode=${posting.postcode }"><button>수정</button></a>
     			<a href="enterprisePostDelete?postcode=${posting.postcode }"><button>삭제</button></a>
     		</td>
     	</tr>

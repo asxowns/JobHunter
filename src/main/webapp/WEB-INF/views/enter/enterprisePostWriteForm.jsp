@@ -28,7 +28,7 @@
     <br>
     	<div class="container">
 	    <form action="enterprisePostWrite" method="post">
-	    <input type="text" id="eid" name="eid"value="${posting.eid.memberid}">
+	    <input type="text" id="eid" name="eid" value="${sessionScope.logged}">
 			<div class="input-row">
 				<input type="text" id="title" name="title" placeholder="공고제목">
 			</div>

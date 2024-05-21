@@ -1,11 +1,10 @@
 package com.green.jobhunter.entity;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -19,11 +18,15 @@ import lombok.Getter;
 public abstract class BaseTimeEntity {
 
 	@CreatedDate
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private LocalDate regdate;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, 
+    pattern = "yyyy-MM-dd HH:mm:ss", 
+    timezone = "Asia/Seoul")
+	private LocalDateTime regdate;
 	
 	@LastModifiedDate
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private LocalDate modifieddate;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, 
+    pattern = "yyyy-MM-dd HH:mm:ss", 
+    timezone = "Asia/Seoul")
+	private LocalDateTime modifieddate;
 	
 }

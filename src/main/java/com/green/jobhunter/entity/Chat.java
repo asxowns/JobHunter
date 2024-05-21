@@ -31,7 +31,7 @@ public class Chat{
 	private String message;
 	
 	@ManyToOne
-	@JoinColumn(name="writer_manager")
+	@JoinColumn(name="writermanager")
 	@ToString.Exclude
 	private Member writermanager;
 	private LocalDateTime timelog;

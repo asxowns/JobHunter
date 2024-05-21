@@ -21,8 +21,10 @@
         <strong>Date:</strong> ${cs.getCsdate()}<br>
         <strong>Id:</strong> ${cs.getHid().getMemberid()}<br>
         <strong>Result:</strong> ${cs.getResult()}<br>
+
         id:${sessionScope.logged }
         hid :${ cs.hid.memberid}
+        cscode :${cs.getCscode()}
         <c:if test="${sessionScope.logged eq cs.hid.memberid}">
             <strong>Publictype:</strong> ${cs.getPublictype()}<br>
             <strong>Type:</strong> ${cs.getType()}<br>
@@ -30,6 +32,18 @@
             <a href="/cs/delete?cscode=${cs.cscode}" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</a>
         </c:if>
     </div>
+    <hr>
+    <form action="/cs/reply" method="get">
+        <input type="text" name="comment" placeholder="comment">
+        <input type="hidden" name="writermanager" value="${sessionScope.logged}" >
+        <input type="hidden" name="cscode" value="${cs.getCscode()}">
+        <input type="submit" value="댓글 작성">
+    </form>
+    <c:forEach var="csreply" items="${list}"  varStatus="stat">
+        댓글번호 : ${stat.count}
+        ${csreply.getWritermanager().getMemberid()}
+        ${csreply.getLocaldate()}
+    </c:forEach>
 </section>
 <footer>
 

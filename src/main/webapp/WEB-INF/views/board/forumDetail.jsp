@@ -140,6 +140,27 @@ main b {
 	right:60px;
 	bottom:15px;
 }
+
+.listup{
+	width:800px;
+	margin:50px auto 100px;
+	text-align:center;
+}
+.listup a{
+	display:inline-block;
+	color:#d44958;
+	border:1px solid #d44958;
+	padding:12px 20px;
+}
+.listup a:hover{
+	color:#fff;
+	background:#d44958;
+	border:1px solid #d44958;
+}
+
+.regdate p{
+	color:#aaa;
+}
 </style>
 </head>
 <body>
@@ -165,7 +186,7 @@ main b {
 						<img src="/resource/img/view_icon.png"> 22
 					</p>
 				</div>
-				<div>
+				<div class="regdate">
 						<p>${community.regdate }</p>
 				</div>
 			</div>
@@ -187,6 +208,9 @@ main b {
 			</div>
 		</div>
 
+		<div class="listup">
+			<a href="openForum">목록보기</a>
+		</div>
 
 
 

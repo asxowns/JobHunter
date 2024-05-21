@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%-- JSTL Core --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
@@ -213,8 +215,14 @@ header {
 					
 					<div class="user_log_list">
 						<ul>
-							<li><a href="/loginForm">로그인</a></li>
-							<li><a href="/registForm">회원가입</a></li>
+							<c:if test="${sessionScope.logged eq null }">
+								<li><a href="/loginForm">로그인</a></li>
+								<li><a href="/registForm">회원가입</a></li>
+							</c:if>
+							<c:if test="${sessionScope.logged ne null }">
+								<li><a href="/hunterPage">${sessionScope.logged }</a></li>
+								<li><a href="#">로그아웃</a></li>
+							</c:if>
 						</ul>
 					</div>
 				</div>
