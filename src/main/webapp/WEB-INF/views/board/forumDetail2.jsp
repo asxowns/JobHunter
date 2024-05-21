@@ -42,9 +42,9 @@ main {
 	width: 800px;
 	margin: 0 auto;
 	border-top: 1px solid #B6B6B6;
-	border-bottom:1px solid #B6B6B6;
+	border-bottom: 1px solid #B6B6B6;
 	position: relative;
-	padding-bottom:150px;
+	padding-bottom: 150px;
 }
 
 main b {
@@ -60,14 +60,16 @@ main b {
 
 .myInfo {
 	display: flex;
-	justify-content:space-between;
+	justify-content: space-between;
 	align-items: center;
 	margin-top: 50px;
 }
-.myInfo .myInfo_me{
-	display:flex;	
-	align-items:center;
+
+.myInfo .myInfo_me {
+	display: flex;
+	align-items: center;
 }
+
 .myInfo .name {
 	font-weight: 600;
 	font-size: 18px;
@@ -76,7 +78,7 @@ main b {
 
 .myInfo .views {
 	display: flex;
-	height:24px;
+	height: 24px;
 }
 
 .myInfo .views img {
@@ -92,53 +94,80 @@ main b {
 	margin-right: 13px;
 }
 
-.detailtitle{
-	padding:25px 0;
-	font-size:30px;
-}
-.detailcontent{
-	font-weight:500;
+.detailtitle {
+	padding: 25px 0;
+	font-size: 30px;
 }
 
-#main_bottom{
-	width:800px;
-	margin:0 auto;
-}
-#main_bottom .reply_count{
-	padding:10px 0;
-	color:#848484;
+.detailcontent {
+	font-weight: 500;
 }
 
-.reply_box{
-	width:800px;
-	height:150px;
-	border:1px solid #b6b6b6;
-	border-radius:5px;
-	display:flex;
-	flex-direction:column;
-	position:relative;
-	padding:30px 60px;
-	box-sizing:border-box;
+#main_bottom {
+	width: 800px;
+	margin: 0 auto;
 }
-.reply_box input[type="text"]{
-	width:100%;
-	margin:0 auto;
-	height:50px;
-	border:1px solid #B6B6B6;
-	background: rgb(212, 73, 88,0.05);
+
+#main_bottom .reply_count {
+	padding: 10px 0;
+	color: #848484;
 }
-.reply_box input[type="submit"]{
-	display:inline-block;
-	width:110px;
-	color:#fff;
-	background:#D44958;
-	border:1px solid #d44958;
-	border-radius:5px;
-	padding:10px 0;
-	cursor:pointer;
-	position:absolute;
-	right:60px;
-	bottom:15px;
+
+.reply_box {
+	width: 800px;
+	height: 150px;
+	border: 1px solid #b6b6b6;
+	border-radius: 5px;
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	padding: 30px 60px;
+	box-sizing: border-box;
+}
+
+.reply_box input[type="text"] {
+	width: 100%;
+	margin: 0 auto;
+	height: 50px;
+	border: 1px solid #B6B6B6;
+	background: rgb(212, 73, 88, 0.05);
+}
+
+.reply_box input[type="submit"] {
+	display: inline-block;
+	width: 110px;
+	color: #fff;
+	background: #D44958;
+	border: 1px solid #d44958;
+	border-radius: 5px;
+	padding: 10px 0;
+	cursor: pointer;
+	position: absolute;
+	right: 60px;
+	bottom: 15px;
+}
+
+.listup {
+	width: 800px;
+	margin: 50px auto 100px;
+	text-align: center;
+}
+
+.listup a {
+	display: inline-block;
+	color: #d44958;
+	border: 1px solid #d44958;
+	padding: 12px 20px;
+}
+
+.listup a:hover {
+	color: #fff;
+	background: #d44958;
+	border: 1px solid #d44958;
+}
+
+.regdate p{
+	color:#aaa;
 }
 </style>
 </head>
@@ -165,29 +194,29 @@ main b {
 						<img src="/resource/img/view_icon.png"> 22
 					</p>
 				</div>
-				<div>
-						<p>${community.regdate }</p>
+				<div class="regdate">
+					<p>${community.regdate }</p>
 				</div>
 			</div>
-				<h1 class="detailtitle">${community.title }</h1>
-				<h4 class="detailcontent">
-					${community.content }
-				</h4>
-			
+			<h1 class="detailtitle">${community.title }</h1>
+			<h4 class="detailcontent">${community.content }</h4>
+
 		</main>
-		
+
 		<div id="main_bottom">
 			<p class="reply_count">2개의 댓글</p>
-			
+
 			<div class="reply_box">
 				<form action="" method="post">
-					<input type="text" name="reply">
-					<input type="submit" value="댓글쓰기">
+					<input type="text" name="reply"> <input type="submit"
+						value="댓글쓰기">
 				</form>
 			</div>
 		</div>
 
-
+		<div class="listup">
+			<a href="enterpriseForum">목록보기</a>
+		</div>
 
 
 	</section>
