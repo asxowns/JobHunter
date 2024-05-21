@@ -21,6 +21,14 @@
         <strong>Date:</strong> ${cs.getCsdate()}<br>
         <strong>Id:</strong> ${cs.getHid().getMemberid()}<br>
         <strong>Result:</strong> ${cs.getResult()}<br>
+        id:${sessionScope.id }
+        hid :${ cs.hid.memberid}
+        <c:if test="${sessionScope.id eq cs.hid.memberid}">
+            <strong>Publictype:</strong> ${cs.getPublictype()}<br>
+            <strong>Type:</strong> ${cs.getType()}<br>
+            <a href="/cs/forumUpdateForm?cscode=${cs.cscode}">수정</a>
+            <a href="/cs/delete?cscode=${cs.cscode}" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</a>
+        </c:if>
     </div>
 </section>
 <footer>

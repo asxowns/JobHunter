@@ -44,7 +44,7 @@
   			</div>
   			<div class="desiredIndustry">
   				<select name="industry" required size=7>
-  					<option value="industry" >
+  					<option value="industry" name="industry1">
   				</select>
   			</div>
   			

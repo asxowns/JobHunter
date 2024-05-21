@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.annotation.RequestScope;
 
 import com.green.jobhunter.entity.Cs;
 import com.green.jobhunter.entity.Member;
@@ -55,9 +56,17 @@ public class CustomerController {
 	public String forumMyDetail(@RequestParam("cscode") Long cscode, Model model) {
 		
 		Cs cs = csRepository.findByCscode(cscode);
-		System.out.println("============================"+cs);
 		model.addAttribute("cs", cs);
 		return "/cs/forumMyDetail";
+	}
+
+	@RequestMapping("/forumDetail")
+	public String forumDetail(HttpServletRequest request, @RequestParam("cscode") Long cscode, Model model) {
+		HttpSession session = request.getSession();
+		String logged = (String)session.getAttribute("id");
+		Cs cs = csRepository.findByCscode(cscode);
+		model.addAttribute("cs", cs);
+		return "/cs/forumDetail";
 	}
 
 
@@ -67,23 +76,27 @@ public class CustomerController {
 	}
 
 	@RequestMapping("/forumUpdateForm")
-	public void forumUpdateForm(){
+	public void forumUpdateForm(@RequestParam("cscode") String cscode, Model model){
+		Long cscode_ = Long.parseLong(cscode);
+		Cs cs = csRepository.findByCscode(cscode_);
 		
+		model.addAttribute("cs", cs);
 		
 	}
    
 	@RequestMapping("/Update")
-	public String forumUpdateForm(@RequestParam("cscode") Long cscode
+	public String forumUpdateForm(@RequestParam("cscode") String cscode
 			,@RequestParam("title") String title
 			,@RequestParam("content") String content
 			,Model model
 			){
-		Cs cs = csRepository.findByCscode(cscode);
+		Long cscode_ = Long.parseLong(cscode);
+		Cs cs = csRepository.findByCscode(cscode_);
 		System.out.println(cs + "====================================================");
 		model.addAttribute("cs", cs);
 		
 		LocalDate csdate = LocalDate.now();
-		
+
 		cs.setTitle(title);
 		cs.setContent(content);
 		cs.setCsdate(csdate);
@@ -92,6 +105,15 @@ public class CustomerController {
 
 	}	
     
+	@RequestMapping("/delete")
+	public String delete(@RequestParam("cscode") Long cscode, Model model){
+		Cs cs = csRepository.findByCscode(cscode);
+		csRepository.delete(cs);
+
+		return "redirect:/cs/csList";
+	}
+	
+
     @RequestMapping("/write")
     public String write(@RequestParam("content") String content
     		,@RequestParam("public_type") char publictype
