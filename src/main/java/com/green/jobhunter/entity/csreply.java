@@ -21,7 +21,7 @@ import lombok.ToString;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class csreply{
+public class Csreply{
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long csr_code;
