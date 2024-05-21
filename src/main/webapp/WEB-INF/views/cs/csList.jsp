@@ -60,7 +60,7 @@ th, td {
 </header>
 <main>
 <section>
-    로그인된 아이디 : ${sessionScope.id}<br>
+    로그인된 아이디 : ${sessionScope.logged}<br>
 <div>
     <ul class="tabs">
         <li class="tab-link current" data-tab="tab-1">FAQ</li>

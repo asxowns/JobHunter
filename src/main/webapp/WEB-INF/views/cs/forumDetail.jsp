@@ -21,9 +21,9 @@
         <strong>Date:</strong> ${cs.getCsdate()}<br>
         <strong>Id:</strong> ${cs.getHid().getMemberid()}<br>
         <strong>Result:</strong> ${cs.getResult()}<br>
-        id:${sessionScope.id }
+        id:${sessionScope.logged }
         hid :${ cs.hid.memberid}
-        <c:if test="${sessionScope.id eq cs.hid.memberid}">
+        <c:if test="${sessionScope.logged eq cs.hid.memberid}">
             <strong>Publictype:</strong> ${cs.getPublictype()}<br>
             <strong>Type:</strong> ${cs.getType()}<br>
             <a href="/cs/forumUpdateForm?cscode=${cs.cscode}">수정</a>
