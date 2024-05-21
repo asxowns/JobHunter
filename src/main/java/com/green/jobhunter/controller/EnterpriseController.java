@@ -41,26 +41,15 @@ public class EnterpriseController {
     @RequestMapping("/enterprisePage")
     public String root2(){
     	
-    	
         return "/enter/enterprisePage";  
-    }
-    //채용공고관리페이지
-    @RequestMapping("/enterprisePostList")
-    public String root3(Model model, HttpServletRequest request){
-    	HttpSession session = request.getSession();
-    	String id = (String)session.getAttribute("id");
-    	List <Posting> posting = postingRepository.findByEid(id);
-    	System.out.println(posting);
-    	model.addAttribute("posting", posting);
-    	return "/enter/enterprisePostList";  
     }
     //기업정보페이지
     @RequestMapping("/enterpriseInfoWriteForm")
     public String root4(Model model, HttpServletRequest request){
     	
     	HttpSession session = request.getSession();
-    	//String id = (String)session.getAttribute("logged");
-    	String id = "aaa";
+    	String id = (String)session.getAttribute("logged");
+    	//String id = "aaa";
     	Enterprise enterprises = enterpriseRepository.findByEid(id);
     	
     	System.out.println(id+"===================");
@@ -69,7 +58,6 @@ public class EnterpriseController {
     	
     	return "/enter/enterpriseInfoWriteForm";  
     }
-    
     //기업정보페이지 수정하기
     @RequestMapping("/enterpriseUpdate")
     public String enterpriseUpdate(Model model, @RequestParam("entercode") Long entercode,
@@ -84,7 +72,7 @@ public class EnterpriseController {
     	enter.setManageremail(manageremail);
     	enter.setBusinessnumber(businessnumber);
     	
-    	Member member = memberRepository.findByMemberid("aaa");
+    	Member member = memberRepository.findByMemberid("logged");
     	member.setPassword(password);
     	
     	memberRepository.save(member);
@@ -92,15 +80,24 @@ public class EnterpriseController {
         return "redirect:/enter/enterpriseInfoWriteForm";
     }
     
-    //인재정보페이지
-    @RequestMapping("/hunterList")
-    public String root5(){
-        return "/enter/hunterList";  
+    //채용공고관리페이지
+    @RequestMapping("/enterprisePostList")
+    public String root3(Model model, HttpServletRequest request){
+    	HttpSession session = request.getSession();
+    	String id = (String)session.getAttribute("logged");
+    	//id = "aaa";
+    	List <Posting> posting = postingRepository.findByEid(id);
+    	System.out.println(posting);
+    	model.addAttribute("posting", posting);
+    	
+    	return "/enter/enterprisePostList";  
     }
     
     //해당공고별 지원자 관리페이지 
     @RequestMapping("/hunterPerPostList")
-    public String root6() {
+    public String root6(@RequestParam("postcode") Long postcode, Model model) {
+    	Posting posting = postingRepository.findByPostcode(postcode);
+    	model.addAttribute("posting", posting);
     	return "/enter/hunterPerPostList";
     }
     //채용공고 등록 폼
@@ -141,16 +138,27 @@ public class EnterpriseController {
     
     //해당공고 수정 폼
     @RequestMapping("/enterprisePostUpdateForm")
-    public String enterprisePostWriteForm() {
+    public String enterprisePostWriteForm(Model model, HttpServletRequest request) {
     	return "/enter/enterprisePostUpdateForm";
     }
+    //해당공고 수정 기능 
+    @RequestMapping("/enterprisePostUpdate")
+    public String enterprisePostUpdate(Model model, @RequestParam() ) {
+    	
+    	return "/enter/enterprisePostList";
+    }
+    
     //채용공고 삭제
-    /*@RequestMapping("/enterprisePostDelete")
-	public String delete(@RequestParam("eid") String eid) {
-		memberRepository.deleteById(eid);
-		return "redirect:/enter/enterprisePost";
-	}*/
+    @RequestMapping("/enterprisePostDelete")
+	public String delete(@RequestParam("postcode") Long postcode) {
+		postingRepository.deleteBypostcode(postcode);
+		return "redirect:/enter/enterprisePostList";
+	}
    
-
+    //인재정보페이지
+    @RequestMapping("/hunterList")
+    public String root5(){
+        return "/enter/hunterList";  
+    }
     
 }

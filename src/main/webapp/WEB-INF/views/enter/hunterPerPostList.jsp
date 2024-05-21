@@ -15,8 +15,16 @@
     <%@ include file="../sub/header.jsp" %>
 </header>
 <section>
-    <h2> hunterPerPostList page </h2>
-    
+    <h2> hunterPerPostList page </h2> <!-- 해당공고의 지원자 관리 페이지(해당공고내용/지원자(구직자)리스트/해당공고의 통계 -->
+    <br>
+    <div> <!-- 해당공고내용 --> 
+    	${posting.postcode }
+    	${posting.title }
+    </div>
+    <br>
+    <div> <!-- 지원자 리스트 -->
+    	
+    </div>
 </section>
 <footer>
 

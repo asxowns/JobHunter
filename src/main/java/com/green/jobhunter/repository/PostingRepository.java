@@ -12,4 +12,9 @@ public interface PostingRepository extends JpaRepository<Posting, Long> {
 
 	@Query(value = "SELECT * FROM posting WHERE eid = :eid", nativeQuery = true)
 	List<Posting> findByEid(@Param("eid") String eid);
+	
+	Posting findByPostcode(Long postcode);
+
+	void deleteBypostcode(Long postcode);
+
 }

@@ -117,7 +117,7 @@ public class MainController {
 			// model.addAttribute("url", "main");
 			session.setAttribute("logged", id);
 			session.setAttribute("pw", pw);
-			return "enter/enterprisePage";
+			return "/enter/enterprisePage";
 		}
 		return "";
 	}
