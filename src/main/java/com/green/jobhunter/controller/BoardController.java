@@ -1,5 +1,8 @@
 package com.green.jobhunter.controller;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -261,6 +264,48 @@ public class BoardController {
 		
 		return "board/openForum";
 		
+	}
+	
+	
+	@RequestMapping("/updateForm")
+	public String updateForm(@RequestParam("cmcode") Long cmcode,@RequestParam("boardtype") int boardtype , Model model) {
+		
+		Community community = communityRepo.findByCmcode(cmcode);
+		
+		model.addAttribute("community", community);
+		model.addAttribute("boardtype", boardtype);
+		
+		return "board/forumWriteForm";
+	}
+	
+	@RequestMapping("update")
+	public String update(Community community,
+			EnterpriseCommunity enterpriseCommunity,
+			@RequestParam("boardtype") int boardtype) {
+		
+		
+		if(boardtype == 1) {
+			communityRepo.save(community);
+			
+			return "redirect:board/openForum";
+			
+		}else if(boardtype == 2) {
+			enterRepo.save(enterpriseCommunity);
+			
+			return "redirect:board/enterpriseForum";
+		}
+		
+		return "redirect:forumWriteForm";
+	}
+	
+	@RequestMapping("/delete")
+	public String delete(@RequestParam("cmcode") Long cmcode) {
+		
+		Community findcomm = communityRepo.findByCmcode(cmcode);
+		
+		communityRepo.deleteByCmcode(cmcode);
+		
+		return "redirect:openForum";
 	}
 	
 	

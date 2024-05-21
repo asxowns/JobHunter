@@ -141,21 +141,36 @@ main b {
 	bottom:15px;
 }
 
-.listup{
+
+.active_menu{
 	width:800px;
-	margin:50px auto 100px;
+	margin:20px auto 100px;
+	display:flex;
+	justify-content:space-between;
+}
+.active_menu a:hover{
+	color:#fff;
+	background:#d44958;
+	border:1px solid #d44958;
+}
+
+.listup{
 	text-align:center;
 }
 .listup a{
 	display:inline-block;
 	color:#d44958;
 	border:1px solid #d44958;
-	padding:12px 20px;
+	padding:6px 10px;
+	font-size:13px;
 }
-.listup a:hover{
-	color:#fff;
-	background:#d44958;
+
+.upAndDel a{
+	display:inline-block;
+	color:#d44958;
 	border:1px solid #d44958;
+	padding:6px 10px;
+	font-size:13px;
 }
 
 .regdate p{
@@ -208,11 +223,17 @@ main b {
 			</div>
 		</div>
 
-		<div class="listup">
-			<a href="openForum">목록보기</a>
+		<div class="active_menu">
+			<div class="listup">
+				<a href="openForum">목록보기</a>
+			</div>
+			<div class="upAndDel">
+				<c:if test="${sessionScope.logged ne null }">
+					<a href="updateForm?cmcode=${community.cmcode }&boardtype=1">수정</a>
+					<a href="delete?cmcode=${community.cmcode }&boardtype=1">삭제</a>
+				</c:if>	
+			</div>
 		</div>
-
-
 
 	</section>
 	<footer> </footer>

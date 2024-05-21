@@ -15,7 +15,16 @@ public interface PostingRepository extends JpaRepository<Posting, Long> {
 	List<Posting> findByEid(@Param("eid") String eid);
 	
 	Posting findByPostcode(Long postcode);
+	//해당 채용공고 삭제
+	@Query(value = "DELETE FROM application WHERE postcode = :postcode", nativeQuery = true)
+	void deleteBypostcode(@Param("postcode") Long postcode);
+	
+	@Query(value = "DELETE FROM posting_skill WHERE postcode= :postcode", nativeQuery = true)
+	void deleteBypostcode2(@Param("postcode") Long postcode);
+	
+	@Query(value = "DELETE FROM posting WHERE postcode= :postcode", nativeQuery = true)
+	void deleteBypostcode3(@Param("postcode") Long postcode);
+	
 
-	void deleteBypostcode(Long postcode);
-
+	List<Posting> findByEidAndAreaAndCareerAndEdutype(Member eid, String area, String career, String edutype);
 }

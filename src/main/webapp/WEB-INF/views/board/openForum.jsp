@@ -140,7 +140,7 @@ input[type="submit"] {
 }
 
 #list_area a h2 {
-	padding: 5px 0;
+	padding: 3px 0 8px;
 }
 
 #list_area a h4 {
@@ -161,6 +161,13 @@ input[type="submit"] {
 	height: 20px;
 	display: flex;
 	padding-left: 5px;
+}
+.list_bottom .user_img{
+	display:inline-block;
+	width:20px;
+	height:20px;
+	background:#ddd;
+	border-radius:50%;
 }
 
 .write_btn {
@@ -253,7 +260,10 @@ input[type="submit"] {
 						<h4>
 							<div class="list_bottom">
 								<div>
-									<span></span> <span>작성자1</span>
+									<span class="user_img">
+										<img src="">
+									</span>
+									<span>${comm.writer.memberid }</span>
 								</div>
 								<div class="list_bottom_info">
 									<p>
@@ -275,7 +285,7 @@ input[type="submit"] {
 						<h4>
 							<div class="list_bottom">
 								<div>
-									<span></span> <span>작성자1</span>
+									<span class="user_img"></span> <span>${search.writer.memberid }</span>
 								</div>
 								<div class="list_bottom_info">
 									<p>

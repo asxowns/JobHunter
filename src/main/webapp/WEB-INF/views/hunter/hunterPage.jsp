@@ -37,22 +37,22 @@
  		</section>
  		<ul>
  			<li>
- 				<a href="resumeList.jsp">이력서 관리</a>
+ 				<a href="/hunter/resumeManagement">이력서 관리</a>
  			</li>
  			<li>
- 				<a href="jobApplication.jsp">입사 지원 관리</a>
+ 				<a href="/hunter/jobApplication">입사 지원 관리</a>
  			</li>
  			<li>
- 				<a href="subscribeList.jsp">관심기업 관리</a>
+ 				<a href="/hunter/subscribeList">관심기업 관리</a>
  			</li>
  			<li>
- 				<a href="positionList.jsp">입사 제안 현황</a>
+ 				<a href="/hunter/positionList">입사 제안 현황</a>
  			</li>
  			<li>
- 				<a href="favorList.jsp">스크랩한 채용 공고</a>
+ 				<a href="/hunter/favorList">스크랩한 채용 공고</a>
  			</li>
  			<li>
- 				<a href="informList.jsp">내정보 관리</a>
+ 				<a href="/hunter/informList">내정보 관리</a>
  			</li>
  		</ul>
  	</aside>

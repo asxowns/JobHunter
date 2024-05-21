@@ -8,4 +8,7 @@ import com.green.jobhunter.entity.MainCategory;
 @Repository
 public interface MainCategoryRepository extends JpaRepository<MainCategory,Long> {
     
+	//@Query(value="SELECT main FROM main_category", nativeQuery=true )
+	//public List<MainCategory> findMainCategory();
+	
 }

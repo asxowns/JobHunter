@@ -19,6 +19,7 @@ public interface EnterpriseRepository extends JpaRepository<Enterprise, Long> {
 	
 	Enterprise findByEntercode(Long entercode);
 
+	Enterprise findByCompanyname(String companyname);
 
 	
 	//@Query("SELECT e FROM Enterprise e WHERE e.eid.memberid = :eid")

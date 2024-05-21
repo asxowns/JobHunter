@@ -12,11 +12,14 @@
 </head>
 <body>
 <header>
-    <%@ include file="sub/header.jsp" %>
+    <%@ include file="../sub/header.jsp" %>
 </header>
 <section>
     <h2> index page </h2>
-    
+    <h3>지원자격</h3>
+    ${dto.title}
+    <br>
+    ${dto.career}
 </section>
 <footer>
 

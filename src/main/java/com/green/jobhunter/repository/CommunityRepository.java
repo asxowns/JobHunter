@@ -12,5 +12,6 @@ public interface CommunityRepository extends JpaRepository<Community, Long> {
 	
 	Community findByCmcode(Long cmcode);
 	Page<Community> findByTitleContaining(String keyword, Pageable pageable);
+	Community deleteByCmcode(Long cmcode);
 	
 }
