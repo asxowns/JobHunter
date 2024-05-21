@@ -7,7 +7,11 @@
     <meta charset="UTF-8">
     <title></title>
 <style>
-
+    section{
+        width: 83.33%;
+        margin: 24px auto;
+        padding: 0;
+    }
 </style>
 </head>
 <body>
@@ -16,10 +20,11 @@
 </header>
 <section>
     <h2> 공지사항 작성 </h2>
-    <form method="post" action="/manage/noticeWrite">
-        공지사항 제목 : <input type="text" name="title" /> <br>
+    <c:if test="${type ne '수정'}"><form method="post" action="/manage/noticeWrite"></c:if>
+    <c:if test="${type eq '수정'}"><form method="post" action="/manage/noticeUpdate?ntcode=${notice.ntcode}"></c:if>
+        공지사항 제목 : <input type="text" name="title" value="${notice.title}" /> <br>
         <label for="content"> 내용 : </label> <br>
-        <textarea id="content" name="content" cols="100" rows="20"> </textarea> <br>
+        <textarea id="content" name="content" cols="100" rows="20">${notice.content} </textarea> <br>
         <input type="submit" value="등록">
         <input type="reset" value="reset">
     </form>
