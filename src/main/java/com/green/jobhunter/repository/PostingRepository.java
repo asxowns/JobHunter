@@ -12,7 +12,6 @@ import com.green.jobhunter.entity.Posting;
 public interface PostingRepository extends JpaRepository<Posting, Long> {
 
 	@Query(value = "SELECT * FROM posting WHERE eid = :eid", nativeQuery = true)
-
 	List<Posting> findByEid(@Param("eid") String eid);
 	
 	Posting findByPostcode(Long postcode);
@@ -27,5 +26,5 @@ public interface PostingRepository extends JpaRepository<Posting, Long> {
 	void deleteBypostcode3(@Param("postcode") Long postcode);
 	
 
-	List<Posting> findByEidAndAreaAndCareerAndEdutype(String eid, String area, String career, String edutype);
+	List<Posting> findByEidAndAreaAndCareerAndEdutype(Member eid, String area, String career, String edutype);
 }
