@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.green.jobhunter.entity.Enterprise;
 import com.green.jobhunter.entity.Member;
+import com.green.jobhunter.repository.EnterpriseRepository;
 import com.green.jobhunter.repository.MemberRepository;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -22,6 +24,8 @@ public class MainController {
 
 	@Autowired
 	MemberRepository memberrepository;
+	@Autowired
+	EnterpriseRepository enterrepository;
 
 	@Autowired
 	HttpServletRequest request;
@@ -45,12 +49,19 @@ public class MainController {
 		return "main/loginForm";
 	}
 
+	@RequestMapping("/enterregist")
+	public String regist(Enterprise enterprise) {
+		enterrepository.save(enterprise);
+		return "main/registForm";
+	}
+	
+	
 	@RequestMapping("/loginHunter")
 	public String loginHunter(@RequestParam("id") String id, @RequestParam("pw") String pw, Model model) throws IOException {
 		Member member = memberrepository.findByMem(id, pw);
 		System.out.println("==========================member : " + member);
 		if (member == null) {
-			return "main/loginForm";
+			return "/main/loginForm";
 		}
 		
 		PrintWriter out = response.getWriter();
@@ -62,9 +73,10 @@ public class MainController {
 			return "main/postList";
 		}
 		else if(member.getRole() != 'h') {
-		out.print(String.format("<script>alert('일반회원이 아닙니다');</script>"));
+		String msg="일반회원이 아닙니다";
+		model.addAttribute("msg",msg);
 		}
-		return "";
+		return "loginForm";
 	}
 
 	@RequestMapping("/loginEnterprise")
