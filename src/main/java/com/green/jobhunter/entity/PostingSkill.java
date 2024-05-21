@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 public class PostingSkill{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long pscode;
+	private Long postcode;
 	private String stack;
 	
 }

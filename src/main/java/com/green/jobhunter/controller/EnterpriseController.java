@@ -61,7 +61,7 @@ public class EnterpriseController {
     }
     //기업정보페이지 수정하기
     @RequestMapping("/enterpriseUpdate")
-    public String enterpriseUpdate(Model model, @RequestParam("entercode") Long entercode,
+    public String enterpriseUpdate(@RequestParam("entercode") Long entercode,
     		@RequestParam("password") String password, @RequestParam("companyname") String companyname, 
     		@RequestParam("corporatetype") String corporatetype, @RequestParam("managertel") String managertel, 
     		@RequestParam("manageremail") String manageremail, @RequestParam("businessnumber") String businessnumber) {
@@ -108,11 +108,11 @@ public class EnterpriseController {
     	return "/enter/enterprisePostWriteForm";
     }
     
-    //채용공고 등록  
+    //채용공고 등록 ok
     @RequestMapping("/enterprisePostWrite")
     public String enterpriseWrite(HttpServletRequest request, Model model) {
     	session = request.getSession();
-    	Member eid = (Member)request.getAttribute("logged");
+    	Member eid = memberRepository.findByMemberid((String)session.getAttribute("logged"));
     	Posting posting = new Posting();
     	
     	// 기업 아이디 설정
@@ -141,16 +141,17 @@ public class EnterpriseController {
     
     //해당공고 수정 폼
     @RequestMapping("/enterprisePostUpdateForm")
-    public String enterprisePostWriteForm() {
+    public String enterprisePostWriteForm(@RequestParam("postcode") Long postcode, Model model) {
+    	Posting posting = postingRepository.findByPostcode(postcode);
+        model.addAttribute("posting", posting);
     	return "/enter/enterprisePostUpdateForm";
     }
     //해당공고 수정 기능 
     @RequestMapping("/enterprisePostUpdate")
-    public String enterprisePostUpdate(@RequestParam("postcode") Long postcode, Model model, HttpServletRequest request){
-    	HttpSession session = request.getSession();
-        String eid = (String) session.getAttribute("logged");
-        
-        Posting posting = postingRepository.findByPostcode(postcode);
+    public String enterprisePostUpdate(HttpServletRequest request){
+        Long postcode_ = Long.parseLong(request.getParameter("postcode"));
+    	Posting posting = postingRepository.findByPostcode(postcode_);
+        posting.setPostcode(postcode_);
         
         posting.setTitle("title");
             
@@ -179,10 +180,13 @@ public class EnterpriseController {
     	return "redirect:/enter/enterprisePostList";
     }
     
-    //채용공고 삭제
+    //해당 채용공고 삭제 ok
     @RequestMapping("/enterprisePostDelete")
 	public String delete(@RequestParam("postcode") Long postcode) {
-		postingRepository.deleteBypostcode(postcode);
+    	postingRepository.deleteBypostcode(postcode);
+    	postingRepository.deleteBypostcode2(postcode);
+    	postingRepository.deleteBypostcode3(postcode);
+		
 		return "redirect:/enter/enterprisePostList";
 	}
    
