@@ -108,6 +108,12 @@ ul.tabs li.current {
 		tabContent1.classList.remove("current");
 	});
 	
-	
+	 document.getElementById("loginForm").addEventListener("submit", function(event) {
+	        const memberRole = '<%= (String) request.getAttribute("msg") %>';
+	        if (memberRole === "일반회원이 아닙니다") {
+	            event.preventDefault(); // 폼 제출 막기
+	            alert("일반회원이 아닙니다"); // 알림창 표시
+	        }
+	    });
 </script>
 </html>

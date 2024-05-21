@@ -112,32 +112,53 @@ input[type="radio"] {
 				비밀번호<input type="text" id = "inputFieldPw" name="pw"><br>
 				<div id="outputDivPw"></div>
 				
-				</div>
-				<div class="gender-box">
-					<div class="radio-container">
-						<input type="radio" id="male" name="gender" value="male">
-						<label for="male">남자</label>
-					</div>
-					<div class="radio-container">
-						<input type="radio" id="female" name="gender" value="female">
-						<label for="female">여자</label>
-					</div>
-					<br> <input type="submit" value="회원가입"><br>
-				</div>
+				
+				 <input type="submit" value="회원가입">
 			</form>
 		</div>
 
 		<div id="tab-2" class="tab-content">
 			<h1>기업 signUpForm</h1>
-			<form action="signUp" method="post">
+			<form action="enterregist" method="post">
+				기업명<input type="text" name="companyname"><br>
+				대표자명<input type="text" name="managername"><br>
+				기업전화번호<input type="text" name="tel"><br>
+				기업크기<input type="text" name="size"><br>
+				기업형태<input type="text" name="corporatetype"><br>
+				산업<input type="text" name="businessitem"><br>
+				사업자등록번호<input type="text" name="businessnumber"><br>
+				회사주소<input type="text" name="address"><br>
+				사원수<input type="text" name="empnum"><br>
+				매출액<input type="text" name="sales"><br>
+				
+				담당자정보<br>
 				아이디<input type="text" name="id"><br>
+				비밀번호<input type="text" name="pw"><br>
+				담당자 이름<input type="text" name="managername"><br>
+				담당자 연락처<input type="text" name="managertel"><br>
+				담당자 이메일<input type="text" name="manageremail"><br>
+	private Member eid;
+	private String companyname;
+	private String size;
+	private String corporatetype;
+	private String businessitem;
+	private String businessnumber;
+	private String ceo;
+	private String tel;
+	private String address;
+	private int empnum;
+	private int sales;
+	private String managername;
+	private String managertel;
+	private String manageremail;
+	private int reportnum;
+
 				<div id="outputDivId"></div>
 				비밀번호<input type="text" name="pw"><br> 
 				기업명<input type="text" name="corname"><br> 
 				산업군<input type="text" name="industryName"><br> 
 				담당자연락처<input type="text" name="corTel"><br> 
 				이메일<input type="text" name="email"><br>
-				사업자등록번호<input type="text" name="corNum"><br> 
 				<input type="submit" value="회원가입"><br>
 			</form>
 		</div>
