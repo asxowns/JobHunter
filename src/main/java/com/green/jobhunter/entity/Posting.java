@@ -1,9 +1,11 @@
 package com.green.jobhunter.entity;
 
+import java.sql.Date;
 import java.time.LocalDateTime;
 
 import org.hibernate.annotations.ManyToAny;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -45,5 +47,7 @@ public class Posting{
 	private String maincontent;
 	private String mainurl;
 
+	@Column(columnDefinition = "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP")
+    private Date regdate;
 	
 }
