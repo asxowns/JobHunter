@@ -7,12 +7,15 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.green.jobhunter.entity.Chat;
 import com.green.jobhunter.entity.Cs;
 import com.green.jobhunter.entity.Csreply;
 import com.green.jobhunter.entity.Member;
+import com.green.jobhunter.repository.ChatRepository;
 import com.green.jobhunter.repository.CsReplyRepository;
 import com.green.jobhunter.repository.CsRepository;
 import com.green.jobhunter.repository.MemberRepository;
@@ -33,6 +36,9 @@ public class CustomerController {
 
 	@Autowired
 	private CsReplyRepository csReplyRepository;
+
+	@Autowired
+	private ChatRepository chatRepository;
 
 	@RequestMapping("/home")
 	public String home() {
@@ -68,7 +74,7 @@ public class CustomerController {
 	public String forumDetail(HttpServletRequest request, @RequestParam("cscode") Long cscode, Model model) {
 		Cs cs = csRepository.findByCscode(cscode);
 		model.addAttribute("cs", cs);
-		List<Csreply> list = csReplyRepository.findAll();
+		List<Csreply> list = csReplyRepository.findAllByCscode(cs);
 		model.addAttribute("list", list);
 		return "/cs/forumDetail";
 	}
@@ -146,7 +152,23 @@ public class CustomerController {
         return "redirect:/cs/csList";
     }
 
-	@RequestMapping("/reply")
+	@PostMapping("/chat")
+    public void saveChat(@RequestParam("message") String message, HttpSession session) {
+
+		String loggedUserId = (String) session.getAttribute("logged");
+
+		Chat chat = new Chat();
+		chat.setMessage(message);
+
+		Member loggedUser = memberRepository.findByMemberid(loggedUserId);
+		chat.setWritermanager(loggedUser);
+
+		chatRepository.save(chat);
+
+    }
+
+
+	@RequestMapping("/regReply")
 	public String reply(@RequestParam("comment") String comment
 			,@RequestParam("writermanager") String writermanager
 			,@RequestParam("cscode") Long cscode
@@ -166,5 +188,7 @@ public class CustomerController {
 		
 		return "redirect:/cs/forumDetail?cscode="+cscode;
 	}
+
+
 
 }
