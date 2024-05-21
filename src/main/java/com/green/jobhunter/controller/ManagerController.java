@@ -140,15 +140,39 @@ public class ManagerController {
     }
 
     @RequestMapping("/accessHub")
-    public void accessHub(){
+    public String accessHub(HttpServletRequest req, Model model){
+        String searchId = req.getParameter("searchId");
+        List<Member> members = null;
+        if(searchId != null){
+            members = memberRepo.searchByMemberid(searchId);
+        }
+        else{
+            members = memberRepo.findAll();
+        }
+        model.addAttribute("members", members);
+        return "/manage/accessHub";
+    }
 
+    @RequestMapping("/updateRole")
+    public String updateRole(@RequestParam String memberId, @RequestParam String action) {
+        Member member = memberRepo.findById(memberId).orElse(null);
+        if (member != null) {
+            switch (action) {
+                case "grant":
+                    member.setRole('m'); // 권한 부여
+                    break;
+                case "delete":
+                    member.setRole('h');
+                    break;
+            }
+            memberRepo.save(member);
+        }
+        return "redirect:/manage/accessHub";
     }
 
     @RequestMapping("/managerDashBoard")
     public void managerDashBoard(){
 
     }
-
-    
 
 }
