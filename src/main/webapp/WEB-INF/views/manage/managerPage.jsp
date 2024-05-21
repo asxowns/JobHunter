@@ -8,16 +8,13 @@
     <title></title>
 <style>
     .a-button{
+        display:flex;
         color: black;
-        padding: 8px;
-        background-color: lightgrey;
+        border:1px solid lightgrey;
         margin: 20px;
         white-space: nowrap;
-    }
-    #manager-menu{
-        display: flex;
-        flex-wrap: nowrap;
-        overflow-x:auto;
+        justify-content:center;
+        align-items:center;
     }
     .chart-container {
         display: flex;
@@ -31,6 +28,19 @@
         width: 100% !important; /* canvas 요소가 부모의 너비를 채우도록 설정 */
         height: auto !important; /* canvas 요소의 높이를 자동으로 설정 */
     }
+    .text-center{
+        text-align: center;
+        margin-bottom:20px;
+    }
+    #managerpage-section{
+        margin:50px 0px;
+    }
+    #manager-menu-grid{
+        display:flex;
+        flex-wrap: wrap;
+        width:840px;
+        margin:0 auto;
+    }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
@@ -39,12 +49,15 @@
     <%@ include file="../sub/header.jsp" %>
 </header>
 <section>
-    <h2> Manager page ROLE : ${role}</h2>
-    <div id="manager-menu">
-        <a class="a-button" href="/manage/noticeList"> 공지사항 관리 </a>
-        <a class="a-button" href="/manage/managerCSList"> 고객센터 관리 </a>
-        <a class="a-button" href="/manage/chat"> 채팅 문의 관리  </a>
-        <a class="a-button" href="/manage/accessHub"> 권한 관리 </a>
+    <div id="managerpage-section">
+    <h2 class="text-center"> 서비스 관리 </h2>
+    <div id="manager-menu-grid">
+            <a class="a-button" href="/manage/noticeList"> <img src="/resource/img/manage/button1.png"> </a>
+            <a class="a-button" href="/manage/managerCSList"> <img src="/resource/img/manage/button2.png"> </a>
+            <a class="a-button" href="/manage/chat"> <img src="/resource/img/manage/button3.png">  </a>
+            <a class="a-button" href="/manage/accessHub"> <img src="/resource/img/manage/button4.png"> </a>
+            <a class="a-button" href="/manage/dashboard"> <img src="/resource/img/manage/button5.png"> </a>
+    </div>
     </div>
     <div class="chart-container">
         <div class="chart">

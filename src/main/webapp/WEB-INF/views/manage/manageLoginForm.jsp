@@ -20,7 +20,13 @@
 <header>
 </header>
 <section>
-    <h2> Management </h2>
+    <h2> Management System</h2>
+    <form action="/manage/manageLogin" method="post">
+        <input type="text" name="id">
+        <input type="password" name="pwd">
+        <input type="submit" value="전송">
+    </form>
+
     
 </section>
 <footer>
