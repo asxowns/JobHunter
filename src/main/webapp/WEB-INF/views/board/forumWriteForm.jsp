@@ -105,7 +105,12 @@ a{
     	<h1>게시물 작성</h1>
     </div>
     
-    <form action="write?boardtype=${boardtype }&regdate=${community.regdate}" method="post">
+    <c:if test="${community.title ne null }">
+    <form action="write?boardtype=${boardtype }" method="post">
+    </c:if>
+    <c:if test="${community.title eq null }">
+    <form action="update?boardtype=${boardtype }" method="post">
+    </c:if>
     	<div class="write_container">
     		<h4>일반</h4>
     		<article>

@@ -8,9 +8,7 @@
     <title></title>
 <style>
 body {
-	margin-top: 100px;
 	font-family: 'Trebuchet MS', serif;
-	line-height: 1.6
 }
 
 .container {
@@ -163,7 +161,6 @@ input[type="radio"] {
 
 </footer>
 
-</body>
 <script>
 	const btn1 = document.querySelector("[data-tab='tab-1']");
 	const btn2 = document.querySelector("[data-tab='tab-2']");

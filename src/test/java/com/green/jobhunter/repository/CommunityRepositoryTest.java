@@ -21,7 +21,7 @@ public class CommunityRepositoryTest {
 	
 	@Test
 	public void insert() {
-		IntStream.rangeClosed(1, 2).forEach(i -> {
+		IntStream.rangeClosed(1, 30).forEach(i -> {
 			
 			Community community = Community.builder()
 					.title("제목제목제목.." + i)
@@ -33,7 +33,7 @@ public class CommunityRepositoryTest {
 	
 	@Test
 	public void insert2() {
-		IntStream.rangeClosed(1, 2).forEach(i -> {
+		IntStream.rangeClosed(1, 30).forEach(i -> {
 			
 			EnterpriseCommunity community = EnterpriseCommunity.builder()
 					.title("기업기업제목.." + i)

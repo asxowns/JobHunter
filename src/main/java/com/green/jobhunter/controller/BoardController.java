@@ -1,8 +1,5 @@
 package com.green.jobhunter.controller;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -300,8 +297,6 @@ public class BoardController {
 	
 	@RequestMapping("/delete")
 	public String delete(@RequestParam("cmcode") Long cmcode) {
-		
-		Community findcomm = communityRepo.findByCmcode(cmcode);
 		
 		communityRepo.deleteByCmcode(cmcode);
 		

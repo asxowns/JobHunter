@@ -189,7 +189,7 @@ main b {
 					<div class="myImg">
 						<img src="">
 					</div>
-					<p class="name">김태준</p>
+					<p class="name">${community.writer.memberid }</p>
 					<p class="views">
 						<img src="/resource/img/view_icon.png"> 22
 					</p>
@@ -208,14 +208,22 @@ main b {
 
 			<div class="reply_box">
 				<form action="" method="post">
-					<input type="text" name="reply"> <input type="submit"
-						value="댓글쓰기">
+					<input type="text" name="reply">
+					<input type="submit" value="댓글쓰기">
 				</form>
 			</div>
 		</div>
 
-		<div class="listup">
-			<a href="enterpriseForum">목록보기</a>
+		<div class="active_menu">
+			<div class="listup">
+				<a href="openForum">목록보기</a>
+			</div>
+			<div class="upAndDel">
+				<c:if test="${sessionScope.logged eq community.writer.memberid }">
+					<a href="updateForm?eccode=${community.eccode }&boardtype=2">수정</a>
+					<a href="delete?eccode=${community.eccode }&boardtype=2">삭제</a>
+				</c:if>	
+			</div>
 		</div>
 
 

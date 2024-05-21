@@ -238,10 +238,10 @@ input[type="submit"] {
 
 			<div id="search_area">
 				<div class="search_area_select">
-					<select>
-						<option>제목+내용</option>
-						<option>제목</option>
-						<option>내용</option>
+					<select name="order">
+						<option value="titleAndContent">제목+내용</option>
+						<option value="title">제목</option>
+						<option value="content">내용</option>
 					</select>
 				</div>
 				<form action="search" method="get">
@@ -287,7 +287,7 @@ input[type="submit"] {
 						<h4>
 							<div class="list_bottom">
 								<div>
-									<span></span> <span>작성자1</span>
+									<span class="user_img"></span> <span>${search.writer.memberid }</span>
 								</div>
 								<div class="list_bottom_info">
 									<p>
@@ -305,7 +305,7 @@ input[type="submit"] {
 			</div>
 
 			<div class="write_btn">
-				<a href="/board/forumWriteForm?boardtype=1">글쓰기</a>
+				<a href="/board/forumWriteForm?boardtype=2">글쓰기</a>
 			</div>
 
 			<!-- 페이지 네비게이션 -->

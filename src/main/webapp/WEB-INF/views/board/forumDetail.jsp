@@ -196,7 +196,7 @@ main b {
 					<div class="myImg">
 						<img src="">
 					</div>
-					<p class="name">김태준</p>
+					<p class="name">${community.writer.memberid }</p>
 					<p class="views">
 						<img src="/resource/img/view_icon.png"> 22
 					</p>
@@ -228,7 +228,7 @@ main b {
 				<a href="openForum">목록보기</a>
 			</div>
 			<div class="upAndDel">
-				<c:if test="${sessionScope.logged ne null }">
+				<c:if test="${sessionScope.logged eq community.writer.memberid }">
 					<a href="updateForm?cmcode=${community.cmcode }&boardtype=1">수정</a>
 					<a href="delete?cmcode=${community.cmcode }&boardtype=1">삭제</a>
 				</c:if>	

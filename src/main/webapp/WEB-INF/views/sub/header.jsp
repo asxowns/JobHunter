@@ -55,7 +55,7 @@ header {
 	left:calc(50% - 206.5px);
 	
 }
-#search{
+#search_input{
 	width:413px;
 	height:47px;
 	border:2px solid #D44958;
@@ -66,7 +66,7 @@ header {
 	margin-right:0;
 	cursor: pointer;
 }
-#search:focus{
+#search_input:focus{
 	border-color:#D44958;
 	outline:none;
 }
@@ -185,8 +185,8 @@ header {
 				</div>
 				<form action="" method="get">
 				<div class="search_bar">
-						<label for="search" class="search_label">
-							<input type="text" id="search" name="search">
+						<label for="search_input" class="search_label">
+							<input type="text" id="search_input" name="search">
 							<select class="search_bar_select">
 								<option value="전체">전체</option>
 								<option value="기업">기업</option>
@@ -221,7 +221,7 @@ header {
 							</c:if>
 							<c:if test="${sessionScope.logged ne null }">
 								<li><a href="/hunterPage">${sessionScope.logged }</a></li>
-								<li><a href="#">로그아웃</a></li>
+								<li><a href="/logout">로그아웃</a></li>
 							</c:if>
 						</ul>
 					</div>

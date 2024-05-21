@@ -8,38 +8,49 @@
     <title></title>
     <style>
 body {
-	margin-top: 100px;
-	font-family: 'Trebuchet MS', serif;
-	line-height: 1.6
+	color:#333;
+}
+ul{
+	list-style: none;
 }
 
+section{
+	width:1240px;
+	margin:73px auto 100px;
+}
+h1{
+	font-size:24px;
+	text-align:center;
+	margin-bottom:105px;
+}
 .container {
 	width: 500px;
 	margin: 0 auto;
 }
 
 ul.tabs {
-	margin: 0px;
-	padding: 0px;
-	list-style: none;
+	text-align:center;
+	margin-bottom:30px;
 }
 
 ul.tabs li {
 	background: none;
 	color: #222;
 	display: inline-block;
-	padding: 10px 15px;
+	padding:0px 10px;
 	cursor: pointer;
+}
+.tabs .line{
+	color:#333;
 }
 
 ul.tabs li.current {
-	background: #ededed;
-	color:;
+	color:#d44958;
+	font-weight:bold;
 }
 
 .tab-content {
 	display: none;
-	background: #ededed;
 	padding: 15px;
 }
 
@@ -47,8 +58,34 @@ ul.tabs li.current {
 	display: block;
 }
 
-</style>
-<style>
+input[type="text"]{
+	width:280px;
+	height:40px;
+	border:1px solid #bbb;
+	border-radius:10px;
+	padding-left:5px;
+	box-sizing:border-box;
+}
+.input_box{
+	padding-left:30px;
+}
+tr{
+	margin-bottom:15px;
+}
+.login_area{
+	text-align:right;
+}
+.login_area input{
+	width:280px;
+	height:40px;
+	background:#d44958;
+	color:#fff;
+	border:none;
+	border-radius:10px;
+	font-size:16px;
+	font-weight:bold;
+}
+
 
 </style>
 </head>
@@ -57,31 +94,53 @@ ul.tabs li.current {
     <%@ include file="../sub/header.jsp" %>
 </header>
 <section>
-    <h2> login page </h2>
+    <h1>로그인</h1>
     <div class="container">
 		<ul class="tabs">
 			<li class="tab-link current" data-tab="tab-1">기업로그인</li>
+			<li class="line">|</li>
 			<li class="tab-link" data-tab="tab-2">일반로그인</li>
 		</ul>
 		<div id="tab-1" class="tab-content current">
-			<h1>기업 login</h1>
 			<form action="/loginEnterprise" method="post">
-				아이디<input type="text" name="id"><br> 비밀번호<input
-					type="text" name="pw"><br> <input type="submit"
-					value="로그인"><br>
+				<div class="input_box">
+					<table>
+						<tr>
+							<th>아이디</th>
+							<td><input type="text" name="id"></td>
+						</tr>
+						<tr>
+							<th>비밀번호</th>
+							<td><input type="text" name="pw"></td>
+						</tr>
+						<tr>
+							<td colspan="2" class="login_area"><input type="submit" value="기업로그인"></td>
+						</tr>
+					</table>
+				</div>
 			</form>
 		</div>
 
 		<div id="tab-2" class="tab-content">
-			<h1>일반 login</h1>
 				<form action="/loginHunter" method="post">
-					아이디<input type="text" name="id"><br> 비밀번호<input
-						type="text" name="pw"><br> <input type="submit"
-						value="로그인"><br>
+					<div class="input_box">
+						<table>
+							<tr>
+								<th>아이디</th>
+								<td><input type="text" name="id"><td>
+							</tr>
+							<tr>
+								<th>비밀번호</th>
+								<td><input type="text" name="pw"></td>
+							</tr>
+							<tr class="login_area">
+								<td colspan="2"><input type="submit" value="일반로그인"></td>
+							</tr>
+						</table>
+					</div>
 				</form>
 			</div>
 		</div>
-			<a href="registForm">회원가입</a>
 </section>
 <footer>
 

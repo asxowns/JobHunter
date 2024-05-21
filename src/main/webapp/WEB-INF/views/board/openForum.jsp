@@ -88,6 +88,7 @@ main {
 	left: 218px;
 	top: 28px;
 	border-right: 1px solid #969696;
+	padding-right:10px;
 }
 
 .search_area_select select {
