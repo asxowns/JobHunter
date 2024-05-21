@@ -46,7 +46,10 @@ public class MainController {
 	public String root(Model model) {
 
 		List<Posting> list = postringrepository.findAll();
+		int size = list.size();
 		model.addAttribute("list", list);
+	
+		
 		return "/main/postList";
 	}
 
