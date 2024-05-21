@@ -9,16 +9,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.context.annotation.RequestScope;
 
 import com.green.jobhunter.entity.Cs;
+import com.green.jobhunter.entity.Csreply;
 import com.green.jobhunter.entity.Member;
+import com.green.jobhunter.repository.CsReplyRepository;
 import com.green.jobhunter.repository.CsRepository;
 import com.green.jobhunter.repository.MemberRepository;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 
 @Controller
@@ -31,6 +31,9 @@ public class CustomerController {
 	@Autowired
 	private MemberRepository memberRepository;
 
+	@Autowired
+	private CsReplyRepository csReplyRepository;
+
 	@RequestMapping("/home")
 	public String home() {
 		return "/home";
@@ -41,9 +44,10 @@ public class CustomerController {
 		List<Cs> a = csRepository.findAll();
 		List<Cs> b = csRepository.findByTypeAndPublictype('A', 'Y');
 		HttpSession session = request.getSession();
-		String logged = (String)session.getAttribute("id");
-		Member logged_member = memberRepository.findByMemberid(logged);
-		 List<Cs> c = csRepository.findByHid(logged_member);
+		String logged = (String)session.getAttribute("logged");
+		Member logged2 = memberRepository.findByMemberid(logged);
+		List<Cs> c = csRepository.findByHid(logged2);
+		 
 
     	model.addAttribute("list", a);
     	model.addAttribute("list2", b);
@@ -62,10 +66,10 @@ public class CustomerController {
 
 	@RequestMapping("/forumDetail")
 	public String forumDetail(HttpServletRequest request, @RequestParam("cscode") Long cscode, Model model) {
-		HttpSession session = request.getSession();
-		String logged = (String)session.getAttribute("id");
 		Cs cs = csRepository.findByCscode(cscode);
 		model.addAttribute("cs", cs);
+		List<Csreply> list = csReplyRepository.findAll();
+		model.addAttribute("list", list);
 		return "/cs/forumDetail";
 	}
 
@@ -84,6 +88,8 @@ public class CustomerController {
 		
 	}
    
+
+
 	@RequestMapping("/Update")
 	public String forumUpdateForm(@RequestParam("cscode") String cscode
 			,@RequestParam("title") String title
@@ -139,5 +145,26 @@ public class CustomerController {
         
         return "redirect:/cs/csList";
     }
-    
+
+	@RequestMapping("/reply")
+	public String reply(@RequestParam("comment") String comment
+			,@RequestParam("writermanager") String writermanager
+			,@RequestParam("cscode") Long cscode
+			){
+		
+		LocalDate localdate = LocalDate.now();
+		Csreply csreply = new Csreply();
+		csreply.setComment(comment);
+		Member member = memberRepository.findByMemberid(writermanager);
+		Cs cs = csRepository.findByCscode(cscode);
+
+		csreply.setWritermanager(member);
+		csreply.setLocaldate(localdate);
+		csreply.setCscode(cs);
+		csReplyRepository.save(csreply);
+		
+		
+		return "redirect:/cs/forumDetail?cscode="+cscode;
+	}
+
 }

@@ -58,6 +58,7 @@ th, td {
 <header>
     <%@ include file="../sub/header.jsp" %>
 </header>
+    <%@ include file="../sub/chat.jsp" %>
 <main>
 <section>
     로그인된 아이디 : ${sessionScope.logged}<br>
@@ -123,7 +124,7 @@ th, td {
                 <tr>
                     <td>${stat.count}</td>
                     <td>${cs.getType()}</td>
-                    <td><a href="/cs/forumMyDetail?cscode=${cs.cscode}">${cs.title}</a></td>
+                    <td><a href="/cs/forumDetail?cscode=${cs.cscode}">${cs.title}</a></td>
                     <td>${cs.getResult()}</td>
                     <td>${cs.getPublictype()}</td>
                     <td>${cs.getCsdate()}</td>

@@ -61,7 +61,7 @@ section {
 <header>
     <%@ include file="../sub/header.jsp" %>
 </header>
-
+    <%@ include file="../sub/chat.jsp" %>
 <section>
     <h2> 문의글 작성 페이지 </h2>
      <div class="container">
@@ -77,7 +77,7 @@ section {
                     <option value="A">문의</option>
                     <option value="B">신고</option>
                 </select>
-            <input type="hidden" name="hid" value="${sessionScope.id}"> 
+            <input type="hidden" name="hid" value="${sessionScope.logged}"> 
             <input type="submit" value="게시물 작성">
         </form>
     </div>
