@@ -75,7 +75,20 @@
     </div>
 	<hr>
 	
-	<a href="loginForm">로그인</a>
+		<c:forEach  var="dto" items="${list}" >
+			<ul>
+				<li>${dto.title}</li>
+				<li>${dto.job}</li>
+				<li>${dto.mainurl}</li>
+				<li>${dto.area}</li>
+				
+			
+			</ul>
+		</c:forEach>
+			
+		</tbody>
+		
+	</table>
 
 </section>
 <footer>

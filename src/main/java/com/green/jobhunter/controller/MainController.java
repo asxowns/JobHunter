@@ -1,7 +1,7 @@
 package com.green.jobhunter.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.green.jobhunter.entity.Enterprise;
 import com.green.jobhunter.entity.Hunter;
 import com.green.jobhunter.entity.Member;
+import com.green.jobhunter.entity.Posting;
 import com.green.jobhunter.repository.EnterpriseRepository;
 import com.green.jobhunter.repository.HunterRepository;
 import com.green.jobhunter.repository.MemberRepository;
+import com.green.jobhunter.repository.PostingRepository;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -32,13 +34,19 @@ public class MainController {
 	HunterRepository hunterrepository;
 
 	@Autowired
+	PostingRepository postringrepository;
+
+	@Autowired
 	HttpServletRequest request;
 
 	@Autowired
 	HttpServletResponse response;
 
 	@RequestMapping("/")
-	public String root() {
+	public String root(Model model) {
+
+		List<Posting> list = postringrepository.findAll();
+		model.addAttribute("list", list);
 		return "/main/postList";
 	}
 
@@ -54,51 +62,48 @@ public class MainController {
 	}
 
 	@RequestMapping("/hunterregist")
-	public String regist(Hunter hunter,Member member,Model model) {
-		System.out.println("===================================헌터"+hunter);
-		System.out.println("===================================멤버"+member);
-		member.setRole('h'); 
+	public String regist(Hunter hunter, Member member, Model model) {
+		System.out.println("===================================헌터" + hunter);
+		System.out.println("===================================멤버" + member);
+		member.setRole('h');
 		hunter.setHid(member);
 		memberrepository.save(member);
 		hunterrepository.save(hunter);
-		
 
 		return "/main/registForm";
 	}
-	
+
 	@RequestMapping("/enterregist")
-	public String regist(Member member,Enterprise enterprise) {
-		
-		
-		member.setRole('e'); 
+	public String regist(Member member, Enterprise enterprise) {
+
+		member.setRole('e');
 		enterprise.setEid(member);
 		memberrepository.save(member);
 		enterrepository.save(enterprise);
 		return "/main/registForm";
 	}
-	
-	
-	
-	
+
 	@RequestMapping("/loginHunter")
-	public String loginHunter(@RequestParam("id") String id, @RequestParam("pw") String pw, Model model) throws IOException {
+	public String loginHunter(@RequestParam("id") String id, @RequestParam("pw") String pw, Model model)
+			throws IOException {
 		Member member = memberrepository.findByMem(id, pw);
 		System.out.println("==========================member : " + member);
 		if (member == null) {
 			return "/main/loginForm";
 		}
-		
-		
+
+		HttpSession session = request.getSession();
+
 		if (member != null & member.getRole() == 'h') {
-			HttpSession session = request.getSession();
+			session = request.getSession();
 
 			session.setAttribute("logged", id);
 			session.setAttribute("pw", pw);
+			session.setAttribute("role", member.getRole());
 			return "/main/postList";
-		}
-		else if(member.getRole() != 'h') {
-		String msg="일반회원이 아닙니다";
-		model.addAttribute("msg",msg);
+		} else if (member.getRole() != 'h') {
+			String msg = "일반회원이 아닙니다";
+			model.addAttribute("msg", msg);
 		}
 		return "/loginForm";
 	}
@@ -110,6 +115,7 @@ public class MainController {
 		if (member == null) {
 			return "/main/loginForm";
 		}
+		
 		if (member != null & member.getRole() == 'e') {
 			HttpSession session = request.getSession();
 			// model.addAttribute("msg", "로그인에 성공하였습니다");
@@ -117,6 +123,7 @@ public class MainController {
 			// model.addAttribute("url", "main");
 			session.setAttribute("logged", id);
 			session.setAttribute("pw", pw);
+			session.setAttribute("role", member.getRole());
 			return "/enter/enterprisePage";
 		}
 		return "";
@@ -130,11 +137,12 @@ public class MainController {
 		if (id.equals("")) {
 			return "";
 
-		} if(member != null) {
-			return "중복입니다";
-			
 		}
-		
+		if (member != null) {
+			return "중복입니다";
+
+		}
+
 		else if (!id.matches(regex)) {
 			return "아이디는 5~20자 영문소문자,특수문자,숫자 포함";
 		}
