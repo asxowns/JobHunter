@@ -1,6 +1,7 @@
 package com.green.jobhunter.controller;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -109,7 +110,10 @@ public class EnterpriseController {
     //채용공고 등록  
     @RequestMapping("/enterprisePostWrite")
     public String enterpriseWrite(HttpServletRequest request, Model model) {
-    	Posting posting = new Posting();
+    	session = request.getSession();
+    	String eid = (String)request.getAttribute("logged");
+    	
+    	Posting posting = postingRepository.findByEid(eid);
     	posting.setTitle(request.getParameter("title"));
     	
     	int headcount_ = Integer.parseInt(request.getParameter("headcount"));
@@ -132,6 +136,7 @@ public class EnterpriseController {
     	posting.setMaincontent(request.getParameter("maincontent"));
     	
     	postingRepository.save(posting);
+    	System.out.println(posting+"++++++++");
     	
     	return "redirect:/enter/enterprisePostList";
     }
