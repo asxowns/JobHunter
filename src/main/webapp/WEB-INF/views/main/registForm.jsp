@@ -101,18 +101,25 @@ input[type="radio"] {
 		
 		<div id="tab-1" class="tab-content current">
 			<h1>일반회원 signUpForm</h1>
-			<form action="signUp" method="post">
-				이름<input type="text" id="inputFieldName" name="name"><br> 
+			<form action="hunterregist" method="post">
+				이름<input type="text" id="inputFieldName" name="username"><br> 
 				<div id="outputDivName"></div>
 				
-				아이디<input
-					type="text" id="inputFieldId" name="id"><br> 
+				아이디<input type="text" id="inputFieldId" name="memberid"><br> 
 				<div id="outputDivId"></div>
-					
-				비밀번호<input type="text" id = "inputFieldPw" name="pw"><br>
+				
+				비밀번호<input type="text" id = "inputFieldPw" name="password"><br>
 				<div id="outputDivPw"></div>
 				
+				생년월일<input type="text" id = "inputFieldBirth" name="birth"><br>
+				<div id="outputDivPw"></div>
 				
+				휴대폰번호<input type="text" id = "inputFieldTel" name="tel"><br>
+				<div id="outputDivPw"></div>
+				
+				이메일<input type="text" id = "inputFieldEmail" name="email"><br>
+				<div id="outputDivPw"></div>
+				<div id="outputDivPw"></div>
 				 <input type="submit" value="회원가입">
 			</form>
 		</div>
@@ -121,7 +128,7 @@ input[type="radio"] {
 			<h1>기업 signUpForm</h1>
 			<form action="enterregist" method="post">
 				기업명<input type="text" name="companyname"><br>
-				대표자명<input type="text" name="managername"><br>
+				대표자명<input type="text" name="ceo"><br>
 				기업전화번호<input type="text" name="tel"><br>
 				기업크기<input type="text" name="size"><br>
 				기업형태<input type="text" name="corporatetype"><br>
@@ -132,26 +139,12 @@ input[type="radio"] {
 				매출액<input type="text" name="sales"><br>
 				
 				담당자정보<br>
-				아이디<input type="text" name="id"><br>
-				비밀번호<input type="text" name="pw"><br>
+				아이디<input type="text" name="memberid"><br>
+				비밀번호<input type="text" name="password"><br>
 				담당자 이름<input type="text" name="managername"><br>
 				담당자 연락처<input type="text" name="managertel"><br>
 				담당자 이메일<input type="text" name="manageremail"><br>
-	private Member eid;
-	private String companyname;
-	private String size;
-	private String corporatetype;
-	private String businessitem;
-	private String businessnumber;
-	private String ceo;
-	private String tel;
-	private String address;
-	private int empnum;
-	private int sales;
-	private String managername;
-	private String managertel;
-	private String manageremail;
-	private int reportnum;
+	
 
 				<div id="outputDivId"></div>
 				비밀번호<input type="text" name="pw"><br> 

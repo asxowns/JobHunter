@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.green.jobhunter.entity.Enterprise;
+import com.green.jobhunter.entity.Hunter;
 import com.green.jobhunter.entity.Member;
 import com.green.jobhunter.repository.EnterpriseRepository;
+import com.green.jobhunter.repository.HunterRepository;
 import com.green.jobhunter.repository.MemberRepository;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -26,6 +28,8 @@ public class MainController {
 	MemberRepository memberrepository;
 	@Autowired
 	EnterpriseRepository enterrepository;
+	@Autowired
+	HunterRepository hunterrepository;
 
 	@Autowired
 	HttpServletRequest request;
@@ -49,11 +53,31 @@ public class MainController {
 		return "main/loginForm";
 	}
 
+	@RequestMapping("/hunterregist")
+	public String regist(Hunter hunter,Member member,Model model) {
+		System.out.println("===================================헌터"+hunter);
+		System.out.println("===================================멤버"+member);
+		member.setRole('h'); 
+		hunter.setHid(member);
+		memberrepository.save(member);
+		hunterrepository.save(hunter);
+		
+
+		return "main/registForm";
+	}
+	
 	@RequestMapping("/enterregist")
-	public String regist(Enterprise enterprise) {
+	public String regist(Member member,Enterprise enterprise) {
+		
+		
+		member.setRole('e'); 
+		enterprise.setEid(member);
+		memberrepository.save(member);
 		enterrepository.save(enterprise);
 		return "main/registForm";
 	}
+	
+	
 	
 	
 	@RequestMapping("/loginHunter")

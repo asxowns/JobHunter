@@ -75,6 +75,7 @@ public class HunterController {
     	hunterRepository.save(hunter);
     	
     	//resume 정보
+
     	String pay_ = req.getParameter("pay");
     	resume.setDesirepay(Integer.parseInt(pay_));
     	resume.setEduname("eduname");
