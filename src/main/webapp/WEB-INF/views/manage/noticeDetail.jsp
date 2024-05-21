@@ -22,8 +22,7 @@
     <h2> ${notice.ntcode} </h2>
     <h2> ${notice.title} </h2><br>
     <h3> ${notice.content} </h3>
-    <c:if test="${logged_role eq 'h'}">
-    <%-- <c:if test="${logged_role eq 'm'}"> --%>
+    <c:if test="${logged_role eq 'm'}">
         <a href="/manage/noticeUpdateForm?ntcode=${notice.ntcode}">수정</a>
         <a href="/manage/noticeDelete?ntcode=${notice.ntcode}">삭제</a>
     </c:if>

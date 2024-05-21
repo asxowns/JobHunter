@@ -198,7 +198,7 @@ header {
 					</div>
 				</form>
 				<div class="logo2">
-					<a href="/"><img src="/resource/img/logo2.png"></a>
+					<a href="/manage/manageLoginForm"><img src="/resource/img/logo2.png"></a>
 				</div>
 			</div>
 			<div class="head_bottom">
