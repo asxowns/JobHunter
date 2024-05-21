@@ -76,9 +76,9 @@ public class HunterController {
     	hunterRepository.save(hunter);
     	
     	//resume 정보
-    	HttpSession session = req.getSession();
-    	String logged = (String)session.getAttribute("id");
-    	resumeRepository.findById((Long)session.getAttribute("huntercode"));    	
+    	//HttpSession session = req.getSession();
+    	//String logged = (String)session.getAttribute("id");
+    	//resumeRepository.findById((Long)session.getAttribute("huntercode"));    	
     	//모르겠다.....
     	
     	
