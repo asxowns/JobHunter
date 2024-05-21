@@ -12,10 +12,11 @@ import com.green.jobhunter.entity.Posting;
 public interface PostingRepository extends JpaRepository<Posting, Long> {
 
 	@Query(value = "SELECT * FROM posting WHERE eid = :eid", nativeQuery = true)
-	List<Posting> findByEid(@Param("eid") String eid);
-	
+	List <Posting> findByEid(@Param("eid") String eid);
+
 	Posting findByPostcode(Long postcode);
 
 	void deleteBypostcode(Long postcode);
 
+	List<Posting> findByEidAndAreaAndCareerAndEdutype(String eid, String area, String career, String edutype);
 }
