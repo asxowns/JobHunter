@@ -27,11 +27,16 @@ public class ManagerController {
 
     @RequestMapping("/")
     public String root(HttpServletRequest req,Model model){
+        String view = "/manage/managerPage";
         HttpSession session = req.getSession();
-        String logged = (String) session.getAttribute("id");
-        char role = memberRepo.findByMemId(logged).getRole();
-        model.addAttribute("role",role);
-        return "/manage/managerPage";  
+        String logged = (String) session.getAttribute("logged");
+        if(logged == null){
+            view = "redirect:/";
+        }else{
+            char role = memberRepo.findByMemId(logged).getRole();
+            model.addAttribute("role",role);
+        }
+        return view;  
     }
 
     @RequestMapping("/noticeList")
@@ -43,16 +48,42 @@ public class ManagerController {
     }
     
     @RequestMapping("/noticeDetail")
-    public String noticeDetail(@RequestParam("ntcode") Long ntcode, Model model) {
-        System.out.println(ntcode);
+    public String noticeDetail(HttpServletRequest req, @RequestParam("ntcode") Long ntcode, Model model) {
+        String view = "/manage/noticeDetail";
+        HttpSession session = req.getSession();
+        String logged = (String) session.getAttribute("logged");
+        if(logged == null){
+            view = "/main/loginForm";
+        }else{
+            char logged_role = memberRepo.findByMemberid(logged).getRole();
+            model.addAttribute("logged_role", String.valueOf(logged_role));
+        }
         Notice notice = noticeRepo.findByNtcode(ntcode);
         model.addAttribute("notice", notice);
-        return "/manage/noticeDetail";
+
+        return view;
+    }
+
+    @RequestMapping("/noticeUpdateForm")
+    public String noticeUpdateForm(@RequestParam("ntcode") Long ntcode, Model model){
+        Notice notice = noticeRepo.findByNtcode(ntcode);
+        model.addAttribute("notice", notice);
+        model.addAttribute("type", "수정");
+        return "/manage/noticeWriteForm";
     }
 
     @RequestMapping("/noticeWriteForm")
     public void noticeWriteForm(){
 
+    }
+
+    @RequestMapping("/noticeUpdate")
+    public String noticeUpdate(@RequestParam("ntcode")Long ntcode, HttpServletRequest req){
+        Notice notice = noticeRepo.findByNtcode(ntcode);
+        notice.setTitle(req.getParameter("title"));
+        notice.setContent(req.getParameter("content"));
+        noticeRepo.save(notice);    
+        return "redirect:/manage/noticeList";
     }
 
     @RequestMapping("/noticeWrite")
@@ -64,6 +95,14 @@ public class ManagerController {
         notice.setTitle(title);
         // notice.setRegdate(Date.now());
         noticeRepo.save(notice);
+        return "redirect:/manage/noticeList";
+    }
+
+    @RequestMapping("/noticeDelete")
+    public String noticeDelete(@RequestParam("ntcode") Long ntcode){
+
+        noticeRepo.deleteById(ntcode);
+        
         return "redirect:/manage/noticeList";
     }
 }
