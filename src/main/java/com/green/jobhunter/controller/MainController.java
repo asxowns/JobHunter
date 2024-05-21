@@ -172,14 +172,17 @@ public class MainController {
 
 	@RequestMapping("/searchMain3Region")
 	public String searchMain3Region(@RequestParam(name = "compnyname", required = false) String compnyname,
-            @RequestParam(name = "area", required = false) String area,
-            @RequestParam(name = "career", required = false) String career,
-            @RequestParam(name = "edutype", required = false) String edutype,Model model) {
-	
-		Enterprise enterprise= enterrepository.findByCompanyname(compnyname);
-		String eid= enterprise.getEid().getMemberid();
-		List<Posting> list= postingrepository.findByEidAndAreaAndCareerAndEdutype( eid,  area,  career, edutype );
-		
+			@RequestParam(name = "area", required = false) String area,
+			@RequestParam(name = "career", required = false) String career,
+			@RequestParam(name = "edutype", required = false) String edutype, Model model) {
+
+//		Enterprise enterprise = enterrepository.findByCompanyname(compnyname);
+//		if (enterprise != null) {
+//			Member eid = memberrepository.findByMemberid()
+//			List<Posting> list = postingrepository.findByEidAndAreaAndCareerAndEdutype(eid, area, career, edutype);
+//		}else {
+//			eid=null;
+//		}
 		return "/main/main";
 	}
 
