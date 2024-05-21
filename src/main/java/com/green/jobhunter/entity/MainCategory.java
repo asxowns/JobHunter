@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class MainCtaegory {
+public class MainCategory {
     @Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long mccode;

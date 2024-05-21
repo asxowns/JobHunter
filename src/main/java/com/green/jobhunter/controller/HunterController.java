@@ -14,18 +14,22 @@ import com.green.jobhunter.entity.CoverLetter;
 import com.green.jobhunter.entity.DesiredArea;
 import com.green.jobhunter.entity.DesiredIndustry;
 import com.green.jobhunter.entity.Hunter;
+import com.green.jobhunter.entity.MainCategory;
 import com.green.jobhunter.entity.Member;
 import com.green.jobhunter.entity.Resume;
 import com.green.jobhunter.entity.ResumeSkill;
+import com.green.jobhunter.entity.SubCategory;
 import com.green.jobhunter.repository.CareerRepository;
 import com.green.jobhunter.repository.CertificateRepository;
 import com.green.jobhunter.repository.CoverLetterRepository;
 import com.green.jobhunter.repository.DesiredAreaRepository;
 import com.green.jobhunter.repository.DesiredIndustryRepository;
 import com.green.jobhunter.repository.HunterRepository;
+import com.green.jobhunter.repository.MainCategoryRepository;
 import com.green.jobhunter.repository.MemberRepository;
 import com.green.jobhunter.repository.ResumeRepository;
 import com.green.jobhunter.repository.ResumeSkillRepository;
+import com.green.jobhunter.repository.SubCategoryRepository;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -36,14 +40,26 @@ public class HunterController {
 	
 	@Autowired
 	HunterRepository hunterRepository;
+	@Autowired
 	ResumeRepository resumeRepository;
+	@Autowired
 	DesiredAreaRepository desiredAreaRepository;
+	@Autowired
 	DesiredIndustryRepository desiredIndustryRepository;
+	@Autowired
 	CertificateRepository certificateRepository;
+	@Autowired
 	CareerRepository careerRepository;
+	@Autowired
 	CoverLetterRepository coverLetterRepository;
+	@Autowired
 	ResumeSkillRepository resumeSkillRepository;
+	@Autowired
 	MemberRepository memberRepo;
+	@Autowired
+	MainCategoryRepository mainCategoryRepository;
+	@Autowired
+	SubCategoryRepository subCategoryRepository;
 	
 	
     @RequestMapping("/")
@@ -59,8 +75,8 @@ public class HunterController {
     @RequestMapping("/resumeWriteForm")
     public String writeResume(Model model) {
     	//DesiredIndustry desiredIndustry;
-    	List<String> mainList = desiredIndustryRepository.findMainCategory();
-    	List<String> middleList = desiredIndustryRepository.findMiddleCategory();
+    	List<MainCategory> mainList = mainCategoryRepository.findAll();
+    	List<SubCategory> middleList = subCategoryRepository.findAll();
     	
     	System.out.println("Main List: " + mainList);  // 로그로 데이터 확인
     	System.out.println("Middle List: " + middleList);  // 로그로 데이터 확인

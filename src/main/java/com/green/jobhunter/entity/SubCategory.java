@@ -25,7 +25,7 @@ public class SubCategory {
 	@ManyToOne
 	@JoinColumn(name="mccode")
 	@ToString.Exclude
-    private MainCtaegory mccode;
+    private MainCategory mccode;
 
     private String sub;
 }
