@@ -1,6 +1,7 @@
 package com.green.jobhunter.controller;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -56,7 +57,16 @@ public class HunterController {
     }
     
     @RequestMapping("/resumeWriteForm")
-    public String writeResume() {
+    public String writeResume(Model model) {
+    	//DesiredIndustry desiredIndustry;
+    	List<String> mainList = desiredIndustryRepository.findMainCategory();
+    	List<String> middleList = desiredIndustryRepository.findMiddleCategory();
+    	
+    	System.out.println("Main List: " + mainList);  // 로그로 데이터 확인
+    	System.out.println("Middle List: " + middleList);  // 로그로 데이터 확인
+    	
+    	model.addAttribute("main", mainList);
+    	model.addAttribute("middle", middleList);
     	
     	return "/hunter/resumeWriteForm";
     }
@@ -124,9 +134,8 @@ public class HunterController {
     	desiredAreaRepository.save(dArea);
     	
     	//desiredIndustry 정보
-    	dIndustry.setIndustry1(req.getParameter("industry1"));
-    	dIndustry.setIndustry2(req.getParameter("industry2"));
-    	dIndustry.setIndustry3(req.getParameter("industry3"));
+    	dIndustry.setMainCategory(req.getParameter("middleCategory"));
+    	dIndustry.setMiddleCategory(req.getParameter("middleCategory"));
     	
     	//certificate 정보
     	certificate.setPublisher(req.getParameter("certificate"));
