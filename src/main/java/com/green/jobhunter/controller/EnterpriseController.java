@@ -102,9 +102,18 @@ public class EnterpriseController {
     	model.addAttribute("posting", posting);
     	return "/enter/hunterPerPostList";
     }
-    //채용공고 등록 폼
+    //채용공고 등록 폼, 해당공고 수정 폼
     @RequestMapping("/enterprisePostWriteForm")
-    public String root7() {
+    public String enterprisePostWriteForm(@RequestParam("postcode") Long postcode, Model model) {
+    	 if (postcode != null) {
+             // 수정 폼
+             Posting posting = postingRepository.findByPostcode(postcode);
+             model.addAttribute("posting", posting);
+             model.addAttribute("formType", "edit");
+         } else {
+             // 등록 폼
+             model.addAttribute("formType", "register");
+         }
     	return "/enter/enterprisePostWriteForm";
     }
     
@@ -139,13 +148,6 @@ public class EnterpriseController {
     	return "redirect:/enter/enterprisePostList";
     }
     
-    //해당공고 수정 폼
-    @RequestMapping("/enterprisePostUpdateForm")
-    public String enterprisePostWriteForm(@RequestParam("postcode") Long postcode, Model model) {
-    	Posting posting = postingRepository.findByPostcode(postcode);
-        model.addAttribute("posting", posting);
-    	return "/enter/enterprisePostUpdateForm";
-    }
     //해당공고 수정 기능 
     @RequestMapping("/enterprisePostUpdate")
     public String enterprisePostUpdate(HttpServletRequest request){
