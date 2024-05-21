@@ -32,7 +32,7 @@ public class DesiredIndustry{
 	@JoinColumn(name="hid")
 	@ToString.Exclude
 	private Member hid;
-	private String industry1;
-	private String industry2;
-	private String industry3;
+
+	private String mainCategory;
+	private String middleCategory;
 }

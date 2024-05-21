@@ -43,9 +43,32 @@
   				<input type="text" name="area2">
   			</div>
   			<div class="desiredIndustry">
-  				<select name="industry" required size=7>
-  					<option value="industry" name="industry1">
+  				<select name="industry" required size="10">
+	  				<c:forEach var="mainList" items="${main }">
+	  					<option value="${mainList}">${mainList}</option>
+	  				</c:forEach>
+	  			</select>
+	  			<select>
+  					<c:forEach var="middleList" items="${middle }">
+	  					<option value="${middleList}">${middleList}</option>
+	  				</c:forEach>
   				</select>
+  			</div>
+  			<div class="career">
+  				<input type="text" name="companyname" value="회사명">
+  				<input type="date" name="cardate" value="입사년월">
+  				<input type="date" name="enddate" value="퇴사년월">
+  				<input type="checkbox" name="working" value="재직중">
+  				<input type="text" name="position" value="직급/직책">
+  				<input type="text" name="job" value="담당직무">
+  				<input type="text" name="salary" value="연봉">
+  				<input type="text" name="industry" value="산업군">
+  				<input type="text" name="work" value="담당업무">
+  			
+  			
+  			
+  			
+  			
   			</div>
   			<input type="submit" value="등록">
   		</form>
