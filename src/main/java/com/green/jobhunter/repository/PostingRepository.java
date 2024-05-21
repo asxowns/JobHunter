@@ -12,9 +12,9 @@ import com.green.jobhunter.entity.Posting;
 public interface PostingRepository extends JpaRepository<Posting, Long> {
 
 	@Query(value = "SELECT * FROM posting WHERE eid = :eid", nativeQuery = true)
+
 	List<Posting> findByEid(@Param("eid") String eid);
 	
-	@Query(value = "")
 	Posting findByPostcode(Long postcode);
 	//해당 채용공고 삭제
 	@Query(value = "DELETE FROM application WHERE postcode = :postcode", nativeQuery = true)
@@ -27,4 +27,5 @@ public interface PostingRepository extends JpaRepository<Posting, Long> {
 	void deleteBypostcode3(@Param("postcode") Long postcode);
 	
 
+	List<Posting> findByEidAndAreaAndCareerAndEdutype(String eid, String area, String career, String edutype);
 }

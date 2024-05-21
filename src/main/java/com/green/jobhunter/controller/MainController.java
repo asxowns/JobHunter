@@ -34,7 +34,7 @@ public class MainController {
 	HunterRepository hunterrepository;
 
 	@Autowired
-	PostingRepository postringrepository;
+	PostingRepository postingrepository;
 
 	@Autowired
 	HttpServletRequest request;
@@ -45,11 +45,9 @@ public class MainController {
 	@RequestMapping("/")
 	public String root(Model model) {
 
-		List<Posting> list = postringrepository.findAll();
-		int size = list.size();
+		List<Posting> list = postingrepository.findAll();
 		model.addAttribute("list", list);
-	
-		
+
 		return "/main/postList";
 	}
 
@@ -118,7 +116,7 @@ public class MainController {
 		if (member == null) {
 			return "/main/loginForm";
 		}
-		
+
 		if (member != null & member.getRole() == 'e') {
 			HttpSession session = request.getSession();
 			// model.addAttribute("msg", "로그인에 성공하였습니다");
@@ -162,6 +160,27 @@ public class MainController {
 			return "비밀번호는 8~16자 영문,특수문자,숫자포함";
 		}
 		return "";
+	}
+
+	@RequestMapping("/postDetail")
+	public String postDetail(@RequestParam("postcode") long postcode, Model model) {
+		Posting posting = postingrepository.findByPostcode(postcode);
+		System.out.println("==================" + posting);
+		model.addAttribute("dto", posting);
+		return "/main/postDetail";
+	}
+
+	@RequestMapping("/searchMain3Region")
+	public String searchMain3Region(@RequestParam(name = "compnyname", required = false) String compnyname,
+            @RequestParam(name = "area", required = false) String area,
+            @RequestParam(name = "career", required = false) String career,
+            @RequestParam(name = "edutype", required = false) String edutype,Model model) {
+	
+		Enterprise enterprise= enterrepository.findByCompanyname(compnyname);
+		String eid= enterprise.getEid().getMemberid();
+		List<Posting> list= postingrepository.findByEidAndAreaAndCareerAndEdutype( eid,  area,  career, edutype );
+		
+		return "/main/main";
 	}
 
 }
