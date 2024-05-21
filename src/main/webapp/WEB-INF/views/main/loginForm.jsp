@@ -69,9 +69,6 @@ input[type="text"]{
 .input_box{
 	padding-left:30px;
 }
-tr{
-	margin-bottom:15px;
-}
 .login_area{
 	text-align:right;
 }

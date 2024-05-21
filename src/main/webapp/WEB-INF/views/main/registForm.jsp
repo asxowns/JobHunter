@@ -7,42 +7,88 @@
     <meta charset="UTF-8">
     <title></title>
 <style>
+*{
+	margin:0;
+	padding:0;
+}
 body {
-	font-family: 'Trebuchet MS', serif;
+	color:#333;
+}
+ul{
+	list-style: none;
+}
+
+section{
+	width:1240px;
+	margin:73px auto 100px;
+}
+h1{
+	font-size:24px;
+	text-align:center;
+	margin-bottom:105px;
+}
+ul{
+	list-style: none;
 }
 
 .container {
 	width: 500px;
 	margin: 0 auto;
 }
-
-ul.tabs {
-	margin: 0px;
-	padding: 0px;
-	list-style: none;
+ul.tabs{
+	display:flex;
 }
-
 ul.tabs li {
-	background: none;
+	width:250px;
+	background:#fff;
+	border:1px solid #ddd;
 	color: #222;
 	display: inline-block;
-	padding: 10px 15px;
+	padding: 20px 0px;
 	cursor: pointer;
+	text-align:center;
+	font-size:18px;
+	margin-bottom:20px;
 }
 
 ul.tabs li.current {
-	background: #ededed;
-	color:;
+	background:#d44958;
+	border:1px solid #d44958;
+	color:#fff;
+	font-weight:bold;
 }
 
 .tab-content {
 	display: none;
-	background: #ededed;
-	padding: 15px;
 }
 
 .tab-content.current {
 	display: block;
+}
+.input_box{
+	width:500px;
+}
+.input_box div{
+	margin-bottom:10px;
+}
+.input_box div:nth-child(even){
+	margin-bottom:20px;
+}
+
+.regbtn input[type="submit"]{
+	width:500px;
+	height:50px;
+	background:#d44958;
+	border:none;
+	color:#fff;
+	font-size:20px;
+}
+input[type="text"]{
+	width:500px;
+	height:40px;
+	border:1px solid #ddd;
+	padding-left:5px;
+	box-sizing:border-box;
 }
 
 input[type="radio"] {
@@ -93,38 +139,63 @@ input[type="radio"] {
     <%@ include file="../sub/header.jsp" %>
 </header>
 <section>
-    <h2> regist page </h2>
+    <h1>회원가입</h1>
     <div class="container">
 		<ul class="tabs">
-			<li class="tab-link current" data-tab="tab-1">메뉴1</li>
-			<li class="tab-link" data-tab="tab-2">메뉴2</li>
+			<li class="tab-link current" data-tab="tab-1">일반 회원가입</li>
+			<li class="tab-link" data-tab="tab-2">기업 회원가입</li>
 		</ul>
 		
 		<div id="tab-1" class="tab-content current">
-			<h1>일반회원 signUpForm</h1>
 			<form action="/hunterregist" method="post">
-				이름<input type="text" id="inputFieldName" name="username"><br> 
-				<div id="outputDivName"></div>
-				
-				아이디<input type="text" id="inputFieldId" name="memberid"><br> 
-				<div id="outputDivId" class="check"></div>
-				
-				비밀번호<input type="text" id = "inputFieldPw" name="password"><br>
-				<div id="outputDivPw" class="check"></div>
-				
-				생년월일<input type="text" id = "inputFieldBirth" name="birth"><br>
-				
-				휴대폰번호<input type="text" id = "inputFieldTel" name="tel"><br>
-
-				
-				이메일<input type="text" id = "inputFieldEmail" name="email"><br>
-			
-				 <input type="submit" value="회원가입">
+			<div class="input_box">
+					<div>
+						<p>이름</p>
+					</div>
+					<div>
+						<input type="text" id="inputFieldName" name="username">
+						<div id="outputDivName"></div>
+					</div>
+					<div>
+						<p>아이디</p>
+					</div>
+					<div>
+						<input type="text" id="inputFieldId" name="memberid"> 
+						<div id="outputDivId" class="check"></div>
+					</div>
+					<div>
+						<p>비밀번호</p>
+					</div>
+					<div>
+						<input type="text" id = "inputFieldPw" name="password">
+						<div id="outputDivPw" class="check"></div>
+					</div>
+					<div>
+						<p>생년월일</p>
+					</div>
+					<div>
+						<td><input type="text" id = "inputFieldBirth" name="birth"></td>
+					</div>
+					<div>
+						<p>휴대폰번호</p>
+					</div>
+					<div>
+						<td><input type="text" id = "inputFieldTel" name="tel"></td>
+					</div>
+					<div>
+						<p>이메일</p>
+					</div>
+					<div>
+						<p><input type="text" id = "inputFieldEmail" name="email"></p>
+					</div>
+					<div class="regbtn">
+						<input type="submit" value="회원가입">
+					</div>
+				 </div>
 			</form>
 		</div>
 
 		<div id="tab-2" class="tab-content">
-			<h1>기업 signUpForm</h1>
 			<form action="/enterregist" method="post">
 				기업명<input type="text" name="companyname"><br>
 				대표자명<input type="text" name="ceo"><br>
