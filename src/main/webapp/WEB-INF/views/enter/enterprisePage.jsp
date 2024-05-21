@@ -24,7 +24,7 @@
     <%@ include file="../sub/header.jsp" %>
 </header>
 <section>
-    <h2> enterprise page </h2>
+    <h2> enterprise page (${sessionScope.logged })</h2>
     <br>
 	<a href="enterprisePostList"><button>채용공고관리</button></a>
 	<a href="enterpriseInfoWriteForm"><button>기업정보관리</button></a>
