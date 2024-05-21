@@ -18,7 +18,7 @@
     <div>
     
         <form action="/cs/Update" method="post">
-            <input type="hidden" id="title" name="cscode" value="">
+            <input type="text" id="cscode" name="cscode" value="${cs.cscode}">
             <strong>Title:</strong> <input type="text" id="title" name="title" value="${cs.getTitle()}"><br>   
             <strong>Content:</strong> <textarea id="content" name="content" >${cs.getContent()}</textarea><br>  
             <input type="submit" value="Update">
