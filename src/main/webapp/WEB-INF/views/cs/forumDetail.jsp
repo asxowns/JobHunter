@@ -33,16 +33,14 @@
         </c:if>
     </div>
     <hr>
-    <form action="/cs/reply" method="get">
+    <form action="/cs/regReply" method="get">
         <input type="text" name="comment" placeholder="comment">
         <input type="hidden" name="writermanager" value="${sessionScope.logged}" >
         <input type="hidden" name="cscode" value="${cs.getCscode()}">
         <input type="submit" value="댓글 작성">
     </form>
-    <c:forEach var="csreply" items="${list}"  varStatus="stat">
-        댓글번호 : ${stat.count}
-        ${csreply.getWritermanager().getMemberid()}
-        ${csreply.getLocaldate()}
+    <c:forEach var="csreply" items="${list}" varStatus="stat">
+        댓글번호: ${stat.count}, 아이디: ${csreply.getWritermanager().getMemberid()}, 내용: ${csreply.getComment()}, 날짜: ${csreply.getLocaldate()}<br>
     </c:forEach>
 </section>
 <footer>

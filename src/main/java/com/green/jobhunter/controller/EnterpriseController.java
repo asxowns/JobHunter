@@ -110,33 +110,33 @@ public class EnterpriseController {
     //채용공고 등록  
     @RequestMapping("/enterprisePostWrite")
     public String enterpriseWrite(HttpServletRequest request, Model model) {
-    	session = request.getSession();
-    	String eid = (String)request.getAttribute("logged");
+    	// session = request.getSession();
+    	// String eid = (String)request.getAttribute("logged");
     	
-    	Posting posting = postingRepository.findByEid(eid);
-    	posting.setTitle(request.getParameter("title"));
+    	// Posting posting = postingRepository.findByEid(eid);
+    	// posting.setTitle(request.getParameter("title"));
     	
-    	int headcount_ = Integer.parseInt(request.getParameter("headcount"));
-    	posting.setHeadcount(headcount_);
-    	posting.setEdutype(request.getParameter("edutype"));
-    	posting.setCareer(request.getParameter("career"));
-    	posting.setEmploymenttype(request.getParameter("employmenttype"));
+    	// int headcount_ = Integer.parseInt(request.getParameter("headcount"));
+    	// posting.setHeadcount(headcount_);
+    	// posting.setEdutype(request.getParameter("edutype"));
+    	// posting.setCareer(request.getParameter("career"));
+    	// posting.setEmploymenttype(request.getParameter("employmenttype"));
     	
-    	int pay_ = Integer.parseInt(request.getParameter("pay"));
-    	posting.setPay(pay_);
-    	posting.setArea(request.getParameter("area"));
-    	posting.setJob(request.getParameter("job"));
+    	// int pay_ = Integer.parseInt(request.getParameter("pay"));
+    	// posting.setPay(pay_);
+    	// posting.setArea(request.getParameter("area"));
+    	// posting.setJob(request.getParameter("job"));
     	
-    	String deadlineString = request.getParameter("deadline");
-        LocalDateTime deadline = LocalDateTime.parse(deadlineString.replace(" ", "T")); // 공백을 'T'로 대체하여 LocalDateTime으로 변환
-        posting.setDeadline(deadline);
+    	// String deadlineString = request.getParameter("deadline");
+        // LocalDateTime deadline = LocalDateTime.parse(deadlineString.replace(" ", "T")); // 공백을 'T'로 대체하여 LocalDateTime으로 변환
+        // posting.setDeadline(deadline);
     	
-    	posting.setManagertel(request.getParameter("managertel"));
-    	posting.setMainurl(request.getParameter("mainurl"));
-    	posting.setMaincontent(request.getParameter("maincontent"));
+    	// posting.setManagertel(request.getParameter("managertel"));
+    	// posting.setMainurl(request.getParameter("mainurl"));
+    	// posting.setMaincontent(request.getParameter("maincontent"));
     	
-    	postingRepository.save(posting);
-    	System.out.println(posting+"++++++++");
+    	// postingRepository.save(posting);
+    	// System.out.println(posting+"++++++++");
     	
     	return "redirect:/enter/enterprisePostList";
     }

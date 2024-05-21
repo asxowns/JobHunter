@@ -20,6 +20,7 @@
             display: flex;
             flex-direction: column;
             display: none;
+            z-index: 9999;
         }
         .chat-content {
             flex: 10px;
@@ -98,7 +99,8 @@
                 <span class="chat-box mine">이름이 이상해요</span>
             </div>
         </div>
-        <form id="chatForm" action="/saveChat" method="post" style="display: flex;">
+        <form id="chatForm" action="/cs/chat" method="post" style="display: flex;">
+            <input type="hidden" name="logged" value="logged">
             <input type="text" id="text" name="message" placeholder="메시지를 입력하세요...">
             <button type="submit" id="send">전송</button>
         </form>
