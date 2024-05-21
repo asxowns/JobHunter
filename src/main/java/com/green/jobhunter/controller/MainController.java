@@ -39,18 +39,18 @@ public class MainController {
 
 	@RequestMapping("/")
 	public String root() {
-		return "main/postList";
+		return "/main/postList";
 	}
 
 	@RequestMapping("/registForm")
 	public String regForm() {
 
-		return "main/registForm";
+		return "/main/registForm";
 	}
 
 	@RequestMapping("/loginForm")
 	public String loginForm() {
-		return "main/loginForm";
+		return "/main/loginForm";
 	}
 
 	@RequestMapping("/hunterregist")
@@ -63,7 +63,7 @@ public class MainController {
 		hunterrepository.save(hunter);
 		
 
-		return "main/registForm";
+		return "/main/registForm";
 	}
 	
 	@RequestMapping("/enterregist")
@@ -74,7 +74,7 @@ public class MainController {
 		enterprise.setEid(member);
 		memberrepository.save(member);
 		enterrepository.save(enterprise);
-		return "main/registForm";
+		return "/main/registForm";
 	}
 	
 	
@@ -94,13 +94,13 @@ public class MainController {
 
 			session.setAttribute("logged", id);
 			session.setAttribute("pw", pw);
-			return "main/postList";
+			return "/main/postList";
 		}
 		else if(member.getRole() != 'h') {
 		String msg="일반회원이 아닙니다";
 		model.addAttribute("msg",msg);
 		}
-		return "loginForm";
+		return "/loginForm";
 	}
 
 	@RequestMapping("/loginEnterprise")
@@ -108,7 +108,7 @@ public class MainController {
 		Member member = memberrepository.findByMem(id, pw);
 		System.out.println("==========================member : " + member);
 		if (member == null) {
-			return "main/loginForm";
+			return "/main/loginForm";
 		}
 		if (member != null & member.getRole() == 'e') {
 			HttpSession session = request.getSession();
@@ -117,7 +117,7 @@ public class MainController {
 			// model.addAttribute("url", "main");
 			session.setAttribute("logged", id);
 			session.setAttribute("pw", pw);
-			return "enter/enterprisePage";
+			return "/enter/enterprisePage";
 		}
 		return "";
 	}
@@ -130,8 +130,13 @@ public class MainController {
 		if (id.equals("")) {
 			return "";
 
-		} else if (member != null || !id.matches(regex)) {
-			return "사용불가입니다";
+		} if(member != null) {
+			return "중복입니다";
+			
+		}
+		
+		else if (!id.matches(regex)) {
+			return "아이디는 5~20자 영문소문자,특수문자,숫자 포함";
 		}
 		return "";
 	}
@@ -143,7 +148,7 @@ public class MainController {
 			return "";
 
 		} else if (!pw.matches(regex)) {
-			return "사용불가입니다";
+			return "비밀번호는 8~16자 영문,특수문자,숫자포함";
 		}
 		return "";
 	}

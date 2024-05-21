@@ -80,6 +80,9 @@ input[type="radio"] {
 	background-color: #007bff;
 	border-color: #007bff;
 }
+.check{
+	color:red;
+}
 
 /* 라디오 버튼에 텍스트를 수직 정렬 */
 .radio-container label {
@@ -106,20 +109,18 @@ input[type="radio"] {
 				<div id="outputDivName"></div>
 				
 				아이디<input type="text" id="inputFieldId" name="memberid"><br> 
-				<div id="outputDivId"></div>
+				<div id="outputDivId" class="check"></div>
 				
 				비밀번호<input type="text" id = "inputFieldPw" name="password"><br>
-				<div id="outputDivPw"></div>
+				<div id="outputDivPw" class="check"></div>
 				
 				생년월일<input type="text" id = "inputFieldBirth" name="birth"><br>
-				<div id="outputDivPw"></div>
 				
 				휴대폰번호<input type="text" id = "inputFieldTel" name="tel"><br>
-				<div id="outputDivPw"></div>
+
 				
 				이메일<input type="text" id = "inputFieldEmail" name="email"><br>
-				<div id="outputDivPw"></div>
-				<div id="outputDivPw"></div>
+			
 				 <input type="submit" value="회원가입">
 			</form>
 		</div>
