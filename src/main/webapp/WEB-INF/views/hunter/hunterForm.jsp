@@ -14,7 +14,7 @@
 		left: 50%;
 		transform: translate(-50%, -50%);
 		text-align: center;
-		background-color: lightgray;
+		background-color: #d44958;
 		padding: 20px;
 		border-radius: 10px;
 	}
@@ -27,7 +27,7 @@
 	<section>
 		<h2>내정보 관리</h2>
 		<div id="container">
-			<form  action="/hunter/saveHunterForm" method="post">
+			<form action="/hunter/saveHunterForm" method="post">
 				아이디 <input type="text" name ="memberid" value="${meme.memberid}" readonly><br>
 				비밀번호 <input type="password" name ="password" value="${meme.password}"><br>
 				이름 <input type="text" name ="username" value="${hunter.username}"><br>

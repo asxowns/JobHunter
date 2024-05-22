@@ -28,7 +28,6 @@ public interface MemberRepository extends JpaRepository<Member, String>{
 	@Query(value = "select * from Member where memberid LIKE %:memberid%", nativeQuery = true)
 	List<Member> searchByMemberid(@Param("memberid") String memberid);
 	
-	@Query(value = "UPDATE member SET password = :password", nativeQuery = true)
-	Member updateMember(MemberDto m);
+
 }
 
