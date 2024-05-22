@@ -1,5 +1,7 @@
 package com.green.jobhunter.entity;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -33,5 +35,6 @@ public class ResumeSkill{
 	@ToString.Exclude
 	private Member hid;
 	private String stack;
+
 	
 }
