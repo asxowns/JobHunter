@@ -38,6 +38,7 @@ public class Csreply{
 
     @Column(length = 500)
     private String comment;
+	@Column(columnDefinition = "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP", nullable = false)
     private LocalDate localdate;
 
 }
