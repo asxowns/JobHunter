@@ -14,6 +14,18 @@
         padding: 50px;
         font-size: 16px;
     }
+    #manage-login-btn{
+        background-color:whitesmoke ;
+        color:black;
+    }
+    #manage-login-form{
+        min-height:250px;
+        margin: 20px auto;
+    }
+    a{
+        font-weight:bold;
+        font-size:larger;
+    }
 </style>
 </head>
 <body>
@@ -21,11 +33,14 @@
 </header>
 <section>
     <h2> Management System</h2>
+    <div id="manage-login-form">
     <form action="/manage/manageLogin" method="post">
         <input type="text" name="id">
         <input type="password" name="pwd">
-        <input type="submit" value="전송">
+        <input id="manage-login-btn" type="submit" value="확인">
     </form>
+    </div>
+    <a href="/"> Go back Home </a>
 
     
 </section>
