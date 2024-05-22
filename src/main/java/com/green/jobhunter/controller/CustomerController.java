@@ -153,18 +153,20 @@ public class CustomerController {
     }
 
 	@PostMapping("/chat")
-    public void saveChat(@RequestParam("message") String message, HttpSession session) {
+    public String saveChat(@RequestParam("message") String message, HttpSession session) {
 
-		String loggedUserId = (String) session.getAttribute("logged");
+		String logged = (String) session.getAttribute("logged");
 
 		Chat chat = new Chat();
+		LocalDateTime timelog = LocalDateTime.now();
 		chat.setMessage(message);
 
-		Member loggedUser = memberRepository.findByMemberid(loggedUserId);
-		chat.setWritermanager(loggedUser);
+		Member logged_Hid = memberRepository.findByMemberid(logged);
+		chat.setHid(logged_Hid);
+		chat.setTimelog(timelog);
 
 		chatRepository.save(chat);
-
+		return "redirect:/cs/csList";
     }
 
 
