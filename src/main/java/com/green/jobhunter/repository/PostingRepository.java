@@ -25,6 +25,14 @@ public interface PostingRepository extends JpaRepository<Posting, Long> {
 	@Query(value = "DELETE FROM posting WHERE postcode= :postcode", nativeQuery = true)
 	void deleteBypostcode3(@Param("postcode") Long postcode);
 	
+	@Query("SELECT p FROM Posting p WHERE (:eid IS NULL OR p.eid = :eid) AND " +
+		       "(:area IS NULL OR p.area = :area) AND " +
+		       "(:career IS NULL OR p.career = :career) AND " +
+		       "(:edutype IS NULL OR p.edutype = :edutype)")
+		List<Posting> findByEidAndAreaAndCareerAndEdutype(@Param("eid") Member eid, 
+		        @Param("area") String area, 
+		        @Param("career") String career, 
+		        @Param("edutype") String edutype);
+	List<Posting> findByEid(Member eid);
 
-	List<Posting> findByEidAndAreaAndCareerAndEdutype(Member eid, String area, String career, String edutype);
 }

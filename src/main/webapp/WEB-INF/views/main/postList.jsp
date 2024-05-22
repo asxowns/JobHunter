@@ -47,50 +47,30 @@ section{
 		<span>직무를 선택해주세요</span><br>
 
 
-		<form action="searchMain3Region" id="searchForm" method="get">
-			<select name="area" id="area">
+
+
+
+
+
+	<form id="searhForm" action="searchFilter" method="post">
+		<div class="search-container">
+			<select id="area" name="area_">
 				<option value="">지역</option>
 				<option value="seoul">서울</option>
 				<option value="busan">부산</option>
-				<option value="kyounggi">경기</option>
-			</select> <select name="career" id="career">
+			</select> <select id="career" name="career_">
 				<option value="">경력</option>
 				<option value="new">신입</option>
-				<option value="twoyear">2년차</option>
-			</select> <select name="edutype" id="edutype">
-				<option value="">학위</option>
-				<option value="bachelor">대졸</option>
-				<option value="highschool">고졸</option>
-			</select> <input type="text" name="companyname"> <input type="submit"
-				value="검색">
-		</form>
-
-
-
-
-
-
-
-		<div class="search-container">
-			<select id="region" name="region">
-				<option value="">지역</option>
-				<option value="region1">서울</option>
-				<option value="region2">경기</option>
-				<option value="region3">부산</option>
-			</select> <select id="region" name="region">
-				<option value="">경력</option>
-				<option value="region1">신입</option>
-				<option value="region2">2년이상</option>
-				<option value="region3">5년이상</option>
-			</select> <select id="region" name="region">
+				<option value="twoyear">2년이상</option>
+			</select> <select id="edutype" name="edutype_">
 				<option value="">학력</option>
-				<option value="region1">대졸</option>
-				<option value="region2">초대졸</option>
-				<option value="region3">고졸</option>
-			</select> <input type="text" id="search" name="search"
-				placeholder="기업명 공고명 검색"> <input type="submit"
-				id="search-button" value="">
+				<option value="uni">대졸</option>
+				<option value="high">고졸</option>
+			</select> <input type="text" id="search" name="companyname_"
+				placeholder="기업명 공고명 검색"> 
+				<input type="submit" id="search-button" value="검색">
 		</div>
+	</form>
 		<hr>
 		<article class="post_area">
 			<c:forEach var="dto" items="${list}">
@@ -125,38 +105,38 @@ section{
 </body>
 <script>
 	window.addEventListener("load", function() {
-		var selectedRegion = "${param.region}"; // 서블릿에서 전달된 region 파라미터 값
+		var selectedRegion = "${param.area_}"; // 서블릿에서 전달된 region 파라미터 값
 		if (selectedRegion) {
-			document.getElementById("region").value = selectedRegion;
+			document.getElementById("area").value = selectedRegion;
 		}
 
-		var selectedCareer = "${param.career}"; // 서블릿에서 전달된 career 파라미터 값
+		var selectedCareer = "${param.career_}"; // 서블릿에서 전달된 career 파라미터 값
 		if (selectedCareer) {
 			document.getElementById("career").value = selectedCareer;
 		}
 
-		var selectedDegree = "${param.degree}"; // 서블릿에서 전달된 degree 파라미터 값
+		var selectedDegree = "${param.edutype_}"; // 서블릿에서 전달된 degree 파라미터 값
 		if (selectedDegree) {
-			document.getElementById("degree").value = selectedDegree;
+			document.getElementById("edutype").value = selectedDegree;
 		}
 
 		// select 요소의 변경 이벤트 처리
-		document.getElementById("region").addEventListener("change",
+		document.getElementById("area").addEventListener("change",
 				function() {
 					// 서블릿 호출을 위해 form을 submit
-					document.getElementById("searchForm").submit();
+					document.getElementById("searhForm").submit();
 				});
 
 		document.getElementById("career").addEventListener("change",
 				function() {
 					// 서블릿 호출을 위해 form을 submit
-					document.getElementById("searchForm").submit();
+					document.getElementById("searhForm").submit();
 				});
 
-		document.getElementById("degree").addEventListener("change",
+		document.getElementById("edutype").addEventListener("change",
 				function() {
 					// 서블릿 호출을 위해 form을 submit
-					document.getElementById("searchForm").submit();
+					document.getElementById("searhForm").submit();
 				});
 	});
 </script>

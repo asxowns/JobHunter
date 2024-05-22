@@ -26,7 +26,8 @@ import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class MainController {
-
+	static Enterprise enterprise = null;
+	static Member eid = null;
 	@Autowired
 	MemberRepository memberrepository;
 	@Autowired
@@ -170,23 +171,133 @@ public class MainController {
 		model.addAttribute("dto", posting);
 		return "/main/postDetail";
 	}
-
-	@RequestMapping("/searchMain3Region")
-	public String searchMain3Region(@RequestParam(name = "compnyname", required = false) String compnyname,
-			@RequestParam(name = "area", required = false) String area,
-			@RequestParam(name = "career", required = false) String career,
-			@RequestParam(name = "edutype", required = false) String edutype, Model model) {
-
-//		Enterprise enterprise = enterrepository.findByCompanyname(compnyname);
-//		if (enterprise != null) {
-//			Member eid = memberrepository.findByMemberid()
+	// 이름을 이용해서 회사아이디 뽑음
+//	@RequestMapping("/searchMain3Region")
+//	public String searchMain3Region(@RequestParam(name = "companyname", required = false) String companyname,
+//	        @RequestParam(name = "area", required = false) String area,
+//	        @RequestParam(name = "career", required = false) String career,
+//	        @RequestParam(name = "edutype", required = false) String edutype, Model model) {
+//		
+//		
+//		
+//		System.out.println("==========here search3=======================");
+//	
+//		
+//		if (companyname != null && !companyname.isEmpty()) {
+//			System.out.println("===============================companyname:"+companyname);
+//			enterprise = enterrepository.findByCompanyname(companyname);
+//			System.out.println("============================enterprise:"+enterprise);
+//			String memid= enterprise.getEid().getMemberid();
+//			System.out.println("============================memid:"+memid);
+//
+//			Member eid = memberrepository.findByMemberid(memid);
+//			System.out.println("============================eid:"+eid);
+//			System.out.println("============================area:"+area);
+//			System.out.println("============================career:"+career);
+//			System.out.println("============================edutype:"+edutype);
+//
 //			List<Posting> list = postingrepository.findByEidAndAreaAndCareerAndEdutype(eid, area, career, edutype);
-//		}else {
-//			eid=null;
+//			System.out.println("============================list:"+list);
+//			List<Posting> list2 = postingrepository.findByEid(eid);
+//			System.out.println("============================list2:"+list2);
+//			model.addAttribute("list",list);
+//			
+//		
+//		}else if(companyname== null &&companyname.isEmpty()) {
+//			System.out.println("=============company이름 null================");
+//			
+//			System.out.println("=============career================"+career);
+//			System.out.println("=============edutype================"+edutype);
+//			if (career==null) {
+//				System.out.println("===============================널입니다=");
+//			}
+//
+//			
+//			List<Posting> list = postingrepository.findByEidAndAreaAndCareerAndEdutype(eid, area, career, edutype);
+//			System.out.println("============================list:"+list);
+//			model.addAttribute("list",list);
 //		}
-		return "/main/main";
+//		return "/main/postList";
+//	}
+
+	@RequestMapping("/searchFilter")
+	public String searchFilter(@RequestParam(name = "companyname_", required = false) String companyname_,
+			@RequestParam(name = "area_", required = false) String area_,
+			@RequestParam(name = "career_", required = false) String career_,
+			@RequestParam(name = "edutype_", required = false) String edutype_, Model model) {
+
+		System.out.println("==========here search3=======================");
+		String companyname;
+		String area;
+		String career;
+		String edutype;
+		if (companyname_.isEmpty()) {
+			companyname = null;
+			
+			System.out.println(companyname_);
+			System.out.println(companyname);
+		}else {
+			companyname=companyname_;
+			System.out.println(companyname_);
+			System.out.println(companyname);
+		}
+
+		if (area_.isEmpty()) {
+			area = null;
+		}else {
+			area=area_;
+		}
+		
+		if (career_.isEmpty()) {
+			career = null;
+		}else {
+			career=career_;
+		}
+		
+		if (edutype_.isEmpty()) {
+			edutype = null;
+		}else {
+			edutype=edutype_;
+		}
+		
+		
+		
+		
+		if (!companyname_.isEmpty()) {
+			System.out.println("===============================companyname_:" + companyname_);
+			enterprise = enterrepository.findByCompanyname(companyname);
+			System.out.println("============================enterprise:" + enterprise);
+			String memid = enterprise.getEid().getMemberid();
+			System.out.println("============================memid:" + memid);
+
+			Member eid = memberrepository.findByMemberid(memid);
+			System.out.println("============================eid:" + eid);
+			System.out.println("============================area:" + area);
+			System.out.println("============================career:" + career);
+			System.out.println("============================edutype:" + edutype);
+
+			List<Posting> list = postingrepository.findByEidAndAreaAndCareerAndEdutype(eid, area, career, edutype);
+			System.out.println("============================list:" + list);
+			List<Posting> list2 = postingrepository.findByEid(eid);
+			System.out.println("============================list2:" + list2);
+			model.addAttribute("list", list);
+
+		} else if (companyname_.isEmpty()) {
+			System.out.println("=============company이름 null================");
+
+			System.out.println("=============career_================" + career_);
+			System.out.println("=============edutype_================" + edutype_);
+			if (career_ == null) {
+				System.out.println("===============================널입니다=");
+			}
+
+			List<Posting> list = postingrepository.findByEidAndAreaAndCareerAndEdutype(eid, area, career, edutype);
+			System.out.println("============================list:" + list);
+			model.addAttribute("list", list);
+		}
+		return "/main/postList";
 	}
-	
+
 //	로그아웃
 	@GetMapping("/logout")
 	public String logout(HttpServletRequest request) {
@@ -197,7 +308,5 @@ public class MainController {
 
 		return "/main/loginForm";
 	}
-	
-	
 
 }
