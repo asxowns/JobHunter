@@ -1,7 +1,7 @@
 package com.green.jobhunter.entity;
 
-import java.sql.Date;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -45,6 +45,7 @@ public class Posting{
 	private String mainurl;
 
 	@Column(columnDefinition = "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP" , nullable = false)
-    private Date regdate;
+	private LocalDate regdate;
+
 	
 }

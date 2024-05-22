@@ -50,6 +50,16 @@
     <br>
     <div class="container"> <!-- 지원자 리스트 -->
     	<p>지원자 리스트</p>
+    	<br>
+    	<table border="1">
+    		<c:forEach var="app" items="${application }">
+    		<tr>
+	    		<td>${app.appcode }</td> 
+	    		<td>${app.hid.memberid }</td>
+    		</tr>
+    		</c:forEach>
+    	</table>
+    	
     </div>
     <br>
     <div class="container">  <!-- 통계(해당채용공고의 지원자수, 성별, 나이대) -->
