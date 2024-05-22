@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.green.jobhunter.dto.MemberDto;
 import com.green.jobhunter.entity.Member;
 
 
@@ -28,7 +27,5 @@ public interface MemberRepository extends JpaRepository<Member, String>{
 	@Query(value = "select * from Member where memberid LIKE %:memberid%", nativeQuery = true)
 	List<Member> searchByMemberid(@Param("memberid") String memberid);
 	
-	@Query(value = "UPDATE member SET password = :password", nativeQuery = true)
-	Member updateMember(MemberDto m);
 }
 
