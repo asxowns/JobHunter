@@ -27,15 +27,13 @@ public class Chat{
 	private Long chcode;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="hid")
+	@JoinColumn(name="hid" ,nullable = false)
 	@ToString.Exclude
 	private Member hid;
 	private String message;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="writermanager")
-	@ToString.Exclude
-	private Member writermanager;
+	@Column(length = 1)
+	private String type;
 	
 	@Column(columnDefinition = "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP",  nullable = false)
 	private LocalDateTime timelog;
