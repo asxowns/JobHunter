@@ -9,16 +9,20 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.green.jobhunter.entity.Application;
 import com.green.jobhunter.entity.Enterprise;
 import com.green.jobhunter.entity.Hunter;
 import com.green.jobhunter.entity.MainCategory;
 import com.green.jobhunter.entity.Member;
 import com.green.jobhunter.entity.Posting;
+import com.green.jobhunter.entity.Resume;
+import com.green.jobhunter.repository.ApplicationRepository;
 import com.green.jobhunter.repository.EnterpriseRepository;
 import com.green.jobhunter.repository.HunterRepository;
 import com.green.jobhunter.repository.MainCategoryRepository;
 import com.green.jobhunter.repository.MemberRepository;
 import com.green.jobhunter.repository.PostingRepository;
+import com.green.jobhunter.repository.ResumeRepository;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -39,6 +43,10 @@ public class EnterpriseController {
 	MainCategoryRepository mainCategoryRepository;
 	@Autowired
 	HunterRepository hunterRepository;
+	@Autowired
+	ResumeRepository resumeRepository;
+	@Autowired
+	ApplicationRepository applicationRepository;
 	
 	@RequestMapping("/")
     public String root(){
@@ -103,7 +111,9 @@ public class EnterpriseController {
     	model.addAttribute("posting", posting);
     	
     	//지원자리스트 (구직자정보 / 해당공고정보)
-    	//Hunter hunter = hunterRepository.findById();
+    	List<Application> applications = applicationRepository.findByPostcode(posting);
+        model.addAttribute("application", applications);
+        
     	return "/enter/hunterPerPostList";
     }
     //채용공고 등록 폼, 해당공고 수정 폼
@@ -125,7 +135,7 @@ public class EnterpriseController {
     	return "/enter/enterprisePostWriteForm";
     }
     
-    //채용공고 등록 ok
+    //채용공고 등록 
     @RequestMapping("/enterprisePostWrite")
     public String enterpriseWrite(HttpServletRequest request, Model model) {
     	session = request.getSession();
@@ -143,12 +153,19 @@ public class EnterpriseController {
         posting.setEmploymenttype(request.getParameter("employmenttype"));
         int pay_ = Integer.parseInt(request.getParameter("pay"));
         posting.setPay(pay_);
+        posting.setArea(request.getParameter("area"));
+        
+        posting.setIndustry(request.getParameter("industry"));
         posting.setJob(request.getParameter("job"));
+        
         String deadline_ = request.getParameter("deadline");
         LocalDate deadline = LocalDate.parse(deadline_);
+        posting.setDeadline(deadline);
+        
         posting.setManagertel(request.getParameter("managertel"));
         posting.setMainurl(request.getParameter("mainurl"));
         posting.setMaincontent(request.getParameter("maincontent"));
+        posting.setRegdate(LocalDate.now());
         // 채용공고 저장
         postingRepository.save(posting);
         model.addAttribute("posting", posting);
@@ -173,14 +190,17 @@ public class EnterpriseController {
         int pay_ = Integer.parseInt(request.getParameter("pay"));
         posting.setPay(pay_);
         posting.setArea(request.getParameter("area"));
+        posting.setIndustry(request.getParameter("industry"));
         posting.setJob(request.getParameter("job"));
             
         String deadline_ = request.getParameter("deadline");
         LocalDate deadline = LocalDate.parse(deadline_);
+        posting.setDeadline(deadline);
             
         posting.setManagertel(request.getParameter("managertel"));
         posting.setMainurl(request.getParameter("mainurl"));
         posting.setMaincontent(request.getParameter("maincontent"));
+        posting.setRegdate(LocalDate.now());
             
         // 수정된 채용공고를 저장
         postingRepository.save(posting);
@@ -200,9 +220,9 @@ public class EnterpriseController {
    
     //인재정보페이지
     @RequestMapping("/hunterList")
-    public String root5(){
-        
-    	
+    public String root5(Model model){
+    	List<Resume> resume = resumeRepository.findAll();
+    	model.addAttribute("resume", resume);
     	return "/enter/hunterList";  
     }
     

@@ -22,7 +22,6 @@ import com.green.jobhunter.repository.MemberRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
-
 @Controller
 @RequestMapping("/cs")
 public class CustomerController {
@@ -88,7 +87,8 @@ public class CustomerController {
 	}
 
 	@RequestMapping("/forumUpdateForm")
-	public void forumUpdateForm(@RequestParam("cscode") String cscode, Model model){
+	public void forumUpdateForm(@RequestParam("cscode") String cscode, Model model
+		){
 		Long cscode_ = Long.parseLong(cscode);
 		Cs cs = csRepository.findByCscode(cscode_);
 		
@@ -127,25 +127,30 @@ public class CustomerController {
 
     @RequestMapping("/write")
     public String write(@RequestParam("content") String content
-			,@RequestParam("public_type") char publictype
-			,@RequestParam("title") String title
-			,@RequestParam("type") char type
-			,@RequestParam("hid") String hid
-			){
-		
-		LocalDate csdate = LocalDate.now();
-		char result = 'N';
-		Cs cs = new Cs();
-		cs.setContent(content);
-		cs.setPublictype(publictype);
-		cs.setTitle(title);
-		cs.setType(type);
-		cs.setCsdate(csdate);
-		cs.setResult(result);
-		Member member = memberRepository.findByMemberid(hid);
-		member.setMemberid(hid);
-		cs.setHid(member);
-		csRepository.save(cs);
+    		,@RequestParam("public_type") char publictype
+    		,@RequestParam("title") String title
+    		,@RequestParam("type") char type
+    		,@RequestParam("hid") String hid
+			,HttpSession session
+    		){
+		String logged = (String) session.getAttribute("logged");
+		if(logged == null){
+			return "redirect:/loginForm";
+		}
+
+    	LocalDate csdate = LocalDate.now();
+    	char result = 'N';
+    	Cs cs = new Cs();
+    	cs.setContent(content);
+    	cs.setPublictype(publictype);
+    	cs.setTitle(title);
+    	cs.setType(type);
+    	cs.setCsdate(csdate);
+    	cs.setResult(result);
+    	Member member = memberRepository.findByMemberid(hid);
+    	member.setMemberid(hid);
+    	cs.setHid(member);
+    	csRepository.save(cs);
         
         return "redirect:/cs/csList";
     }
@@ -154,8 +159,12 @@ public class CustomerController {
 	public String reply(@RequestParam("comment") String comment
 			,@RequestParam("writermanager") String writermanager
 			,@RequestParam("cscode") Long cscode
+			,HttpSession session
 			){
-		
+		String logged = (String) session.getAttribute("logged");
+		if(logged == null){
+			return "redirect:/loginForm";
+		}
 		LocalDate localdate = LocalDate.now();
 		Csreply csreply = new Csreply();
 		csreply.setComment(comment);
@@ -169,6 +178,5 @@ public class CustomerController {
 		
 		return "redirect:/cs/forumDetail?cscode="+cscode;
 	}
-
 	
 }

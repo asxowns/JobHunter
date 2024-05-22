@@ -148,7 +148,7 @@
 				</div>
 				<div class="input-row">
 				<label>직무</label>
-				<select name="middleCategory" id="subSelect">
+				<select name="job" id="subSelect">
         			<option value="">소분류</option>
         			 <c:forEach var="sub" items="${subList }">
                         <option value="${sub}">${sub}</option>

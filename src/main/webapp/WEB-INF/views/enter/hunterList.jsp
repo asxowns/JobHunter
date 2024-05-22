@@ -25,7 +25,11 @@
 </header>
 <section>
     <h2> hunterList page </h2>
-    
+    <br>
+    <c:forEach var="resume" items="${resume}">
+    	${resume.resumecode }
+    	${resume.title}
+    </c:forEach>
 </section>
 <footer>
 
