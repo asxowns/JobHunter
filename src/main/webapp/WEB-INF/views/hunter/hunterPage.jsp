@@ -37,7 +37,7 @@
  		</section>
  		<ul>
  			<li>
- 				<a href="/hunter/resumeManagement">이력서 관리</a>
+ 				<a href="/hunter/resumeList">이력서 관리</a>
  			</li>
  			<li>
  				<a href="/hunter/jobApplication">입사 지원 관리</a>
@@ -52,7 +52,7 @@
  				<a href="/hunter/favorList">스크랩한 채용 공고</a>
  			</li>
  			<li>
- 				<a href="/hunter/informList">내정보 관리</a>
+ 				<a href="/hunter/hunterForm">내정보 관리</a>
  			</li>
  		</ul>
  	</aside>

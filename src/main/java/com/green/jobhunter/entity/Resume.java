@@ -40,7 +40,7 @@ public class Resume{
 	private LocalDate graduatedate;
 	private String employmenttype;
 	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
-	@Column(columnDefinition = "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP")
+	@Column(columnDefinition = "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP",  nullable = false)
 	private LocalDate modifydate;
 	private String photourl;
 	private int desiredpay;
