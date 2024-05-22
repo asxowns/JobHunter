@@ -2,6 +2,7 @@ package com.green.jobhunter.entity;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,12 +27,12 @@ public class Csreply{
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long csr_code;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="cscode")
     @ToString.Exclude
     private Cs cscode;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="writermanager")
     @ToString.Exclude
     private Member writermanager;

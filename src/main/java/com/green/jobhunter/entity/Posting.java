@@ -3,6 +3,7 @@ package com.green.jobhunter.entity;
 import java.sql.Date;
 import java.time.LocalDate;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,7 +27,7 @@ public class Posting{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long postcode;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="eid")
 	@ToString.Exclude
 	private Member eid;

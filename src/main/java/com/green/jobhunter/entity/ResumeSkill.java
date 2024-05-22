@@ -1,5 +1,6 @@
 package com.green.jobhunter.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,12 +24,12 @@ public class ResumeSkill{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long skillcode;
 	
-	@OneToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="resumecode")
 	@ToString.Exclude
 	private Resume resumecode;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="hid")
 	@ToString.Exclude
 	private Member hid;
