@@ -56,7 +56,7 @@
             <a class="a-button" href="/manage/managerCSList"> <img src="/resource/img/manage/button2.png"> </a>
             <a class="a-button" href="/manage/chat"> <img src="/resource/img/manage/button3.png">  </a>
             <a class="a-button" href="/manage/accessHub"> <img src="/resource/img/manage/button4.png"> </a>
-            <a class="a-button" href="/manage/dashboard"> <img src="/resource/img/manage/button5.png"> </a>
+            <a class="a-button" href="/manage/managerDashBoard"> <img src="/resource/img/manage/button5.png"> </a>
     </div>
     </div>
     <div class="chart-container">

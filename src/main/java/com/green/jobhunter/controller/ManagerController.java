@@ -170,9 +170,32 @@ public class ManagerController {
         return "redirect:/manage/accessHub";
     }
 
+    @RequestMapping("/managerCSList")
+    public String managerCSList(){
+
+        return "/manage/managerCSList";
+    }
+    @RequestMapping("/managerCSDetail")
+    public String managerCSDetail(){
+        return "/manage/managerCSDetail";
+    }
+
+    @RequestMapping("/chat")
+    public String chat(){
+
+        return "/manage/chatInquiryList";
+    }
+
+    @RequestMapping("/chatDetail")
+    public String chatDetail(){
+        return "/manage/chatDetail";
+    }
+
     @RequestMapping("/managerDashBoard")
     public void managerDashBoard(){
 
     }
 
+
+    
 }
