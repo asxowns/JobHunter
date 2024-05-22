@@ -157,7 +157,9 @@ public class BoardController {
 	public String forumDetail(@RequestParam("cmcode") Long cmcode, Model model) {
 
 		Community community = communityRepo.findByCmcode(cmcode);
-
+		Community commu = communityRepo.findByCmcode(cmcode);
+		List<CommunityReply> reply = communityReplyRepo.findByCmcode(commu);
+		model.addAttribute("reply",reply);
 		model.addAttribute("community", community);
 
 		return "/board/forumDetail";
@@ -309,14 +311,11 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/communityReply")
-	public String communityReply(@RequestParam("cmcode") Community cmcode, CommunityReply communityReply, Model model) {
+	public String communityReply(CommunityReply communityReply, @RequestParam("cmcode") Long cmcode) {
 		
 		communityReplyRepo.save(communityReply);
 		
-		List<CommunityReply> communityReplyList = communityReplyRepo.findByCmcode(cmcode);
-		model.addAttribute("communityReplyList", communityReplyList);
-		
-		return "redirect:forumDetail";
+		return "redirect:/board/forumDetail?cmcode="+cmcode;
 	}
 
 }
