@@ -41,7 +41,7 @@ public class Resume{
 	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
 	private LocalDate modifydate;
 	private String photourl;
-	private int desirepay;
+	private int desiredpay;
 	private char publictype;
 	
 		
