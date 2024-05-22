@@ -78,8 +78,8 @@ th, td {
             <c:forEach var="faq" items="${list}" varStatus="stat">
                 <tr>
                     <td>${stat.count}</td>
-                    <td><a href="${feq.getContent()}">
-                    ${faq.getTitle()}</a></td>
+                     <td><a href="${feq.getContent()}">
+                     ${faq.getTitle()}</a></td>
                 <tr>
             </c:forEach>
         </tbody>
