@@ -1,6 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <meta charset="UTF-8">
+<%-- JSTL Core --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html lang="ko">
 <head>
+    
+    <title></title>
+
 <!-- 폰트 첨부 -->
     <link href="https://fonts.googleapis.com/css2?family=Poor+Story&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
@@ -95,9 +102,9 @@
             <div class="line">
                 <span class="chat-box">안녕하세요! 무엇을 도와드릴까요?</span>
             </div>
-            <div class="line">
-                <span class="chat-box mine">이름이 이상해요</span>
-            </div>
+                <div class="line">
+                    <span class="chat-box-mine">${chat.message}</span>
+                </div>
         </div>
         <form id="chatForm" action="/cs/chat" method="post" style="display: flex;">
             <input type="hidden" name="logged" value="logged">

@@ -59,6 +59,11 @@ public class CustomerController {
     	model.addAttribute("list2", b);
     	model.addAttribute("list3", c);
 
+		List<Chat> list4 = chatRepository.findAll();
+		model.addAttribute("list4", list4);
+
+		
+		
 		return "/cs/csList";
 	}
 	
@@ -153,21 +158,30 @@ public class CustomerController {
     }
 
 	@PostMapping("/chat")
-    public String saveChat(@RequestParam("message") String message, HttpSession session) {
+    public String saveChat(@RequestParam("message") String message, HttpSession session,Model model) {
 
 		String logged = (String) session.getAttribute("logged");
-
+		Member logged_Hid = memberRepository.findByMemberid(logged);
 		Chat chat = new Chat();
 		LocalDateTime timelog = LocalDateTime.now();
+		
 		chat.setMessage(message);
-
-		Member logged_Hid = memberRepository.findByMemberid(logged);
 		chat.setHid(logged_Hid);
 		chat.setTimelog(timelog);
-
+		
 		chatRepository.save(chat);
-		return "redirect:/cs/csList";
+		
+		return "/cs/csList";
     }
+
+	@RequestMapping("/chatList")
+	public String chatList(Model model){
+		List<Chat> list = chatRepository.findAll();
+		model.addAttribute("list", list);
+		System.out.println(list + "@@@@@@@@@@@@@@@============@@@@@@@");
+	
+		return "";
+	}
 
 
 	@RequestMapping("/regReply")
