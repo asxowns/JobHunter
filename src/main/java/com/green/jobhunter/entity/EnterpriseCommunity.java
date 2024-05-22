@@ -1,5 +1,6 @@
 package com.green.jobhunter.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,7 +23,7 @@ public class EnterpriseCommunity extends BaseTimeEntity{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long eccode;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="writer")
 	@ToString.Exclude
 	private Member writer;

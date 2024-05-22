@@ -2,6 +2,8 @@ package com.green.jobhunter.entity;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,16 +26,18 @@ public class Certificate{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long certicode;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="resumecode")
 	@ToString.Exclude
 	private Resume resumecode;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="hid")
 	@ToString.Exclude
 	private Member hid;
 	private String publisher;
+	
+	@Column(columnDefinition = "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP",  nullable = false)
 	private LocalDate issuedate;
 	
 }

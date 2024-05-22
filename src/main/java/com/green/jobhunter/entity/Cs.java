@@ -1,8 +1,8 @@
 package com.green.jobhunter.entity;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,7 +26,7 @@ public class Cs{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long cscode;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="hid")
 	@ToString.Exclude
 	private Member hid;

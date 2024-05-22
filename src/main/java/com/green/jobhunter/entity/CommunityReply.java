@@ -29,7 +29,7 @@ public class CommunityReply extends BaseTimeEntity{
 	private Community cmcode;
 	private String comment;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="writer")
 	@ToString.Exclude
 	private Member writer;
