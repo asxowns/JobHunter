@@ -249,20 +249,31 @@ public class HunterController {
 	}
 	
 	@RequestMapping("/hunterForm")
-	public String hunterForm() {
-
-		return "/hunter/hunterForm";
-	}
-	
-	@RequestMapping("/saveHunterForm")
-	public String saveHunterForm(HttpServletRequest req, MemberDto m, HunterDto h, Model model) {
+	public String hunterForm(HttpServletRequest req, MemberDto m, HunterDto h, Model model) {
 		HttpSession session = req.getSession();
 		String logged_id =(String) session.getAttribute("logged");
 		Member member = memberRepository.findByMemId(logged_id);
 		Hunter hunter = hunterRepository.findByHid(member);
-		
 		model.addAttribute("hunter",hunter);
 		model.addAttribute("meme",member);
+		return "/hunter/hunterForm";
+	}
+	
+	@RequestMapping("/saveHunterForm")
+	public String saveHunterForm(HunterDto h, Member m) {
+		Hunter hunter = new Hunter();
+		Member member = new Member();
+		member.setPassword(m.getPassword());
+		hunter.setUsername(h.getUsername());
+		hunter.setBirth(h.getBirth());
+		hunter.setAddress(h.getAddress());
+		hunter.setEmail(h.getEmail());
+		hunter.setTel(h.getTel());
+		hunter.setTel2(h.getTel2());
+		
+		hunterRepository.save(hunter);
+		memberRepository.save(member);
+		
 		return "redirect:/hunter/hunterForm";
 	}
 	
