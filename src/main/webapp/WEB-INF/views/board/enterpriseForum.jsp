@@ -231,8 +231,8 @@ input[type="submit"] {
 
 			<div id="forum_tap">
 				<ul>
-					<a href="openForum"><li id="open">일반</li></a>
-					<a href="enterpriseForum"><li id="enterprise">기업</li></a>
+					<a href="openForum?boardtype=1"><li id="open">일반</li></a>
+					<a href="enterpriseForum?boardtype=2"><li id="enterprise">기업</li></a>
 				</ul>
 			</div>
 
@@ -336,6 +336,5 @@ input[type="submit"] {
 		</main>
 	</section>
 	<footer> </footer>
-
 </body>
 </html>

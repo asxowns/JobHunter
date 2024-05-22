@@ -115,7 +115,7 @@ input[type="text"] {
 	width: 380px;
 	height: 100%;
 	border: 1px solid #969696;
-	padding-left: 100px;
+	padding-left: 110px;
 	box-sizing: border-box;
 	cursor: pointer;
 	border-radius: 5px;
@@ -230,8 +230,8 @@ input[type="submit"] {
 
 			<div id="forum_tap">
 				<ul>
-					<a href="openForum"><li id="open">일반</li></a>
-					<a href="enterpriseForum"><li id="enterprise">기업</li></a>
+					<a href="openForum?boardtype=1" id="open_link"><li id="open">일반</li></a>
+					<a href="enterpriseForum?boardtype=2" id="enterprise_link"><li id="enterprise">기업</li></a>
 				</ul>
 			</div>
 

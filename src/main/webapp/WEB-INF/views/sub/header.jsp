@@ -28,6 +28,7 @@ header {
 	height: 150px;
 	border-bottom: 1px solid #eee;
 	box-shadow:0px 2px 10px #eee;
+	background:#fff;
 }
 
 .head {
