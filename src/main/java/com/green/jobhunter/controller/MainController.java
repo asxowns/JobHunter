@@ -107,8 +107,9 @@ public class MainController {
 		} else if (member.getRole() != 'h') {
 			String msg = "일반회원이 아닙니다";
 			model.addAttribute("msg", msg);
+			return "/main/loginForm";
 		}
-		return "/loginForm";
+		return "";
 	}
 
 	@RequestMapping("/loginEnterprise")
@@ -128,6 +129,10 @@ public class MainController {
 			session.setAttribute("pw", pw);
 			session.setAttribute("role", member.getRole());
 			return "/enter/enterprisePage";
+		}else if (member.getRole() != 'e') {
+			String msg = "기업회원이 아닙니다";
+			model.addAttribute("msg", msg);
+			return "/main/loginForm";
 		}
 		return "";
 	}
@@ -251,15 +256,8 @@ public class MainController {
 		return "/main/postList";
 	}
 
-//	로그아웃
-	@GetMapping("/logout")
-	public String logout(HttpServletRequest request) {
 
-		HttpSession session = request.getSession();
+	
 
-		session.invalidate();
-
-		return "/main/loginForm";
-	}
-
+	
 }
