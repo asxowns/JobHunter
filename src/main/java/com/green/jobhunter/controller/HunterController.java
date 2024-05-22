@@ -15,6 +15,7 @@ import com.green.jobhunter.dto.CoverLetterDto;
 import com.green.jobhunter.dto.DesiredAreaDto;
 import com.green.jobhunter.dto.DesiredIndustryDto;
 import com.green.jobhunter.dto.HunterDto;
+import com.green.jobhunter.dto.MemberDto;
 import com.green.jobhunter.dto.ResumeDto;
 import com.green.jobhunter.dto.ResumeSkillDto;
 import com.green.jobhunter.entity.Career;
@@ -24,6 +25,7 @@ import com.green.jobhunter.entity.DesiredArea;
 import com.green.jobhunter.entity.DesiredIndustry;
 import com.green.jobhunter.entity.Hunter;
 import com.green.jobhunter.entity.MainCategory;
+import com.green.jobhunter.entity.Member;
 import com.green.jobhunter.entity.Resume;
 import com.green.jobhunter.entity.ResumeSkill;
 import com.green.jobhunter.repository.CareerRepository;
@@ -69,11 +71,6 @@ public class HunterController {
 	SubCategoryRepository subCategoryRepository;
 
 	@RequestMapping("/")
-	public String root() {
-		return "/home";
-	}
-
-	@RequestMapping("/hunterpage")
 	public String goHunterPage() {
 		return "/hunter/hunterPage";
 	}
@@ -250,7 +247,25 @@ public class HunterController {
 
 		return "/hunter/informList";
 	}
+	
+	@RequestMapping("/hunterForm")
+	public String hunterForm() {
 
-	DesiredAreaDto dAreaDto = new DesiredAreaDto();
+		return "/hunter/hunterForm";
+	}
+	
+	@RequestMapping("/saveHunterForm")
+	public String saveHunterForm(HttpServletRequest req, MemberDto m, HunterDto h, Model model) {
+		HttpSession session = req.getSession();
+		String logged_id =(String) session.getAttribute("logged");
+		Member member = memberRepository.findByMemId(logged_id);
+		Hunter hunter = hunterRepository.findByHid(member);
+		
+		model.addAttribute("hunter",hunter);
+		model.addAttribute("meme",member);
+		return "redirect:/hunter/hunterForm";
+	}
+	
+	
 
 }
