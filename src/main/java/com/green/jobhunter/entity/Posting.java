@@ -1,9 +1,7 @@
 package com.green.jobhunter.entity;
 
 import java.sql.Date;
-import java.time.LocalDateTime;
-
-import org.hibernate.annotations.ManyToAny;
+import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,7 +10,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -42,12 +39,12 @@ public class Posting{
 	private String area;
 	private String industry;
 	private String job;
-	private LocalDateTime deadline;
+	private LocalDate deadline;
 	private String managertel;
 	private String maincontent;
 	private String mainurl;
 
-	@Column(columnDefinition = "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP")
+	@Column(columnDefinition = "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP" , nullable = false)
     private Date regdate;
 	
 }
