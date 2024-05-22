@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -36,6 +37,7 @@ public class Hunter{
 	private LocalDate birth;
 	private int age;
 	private String tel;
+	@Column(nullable=false)
 	private String tel2;
 	private String address;
 	private String email;
