@@ -256,7 +256,17 @@ public class MainController {
 		return "/main/postList";
 	}
 
+//	로그아웃
+	@GetMapping("/logout")
+	public String logout(HttpServletRequest request) {
 
+		HttpSession session = request.getSession();
+
+		session.invalidate();
+
+		return "/main/loginForm";
+		
+	}
 	
 
 	
