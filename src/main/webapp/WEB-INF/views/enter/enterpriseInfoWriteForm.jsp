@@ -32,30 +32,22 @@
     align-items: center; 
     margin-bottom: 10px; 
   }
-  .container form .input-row label {
-    width: 100px; 
-    text-align: left; 
-  }
+  
   .container form .input-row input[type="text"] {
     flex: 1; 
     margin-left: 10px; 
   }
-  .container form input[type="text"] {
+  .container form input[type="text"], form input[type="password"] {
         width: 200px; 
         height: 20px; 
         padding: 10px; 
         border: 1px solid gray;
-        border-radius: 30px; 
         outline: none; 
         font-size: 16px; 
-    }
-    .container form label {
-        text-align: left; 
     }
     .container form input[type="submit"] {
         width: 200px; 
         height: 20px; 
-        border-radius: 30px; 
         border: 1px solid gray;
         padding: 20px; 
         text-align: center; 
@@ -70,23 +62,38 @@
     <h2> enterpriseInfoWriteForm page </h2> <!-- 기업정보 수정폼 페이지  -->
     <br>
     <div class="container">
+    	<p>· 기업정보</p> 
 		<form action="/enter/enterpriseUpdate" method="post">
 			<input type="hidden" id="entercode" name="entercode"value="${enterprise.entercode }">
+			<div class="input-row">
+				<label for="cname">기업명</label>
+				<input type="text" id="companyname" name="companyname" value="${enterprise.companyname }">
+			</div>
+			<div class="input-row">
+				<label for="ceo">대표자명</label>
+				<input type="text" id="ceo" name="ceo" value="${enterprise.ceo }">
+			</div>
+			<div class="input-row">
+				<label for="corporatetype">기업형태</label>
+				<input type="text" id="corporatetype" name="corporatetype" value="${enterprise.corporatetype }">
+			</div>
+			<div class="input-row">
+				<label for="breginum">사업자등록번호</label>
+				<input type="text" id="businessnumber" name="businessnumber" value="${enterprise.businessnumber }">
+			</div>
+			<div class="input-row">
+				<label for="address">회사 주소</label>
+				<input type="text" id="address" name="address" value="${enterprise.address}">
+			</div>
+		<br>
+		<p>· 담당자 정보</p>	
 			<div class="input-row">
 				<label for="id">아이디</label>
 				<input type="text" id="eid" name="eid" value="${enterprise.eid.memberid}" readonly>
 			</div>
 			<div class="input-row">
 				<label for="pw">비밀번호</label>
-				<input type="text" id="password" name="password" value="${enterprise.eid.password}">
-			</div>
-			<div class="input-row">
-				<label for="cname">기업명</label>
-				<input type="text" id="companyname" name="companyname" value="${enterprise.companyname }">
-			</div>
-			<div class="input-row">
-				<label for="industry">산업군</label>
-				<input type="text" id="corporatetype" name="corporatetype" value="${enterprise.corporatetype }">
+				<input type="password" id="password" name="password" value="${enterprise.eid.password}">
 			</div>
 			<div class="input-row">
 				<label for="btel">담당자 연락처</label>
@@ -96,10 +103,7 @@
 				<label for="bemail">이메일</label>
 				<input type="text" id="manageremail" name="manageremail" value="${enterprise.manageremail }">
 			</div>
-			<div class="input-row">
-				<label for="breginum">사업자등록번호</label>
-				<input type="text" id="businessnumber" name="businessnumber" value="${enterprise.businessnumber }">
-			</div>
+			
 			<input type="submit" value="수정하기">
 		</form>
 	</div>
