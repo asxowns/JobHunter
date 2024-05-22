@@ -48,7 +48,7 @@ ul.tabs li {
 	cursor: pointer;
 	text-align:center;
 	font-size:18px;
-	margin-bottom:20px;
+	margin-bottom:30px;
 }
 
 ul.tabs li.current {
@@ -68,13 +68,22 @@ ul.tabs li.current {
 .input_box{
 	width:500px;
 }
+.input_box p{
+	font-weight:bold;
+}
 .input_box div{
 	margin-bottom:10px;
 }
 .input_box div:nth-child(even){
 	margin-bottom:20px;
 }
+.input_box_ent p {
+	margin-bottom:10px;
+}
 
+.regbtn{
+	margin-top:20px;
+}
 .regbtn input[type="submit"]{
 	width:500px;
 	height:50px;
@@ -84,7 +93,7 @@ ul.tabs li.current {
 	font-size:20px;
 }
 input[type="text"]{
-	width:500px;
+	width:100%;
 	height:40px;
 	border:1px solid #ddd;
 	padding-left:5px;
@@ -132,6 +141,29 @@ input[type="radio"] {
 .radio-container label {
 	vertical-align: middle;
 }
+
+
+.entInfo p{
+	display:inline-block;
+	color:#888;
+	margin-bottom:15px;
+	font-weight:500;
+	font-size:20px;
+	
+}
+.entInfo b{
+	padding-right:10px;
+	font-size:20px;
+}
+
+article{
+	width:100%;
+	display:flex;
+	justify-content:space-between;
+}
+.arti1 input[type="text"]{
+	width:240px;
+}
 </style>
 </head>
 <body>
@@ -174,13 +206,13 @@ input[type="radio"] {
 						<p>생년월일</p>
 					</div>
 					<div>
-						<td><input type="text" id = "inputFieldBirth" name="birth"></td>
+						<input type="text" id = "inputFieldBirth" name="birth">
 					</div>
 					<div>
 						<p>휴대폰번호</p>
 					</div>
 					<div>
-						<td><input type="text" id = "inputFieldTel" name="tel"></td>
+						<input type="text" id = "inputFieldTel" name="tel">
 					</div>
 					<div>
 						<p>이메일</p>
@@ -197,32 +229,90 @@ input[type="radio"] {
 
 		<div id="tab-2" class="tab-content">
 			<form action="/enterregist" method="post">
-				기업명<input type="text" name="companyname"><br>
-				대표자명<input type="text" name="ceo"><br>
-				기업전화번호<input type="text" name="tel"><br>
-				기업크기<input type="text" name="size"><br>
-				기업형태<input type="text" name="corporatetype"><br>
-				산업<input type="text" name="businessitem"><br>
-				사업자등록번호<input type="text" name="businessnumber"><br>
-				회사주소<input type="text" name="address"><br>
-				사원수<input type="text" name="empnum"><br>
-				매출액<input type="text" name="sales"><br>
-				
-				담당자정보<br>
-				아이디<input type="text" name="memberid"><br>
-				비밀번호<input type="text" name="password"><br>
-				담당자 이름<input type="text" name="managername"><br>
-				담당자 연락처<input type="text" name="managertel"><br>
-				담당자 이메일<input type="text" name="manageremail"><br>
-	
-
-				<div id="outputDivId"></div>
-				비밀번호<input type="text" name="pw"><br> 
-				기업명<input type="text" name="corname"><br> 
-				산업군<input type="text" name="industryName"><br> 
-				담당자연락처<input type="text" name="corTel"><br> 
-				이메일<input type="text" name="email"><br>
-				<input type="submit" value="회원가입"><br>
+				<div class="input_box input_box_ent">
+					<div class="entInfo">
+						<p><b>·</b>기업정보</p>
+					</div>
+					<article class="arti1">
+						<div>
+							<p>기업명<p>
+							<input type="text" name="companyname">
+						</div>
+						<div>
+							<p>대표자명</p>
+							<input type="text" name="ceo"><br>
+						</div>
+					</article>
+					<div>
+						<p>기업전화번호</p>
+						<input type="text" name="tel">
+					</div>
+					<article class="arti1">
+						<div>
+							<p>기업크기</p>
+							<input type="text" name="size">
+						</div>
+						<div>
+							<p>기업형태</p>
+							<input type="text" name="corporatetype">
+						</div>
+					</article>
+					<div>
+						<p>산업</p>
+						<input type="text" name="businessitem">
+					</div>
+					<div>
+						<p>사업자등록번호</p>
+						<input type="text" name="businessnumber">
+					</div>
+					<div>
+						<p>회사주소</p>
+						<input type="text" name="address">
+					</div>
+					<article class="arti1">
+						<div>
+							<p>사원수</p>
+							<input type="text" name="empnum">
+						</div>
+						<div>
+							<p>매출액</p>
+							<input type="text" name="sales">
+						</div>
+					</article>
+					<div class="entInfo">
+						<p><b>·</b>담당자정보</p>
+					</div>
+					<article class="arti1">
+						<div>
+							<p>아이디</p>
+							<input type="text" name="memberid">	
+						</div>
+						<div>
+							<p>비밀번호</p>
+							<input type="text" name="password">
+						</div>
+					</article>
+					<div>
+						<p>담당자 이름</p>
+						<input type="text" name="managername">
+					</div>
+					<div>
+						<p>담당자 연락처</p>
+						<input type="text" name="managertel">
+					</div>
+					<div>
+						<p>담당자 이메일</p>
+						<input type="text" name="manageremail">
+						<div id="outputDivId"></div>
+					</div>
+					<div class="regbtn">
+						<input type="submit" value="회원가입">
+					</div>
+					 
+					 
+					
+					
+				</div>
 			</form>
 		</div>
 

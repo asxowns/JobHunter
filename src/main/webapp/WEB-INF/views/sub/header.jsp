@@ -97,7 +97,7 @@ header {
 	top:5px;
 	cursor: pointer;
 }
-.search_glass_label input[type="submit"]{
+#search_glass_label input[type="submit"]{
 	display:none;
 }
 

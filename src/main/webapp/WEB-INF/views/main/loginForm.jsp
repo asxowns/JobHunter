@@ -67,7 +67,7 @@ input[type="text"]{
 	box-sizing:border-box;
 }
 .input_box{
-	padding-left:30px;
+	padding-left:20px;
 }
 .login_area{
 	text-align:right;
@@ -83,6 +83,13 @@ input[type="text"]{
 	font-weight:bold;
 }
 
+table{
+	border-collapse: separate;
+  	border-spacing: 0 15px;
+}
+table th{
+	padding-right:10px;
+}
 
 </style>
 </head>
