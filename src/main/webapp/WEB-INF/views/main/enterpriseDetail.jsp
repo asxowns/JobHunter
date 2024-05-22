@@ -15,7 +15,7 @@
     <%@ include file="sub/header.jsp" %>
 </header>
 <section>
-    <h2> index page </h2>
+    <h2> enterpriseDetail </h2>
     
 </section>
 <footer>
