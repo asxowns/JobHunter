@@ -171,54 +171,7 @@ public class MainController {
 		model.addAttribute("dto", posting);
 		return "/main/postDetail";
 	}
-	// 이름을 이용해서 회사아이디 뽑음
-//	@RequestMapping("/searchMain3Region")
-//	public String searchMain3Region(@RequestParam(name = "companyname", required = false) String companyname,
-//	        @RequestParam(name = "area", required = false) String area,
-//	        @RequestParam(name = "career", required = false) String career,
-//	        @RequestParam(name = "edutype", required = false) String edutype, Model model) {
-//		
-//		
-//		
-//		System.out.println("==========here search3=======================");
-//	
-//		
-//		if (companyname != null && !companyname.isEmpty()) {
-//			System.out.println("===============================companyname:"+companyname);
-//			enterprise = enterrepository.findByCompanyname(companyname);
-//			System.out.println("============================enterprise:"+enterprise);
-//			String memid= enterprise.getEid().getMemberid();
-//			System.out.println("============================memid:"+memid);
-//
-//			Member eid = memberrepository.findByMemberid(memid);
-//			System.out.println("============================eid:"+eid);
-//			System.out.println("============================area:"+area);
-//			System.out.println("============================career:"+career);
-//			System.out.println("============================edutype:"+edutype);
-//
-//			List<Posting> list = postingrepository.findByEidAndAreaAndCareerAndEdutype(eid, area, career, edutype);
-//			System.out.println("============================list:"+list);
-//			List<Posting> list2 = postingrepository.findByEid(eid);
-//			System.out.println("============================list2:"+list2);
-//			model.addAttribute("list",list);
-//			
-//		
-//		}else if(companyname== null &&companyname.isEmpty()) {
-//			System.out.println("=============company이름 null================");
-//			
-//			System.out.println("=============career================"+career);
-//			System.out.println("=============edutype================"+edutype);
-//			if (career==null) {
-//				System.out.println("===============================널입니다=");
-//			}
-//
-//			
-//			List<Posting> list = postingrepository.findByEidAndAreaAndCareerAndEdutype(eid, area, career, edutype);
-//			System.out.println("============================list:"+list);
-//			model.addAttribute("list",list);
-//		}
-//		return "/main/postList";
-//	}
+
 
 	@RequestMapping("/searchFilter")
 	public String searchFilter(@RequestParam(name = "companyname_", required = false) String companyname_,
