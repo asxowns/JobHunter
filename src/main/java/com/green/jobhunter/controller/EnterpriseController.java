@@ -153,6 +153,9 @@ public class EnterpriseController {
         posting.setEmploymenttype(request.getParameter("employmenttype"));
         int pay_ = Integer.parseInt(request.getParameter("pay"));
         posting.setPay(pay_);
+        posting.setArea(request.getParameter("area"));
+        
+        posting.setIndustry(request.getParameter("industry"));
         posting.setJob(request.getParameter("job"));
         
         String deadline_ = request.getParameter("deadline");
@@ -187,6 +190,7 @@ public class EnterpriseController {
         int pay_ = Integer.parseInt(request.getParameter("pay"));
         posting.setPay(pay_);
         posting.setArea(request.getParameter("area"));
+        posting.setIndustry(request.getParameter("industry"));
         posting.setJob(request.getParameter("job"));
             
         String deadline_ = request.getParameter("deadline");
