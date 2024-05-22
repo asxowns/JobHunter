@@ -4,7 +4,7 @@
 <!-- 폰트 첨부 -->
     <link href="https://fonts.googleapis.com/css2?family=Poor+Story&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
-   <style>
+    <style>
         body {
             height: 2000px;
         }
@@ -130,6 +130,47 @@
                 btn.style.backgroundColor = "gray";
                 btn.style.fontSize = "24px";
             }
+        });
+
+        // AJAX를 이용한 채팅 업데이트
+        document.addEventListener("DOMContentLoaded", function() {
+            const chatContent = document.getElementById("chat-content");
+            const sendButton = document.getElementById("send");
+
+            // 전송 버튼 클릭 시 AJAX 호출
+            sendButton.addEventListener("click", function(event) {
+                event.preventDefault(); // 기본 동작 중지
+                const messageInput = document.getElementById("text").value;
+                const xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === XMLHttpRequest.DONE) {
+                        if (xhr.status === 200) {
+                            // 채팅 메시지 업데이트
+                            chatContent.innerHTML = xhr.responseText;
+                        } else {
+                            console.error('요청 실패:', xhr.status);
+                        }
+                    }
+                };
+                xhr.open("POST", "/cs/chat");
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.send("message=" + encodeURIComponent(messageInput));
+            });
+
+            // 페이지 로드 후 초기 채팅 메시지 가져오기
+            const xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        // 채팅 메시지 업데이트
+                        chatContent.innerHTML = xhr.responseText;
+                    } else {
+                        console.error('요청 실패:', xhr.status);
+                    }
+                }
+            };
+            xhr.open("GET", "/cs/chat");
+            xhr.send();
         });
     </script>
 </body>
