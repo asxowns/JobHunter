@@ -35,6 +35,7 @@
         cursor: pointer;
     }
 </style>
+<%@ include file="./managerCheck.jsp" %>
 </head>
 <body>
 <header>

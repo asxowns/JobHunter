@@ -9,6 +9,7 @@
 <style>
 
 </style>
+<%@ include file="./managerCheck.jsp" %>
 </head>
 <body>
 <header>
