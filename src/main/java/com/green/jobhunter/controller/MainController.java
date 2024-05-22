@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,6 +18,7 @@ import com.green.jobhunter.repository.EnterpriseRepository;
 import com.green.jobhunter.repository.HunterRepository;
 import com.green.jobhunter.repository.MemberRepository;
 import com.green.jobhunter.repository.PostingRepository;
+import com.green.jobhunter.repository.SubscribeRepository;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -32,6 +32,10 @@ public class MainController {
 	MemberRepository memberrepository;
 	@Autowired
 	EnterpriseRepository enterrepository;
+	
+	@Autowired
+	SubscribeRepository subscriberepostory ;
+	
 	@Autowired
 	HunterRepository hunterrepository;
 
@@ -44,6 +48,8 @@ public class MainController {
 	@Autowired
 	HttpServletResponse response;
 
+	
+	
 	@RequestMapping("/")
 	public String root(Model model) {
 
@@ -170,10 +176,13 @@ public class MainController {
 	}
 
 	@RequestMapping("/postDetail")
-	public String postDetail(@RequestParam("postcode") long postcode, Model model) {
+	public String postDetail(@RequestParam("postcode") long postcode,@RequestParam("posteid") long posteid, Model model) {
 		Posting posting = postingrepository.findByPostcode(postcode);
 		System.out.println("==================" + posting);
+		System.out.println("==================" + posting.getEid().getMemberid());
 		model.addAttribute("dto", posting);
+		model.addAttribute("posteid", posteid);
+		System.out.println();
 		return "/main/postDetail";
 	}
 
@@ -257,7 +266,13 @@ public class MainController {
 	}
 
 
-	
-
-	
+//	
+//	@RequestMapping("/subscribe")
+//	public String subscribe(@RequestParam(), Model model) {
+//		
+//		subscriberepostory.save();
+//		return "/main/postDetail";
+//	}
+//
+//	
 }

@@ -75,7 +75,7 @@ section{
 		<article class="post_area">
 			<c:forEach var="dto" items="${list}">
 				<div class="post_box">
-					<a href="postDetail?postcode=${dto.postcode}">
+					<a href="postDetail?postcode=${dto.postcode}&posteid=${dto.eid.memberid}">
 						<div class="post_img">
 							<img src="">
 						</div>
