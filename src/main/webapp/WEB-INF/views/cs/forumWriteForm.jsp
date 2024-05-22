@@ -86,19 +86,20 @@ section {
 
 </footer>
 <script>
-     document.getElementById("type").addEventListener("change", function() {
-        var type = document.getElementById("type").value;
-        var publicRadio = document.getElementById("public");
-        var privateRadio = document.getElementById("private");
+    document.getElementById("type").addEventListener("change", function() {
+    var type = document.getElementById("type").value;
+    var publicRadio = document.getElementById("public");
+    var privateRadio = document.getElementById("private");
 
-        if (type.aa.value === "B") {
-            publicRadio.checked = false;
-            privateRadio.checked = true;
-        } else {
-            publicRadio.checked = true;
-            privateRadio.checked = false;
-        }
-    });
+    if (type === "B") {
+        publicRadio.checked = false;
+        publicRadio.disabled = true;
+        privateRadio.checked = true;
+    } else {
+        publicRadio.checked = true;
+        publicRadio.disabled = false; 
+    }
+});
 </script>
 </body>
 </html>

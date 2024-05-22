@@ -60,7 +60,7 @@ th, td {
 </header>
 <main>
 <section>
-    로그인된 아이디 : ${sessionScope.logged}<br>
+    로그인된 아이디 : ${sessionScope.logged} 
 <div>
     <ul class="tabs">
         <li class="tab-link current" data-tab="tab-1">FAQ</li>
@@ -75,10 +75,11 @@ th, td {
             </tr>
         </thead>
         <tbody>
-            <c:forEach var="cs" items="${list}" varStatus="stat">
+            <c:forEach var="faq" items="${list}" varStatus="stat">
                 <tr>
                     <td>${stat.count}</td>
-                    <td>제목이 들어가는 부분...</td>
+                    <td><a href="${feq.getContent()}">
+                    ${faq.getTitle()}</a></td>
                 <tr>
             </c:forEach>
         </tbody>
