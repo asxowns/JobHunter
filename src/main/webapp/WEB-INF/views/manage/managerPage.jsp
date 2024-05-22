@@ -43,6 +43,7 @@
     }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<%@ include file="./managerCheck.jsp" %>
 </head>
 <body>
 <header>

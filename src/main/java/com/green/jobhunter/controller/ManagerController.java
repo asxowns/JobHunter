@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.green.jobhunter.entity.Member;
 import com.green.jobhunter.entity.Notice;
@@ -27,7 +28,8 @@ public class ManagerController {
     private MemberRepository memberRepo;
 
     @RequestMapping("/manageLoginForm")
-    public String manageLoginForm(HttpSession session) {
+    public String manageLoginForm(HttpServletRequest req) {
+        HttpSession session = req.getSession();
         String view="/manage/manageLoginForm";
         String logged_id = (String)session.getAttribute("logged");
         if(logged_id != null){
@@ -202,6 +204,13 @@ public class ManagerController {
 
     }
 
-
+    @RequestMapping("/checkRole")
+    @ResponseBody
+    public String checkRole(HttpServletRequest req){
+        HttpSession session = req.getSession();
+        char role = (char) session.getAttribute("role");
+        String role_ = Character.toString(role);
+        return role_ != null ? role_ : "";
+    }
     
 }
