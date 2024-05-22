@@ -12,14 +12,12 @@
     padding: 0;
 }
 
-main {
-    width: 100%;
-}
-
 section {
-    width: 80%;
-    margin: auto;
-    text-align: center;
+    width: 1240px;
+    margin:0 auto;
+}
+h1{
+    text-align:center;
 }
 
 table {
@@ -33,7 +31,10 @@ th, td {
     border: 1px solid black;
     padding: 10px;
 }
-
+#tab-1{
+    width:800px;
+    margin:0 auto;
+}
 .tabs {
     list-style-type: none;
     display: flex;
@@ -42,15 +43,50 @@ th, td {
 }
 
 .tab-link {
+    width: 190px;
     cursor: pointer;
-    padding: 10px;
-    border: 1px solid #ccc;
+    padding: 10px 0;
+    border: 1px solid #EFEFEF;
     background-color: #f2f2f2;
-    margin-right: 10px; /* 메뉴 간 간격 조절 */
+    text-align:center;
 }
 
 .tab-link.current {
-    background-color: #ccc;
+    background-color: #D44958;
+    color: #FFF;
+    border:1px solid #d44958;
+}
+
+
+.faq_box{
+    width:800px;
+    height:80px;
+    border:1px solid #ccc;
+    padding:15px;
+    box-sizing:border-box;
+    cursor:pointer;
+    margin:7px 0;
+}
+.title_Q{
+    color: #D44958;
+}
+.title_A{
+    color: blue;
+}
+.title_area{
+    width:100%;
+    font-weight: bold;
+    
+}
+.faq_content{
+    padding: 27px 0;
+    box-sizing:border-box;
+    color: gray;
+    font-weight: bold;
+}
+
+.active{
+    display:none;
 }
 </style>
 </head>
@@ -58,32 +94,27 @@ th, td {
 <header>
     <%@ include file="../sub/header.jsp" %>
 </header>
-<main>
-<section>
-    로그인된 아이디 : ${sessionScope.logged} 
+
+<section>  
+    <br><br><br>
+    <h1>고객센터</h1><br><br><br>
 <div>
     <ul class="tabs">
         <li class="tab-link current" data-tab="tab-1">FAQ</li>
         <li class="tab-link" data-tab="tab-2">문의 게시판</li>
         <li class="tab-link" data-tab="tab-3">나의 문의</li>
-    </ul>
-    <table id="tab-1">
-        <thead>
-            <tr>
-                <th>번호</th>
-                <th>자주 묻는 질문(FAQ)</th>
-            </tr>
-        </thead>
-        <tbody>
+    </ul><br><br><br>
+    <div id="tab-1">
             <c:forEach var="faq" items="${list}" varStatus="stat">
-                <tr>
-                    <td>${stat.count}</td>
-                     <td><a href="${feq.getContent()}">
-                     ${faq.getTitle()}</a></td>
-                <tr>
-            </c:forEach>
-        </tbody>
-    </table>
+                <div class="faq_box">
+                    <p class="title_area"><span class="title_Q">Q.&nbsp;&nbsp;</span>${faq.getTitle()}</p>
+                    <div class="faq_content active">
+                        <span class="title_A">A.&nbsp;&nbsp;</span>${faq.getContent()}
+                    </div>
+                </div>
+        </c:forEach>
+    </div>
+
      <table id="tab-2">
         <thead>
             <tr>
@@ -130,16 +161,28 @@ th, td {
             </c:forEach>
         </tbody>
     </table>
-    <a href="/cs/forumWriteForm">문의글 작성</a>
 </div>
 </section>
-</main>
+
 <footer>
 
 </footer>
-
+    
 </body>
 <script type="text/javascript">
+
+    document.querySelectorAll(".faq_box").forEach(faqbox => {
+        faqbox.addEventListener("click", () => {
+            const faqcontent = faqbox.querySelector(".faq_content");
+            faqcontent.classList.toggle("active");
+            if (faqcontent.classList.contains("active")) {
+                faqbox.style.height = "80px";
+            } else {
+                faqbox.style.height = "150px";
+            }
+        });
+    });
+
      document.addEventListener("DOMContentLoaded", function() {
         const btn1 = document.querySelector("[data-tab='tab-1']");
         const btn2 = document.querySelector("[data-tab='tab-2']");

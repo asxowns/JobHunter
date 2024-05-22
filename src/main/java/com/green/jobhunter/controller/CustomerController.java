@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.apache.catalina.manager.host.HTMLHostManagerServlet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -95,14 +96,15 @@ public class CustomerController {
 	}
 
 	@RequestMapping("/forumUpdateForm")
-	public void forumUpdateForm(@RequestParam("cscode") String cscode, Model model){
+	public void forumUpdateForm(@RequestParam("cscode") String cscode, Model model
+		){
 		Long cscode_ = Long.parseLong(cscode);
 		Cs cs = csRepository.findByCscode(cscode_);
 		
 		model.addAttribute("cs", cs);
 		
 	}
-   
+
 
 
 	@RequestMapping("/Update")
@@ -141,8 +143,13 @@ public class CustomerController {
     		,@RequestParam("title") String title
     		,@RequestParam("type") char type
     		,@RequestParam("hid") String hid
+			,HttpSession session
     		){
-    	
+		String logged = (String) session.getAttribute("logged");
+		if(logged == null){
+			return "redirect:/loginForm";
+		}
+
     	LocalDate csdate = LocalDate.now();
     	char result = 'N';
     	Cs cs = new Cs();
@@ -165,6 +172,9 @@ public class CustomerController {
     public String saveChat(@RequestParam("message") String message, HttpSession session,Model model) {
 
 		String logged = (String) session.getAttribute("logged");
+		if(logged == null){
+			return "redirect:/loginForm";
+		}
 		Member logged_Hid = memberRepository.findByMemberid(logged);
 		Chat chat = new Chat();
 		LocalDateTime timelog = LocalDateTime.now();
@@ -193,8 +203,12 @@ public class CustomerController {
 	public String reply(@RequestParam("comment") String comment
 			,@RequestParam("writermanager") String writermanager
 			,@RequestParam("cscode") Long cscode
+			,HttpSession session
 			){
-		
+		String logged = (String) session.getAttribute("logged");
+		if(logged == null){
+			return "redirect:/loginForm";
+		}
 		LocalDate localdate = LocalDate.now();
 		Csreply csreply = new Csreply();
 		csreply.setComment(comment);
