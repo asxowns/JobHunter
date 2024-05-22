@@ -1,6 +1,5 @@
 package com.green.jobhunter.controller;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +9,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.green.jobhunter.dto.CareerDto;
+import com.green.jobhunter.dto.CertificateDto;
+import com.green.jobhunter.dto.CoverLetterDto;
+import com.green.jobhunter.dto.DesiredAreaDto;
+import com.green.jobhunter.dto.DesiredIndustryDto;
+import com.green.jobhunter.dto.HunterDto;
+import com.green.jobhunter.dto.MemberDto;
+import com.green.jobhunter.dto.ResumeDto;
+import com.green.jobhunter.dto.ResumeSkillDto;
 import com.green.jobhunter.entity.Career;
 import com.green.jobhunter.entity.Certificate;
 import com.green.jobhunter.entity.CoverLetter;
@@ -17,6 +25,7 @@ import com.green.jobhunter.entity.DesiredArea;
 import com.green.jobhunter.entity.DesiredIndustry;
 import com.green.jobhunter.entity.Hunter;
 import com.green.jobhunter.entity.MainCategory;
+import com.green.jobhunter.entity.Member;
 import com.green.jobhunter.entity.Resume;
 import com.green.jobhunter.entity.ResumeSkill;
 import com.green.jobhunter.repository.CareerRepository;
@@ -38,233 +47,236 @@ import jakarta.servlet.http.HttpSession;
 @RequestMapping("/hunter")
 public class HunterController {
 
-   @Autowired
-   HunterRepository hunterRepository;
-   @Autowired
-   ResumeRepository resumeRepository;
-   @Autowired
-   DesiredAreaRepository desiredAreaRepository;
-   @Autowired
-   DesiredIndustryRepository desiredIndustryRepository;
-   @Autowired
-   CertificateRepository certificateRepository;
-   @Autowired
-   CareerRepository careerRepository;
-   @Autowired
-   CoverLetterRepository coverLetterRepository;
-   @Autowired
-   ResumeSkillRepository resumeSkillRepository;
-   @Autowired
-   MemberRepository memberRepository;
-   @Autowired
-   MainCategoryRepository mainCategoryRepository;
-   @Autowired
-   SubCategoryRepository subCategoryRepository;
+	@Autowired
+	HunterRepository hunterRepository;
+	@Autowired
+	ResumeRepository resumeRepository;
+	@Autowired
+	DesiredAreaRepository desiredAreaRepository;
+	@Autowired
+	DesiredIndustryRepository desiredIndustryRepository;
+	@Autowired
+	CertificateRepository certificateRepository;
+	@Autowired
+	CareerRepository careerRepository;
+	@Autowired
+	CoverLetterRepository coverLetterRepository;
+	@Autowired
+	ResumeSkillRepository resumeSkillRepository;
+	@Autowired
+	MemberRepository memberRepository;
+	@Autowired
+	MainCategoryRepository mainCategoryRepository;
+	@Autowired
+	SubCategoryRepository subCategoryRepository;
 
-   @RequestMapping("/")
-   public String root() {
-      return "/home";
-   }
+	@RequestMapping("/")
+	public String goHunterPage() {
+		return "/hunter/hunterPage";
+	}
 
-   @RequestMapping("/hunterpage")
-   public String goHunterPage() {
-      return "/hunter/hunterPage";
-   }
+	@RequestMapping("/resumeWriteForm")
+	public String writeResume(Model model) {
+		// DesiredIndustry desiredIndustry;
+		// List<MainCategory> mainList = mainCategoryRepository.findMainCategory();
+		// List<SubCategory> subList = subCategoryRepository.findSubCategory();
+		List<MainCategory> mainList = mainCategoryRepository.findAll();
+		List<String> subList = subCategoryRepository.findSubCategory();
 
-   @RequestMapping("/resumeWriteForm")
-   public String writeResume(Model model) {
-      // DesiredIndustry desiredIndustry;
-      // List<MainCategory> mainList = mainCategoryRepository.findMainCategory();
-      // List<SubCategory> subList = subCategoryRepository.findSubCategory();
-      List<MainCategory> mainList = mainCategoryRepository.findAll();
-      List<String> subList = subCategoryRepository.findSubCategory();
+		// System.out.println("Main List: " + mainList); // 로그로 데이터 확인
+		// System.out.println("Middle List: " + subList); // 로그로 데이터 확인
 
-      // System.out.println("Main List: " + mainList); // 로그로 데이터 확인
-      // System.out.println("Middle List: " + subList); // 로그로 데이터 확인
+		model.addAttribute("mainList", mainList);
+		model.addAttribute("subList", subList);
 
-      model.addAttribute("mainList", mainList);
-      model.addAttribute("subList", subList);
+		return "/hunter/resumeWriteForm";
+	}
 
-      return "/hunter/resumeWriteForm";
-   }
+	@RequestMapping("/resumeWrite")
+	public String addResume(HunterDto h, ResumeDto r, DesiredAreaDto da, DesiredIndustryDto di, 
+			CareerDto c, CoverLetterDto cl, ResumeSkillDto rs, CertificateDto ctf,  Model model) {
 
-   @RequestMapping("/resumeWrite")
-   public String addResume(HttpServletRequest req, Model model) {
-      Hunter hunter = (Hunter) hunterRepository.findAll();
-      Resume resume = (Resume) resumeRepository.findAll();
-      DesiredArea dArea = (DesiredArea) desiredAreaRepository.findAll();
-      DesiredIndustry dIndustry = (DesiredIndustry) desiredIndustryRepository.findAll();
-      Certificate certificate = (Certificate) certificateRepository.findAll();
-      Career career = (Career) careerRepository.findAll();
-      CoverLetter coverLetter = (CoverLetter) coverLetterRepository.findAll();
-      ResumeSkill resumeSkill = (ResumeSkill) resumeSkillRepository.findAll();
+		// hunter 정보
+		Hunter hunter = new Hunter();
+		hunter.setUsername(h.getUsername());
+		hunter.setBirth(h.getBirth());
+		hunter.setTel(h.getTel());
+		hunter.setTel2(h.getTel2());
+		hunter.setAddress(h.getAddress());
+		hunter.setEmail(h.getEmail());
+		hunter.setGender(h.getGender());
+		hunter.setMilitary(h.getMilitary());
+		hunter.setReportnum(h.getReportnum());
+		hunter.setNewOrExp(h.getNewOrExp());
 
-      // hunter 정보
-      hunter.setUsername("username");
-      String birth_ = req.getParameter("birth");
-      LocalDate birth = LocalDate.parse(birth_);
-      hunter.setBirth(birth);
-      hunter.setTel(req.getParameter("tel"));
-      hunter.setTel2(req.getParameter("tel2"));
-      hunter.setAddress(req.getParameter("address"));
-      hunter.setEmail(req.getParameter("email"));
-      String gender_ = req.getParameter("gender");
-      hunter.setGender(gender_.charAt(0));
-      String military_ = req.getParameter("military");
-      hunter.setMilitary(military_.charAt(0));
+		// resume 정보
+		Resume resume = new Resume();
+		resume.setTitle(r.getTitle());
+		resume.setEduname(r.getEduname());
+		resume.setEdutype(r.getEdutype());
+		resume.setEdumajor(r.getEdumajor());
+		resume.setEdustate(r.getEdustate());
+		resume.setGraduatedate(r.getGraduatedate());
+		resume.setEmploymenttype(r.getEmploymenttype());
+		resume.setModifydate(r.getModifydate());
+		resume.setPhotourl(r.getPhotourl());
+		resume.setDesiredpay(r.getDesiredpay());
+		resume.setPublictype(r.getPublictype());
+		
+		// desiredArea 정보
+		DesiredArea dArea = new DesiredArea();
+		dArea.setResumecode(resume);
+		dArea.setArea1(da.getArea1());
+		dArea.setArea2(da.getArea2());
+		
+		// desiredIndustry 정보
+		DesiredIndustry dIndustry = new DesiredIndustry();
+		dIndustry.setResumecode(resume);
+		dIndustry.setMainCategory(di.getMainCategory());
+		dIndustry.setMiddleCategory(di.getMiddleCategory());
+		
+		// career 정보
+		Career career = new Career();
+		career.setResumecode(resume);
+		career.setCompanyname(c.getCompanyname());
+		career.setCardate(c.getCardate());
+		career.setEnddate(c.getEnddate());
+		career.setIndustry(c.getIndustry());
+		career.setPosition(c.getPosition());
+		career.setJob(c.getJob());
+		career.setWork(c.getWork());
+		career.setSalary(c.getSalary());
+		
+		// resumeSkill 정보
+		ResumeSkill resumeSkill = new ResumeSkill();
+		resumeSkill.setResumecode(resume);
+		resumeSkill.setStack(rs.getStack());
+		
+		// coverLetter 정보
+		CoverLetter coverLetter = new CoverLetter();
+		coverLetter.setResumecode(resume);
+		coverLetter.setGrowth(cl.getGrowth());
+		coverLetter.setMotive(cl.getMotive());
+		coverLetter.setProsAndCons(cl.getProsAndCons());
+		
+		// certificate 정보
+		Certificate cer = new Certificate();
+		cer.setResumecode(resume);
+		cer.setPublisher(ctf.getPublisher());
+		cer.setIssuedate(ctf.getIssuedate());
+		
+		
+		hunterRepository.save(hunter);
+		resumeRepository.save(resume);
+		desiredAreaRepository.save(dArea);
+		desiredIndustryRepository.save(dIndustry);
+		certificateRepository.save(cer);
+		careerRepository.save(career);
+		coverLetterRepository.save(coverLetter);
+		resumeSkillRepository.save(resumeSkill);
+		//memberRepository.save();
+		
+		return "redirect:/hunter/resumeList";
+	}
 
-      hunterRepository.save(hunter);
 
-      
-      // resume 정보
+	@RequestMapping("/resumeList")
+	public String goResumeList(HttpServletRequest req, Model model) {
+		HttpSession session = req.getSession();
+		//String logged = (String) session.getAttribute("logged");
+		
+		// Long resumecode = Long.parseLong(req.getParameter("resumecode"));
+		// Member member = memberRepository.findByMemberid(logged);
+		// String title = resumeRepository.findTitle(member);
+		
+		
+		//if (!logged.isEmpty()) {
+			List<Resume> resume = resumeRepository.findAll();
+			model.addAttribute("resume", resume);
+		//}
 
-      resume.setTitle(req.getParameter("title"));
-      String pay_ = req.getParameter("pay");
-      resume.setDesirepay(Integer.parseInt(pay_));
-      resume.setEduname("eduname");
-      resume.setEdutype("edutype");
-      resume.setEdumajor("edumajor");
-      resume.setEdustate("edustate");
-      LocalDate graduatedate_ = LocalDate.parse("graduatedate");
-      resume.setGraduatedate(graduatedate_);
-      resume.setEmploymenttype("employmenttype");
-      //String modifydate_ = req.getParameter("modifydate_");
-      //resumeWriteForm에서 modifydate는 받지 않음. 등록 누르는 순간의 시간을 받아오면 될 것 같음
-      //LocalDate modifydate = LocalDate.parse(modifydate_);
-      //resume.setModifydate(modifydate);
-      resume.setPhotourl(req.getParameter("photourl"));
-      String desirepay_ = req.getParameter("desiredpay");
-      int desirepay = Integer.parseInt(desirepay_);
-      resume.setDesirepay(desirepay);
-      String publictype_ = req.getParameter("publictype");
-      resume.setPublictype(publictype_.charAt(1));
+		return "/hunter/resumeList";
+	}
 
-      resumeRepository.save(resume);
+	@RequestMapping("/getSubList")
+	@ResponseBody
+	public List<String> getSubList(@RequestParam("mccode") String mccode) {
+		Long mccodeLong = Long.parseLong(mccode); // String을 Long으로 변환
+		System.out.println("mccodeLong: " + mccodeLong);
+		List<String> subList = null;
+		if (mccode != null) {
+			subList = subCategoryRepository.findSubCategoryBymccode(mccodeLong);
+			System.out.println(subList);
 
-      // desiredArea 정보
-      dArea.setResumecode(resume);
-      dArea.setArea1(req.getParameter("area1"));
-      dArea.setArea1(req.getParameter("area2"));
+		}
+		return subList;
+	}
 
-      desiredAreaRepository.save(dArea);
+	@RequestMapping("/resumeManagement")
+	public String resumeManagement() {
 
-      // desiredIndustry 정보
-      dIndustry.setResumecode(resume);
-      dIndustry.setMainCategory(req.getParameter("industry"));
-      dIndustry.setMiddleCategory(req.getParameter("middleCategory"));
+		return "/hunter/resumeManagement";
+	}
 
+	@RequestMapping("/jobApplication")
+	public String jobApplication() {
 
-      // career 정보
-      career.setCompanyname(req.getParameter("companyname"));
-      LocalDate cardate = LocalDate.parse(req.getParameter("cardate"));
-      career.setCardate(cardate);
-      String working = req.getParameter("working");
-      if(working.equals("off")){
-         LocalDate enddate = LocalDate.parse(req.getParameter("enddate"));
-         career.setEnddate(enddate);
-      }
-      career.setPosition(req.getParameter("position"));
-      career.setJob(req.getParameter("job"));
-      career.setSalary(req.getParameter("salary"));
-      career.setIndustry(req.getParameter("industry"));
-      career.setWork(req.getParameter("work"));
+		return "/hunter/jobApplication";
+	}
 
-      careerRepository.save(career);
-      
-      // resumeSkill 정보
-      String skills_ = req.getParameter("resumeSkill");
-      String[] skills = skills_.split(",");
-      
-      for(int i = 0; i < skills.length; i++) {
-         resumeSkill.setResumecode(resume);
-         resumeSkill.setStack(skills[i]);
-         resumeSkillRepository.save(resumeSkill);
-      }
+	@RequestMapping("/subscribeList")
+	public String subscribeList() {
 
-      // coverLetter 정보
-      coverLetter.setResumecode(resume);
-      coverLetter.setGrowth(req.getParameter("growth"));
-      coverLetter.setMotive(req.getParameter("motive"));
-      coverLetter.setProsAndCons(req.getParameter("prosAndCons"));
+		return "/hunter/subscribeList";
+	}
 
-      coverLetterRepository.save(coverLetter);
+	@RequestMapping("/positionList")
+	public String positionList() {
 
-      // certificate 정보
-      certificate.setPublisher(req.getParameter("certificate"));
-      LocalDate issuedate = LocalDate.parse(req.getParameter("optaindate"));
-      certificate.setIssuedate(issuedate);
-      certificate.setPublisher(req.getParameter("issuer"));
+		return "/hunter/positionList";
+	}
 
-      certificateRepository.save(certificate);
+	@RequestMapping("/favorList")
+	public String favorList() {
 
-      return "redirect:/hunter/resumeList";
+		return "/hunter/favorList";
+	}
 
-   }
+	@RequestMapping("/informList")
+	public String informList() {
 
-   @RequestMapping("/resumeList")
-   public String goResumeList(HttpServletRequest req, Model model) {
-      HttpSession session = req.getSession();
-      String logged = (String) session.getAttribute("logged");
-      // Long resumecode = Long.parseLong(req.getParameter("resumecode"));
-      //Member member = memberRepository.findByMemberid(logged);
-      //String title = resumeRepository.findTitle(member);
-      if(!logged.isEmpty()) {
-    	  Resume resume = (Resume) resumeRepository.findAll();
-    	  model.addAttribute("resume", resume);
-      }
-      
-
-      return "/hunter/resumeList";
-   }
-
-   @RequestMapping("/getSubList")
-   @ResponseBody
-   public List<String> getSubList(@RequestParam("mccode") String mccode) {
-      Long mccodeLong = Long.parseLong(mccode); // String을 Long으로 변환
-      System.out.println("mccodeLong: " + mccodeLong);
-      List<String> subList = null;
-      if (mccode != null) {
-         subList = subCategoryRepository.findSubCategoryBymccode(mccodeLong);
-         System.out.println(subList);
-
-      }
-      return subList;
-   }
-
-   @RequestMapping("/resumeManagement")
-   public String resumeManagement() {
-
-      return "/hunter/resumeManagement";
-   }
-
-   @RequestMapping("/jobApplication")
-   public String jobApplication() {
-
-      return "/hunter/jobApplication";
-   }
-
-   @RequestMapping("/subscribeList")
-   public String subscribeList() {
-
-      return "/hunter/subscribeList";
-   }
-
-   @RequestMapping("/positionList")
-   public String positionList() {
-
-      return "/hunter/positionList";
-   }
-
-   @RequestMapping("/favorList")
-   public String favorList() {
-
-      return "/hunter/favorList";
-   }
-
-   @RequestMapping("/informList")
-   public String informList() {
-
-      return "/hunter/informList";
-   }
+		return "/hunter/informList";
+	}
+	
+	@RequestMapping("/hunterForm")
+	public String hunterForm(HttpServletRequest req, MemberDto m, HunterDto h, Model model) {
+		HttpSession session = req.getSession();
+		String logged_id =(String) session.getAttribute("logged");
+		Member member = memberRepository.findByMemId(logged_id);
+		Hunter hunter = hunterRepository.findByHid(member);
+		model.addAttribute("hunter",hunter);
+		model.addAttribute("meme",member);
+		return "/hunter/hunterForm";
+	}
+	
+	@RequestMapping("/saveHunterForm")
+	public String saveHunterForm(HunterDto h, Member m) {
+		Hunter hunter = new Hunter();
+		Member member = new Member();
+		member.setPassword(m.getPassword());
+		hunter.setUsername(h.getUsername());
+		hunter.setBirth(h.getBirth());
+		hunter.setAddress(h.getAddress());
+		hunter.setEmail(h.getEmail());
+		hunter.setTel(h.getTel());
+		hunter.setTel2(h.getTel2());
+		
+		hunterRepository.save(hunter);
+		memberRepository.save(member);
+		
+		return "redirect:/hunter/hunterForm";
+	}
+	
+	
 
 }

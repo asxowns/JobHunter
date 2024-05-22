@@ -220,7 +220,7 @@ main b {
 			</div>
 			<div class="upAndDel">
 				<c:if test="${sessionScope.logged eq community.writer.memberid }">
-					<a href="updateForm?eccode=${community.eccode }&boardtype=2">수정</a>
+					<a href="updateForm2?eccode=${community.eccode }&boardtype=2">수정</a>
 					<a href="delete?eccode=${community.eccode }&boardtype=2">삭제</a>
 				</c:if>	
 			</div>

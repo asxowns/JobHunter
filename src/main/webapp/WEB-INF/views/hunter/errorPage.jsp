@@ -7,16 +7,7 @@
     <meta charset="UTF-8">
     <title></title>
 <style>
-	body, html {
-    height: 100%;
-    margin: 0;
-  }
-  .container, h2 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column; 
-  }
+
 </style>
 </head>
 <body>
@@ -24,8 +15,8 @@
     <%@ include file="../sub/header.jsp" %>
 </header>
 <section>
-    <h2> hunterList page </h2>
-    
+    <h1> ERROR!!!! </h1>
+    <h2>${error }</h2>
 </section>
 <footer>
 

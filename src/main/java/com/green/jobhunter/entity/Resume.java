@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -39,9 +40,10 @@ public class Resume{
 	private LocalDate graduatedate;
 	private String employmenttype;
 	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
+	@Column(columnDefinition = "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP",  nullable = false)
 	private LocalDate modifydate;
 	private String photourl;
-	private int desirepay;
+	private int desiredpay;
 	private char publictype;
 	
 		

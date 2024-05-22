@@ -28,7 +28,7 @@ public class Notice{
 	@Column(columnDefinition = "TEXT", nullable = false)
 	private String content;
 
-	@Column(columnDefinition = "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP")
+	@Column(columnDefinition = "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP", nullable = false)
     private Date regdate;
 
 }

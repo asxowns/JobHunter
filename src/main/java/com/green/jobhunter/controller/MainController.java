@@ -265,14 +265,19 @@ public class MainController {
 		return "/main/postList";
 	}
 
+//	로그아웃
+	@GetMapping("/logout")
+	public String logout(HttpServletRequest request) {
 
-//	
-//	@RequestMapping("/subscribe")
-//	public String subscribe(@RequestParam(), Model model) {
-//		
-//		subscriberepostory.save();
-//		return "/main/postDetail";
-//	}
-//
-//	
+		HttpSession session = request.getSession();
+
+		session.invalidate();
+
+		return "/main/loginForm";
+		
+	}
+	
+
+	
+
 }

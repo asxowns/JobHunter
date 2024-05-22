@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<meta charset="UTF-8">
-<head>
-<!-- 폰트 첨부 -->
+
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <link href="https://fonts.googleapis.com/css2?family=Poor+Story&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
     <style>
@@ -17,7 +17,6 @@
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             border: 1px solid #f8c0c0; 
             border-radius: 20px;
-            display: flex;
             flex-direction: column;
             display: none;
             z-index: 9999;
@@ -84,19 +83,17 @@
             align-items: center;
             cursor: pointer;
         }
-        .active {
+        .inactive {
             display: block !important;
         }
     </style>
-</head>
-<body>
     <div id="chat-container">
         <div class="chat-content">
             <div class="line">
                 <span class="chat-box">안녕하세요! 무엇을 도와드릴까요?</span>
             </div>
             <div class="line">
-                <span class="chat-box mine">이름이 이상해요</span>
+                <span class="chat-box-mine">${chat.message}</span>
             </div>
         </div>
         <form id="chatForm" action="/cs/chat" method="post" style="display: flex;">
@@ -115,63 +112,37 @@
             
         })
 
-        const btn = document.getElementById('chat-switch');
+        const chat_open_btn = document.getElementById('chat-switch');
         
-        btn.addEventListener('click', () => {
+        chat_open_btn.addEventListener('click', () => {
             const box = document.getElementById('chat-container');
-            box.classList.toggle('active');
+            box.classList.toggle('inactive');
             Count++;
             if (Count % 2 === 1) {
-                btn.innerText  = "1:1문의";
-                btn.style.backgroundColor = "#D44958";
-                btn.style.fontSize = "16px";
+                chat_open_btn.innerText  = "1:1문의";
+                chat_open_btn.style.backgroundColor = "#D44958";
+                chat_open_btn.style.fontSize = "16px";
             } else {
-                btn.innerText  = "✕";
-                btn.style.backgroundColor = "gray";
-                btn.style.fontSize = "24px";
+                chat_open_btn.innerText  = "✕";
+                chat_open_btn.style.backgroundColor = "gray";
+                chat_open_btn.style.fontSize = "24px";
             }
         });
 
-        // AJAX를 이용한 채팅 업데이트
-        document.addEventListener("DOMContentLoaded", function() {
-            const chatContent = document.getElementById("chat-content");
-            const sendButton = document.getElementById("send");
+        // 1초 마다 실행할 함수 (chat list 데이터 가져오기)
+        function checkUserRole() {
+            fetch('/cs/chatList')
+                .then(chat => {
+                    
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        }
 
-            // 전송 버튼 클릭 시 AJAX 호출
-            sendButton.addEventListener("click", function(event) {
-                event.preventDefault(); // 기본 동작 중지
-                const messageInput = document.getElementById("text").value;
-                const xhr = new XMLHttpRequest();
-                xhr.onreadystatechange = function() {
-                    if (xhr.readyState === XMLHttpRequest.DONE) {
-                        if (xhr.status === 200) {
-                            // 채팅 메시지 업데이트
-                            chatContent.innerHTML = xhr.responseText;
-                        } else {
-                            console.error('요청 실패:', xhr.status);
-                        }
-                    }
-                };
-                xhr.open("POST", "/cs/chat");
-                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                xhr.send("message=" + encodeURIComponent(messageInput));
-            });
-
-            // 페이지 로드 후 초기 채팅 메시지 가져오기
-            const xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === XMLHttpRequest.DONE) {
-                    if (xhr.status === 200) {
-                        // 채팅 메시지 업데이트
-                        chatContent.innerHTML = xhr.responseText;
-                    } else {
-                        console.error('요청 실패:', xhr.status);
-                    }
-                }
-            };
-            xhr.open("GET", "/cs/chat");
-            xhr.send();
+        document.addEventListener('DOMContentLoaded', (event) => {
+            checkUserRole();
+            setInterval(checkUserRole, 1000); // 1초 마다 함수 실행
         });
+        
     </script>
-</body>
-</html>

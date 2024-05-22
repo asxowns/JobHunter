@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.green.jobhunter.entity.Member;
 import com.green.jobhunter.entity.Notice;
@@ -22,10 +23,51 @@ import jakarta.servlet.http.HttpSession;
 public class ManagerController {
     @Autowired
     private NoticeRepository noticeRepo;
-
+    
     @Autowired
     private MemberRepository memberRepo;
 
+    @RequestMapping("/manageLoginForm")
+    public String manageLoginForm(HttpServletRequest req) {
+        HttpSession session = req.getSession();
+        String view="/manage/manageLoginForm";
+        String logged_id = (String)session.getAttribute("logged");
+        if(logged_id != null){
+            Member loggedMember = memberRepo.findByMemId(logged_id);
+            if(loggedMember.getRole() == 'm' || loggedMember.getRole() == 'M'){
+                view = "/manage/managerPage";
+            }
+        }
+        
+        return view;
+    }
+
+    @RequestMapping("/manageLogin")
+    public String manageLogin(HttpServletRequest req) {
+        String view = "redirect:/manage/";
+        String id = req.getParameter("id");
+        String pwd = req.getParameter("pwd");
+        if (id == null || pwd == null) {
+            view = "/manage/manageLoginForm";
+        } else {
+            Member manager = memberRepo.findByMem(id, pwd);
+            if (manager != null) {
+                char role = manager.getRole();
+                if (role == 'm' || role == 'M') {
+                    HttpSession session = req.getSession();
+                    session.setAttribute("logged", id);
+                    session.setAttribute("role",role);
+                    view = "/manage/managerPage";
+                } else {
+                    view = "redirect:/";
+                }
+            }else{
+                view = "redirect:/";
+            }
+        }
+        return view;
+    }
+    
     @RequestMapping("/")
     public String root(HttpServletRequest req, Model model) {
         String view = "/manage/managerPage";
@@ -33,9 +75,6 @@ public class ManagerController {
         String logged = (String) session.getAttribute("logged");
         if (logged == null) {
             view = "redirect:/";
-        } else {
-            char role = memberRepo.findByMemId(logged).getRole();
-            model.addAttribute("role", role);
         }
         return view;
     }
@@ -107,37 +146,6 @@ public class ManagerController {
         return "redirect:/manage/noticeList";
     }
 
-    @RequestMapping("/manageLoginForm")
-    public String manageLoginForm() {
-
-        return "/manage/manageLoginForm";
-    }
-
-    @RequestMapping("/manageLogin")
-    public String manageLogin(HttpServletRequest req) {
-        String view = "redirect:/manage/";
-        String id = req.getParameter("id");
-        String pwd = req.getParameter("pwd");
-        if (id == null || pwd == null) {
-            view = "/manage/manageLoginForm";
-        } else {
-            Member manager = memberRepo.findByMem(id, pwd);
-            if (manager != null) {
-                char role = manager.getRole();
-                if (role == 'm' || role == 'M') {
-                    HttpSession session = req.getSession();
-                    session.setAttribute("logged", id);
-                    session.setAttribute("role",role);
-                    view = "/manage/managerPage";
-                } else {
-                    view = "redirect:/";
-                }
-            }else{
-                view = "redirect:/";
-            }
-        }
-        return view;
-    }
 
     @RequestMapping("/accessHub")
     public String accessHub(HttpServletRequest req, Model model){
@@ -170,9 +178,39 @@ public class ManagerController {
         return "redirect:/manage/accessHub";
     }
 
+    @RequestMapping("/managerCSList")
+    public String managerCSList(){
+
+        return "/manage/managerCSList";
+    }
+    @RequestMapping("/managerCSDetail")
+    public String managerCSDetail(){
+        return "/manage/managerCSDetail";
+    }
+
+    @RequestMapping("/chat")
+    public String chat(){
+
+        return "/manage/chatInquiryList";
+    }
+
+    @RequestMapping("/chatDetail")
+    public String chatDetail(){
+        return "/manage/chatDetail";
+    }
+
     @RequestMapping("/managerDashBoard")
     public void managerDashBoard(){
 
     }
 
+    @RequestMapping("/checkRole")
+    @ResponseBody
+    public String checkRole(HttpServletRequest req){
+        HttpSession session = req.getSession();
+        char role = (char) session.getAttribute("role");
+        String role_ = Character.toString(role);
+        return role_ != null ? role_ : "";
+    }
+    
 }

@@ -1,7 +1,6 @@
 package com.green.jobhunter.controller;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.green.jobhunter.entity.Enterprise;
+import com.green.jobhunter.entity.Hunter;
+import com.green.jobhunter.entity.MainCategory;
 import com.green.jobhunter.entity.Member;
 import com.green.jobhunter.entity.Posting;
 import com.green.jobhunter.repository.EnterpriseRepository;
+import com.green.jobhunter.repository.HunterRepository;
+import com.green.jobhunter.repository.MainCategoryRepository;
 import com.green.jobhunter.repository.MemberRepository;
 import com.green.jobhunter.repository.PostingRepository;
 
@@ -32,15 +35,13 @@ public class EnterpriseController {
 	PostingRepository postingRepository;
 	@Autowired
 	HttpSession session;  
+	@Autowired
+	MainCategoryRepository mainCategoryRepository;
+	@Autowired
+	HunterRepository hunterRepository;
 	
 	@RequestMapping("/")
     public String root(){
-        return "home";  
-    }
-	
-	//기업마이페이지 
-    @RequestMapping("/enterprisePage")
-    public String root2(){
     	
         return "/enter/enterprisePage";  
     }
@@ -100,20 +101,27 @@ public class EnterpriseController {
     public String root6(@RequestParam("postcode") Long postcode, Model model) {
     	Posting posting = postingRepository.findByPostcode(postcode);
     	model.addAttribute("posting", posting);
+    	
+    	//지원자리스트 (구직자정보 / 해당공고정보)
+    	//Hunter hunter = hunterRepository.findById();
     	return "/enter/hunterPerPostList";
     }
     //채용공고 등록 폼, 해당공고 수정 폼
     @RequestMapping("/enterprisePostWriteForm")
-    public String enterprisePostWriteForm(@RequestParam("postcode") Long postcode, Model model) {
-    	 if (postcode != null) {
-             // 수정 폼
-             Posting posting = postingRepository.findByPostcode(postcode);
-             model.addAttribute("posting", posting);
-             model.addAttribute("formType", "edit");
-         } else {
-             // 등록 폼
-             model.addAttribute("formType", "register");
-         }
+    public String enterprisePostWriteForm(Model model, HttpServletRequest request) {
+    	String formType = request.getParameter("formType");
+    	List<MainCategory> mainList = mainCategoryRepository.findAll();
+    	model.addAttribute("mainList",mainList);
+    	if("register".equals(formType)) {
+            // 등록 폼
+            model.addAttribute("formType", "register");
+    	}else {
+            Long postcode = Long.parseLong(request.getParameter("postcode"));
+            Posting posting = postingRepository.findByPostcode(postcode);
+            model.addAttribute("posting", posting);
+            model.addAttribute("formType", "edit");
+            
+        }
     	return "/enter/enterprisePostWriteForm";
     }
     
@@ -136,9 +144,8 @@ public class EnterpriseController {
         int pay_ = Integer.parseInt(request.getParameter("pay"));
         posting.setPay(pay_);
         posting.setJob(request.getParameter("job"));
-        String deadlineString = request.getParameter("deadline");
-        LocalDateTime deadline = LocalDateTime.parse(deadlineString.replace(" ", "T"));
-        posting.setDeadline(deadline);
+        String deadline_ = request.getParameter("deadline");
+        LocalDate deadline = LocalDate.parse(deadline_);
         posting.setManagertel(request.getParameter("managertel"));
         posting.setMainurl(request.getParameter("mainurl"));
         posting.setMaincontent(request.getParameter("maincontent"));
@@ -168,9 +175,8 @@ public class EnterpriseController {
         posting.setArea(request.getParameter("area"));
         posting.setJob(request.getParameter("job"));
             
-        String deadlineString = request.getParameter("deadline");
-        LocalDateTime deadline = LocalDateTime.parse(deadlineString.replace(" ", "T"));
-        posting.setDeadline(deadline);
+        String deadline_ = request.getParameter("deadline");
+        LocalDate deadline = LocalDate.parse(deadline_);
             
         posting.setManagertel(request.getParameter("managertel"));
         posting.setMainurl(request.getParameter("mainurl"));
@@ -195,7 +201,9 @@ public class EnterpriseController {
     //인재정보페이지
     @RequestMapping("/hunterList")
     public String root5(){
-        return "/enter/hunterList";  
+        
+    	
+    	return "/enter/hunterList";  
     }
     
 }

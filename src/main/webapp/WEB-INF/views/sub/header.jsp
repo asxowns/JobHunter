@@ -2,10 +2,9 @@
 	pageEncoding="UTF-8"%>
 	<%-- JSTL Core --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html lang="ko">
-<head>
-<meta charset="UTF-8">
-<title>header</title>
+
 <style>
 * {
 	margin: 0;
@@ -28,6 +27,7 @@ header {
 	height: 150px;
 	border-bottom: 1px solid #eee;
 	box-shadow:0px 2px 10px #eee;
+	background:#fff;
 }
 
 .head {
@@ -175,8 +175,6 @@ header {
 	color:#D44958;
 }
 </style>
-</head>
-<body>
 	<header>
 		<div class="head">
 			<div class="head_top">
@@ -220,7 +218,15 @@ header {
 								<li><a href="/registForm">회원가입</a></li>
 							</c:if>
 							<c:if test="${sessionScope.logged ne null }">
-								<li><a href="/hunterPage">${sessionScope.logged }</a></li>
+								<c:if test="${fn:trim(sessionScope.role) eq 'h'}">
+									<li><a href="/hunter/">${sessionScope.logged } 님 </a></li>
+								</c:if>
+								<c:if test="${fn:trim(sessionScope.role) eq 'e'}">
+									<li><a href="/enter/">${sessionScope.logged } 님 </a></li>
+								</c:if>
+								<c:if test="${fn:trim(sessionScope.role) eq 'm'}">
+									<li><a href="/manage/">${sessionScope.logged } 님 </a></li>
+								</c:if>
 								<li><a href="/logout">로그아웃</a></li>
 							</c:if>
 						</ul>
@@ -263,5 +269,4 @@ header {
 	
 	
 </script>
-</body>
-</html>
+<%@ include file="./chat.jsp" %>

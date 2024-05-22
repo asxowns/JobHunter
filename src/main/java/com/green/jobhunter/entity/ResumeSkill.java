@@ -33,5 +33,6 @@ public class ResumeSkill{
 	@ToString.Exclude
 	private Member hid;
 	private String stack;
+
 	
 }

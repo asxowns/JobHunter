@@ -176,6 +176,39 @@ main b {
 .regdate p{
 	color:#aaa;
 }
+
+#reply_list{
+	width:800px;
+	margin:40px auto 20px;
+	border-bottom:1px solid #B6B6B6;
+	padding-bottom:15px;
+}
+#reply_list .img{
+	display:inline-block;
+	width:35px;
+	height:35px;
+	background:#ccc;
+	border-radius:50%;
+	margin-right:10px;
+}
+.reply_myinfo{
+	display:flex;
+	align-items:center;
+	padding-bottom:15px;
+}
+
+.reply_content{
+	display:flex;
+	justify-content:space-between;
+}
+.reply_content h4{
+	font-size:16px;
+	font-weight:400;
+}
+.reply_content h5{
+	font-weight:400;
+	color:#aaa;
+}
 </style>
 </head>
 <body>
@@ -212,16 +245,33 @@ main b {
 			
 		</main>
 		
+		<!-- 댓글 -->
 		<div id="main_bottom">
 			<p class="reply_count">2개의 댓글</p>
 			
 			<div class="reply_box">
-				<form action="" method="post">
-					<input type="text" name="reply">
+				<form action="communityReply?cmcode=${community.cmcode }" method="post">
+					<input type="text" name="comment">
 					<input type="submit" value="댓글쓰기">
 				</form>
 			</div>
 		</div>
+
+		<c:forEach var="list" items="${communityReplyList }">
+			<div id="reply_list">
+				<div class="reply_myinfo">
+					<span class="img">
+						<img src="">
+					</span>
+					<p>${sessionScope.logged }</p>
+				</div>
+				<div class="reply_content">
+					<h4>${list.comment }</h4>
+					<h5>${list.regdate }</h5>
+				</div>
+			</div>
+		</c:forEach>
+		
 
 		<div class="active_menu">
 			<div class="listup">

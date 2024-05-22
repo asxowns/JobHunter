@@ -105,11 +105,11 @@ a{
     	<h1>게시물 작성</h1>
     </div>
     
-    <c:if test="${community.title ne null }">
-    <form action="write?boardtype=${boardtype }" method="post">
+    <c:if test="${community.cmcode ne null }">
+    	<form action="update?boardtype=${boardtype }" method="post">
     </c:if>
-    <c:if test="${community.title eq null }">
-    <form action="update?boardtype=${boardtype }" method="post">
+    <c:if test="${community.cmcode eq null }">
+    	<form action="write?boardtype=${boardtype }" method="post">
     </c:if>
     	<div class="write_container">
     		<h4>일반</h4>
@@ -129,14 +129,16 @@ a{
 	    			<textarea name="content"></textarea>
 	    		</c:if>
 	    		<input type="hidden" name="writer" value="${sessionScope.logged }">
+	    		<input type="hidden" name="boardtype" value="${boardtype }">
+	    		<input type="hidden" name="cmcode" value="${community.cmcode }">
     		</article>
     	</div>
     	
     	<div class="btn_box">
-    		<c:if test="${community.title eq null }">
+    		<c:if test="${community.cmcode eq null }">
     			<input type="submit" value="작성" class="btn_submit btn">
     		</c:if>
-    		<c:if test="${community.title ne null }">
+    		<c:if test="${community.cmcode ne null }">
     			<input type="submit" value="수정" class="btn_submit btn">
     		</c:if>
     		<a href="openForum" class="btn_cancel btn">취소</a>

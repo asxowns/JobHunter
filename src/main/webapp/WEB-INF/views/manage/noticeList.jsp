@@ -41,7 +41,7 @@
     <%@ include file="../sub/header.jsp" %>
 </header>
 <section>
-    <h2 style="text-align:center"> 공지사항 </h2>
+    <h2 style="text-align:center; margin:24px 0;"> 공지사항 </h2>
     <h4><a href="/manage/noticeWriteForm"> 공지사항 작성 </a> </h4>
     <div id="notice-list-table">
         <li class="notice-list-item">

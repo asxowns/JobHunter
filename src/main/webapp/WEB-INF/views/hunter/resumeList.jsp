@@ -22,12 +22,11 @@
 				<th>제목</th>
 				<th>작성일/최종수정일</th>
 			</tr>
-
-			<c:forEach var="resume" items="${resume }">
+			<c:forEach var="resume" items="${resume}" varStatus="status">
 				<tr>
-					<td>${resume.resumecode }</td>
-					<td>${resume.title  }</td>
-					<td>${resume.modifydate }</td>
+					<td><a href="/hunter/resumeWriteForm?resumcode=${resume.resumecode}"> ${status.count} </a></td>
+					<td><a href="/hunter/resumeWriteForm?resumcode=${resume.resumecode}">${resume.title  }</a></td>
+					<td><a href="/hunter/resumeWriteForm?resumcode=${resume.resumecode}">${resume.modifydate }</a></td>
 				</tr>
 			</c:forEach>
 		</table>

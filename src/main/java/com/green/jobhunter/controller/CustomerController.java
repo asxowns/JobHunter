@@ -10,14 +10,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.green.jobhunter.entity.Chat;
 import com.green.jobhunter.entity.Cs;
 import com.green.jobhunter.entity.Csreply;
+import com.green.jobhunter.entity.Faq;
 import com.green.jobhunter.entity.Member;
 import com.green.jobhunter.repository.ChatRepository;
 import com.green.jobhunter.repository.CsReplyRepository;
 import com.green.jobhunter.repository.CsRepository;
+import com.green.jobhunter.repository.FaqRepository;
 import com.green.jobhunter.repository.MemberRepository;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -40,6 +43,9 @@ public class CustomerController {
 	@Autowired
 	private ChatRepository chatRepository;
 
+	@Autowired
+	private FaqRepository faqRepository;
+
 	@RequestMapping("/home")
 	public String home() {
 		return "/home";
@@ -47,18 +53,21 @@ public class CustomerController {
 	
 	@RequestMapping("/csList")
 	public String csList(HttpServletRequest request,Model model) {
-		List<Cs> a = csRepository.findAll();
-		List<Cs> b = csRepository.findByTypeAndPublictype('A', 'Y');
+		List<Faq> list = faqRepository.findAll();
+		model.addAttribute("list", list);
+		List<Cs> list2 = csRepository.findByTypeAndPublictype('A', 'Y');
 		HttpSession session = request.getSession();
 		String logged = (String)session.getAttribute("logged");
 		Member logged2 = memberRepository.findByMemberid(logged);
-		List<Cs> c = csRepository.findByHid(logged2);
+		List<Cs> list3 = csRepository.findByHid(logged2);
 		 
 
-    	model.addAttribute("list", a);
-    	model.addAttribute("list2", b);
-    	model.addAttribute("list3", c);
+    	model.addAttribute("list", list);
+    	model.addAttribute("list2", list2);
+    	model.addAttribute("list3", list3);
 
+		
+		
 		return "/cs/csList";
 	}
 	
@@ -153,21 +162,31 @@ public class CustomerController {
     }
 
 	@PostMapping("/chat")
-    public String saveChat(@RequestParam("message") String message, HttpSession session) {
+    public String saveChat(@RequestParam("message") String message, HttpSession session,Model model) {
 
 		String logged = (String) session.getAttribute("logged");
-
+		Member logged_Hid = memberRepository.findByMemberid(logged);
 		Chat chat = new Chat();
 		LocalDateTime timelog = LocalDateTime.now();
+		List<Chat> list = chatRepository.findAll();
 		chat.setMessage(message);
-
-		Member logged_Hid = memberRepository.findByMemberid(logged);
 		chat.setHid(logged_Hid);
 		chat.setTimelog(timelog);
-
+		
 		chatRepository.save(chat);
-		return "redirect:/cs/csList";
+		model.addAttribute("list", list);
+		return "/";
     }
+
+	@RequestMapping("/chatList")
+	@ResponseBody
+	public String chatList(Model model){
+		List<Chat> list = chatRepository.findAll();
+		model.addAttribute("list", list);
+		System.out.println(list + "@@@@@@@@@@@@@@@============@@@@@@@");
+	
+		return list.toString();
+	}
 
 
 	@RequestMapping("/regReply")

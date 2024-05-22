@@ -13,6 +13,7 @@
         padding: 0;
     }
 </style>
+<%@ include file="./managerCheck.jsp" %>
 </head>
 <body>
 <header>
