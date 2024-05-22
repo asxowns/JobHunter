@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.green.jobhunter.entity.Chat;
 import com.green.jobhunter.entity.Cs;
@@ -167,23 +168,24 @@ public class CustomerController {
 		Member logged_Hid = memberRepository.findByMemberid(logged);
 		Chat chat = new Chat();
 		LocalDateTime timelog = LocalDateTime.now();
-		
+		List<Chat> list = chatRepository.findAll();
 		chat.setMessage(message);
 		chat.setHid(logged_Hid);
 		chat.setTimelog(timelog);
 		
 		chatRepository.save(chat);
-		
-		return "/cs/csList";
+		model.addAttribute("list", list);
+		return "/";
     }
 
 	@RequestMapping("/chatList")
+	@ResponseBody
 	public String chatList(Model model){
 		List<Chat> list = chatRepository.findAll();
 		model.addAttribute("list", list);
 		System.out.println(list + "@@@@@@@@@@@@@@@============@@@@@@@");
 	
-		return "";
+		return list.toString();
 	}
 
 
