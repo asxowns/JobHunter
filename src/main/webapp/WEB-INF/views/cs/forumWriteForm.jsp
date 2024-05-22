@@ -69,14 +69,14 @@ section {
             <input type="text" name="title" placeholder="title">
             <textarea id="content" name="content" placeholder="content" rows="4" cols="50"></textarea>
             <p>게시물 공개 여부:</p>
+            <select name="type" id="type">
+                <option id="aa" value="A">문의</option>
+                <option id="bb" value="B">신고</option>
+            </select>
             <input type="radio" id="public" name="public_type" value="Y">
             <label for="public">공개</label><br>
             <input type="radio" id="private" name="public_type" value="N">
             <label for="private">비공개</label><br>
-                <select name="type">
-                    <option value="A">문의</option>
-                    <option value="B">신고</option>
-                </select>
             <input type="hidden" name="hid" value="${sessionScope.logged}"> 
             <input type="submit" value="게시물 작성">
         </form>
@@ -85,6 +85,21 @@ section {
 <footer>
 
 </footer>
+<script>
+    document.getElementById("type").addEventListener("change", function() {
+    var type = document.getElementById("type").value;
+    var publicRadio = document.getElementById("public");
+    var privateRadio = document.getElementById("private");
 
+    if (type === "B") {
+        publicRadio.checked = false;
+        publicRadio.disabled = true;
+        privateRadio.checked = true;
+    } else {
+        publicRadio.checked = true;
+        publicRadio.disabled = false; 
+    }
+});
+</script>
 </body>
 </html>

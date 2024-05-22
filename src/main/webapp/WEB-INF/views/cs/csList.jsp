@@ -58,10 +58,9 @@ th, td {
 <header>
     <%@ include file="../sub/header.jsp" %>
 </header>
-    <%@ include file="../sub/chat.jsp" %>
 <main>
 <section>
-    로그인된 아이디 : ${sessionScope.logged}<br>
+    로그인된 아이디 : ${sessionScope.logged} 
 <div>
     <ul class="tabs">
         <li class="tab-link current" data-tab="tab-1">FAQ</li>
@@ -71,17 +70,16 @@ th, td {
     <table id="tab-1">
         <thead>
             <tr>
-                <th>문의 번호</th>
-                <th>제목</th>
-                <th>작성자</th>
+                <th>번호</th>
+                <th>자주 묻는 질문(FAQ)</th>
             </tr>
         </thead>
         <tbody>
-            <c:forEach var="cs" items="${list}" varStatus="stat">
+            <c:forEach var="faq" items="${list}" varStatus="stat">
                 <tr>
                     <td>${stat.count}</td>
-                    <td>${cs.getTitle()}</td>
-                    <td>${cs.getHid().getMemberid()}</td>
+                    <td><a href="${feq.getContent()}">
+                    ${faq.getTitle()}</a></td>
                 <tr>
             </c:forEach>
         </tbody>
