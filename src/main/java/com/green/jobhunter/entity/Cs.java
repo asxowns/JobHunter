@@ -3,6 +3,7 @@ package com.green.jobhunter.entity;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -30,8 +31,10 @@ public class Cs{
 	@ToString.Exclude
 	private Member hid;
 	private String title;
+	@Column(length = 1000)
 	private String content;
 	private char type;
+	@Column(columnDefinition = "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP", nullable = false)
 	private LocalDate csdate;
 	private char result;
 	private char publictype;
