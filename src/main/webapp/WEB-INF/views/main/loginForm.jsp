@@ -111,11 +111,14 @@ table th{
 					<table>
 						<tr>
 							<th>아이디</th>
-							<td><input type="text" name="id"></td>
+							<td><input type="text" id="inputFieldHid" name="id"></td>
+							<div id="outputFieldHid"></div>
+							
 						</tr>
 						<tr>
 							<th>비밀번호</th>
-							<td><input type="text" name="pw"></td>
+							<td><input type="text" id="inputFieldHpw" name="pw"></td>
+							<div id="outputFieldHpw"></div>
 						</tr>
 						<tr>
 							<td colspan="2" class="login_area"><input type="submit" value="기업로그인"></td>
@@ -131,7 +134,9 @@ table th{
 						<table>
 							<tr>
 								<th>아이디</th>
-								<td><input type="text" name="id"><td>
+								<td><input type="text"   id="inputFieldEid" name="id"><td>
+								<div id="outputFieldEid"></div>
+								
 							</tr>
 							<tr>
 								<th>비밀번호</th>
@@ -151,6 +156,12 @@ table th{
 </footer>
 
 </body>
+<c:if test="${not empty msg}">
+    <script>
+    var msg = "${msg}";
+        alert(msg);
+    </script>
+</c:if>
 <script type="text/javascript">
 	const btn1 = document.querySelector("[data-tab='tab-1']");
 	const btn2 = document.querySelector("[data-tab='tab-2']");
@@ -171,12 +182,7 @@ table th{
 		tabContent1.classList.remove("current");
 	});
 	
-	 document.getElementById("loginForm").addEventListener("submit", function(event) {
-	        const memberRole = '<%= (String) request.getAttribute("msg") %>';
-	        if (memberRole === "일반회원이 아닙니다") {
-	            event.preventDefault(); // 폼 제출 막기
-	            alert("일반회원이 아닙니다"); // 알림창 표시
-	        }
-	    });
+	 
+	
 </script>
 </html>
