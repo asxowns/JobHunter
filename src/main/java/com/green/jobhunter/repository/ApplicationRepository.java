@@ -48,5 +48,5 @@ public interface ApplicationRepository extends JpaRepository<Application, Long> 
 	List<Application> findByHid(Member member);
 	
 	@Query(value="SELECT * FROM application  WHERE postcode = :posting.postcode", nativeQuery = true)
-	Application  findByPostcode(List<Posting> postList);
+	Application  findByPostcode(@Param("posting") List<Posting> posting);
 }
