@@ -101,12 +101,12 @@ table th{
     <h1>로그인</h1>
     <div class="container">
 		<ul class="tabs">
-			<li class="tab-link current" data-tab="tab-1">기업로그인</li>
+			<li class="tab-link current" data-tab="tab-1">일반로그인</li>
 			<li class="line">|</li>
-			<li class="tab-link" data-tab="tab-2">일반로그인</li>
+			<li class="tab-link" data-tab="tab-2">기업로그인</li>
 		</ul>
 		<div id="tab-1" class="tab-content current">
-			<form action="/loginEnterprise" method="post">
+			<form action="/loginHunter" method="post">
 				<div class="input_box">
 					<table>
 						<tr>
@@ -121,7 +121,7 @@ table th{
 							<div id="outputFieldHpw"></div>
 						</tr>
 						<tr>
-							<td colspan="2" class="login_area"><input type="submit" value="기업로그인"></td>
+							<td colspan="2" class="login_area"><input type="submit" value="일반로그인"></td>
 						</tr>
 					</table>
 				</div>
@@ -129,7 +129,7 @@ table th{
 		</div>
 
 		<div id="tab-2" class="tab-content">
-				<form action="/loginHunter" method="post">
+				<form action="/loginEnterprise" method="post">
 					<div class="input_box">
 						<table>
 							<tr>
@@ -143,7 +143,7 @@ table th{
 								<td><input type="text" name="pw"></td>
 							</tr>
 							<tr class="login_area">
-								<td colspan="2"><input type="submit" value="일반로그인"></td>
+								<td colspan="2"><input type="submit" value="기업로그인"></td>
 							</tr>
 						</table>
 					</div>

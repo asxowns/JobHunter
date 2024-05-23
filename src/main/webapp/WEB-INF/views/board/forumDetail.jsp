@@ -126,6 +126,7 @@ main b {
 	height:50px;
 	border:1px solid #B6B6B6;
 	background: rgb(212, 73, 88,0.05);
+	padding-left:5px;
 }
 .reply_box input[type="submit"]{
 	display:inline-block;
@@ -250,14 +251,15 @@ main b {
 			<p class="reply_count">2개의 댓글</p>
 			
 			<div class="reply_box">
-				<form action="communityReply?cmcode=${community.cmcode }" method="post">
+				<form action="communityReply" method="post">
 					<input type="text" name="comment">
+					<input type="hidden" name="writer" value="${sessionScope.logged }">
+					<input type="hidden" name="cmcode" value="${community.cmcode }">
 					<input type="submit" value="댓글쓰기">
 				</form>
 			</div>
 		</div>
-
-		<c:forEach var="list" items="${communityReplyList }">
+		<c:forEach var="reply" items="${reply }">
 			<div id="reply_list">
 				<div class="reply_myinfo">
 					<span class="img">
@@ -266,8 +268,8 @@ main b {
 					<p>${sessionScope.logged }</p>
 				</div>
 				<div class="reply_content">
-					<h4>${list.comment }</h4>
-					<h5>${list.regdate }</h5>
+					<h4>${reply.comment }</h4>
+					<h5>${reply.regdate }</h5>
 				</div>
 			</div>
 		</c:forEach>

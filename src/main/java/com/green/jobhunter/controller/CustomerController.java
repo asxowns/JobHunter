@@ -1,17 +1,14 @@
 package com.green.jobhunter.controller;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.green.jobhunter.entity.Chat;
 import com.green.jobhunter.entity.Cs;
 import com.green.jobhunter.entity.Csreply;
 import com.green.jobhunter.entity.Faq;
@@ -24,7 +21,6 @@ import com.green.jobhunter.repository.MemberRepository;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-
 
 @Controller
 @RequestMapping("/cs")
@@ -59,13 +55,10 @@ public class CustomerController {
 		String logged = (String)session.getAttribute("logged");
 		Member logged2 = memberRepository.findByMemberid(logged);
 		List<Cs> list3 = csRepository.findByHid(logged2);
-		 
 
-    	model.addAttribute("list", list);
-    	model.addAttribute("list2", list2);
-    	model.addAttribute("list3", list3);
-
-		
+		model.addAttribute("list", list);
+		model.addAttribute("list2", list2);
+		model.addAttribute("list3", list3);
 		
 		return "/cs/csList";
 	}
@@ -94,15 +87,14 @@ public class CustomerController {
 	}
 
 	@RequestMapping("/forumUpdateForm")
-	public void forumUpdateForm(@RequestParam("cscode") String cscode, Model model){
+	public void forumUpdateForm(@RequestParam("cscode") String cscode, Model model
+		){
 		Long cscode_ = Long.parseLong(cscode);
 		Cs cs = csRepository.findByCscode(cscode_);
 		
 		model.addAttribute("cs", cs);
 		
 	}
-   
-
 
 	@RequestMapping("/Update")
 	public String forumUpdateForm(@RequestParam("cscode") String cscode
@@ -122,7 +114,6 @@ public class CustomerController {
 		cs.setCsdate(csdate);
 		csRepository.save(cs);
 		return "redirect:/cs/csList";
-
 	}	
     
 	@RequestMapping("/delete")
@@ -140,8 +131,13 @@ public class CustomerController {
     		,@RequestParam("title") String title
     		,@RequestParam("type") char type
     		,@RequestParam("hid") String hid
+			,HttpSession session
     		){
-    	
+		String logged = (String) session.getAttribute("logged");
+		if(logged == null){
+			return "redirect:/loginForm";
+		}
+
     	LocalDate csdate = LocalDate.now();
     	char result = 'N';
     	Cs cs = new Cs();
@@ -156,43 +152,20 @@ public class CustomerController {
     	cs.setHid(member);
     	csRepository.save(cs);
         
-        
         return "redirect:/cs/csList";
     }
-
-	@PostMapping("/chat")
-    public String saveChat(@RequestParam("message") String message, HttpSession session,Model model) {
-
-		String logged = (String) session.getAttribute("logged");
-		Member logged_Hid = memberRepository.findByMemberid(logged);
-		Chat chat = new Chat();
-		LocalDateTime timelog = LocalDateTime.now();
-		
-		chat.setMessage(message);
-		chat.setHid(logged_Hid);
-		chat.setTimelog(timelog);
-		
-		chatRepository.save(chat);
-		
-		return "/cs/csList";
-    }
-
-	@RequestMapping("/chatList")
-	public String chatList(Model model){
-		List<Chat> list = chatRepository.findAll();
-		model.addAttribute("list", list);
-		System.out.println(list + "@@@@@@@@@@@@@@@============@@@@@@@");
-	
-		return "";
-	}
 
 
 	@RequestMapping("/regReply")
 	public String reply(@RequestParam("comment") String comment
 			,@RequestParam("writermanager") String writermanager
 			,@RequestParam("cscode") Long cscode
+			,HttpSession session
 			){
-		
+		String logged = (String) session.getAttribute("logged");
+		if(logged == null){
+			return "redirect:/loginForm";
+		}
 		LocalDate localdate = LocalDate.now();
 		Csreply csreply = new Csreply();
 		csreply.setComment(comment);
@@ -204,10 +177,7 @@ public class CustomerController {
 		csreply.setCscode(cs);
 		csReplyRepository.save(csreply);
 		
-		
 		return "redirect:/cs/forumDetail?cscode="+cscode;
 	}
-
-
-
+	
 }

@@ -4,9 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html lang="ko">
-<head>
-<meta charset="UTF-8">
-<title>header</title>
+
 <style>
 * {
 	margin: 0;
@@ -177,8 +175,6 @@ header {
 	color:#D44958;
 }
 </style>
-</head>
-<body>
 	<header>
 		<div class="head">
 			<div class="head_top">
@@ -273,5 +269,4 @@ header {
 	
 	
 </script>
-</body>
-</html>
+<%@ include file="./chat.jsp" %>

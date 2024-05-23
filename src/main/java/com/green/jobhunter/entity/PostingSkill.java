@@ -1,5 +1,6 @@
 package com.green.jobhunter.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,7 +23,7 @@ public class PostingSkill{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long pscode;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="postcode")
 	@ToString.Exclude
 	private Posting postcode;

@@ -13,6 +13,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -28,19 +29,23 @@ public class Hunter{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long huntercode;
-	
+
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="hid")
 	@ToString.Exclude
 	private Member hid;
-
+  
 	private String username;
+  
 	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
 	private LocalDate birth;
+  
 	private int age;
 	private String tel;
+  
 	@Column(nullable=false)
 	private String tel2;
+  
 	private String address;
 	private String email;
 	private char gender;

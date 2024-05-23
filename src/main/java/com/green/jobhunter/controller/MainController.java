@@ -15,10 +15,12 @@ import com.green.jobhunter.entity.Enterprise;
 import com.green.jobhunter.entity.Hunter;
 import com.green.jobhunter.entity.Member;
 import com.green.jobhunter.entity.Posting;
+import com.green.jobhunter.entity.Subscribe;
 import com.green.jobhunter.repository.EnterpriseRepository;
 import com.green.jobhunter.repository.HunterRepository;
 import com.green.jobhunter.repository.MemberRepository;
 import com.green.jobhunter.repository.PostingRepository;
+import com.green.jobhunter.repository.SubscribeRepository;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -28,10 +30,15 @@ import jakarta.servlet.http.HttpSession;
 public class MainController {
 	static Enterprise enterprise = null;
 	static Member eid = null;
+	static long cnt=0;
 	@Autowired
 	MemberRepository memberrepository;
 	@Autowired
 	EnterpriseRepository enterrepository;
+
+	@Autowired
+	SubscribeRepository subscriberepostory;
+
 	@Autowired
 	HunterRepository hunterrepository;
 
@@ -66,8 +73,6 @@ public class MainController {
 
 	@RequestMapping("/hunterregist")
 	public String regist(Hunter hunter, Member member, Model model) {
-		System.out.println("===================================헌터" + hunter);
-		System.out.println("===================================멤버" + member);
 		member.setRole('h');
 		hunter.setHid(member);
 		memberrepository.save(member);
@@ -90,7 +95,6 @@ public class MainController {
 	public String loginHunter(@RequestParam("id") String id, @RequestParam("pw") String pw, Model model)
 			throws IOException {
 		Member member = memberrepository.findByMem(id, pw);
-		System.out.println("==========================member : " + member);
 		if (member == null) {
 			return "/main/loginForm";
 		}
@@ -103,7 +107,7 @@ public class MainController {
 			session.setAttribute("logged", id);
 			session.setAttribute("pw", pw);
 			session.setAttribute("role", member.getRole());
-			return "/main/postList";
+			return "redirect:/";
 		} else if (member.getRole() != 'h') {
 			String msg = "일반회원이 아닙니다";
 			model.addAttribute("msg", msg);
@@ -115,7 +119,6 @@ public class MainController {
 	@RequestMapping("/loginEnterprise")
 	public String loginEnterprise(@RequestParam("id") String id, @RequestParam("pw") String pw, Model model) {
 		Member member = memberrepository.findByMem(id, pw);
-		System.out.println("==========================member : " + member);
 		if (member == null) {
 			return "/main/loginForm";
 		}
@@ -129,7 +132,7 @@ public class MainController {
 			session.setAttribute("pw", pw);
 			session.setAttribute("role", member.getRole());
 			return "/enter/enterprisePage";
-		}else if (member.getRole() != 'e') {
+		} else if (member.getRole() != 'e') {
 			String msg = "기업회원이 아닙니다";
 			model.addAttribute("msg", msg);
 			return "/main/loginForm";
@@ -170,13 +173,13 @@ public class MainController {
 	}
 
 	@RequestMapping("/postDetail")
-	public String postDetail(@RequestParam("postcode") long postcode, Model model) {
+	public String postDetail(@RequestParam("postcode") long postcode, @RequestParam("posteid") long posteid,
+			Model model) {
 		Posting posting = postingrepository.findByPostcode(postcode);
-		System.out.println("==================" + posting);
 		model.addAttribute("dto", posting);
+		model.addAttribute("posteid", posteid);
 		return "/main/postDetail";
 	}
-
 
 	@RequestMapping("/searchFilter")
 	public String searchFilter(@RequestParam(name = "companyname_", required = false) String companyname_,
@@ -184,73 +187,52 @@ public class MainController {
 			@RequestParam(name = "career_", required = false) String career_,
 			@RequestParam(name = "edutype_", required = false) String edutype_, Model model) {
 
-		System.out.println("==========here search3=======================");
 		String companyname;
 		String area;
 		String career;
 		String edutype;
 		if (companyname_.isEmpty()) {
 			companyname = null;
-			
+
 			System.out.println(companyname_);
 			System.out.println(companyname);
-		}else {
-			companyname=companyname_;
+		} else {
+			companyname = companyname_;
 			System.out.println(companyname_);
 			System.out.println(companyname);
 		}
 
 		if (area_.isEmpty()) {
 			area = null;
-		}else {
-			area=area_;
+		} else {
+			area = area_;
 		}
-		
+
 		if (career_.isEmpty()) {
 			career = null;
-		}else {
-			career=career_;
+		} else {
+			career = career_;
 		}
-		
+
 		if (edutype_.isEmpty()) {
 			edutype = null;
-		}else {
-			edutype=edutype_;
+		} else {
+			edutype = edutype_;
 		}
-		
-		
-		
-		
+
 		if (!companyname_.isEmpty()) {
-			System.out.println("===============================companyname_:" + companyname_);
 			enterprise = enterrepository.findByCompanyname(companyname);
-			System.out.println("============================enterprise:" + enterprise);
 			String memid = enterprise.getEid().getMemberid();
-			System.out.println("============================memid:" + memid);
 
 			Member eid = memberrepository.findByMemberid(memid);
-			System.out.println("============================eid:" + eid);
-			System.out.println("============================area:" + area);
-			System.out.println("============================career:" + career);
-			System.out.println("============================edutype:" + edutype);
 
 			List<Posting> list = postingrepository.findByEidAndAreaAndCareerAndEdutype(eid, area, career, edutype);
-			System.out.println("============================list:" + list);
 			List<Posting> list2 = postingrepository.findByEid(eid);
-			System.out.println("============================list2:" + list2);
 			model.addAttribute("list", list);
 
 		} else if (companyname_.isEmpty()) {
-			System.out.println("=============company이름 null================");
-
-			System.out.println("=============career_================" + career_);
-			System.out.println("=============edutype_================" + edutype_);
-			if (career_ == null) {
-				System.out.println("===============================널입니다=");
-			}
 
 			List<Posting> list = postingrepository.findByEidAndAreaAndCareerAndEdutype(eid, area, career, edutype);
-			System.out.println("============================list:" + list);
 			model.addAttribute("list", list);
 		}
 		return "/main/postList";
@@ -265,9 +247,31 @@ public class MainController {
 		session.invalidate();
 
 		return "/main/loginForm";
-		
-	}
-	
 
+	}
+
+	@RequestMapping("/subscribe")
+	public String subscribe(@RequestParam("posteid") String posteid, Model model) {
+		cnt ++;
+		HttpSession session = request.getSession();
+		String sessionId = (String) session.getAttribute("logged");
+		System.out.println("=====================sessionId: "+sessionId);
+		// 세션에서 멤버 객체 가져오기
+		Member member = memberrepository.findByMemberid(sessionId);
+		System.out.println("=====================member: "+member);
+
+		// 기업 객체 생성 (현재 코드에서는 주석 처리)
+		// Enterprise enterprise = enterpriseRepository.findByEid(posteid);
+
+		// 새로운 기업 및 구독 정보 생성
+		Enterprise enterprise = enterrepository.findByEid(posteid);
+		System.out.println("=====================enterprise: "+enterprise);
 	
+		Subscribe subscribe = new Subscribe(cnt,enterprise,member);
+	
+		// 구독 정보 데이터베이스에 저장
+		subscriberepostory.save(subscribe);
+		 return "redirect:/main/postDetail";
+	}
+
 }
