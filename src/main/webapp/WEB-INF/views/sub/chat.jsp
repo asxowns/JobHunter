@@ -18,7 +18,7 @@ body {
 	position: fixed;
 	bottom: 15%;
 	right: 5px;
-	width: 400px;
+	width: 380px;
 	background:#FFDFE3;
 	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 	border: 1px solid #E8CACD;
@@ -26,13 +26,14 @@ body {
 	flex-direction: column;
 	display: none;
 	z-index: 9999;
+	padding-top:2px;
 }
 
 .chat-content {
 	flex: 10px;
 	padding: 20px;
 	overflow-y: scroll;
-	height: 400px;
+	height: 450px;
 }
 
 .line {
@@ -88,10 +89,11 @@ body {
 	right: 5px;
 	width: 60px;
 	height: 60px;
+	border:2px solid #d44958;
 	border-radius: 50%;
 	background-color: #D44958;
 	color: #fff;
-	font-size: 16px;
+	font-size: 14px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -130,7 +132,7 @@ body {
         </div>
         --%>
 	</div>
-	<div id="chatForm" method="post" style="display: flex;">
+	<div id="chatForm" method="post" style="display: flex; padding-top:5px;">
 		<input type="text" id="text" name="message"
 			placeholder="메시지를 입력하세요...">
 		<button type="button" id="send" onclick="chatSave()">전송</button>
@@ -152,11 +154,16 @@ body {
         Count++;
         if (Count % 2 === 1) {
             chat_open_btn.innerText  = "1:1문의";
+            chat_open_btn.style.color = "#fff";
+            chat_open_btn.style.fontWeight = "400";
+            chat_open_btn.style.fontSize = "14px";
             chat_open_btn.style.backgroundColor = "#D44958";
-            chat_open_btn.style.fontSize = "16px";
         } else {
             chat_open_btn.innerText  = "✕";
-            chat_open_btn.style.backgroundColor = "gray";
+            chat_open_btn.style.fontWeight = "bold";
+            chat_open_btn.style.color = "#d44958";
+            chat_open_btn.style.border = "2px solid #d44958";
+            chat_open_btn.style.backgroundColor = "#fff";
             chat_open_btn.style.fontSize = "24px";
         }
     });
