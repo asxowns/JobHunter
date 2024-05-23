@@ -28,6 +28,10 @@ ul {
 	list-style: none;
 }
 
+section{
+	width:1240px;
+	margin:0 auto;
+}
 
 .choose_job{
 	margin:10px 0;

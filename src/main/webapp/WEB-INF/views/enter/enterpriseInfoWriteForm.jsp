@@ -7,51 +7,80 @@
     <meta charset="UTF-8">
     <title></title>
 <style>
-	body, html {
-    height: 100%;
-    margin: 0;
-  }
-  .container, h2 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column; 
-  }
-  
-  .container form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .container form input[type="submit"] {
-    align-self: center; 
-    margin-top: 7px; 
-  }
-  .container form .input-row {
-    display: flex; 
-    align-items: center; 
-    margin-bottom: 10px; 
+	*{
+		margin:0;
+		padding:0;
+	}
+	body{
+		color:#333;
+	}
+	h1{
+		text-align:center;
+		margin:75px 0 90px;
+	}
+  .container{
+  	width:500px;
+  	margin:0 auto;
   }
   
-  .container form .input-row input[type="text"] {
-    flex: 1; 
-    margin-left: 10px; 
+  .list-title{
+  	font-size:20px;
+  	color:#888;
+  	margin-bottom:25px;
   }
-  .container form input[type="text"], form input[type="password"] {
-        width: 200px; 
-        height: 20px; 
-        padding: 10px; 
-        border: 1px solid gray;
-        outline: none; 
-        font-size: 16px; 
-    }
-    .container form input[type="submit"] {
-        width: 200px; 
-        height: 20px; 
-        border: 1px solid gray;
-        padding: 20px; 
-        text-align: center; 
-    }
+  .list-title b{
+  	padding-right:10px;
+  }
+  
+  input[type="submit"]{
+	width:500px;
+	height:50px;
+	background:#d44958;
+	border:none;
+	color:#fff;
+	font-size:20px;
+}
+input[type="text"]{
+	width:100%;
+	height:40px;
+	border:1px solid #ddd;
+	padding-left:5px;
+	box-sizing:border-box;
+	margin-top:10px;
+}
+input[type="password"]{
+	width:100%;
+	height:40px;
+	border:1px solid #ddd;
+	padding-left:5px;
+	box-sizing:border-box;
+	margin-top:10px;
+}
+
+.input-row{
+	margin-bottom:20px;
+}
+
+.box1{
+	display:flex;
+}
+.box1 input[type="text"]{
+	width:240px;
+}
+.box1 input[type="password"]{
+	width:240px;
+}
+.box1:nth-child(1) .input-row{
+	margin-right:20px;
+}
+
+label{
+	font-weight:bold;
+}
+
+.box2 .input-row:nth-child(1){
+	margin-right:20px;
+}
 </style>
 </head>
 <body>
@@ -59,48 +88,86 @@
     <%@ include file="../sub/header.jsp" %>
 </header>
 <section>
-    <h2> enterpriseInfoWriteForm page </h2> <!-- 기업정보 수정폼 페이지  -->
-    <br>
+    <h1>기업정보관리</h1> <!-- 기업정보 수정폼 페이지  -->
     <div class="container">
-    	<p>· 기업정보</p> 
+    	<p class="list-title"><b>·</b>기업정보</p> 
 		<form action="/enter/enterpriseUpdate" method="post">
+		
+		<div class="box1">
 			<input type="hidden" id="entercode" name="entercode"value="${enterprise.entercode }">
 			<div class="input-row">
-				<label for="cname">기업명</label>
+				<label for="companyname">기업명</label>
 				<input type="text" id="companyname" name="companyname" value="${enterprise.companyname }">
 			</div>
 			<div class="input-row">
 				<label for="ceo">대표자명</label>
 				<input type="text" id="ceo" name="ceo" value="${enterprise.ceo }">
 			</div>
+		</div>
+		
+		<div class="input-row">
+				<label for="">기업전화번호</label>
+				<input type="text" id="" name="" value="">
+		</div>
+		
+		<div class="box1 box2">
+			<div class="input-row">
+				<label for="">기업크기</label>
+				<input type="text" id="" name="" value="">
+			</div>
 			<div class="input-row">
 				<label for="corporatetype">기업형태</label>
 				<input type="text" id="corporatetype" name="corporatetype" value="${enterprise.corporatetype }">
 			</div>
+		</div>
+		
 			<div class="input-row">
-				<label for="breginum">사업자등록번호</label>
+				<label for="">산업</label>
+				<input type="text" id="" name="" value="">
+			</div>
+		
+			<div class="input-row">
+				<label for="businessnumber">사업자등록번호</label>
 				<input type="text" id="businessnumber" name="businessnumber" value="${enterprise.businessnumber }">
 			</div>
 			<div class="input-row">
-				<label for="address">회사 주소</label>
+				<label for="address">회사주소</label>
 				<input type="text" id="address" name="address" value="${enterprise.address}">
 			</div>
-		<br>
-		<p>· 담당자 정보</p>	
+			
+			<div class="box1 box2">
+				<div class="input-row">
+					<label for="">사원수</label>
+					<input type="text" id="" name="" value="">
+				</div>
+				<div class="input-row">
+					<label for="">매출액</label>
+					<input type="text" id="" name="" value="${enterprise.corporatetype }">
+				</div>
+		</div>
+			
+		<p class="list-title"><b>·</b>담당자정보</p>	
+			<div class="box1 box2">
+				<div class="input-row">
+					<label for="eid">아이디</label>
+					<input type="text" id="eid" name="eid" value="${enterprise.eid.memberid}" readonly>
+				</div>
+				<div class="input-row">
+					<label for="password">비밀번호</label>
+					<input type="password" id="password" name="password" value="${enterprise.eid.password}">
+				</div>
+			</div>
+			
 			<div class="input-row">
-				<label for="id">아이디</label>
-				<input type="text" id="eid" name="eid" value="${enterprise.eid.memberid}" readonly>
+				<label for="">담당자 이름</label>
+				<input type="text" id="" name="" value="">
 			</div>
 			<div class="input-row">
-				<label for="pw">비밀번호</label>
-				<input type="password" id="password" name="password" value="${enterprise.eid.password}">
-			</div>
-			<div class="input-row">
-				<label for="btel">담당자 연락처</label>
+				<label for="managertel">담당자 연락처</label>
 				<input type="text" id="managertel" name="managertel" value="${enterprise.managertel }">
 			</div>
 			<div class="input-row">
-				<label for="bemail">이메일</label>
+				<label for="manageremail">담당자 이메일</label>
 				<input type="text" id="manageremail" name="manageremail" value="${enterprise.manageremail }">
 			</div>
 			
@@ -109,7 +176,6 @@
 	</div>
 </section>
     
-</section>
 <footer>
 
 </footer>

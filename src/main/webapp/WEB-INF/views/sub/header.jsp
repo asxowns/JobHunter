@@ -156,6 +156,9 @@ header {
 #head_menu_slide ul:first-child{
 	padding-left:15px;
 }
+#head_menu_slide ul:nth-child(2){
+	padding-left:27px;
+}
 #head_menu_slide ul:nth-child(3){
 	padding-left:15px;
 }
@@ -206,7 +209,7 @@ header {
 				<div class="menu_list">
 						<ul id="menu_list_item">
 							<li><a href="/">채용공고</a></li>
-							<li><a href="/enter/hunterList">인재정보</a></li>
+							<li><a href="/enter/hunterList">기업·인재</a></li>
 							<li><a href="/board/openForumList">커뮤니티</a></li>
 							<li><a href="/cs/csList">고객센터</a></li>
 						</ul>
@@ -240,6 +243,7 @@ header {
 						<li><a href="/">추천공고</a></li>
 					</ul>
 					<ul>
+						<li><a href="/enterpriseList">기업전체</a></li>
 						<li><a href="/enter/hunterList">인재정보</a></li>
 					</ul>
 					<ul>
