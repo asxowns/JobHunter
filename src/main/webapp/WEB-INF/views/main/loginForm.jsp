@@ -58,7 +58,7 @@ ul.tabs li.current {
 	display: block;
 }
 
-input[type="text"]{
+input[type="text"], input[type="password"]{
 	width:280px;
 	height:40px;
 	border:1px solid #bbb;
@@ -117,7 +117,7 @@ table th{
 						</tr>
 						<tr>
 							<th>비밀번호</th>
-							<td><input type="text" id="inputFieldHpw" name="pw"></td>
+							<td><input type="password" id="inputFieldHpw" name="pw"></td>
 							<div id="outputFieldHpw"></div>
 						</tr>
 						<tr>
@@ -140,8 +140,10 @@ table th{
 							</tr>
 							<tr>
 								<th>비밀번호</th>
-								<td><input type="text" name="pw"></td>
+								<td><input type="password" name="pw"></td>
 							</tr>
+							<tr><button id="togglePassword">비밀번호 보기/숨기기</button></tr>
+							
 							<tr class="login_area">
 								<td colspan="2"><input type="submit" value="기업로그인"></td>
 							</tr>

@@ -22,9 +22,11 @@ import com.green.jobhunter.repository.MemberRepository;
 import com.green.jobhunter.repository.PostingRepository;
 import com.green.jobhunter.repository.SubscribeRepository;
 
+import jakarta.persistence.EntityManager;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import jakarta.transaction.Transactional;
 
 @Controller
 public class MainController {
@@ -38,7 +40,8 @@ public class MainController {
 
 	@Autowired
 	SubscribeRepository subscriberepostory;
-
+	@Autowired
+	private EntityManager entityManager;
 	@Autowired
 	HunterRepository hunterrepository;
 
@@ -89,26 +92,139 @@ public class MainController {
 		return "/main/loginForm";
 	}
 
+	@RequestMapping("/enterregist1")
+	public String enterregist1(Enterprise enterprise) {
+		System.out.println("==============================enterprise "+ enterprise);
+		System.out.println("==============================enterprise "+ enterprise);
+		Member member = new Member();
+		member.setMemberid("test");
+		enterprise.setEid(member);
+		enterrepository.save(enterprise);
+
+	
+		return "/main/registForm";
+	}
+
 	@RequestMapping("/hunterregist")
 	public String regist(Hunter hunter, Member member, Model model) {
-		member.setRole('h');
-		hunter.setHid(member);
-		memberrepository.save(member);
-		hunterrepository.save(hunter);
+		Member m =new Member();
+		Hunter h = new Hunter();
 
-		return "/main/registForm";
+		m.setMemberid(member.getMemberid());
+		m.setPassword(member.getPassword());
+		m.setRole('h');
+		h.setHid(m);
+		
+		h.setUsername(hunter.getUsername());
+		h.setBirth(hunter.getBirth());
+		h.setTel(hunter.getTel());
+		h.setEmail(hunter.getEmail());
+	    hunterrepository.save(h);
+	    
+		
+		return "/main/loginForm";
 	}
 
 	@RequestMapping("/enterregist")
 	public String regist(Member member, Enterprise enterprise) {
+		
+		Member m =new Member();
+		Enterprise e = new Enterprise();
+		System.out.println("====================================member "+member);
+		m.setMemberid(member.getMemberid());
+		m.setPassword(member.getPassword());
+		m.setRole('e');
+		e.setEid(m);
+		
+		//Member savedmember = memberrepository.save(member);
+		e.setEid(m);
+		e.setCompanyname(enterprise.getCompanyname());
+		e.setCeo(enterprise.getCeo());
+		e.setTel(enterprise.getTel());
+		e.setSize(enterprise.getSize());
+		e.setCorporatetype(enterprise.getCorporatetype());
+		e.setBusinessitem(enterprise.getBusinessitem());
+		e.setBusinessnumber(enterprise.getBusinessnumber());
+		e.setAddress(enterprise.getAddress());
+		e.setEmpnum(enterprise.getEmpnum());
+		e.setSales(enterprise.getSales());
+		e.setManagername(enterprise.getManagername());
+		e.setManagertel(enterprise.getManagertel());
+		e.setManageremail(enterprise.getManageremail());
+		
+		entityManager.clear();
 
-		member.setRole('e');
-		enterprise.setEid(member);
-		memberrepository.save(member);
-		enterrepository.save(enterprise);
-		return "/main/registForm";
+		System.out.println("==============================enterprise "+ e);
+	    enterrepository.save(e);
+	    
+		return "/main/loginForm";
 	}
-
+	
+	
+	
+	
+	
+	
+	
+//	@RequestMapping("/enterregist")
+//	public String regist(Member member, Enterprise enterprise) {
+//	    System.out.println("=================================member:"+ member);
+//	    // 기존에 저장된 Member 객체를 식별자 값을 통해 찾음
+//	    Member existingMember = memberrepository.findByMemberid(member.getMemberid());
+//	    System.out.println("=================================existingMember:"+ existingMember);
+//
+//	    // 기존 Member 객체가 존재하는지 확인
+//	    if (existingMember != null) {
+//	        // 기존 Member 객체의 필드를 새로운 값으로 업데이트
+//	        existingMember.setRole('e');
+//
+//	        // Enterprise 객체 설정
+//	        enterprise.setEid(existingMember);
+//
+//	        System.out.println("==============================enterprise " + enterprise);
+//
+//	        // 기존 Member 객체를 저장
+//	        memberrepository.save(existingMember);
+//	        enterrepository.save(enterprise);
+//	    } else {
+//	        System.out.println("=============fail============");
+//	        // 기존 Member 객체가 존재하지 않으면 에러 처리 또는 다른 처리 방법 선택
+//	        // 예: throw new IllegalArgumentException("해당 ID의 Member를 찾을 수 없습니다.");
+//	    }
+//
+//	    return "/main/registForm";
+//	}
+//	@RequestMapping("/enterregist")
+//	public String regist(MemberDto memberDto, EnterpriseDto enterprisedto) {
+//
+//		memberDto.setRole('e');
+//		//member.setRole('e');
+//		Member member =new Member();
+//		member.setMemberid(memberDto.getMemberid());
+//		member.setPassword(memberDto.getPassword());
+//		member.setRole(memberDto.getRole());
+//		System.out.println("==================================="+member.toString());
+//		
+//		Enterprise enterprise = new Enterprise();
+//		enterprise.setEid(member);
+//		enterprise.setCompanyname(enterprisedto.getCompanyname());
+//		enterprise.setCeo(enterprisedto.getCeo());
+//		enterprise.setTel(enterprisedto.getTel());
+//		enterprise.setSize(enterprisedto.getSize());
+//		enterprise.setCorporatetype(enterprisedto.getCorporatetype());
+//		enterprise.setBusinessitem(enterprisedto.getBusinessitem());
+//		enterprise.setAddress(enterprisedto.getAddress());
+//		enterprise.setEmpnum(enterprisedto.getEmpnum());
+//		enterprise.setSales(enterprisedto.getSales());
+//		
+//		
+//		
+//		//enterprise.setEid(member);
+//		System.out.println("==============================enterprise "+ enterprise);
+//		memberrepository.save(member);
+//		enterrepository.save(enterprise);
+//		return "/main/registForm";
+//	}
 	@RequestMapping("/loginHunter")
 	public String loginHunter(@RequestParam("id") String id, @RequestParam("pw") String pw, Model model)
 			throws IOException {
@@ -268,6 +384,7 @@ public class MainController {
 
 	}
 
+
 	@RequestMapping("/subscribe")
 	@ResponseBody
 	public String subscribe(@RequestParam("posteid") String posteid,@RequestParam("isFilled") Boolean isFilled, HttpSession session,Model model) {
@@ -299,9 +416,9 @@ public class MainController {
 	    	System.out.println("=====================enterprisegetMemberid(): " + enterprise.getEid().getMemberid());
 		    subscriberepostory.deleteByEntercode(enterprise.getEntercode());
 
+		    model.addAttribute("isFilled",false );
 	    }
 	    // 수정: 응답으로 빈 문자열 반환
 	    return "";
 	}
-
 }

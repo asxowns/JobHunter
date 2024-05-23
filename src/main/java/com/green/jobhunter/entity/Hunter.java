@@ -43,7 +43,7 @@ public class Hunter{
 	private int age;
 	private String tel;
   
-	@Column(nullable=false)
+	@Column(nullable=true)
 	private String tel2;
   
 	private String address;

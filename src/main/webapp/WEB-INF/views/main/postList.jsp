@@ -172,7 +172,7 @@ ul {
 			<span>직무를 선택해주세요</span>
 		</div>
 
-	<form id="searhForm" action="searchFilter" method="get">
+	<form id="searhForm" action="searchFilter" method="post">
 		<div class="search-container">
 			<div class="search-select-filter">
 
