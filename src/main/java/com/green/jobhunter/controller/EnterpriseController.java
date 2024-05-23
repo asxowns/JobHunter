@@ -9,12 +9,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.green.jobhunter.dto.TalentInfoDto;
 import com.green.jobhunter.entity.Application;
 import com.green.jobhunter.entity.Enterprise;
 import com.green.jobhunter.entity.MainCategory;
 import com.green.jobhunter.entity.Member;
 import com.green.jobhunter.entity.Posting;
-import com.green.jobhunter.entity.Resume;
 import com.green.jobhunter.repository.ApplicationRepository;
 import com.green.jobhunter.repository.EnterpriseRepository;
 import com.green.jobhunter.repository.HunterRepository;
@@ -46,6 +46,8 @@ public class EnterpriseController {
 	ResumeRepository resumeRepository;
 	@Autowired
 	ApplicationRepository applicationRepository;
+	@Autowired
+	TalentInfoDto talentInfoDto;
 	
 	@RequestMapping("/")
     public String root(){
@@ -220,8 +222,8 @@ public class EnterpriseController {
     //인재정보페이지
     @RequestMapping("/hunterList")
     public String root5(Model model){
-    	List<Resume> resume = resumeRepository.findAll();
-    	model.addAttribute("resume", resume);
+    	List<TalentInfoDto> talentInfo = resumeRepository.findAllWithTalentInfo();
+    	model.addAttribute("talentInfo", talentInfo);
     	return "/enter/hunterList";  
     }
     

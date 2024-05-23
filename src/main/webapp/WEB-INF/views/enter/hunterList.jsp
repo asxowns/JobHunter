@@ -32,13 +32,14 @@
     <br>
     <div class="container">
     <table border="1">
-	    <c:forEach var="resume" items="${resume}">
+	    <c:forEach var="t" items="${talentInfo}">
     	<tr>
-    		<td>${resume.resumecode }</td>
-    		<td>${hunter.username }</td>
-    		<td>${resume.title}</td>
-    		<td>${resume.eduname }</td>
-    		<td>${resume.edumajor }</td>
+    		<td>${t.huntercode }</td>
+    		<td>${t.username}</td>
+    		<td>${t.birth}</td>
+    		<td>${t.gender}</td>
+    		<td>${t.edutype }</td>
+    		<td>${t.employmenttype }</td>
     	</tr>
 	    </c:forEach>
     </table>
