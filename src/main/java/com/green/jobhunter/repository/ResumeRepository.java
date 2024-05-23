@@ -50,6 +50,6 @@ public interface ResumeRepository extends JpaRepository<Resume, Long>{
             dtos.add(dto);
         }
         return dtos;
-    }
+    } 
 
 }
