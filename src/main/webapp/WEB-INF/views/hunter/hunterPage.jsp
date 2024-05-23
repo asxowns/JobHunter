@@ -7,16 +7,33 @@
     <meta charset="UTF-8">
     <title>구직자 마이페이지</title>
 <style>
-//노멀라이즈 시작
-	body, ul, li{
-		margin: 0;
-		padding: 0;
-		list-style: none;
+	*{
+		margin:0;
+		padding:0;
+	}
+	body{
+		color:#333;
+	}
+
+	section{
+		width:1240px;
+		margin:0 auto;
 	}
 	
-	a{
-		color: inherit;		//부모 엘리먼트 값을 물려받는다 
-		text-decoration: none;		//밑줄 제거
+	h1{
+		text-align:center;
+		margin:75px 0;
+	}
+	
+	.mylink{
+		width:780px;
+		margin:0 auto;
+	}
+	.mylink ul{
+		display:flex;
+		justify-content:center;
+		flex-wrap:wrap;
+		gap:40px;
 	}
 
 </style>
@@ -26,36 +43,41 @@
     <%@ include file="../sub/header.jsp" %>
 </header>
 <section>
-    <h2> 구직자 마이페이지 </h2>
-     	<aside class ="side-bar">
- 		<section class="side-bar__icon-box">
- 			<section class="side-bar__icon-1">
- 				<div></div>
- 				<div></div>
- 				<div></div>
- 			</section>
- 		</section>
+    <h1>마이 페이지</h1>
+    <div class="mylink">
  		<ul>
  			<li>
- 				<a href="/hunter/resumeList">이력서 관리</a>
+ 				<a href="/hunter/resumeList">
+ 					<img src="/resource/img/mypage1.png">
+ 				</a>
  			</li>
  			<li>
- 				<a href="/hunter/jobApplication">입사 지원 관리</a>
+ 				<a href="/hunter/jobApplication">
+ 					<img src="/resource/img/mypage2.png">
+ 				</a>
  			</li>
  			<li>
- 				<a href="/hunter/subscribeList">관심기업 관리</a>
+ 				<a href="/hunter/hunterForm">
+ 					<img src="/resource/img/mypage3.png">
+ 				</a>
  			</li>
  			<li>
- 				<a href="/hunter/positionList">입사 제안 현황</a>
+ 				<a href="/hunter/positionList">
+ 					<img src="/resource/img/mypage4.png">
+ 				</a>
  			</li>
  			<li>
- 				<a href="/hunter/favorList">스크랩한 채용 공고</a>
- 			</li>
+ 				<a href="/hunter/favorList">
+ 					<img src="/resource/img/mypage5.png">
+ 				</a>
+ 			</li> 
  			<li>
- 				<a href="/hunter/hunterForm">내정보 관리</a>
+ 				<a href="/hunter/subscribeList">
+ 					<img src="/resource/img/mypage6.png">
+ 				</a>
  			</li>
  		</ul>
- 	</aside>
+ 	</div>
 </section>
 <footer>
 
