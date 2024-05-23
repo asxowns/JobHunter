@@ -42,7 +42,11 @@
 		padding-left:15px;
 	}
 	.ent_name_top h2 img{
-		padding-top:3px;
+		padding-top:5px;
+		filter:grayscale(100%);
+	}
+	.ent_name_top h2 img:hover{
+		filter:url("/resource/img/heartfill.png");
 	}
 	
 	.ent_info{
