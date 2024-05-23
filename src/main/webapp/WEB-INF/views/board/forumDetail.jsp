@@ -246,7 +246,7 @@ main b {
 		
 		<!-- 댓글 -->
 		<div id="main_bottom">
-			<p class="reply_count">2개의 댓글</p>
+			<p class="reply_count">${reply.size()}개의 댓글</p>
 			
 			<div class="reply_box">
 				<form action="communityReply" method="post">

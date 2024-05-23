@@ -21,13 +21,18 @@ import lombok.ToString;
 public class EnterCommu_reply extends BaseTimeEntity{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long eccode;
+	private Long ecrcode;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="writer")
 	@ToString.Exclude
 	private Member writer;
-	private String title;
-	private String content;
+	
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="eccode")
+	@ToString.Exclude
+	private EnterpriseCommunity eccode;
+	
+	private String comment;
 	
 }

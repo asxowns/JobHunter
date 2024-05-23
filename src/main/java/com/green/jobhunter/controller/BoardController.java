@@ -3,6 +3,7 @@ package com.green.jobhunter.controller;
 import java.io.PrintWriter;
 import java.util.List;
 
+import org.hibernate.engine.internal.Collections;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,7 +25,6 @@ import com.green.jobhunter.repository.EnterpriseCommunityRepository;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/board")
@@ -63,49 +63,26 @@ public class BoardController {
 			) {
 
 		Page<Community> page = communityRepo.findAll(pageable);
-		int currentPage = page.getNumber();
-		int totalPages = page.getTotalPages();
 
-		// 페이지 번호 계산
-		int startPage, endPage;
-		if (totalPages <= 5) {
-			startPage = 0;
-			endPage = totalPages - 1;
-		} else {
-			if (currentPage <= 2) {
-				startPage = 0;
-				endPage = 4;
-			} else if (currentPage >= totalPages - 3) {
-				startPage = totalPages - 5;
-				endPage = totalPages - 1;
-			} else {
-				startPage = currentPage - 2;
-				endPage = currentPage + 2;
-			}
+		// 각 게시글 별 댓글 수 
+		List<String> reply_cnt_ = communityRepo.countReplys(pageable);
+		model.addAttribute("reply_cnt", reply_cnt_);
+			
+		if (page.isEmpty()) {
+			model.addAttribute("list", null);
+			model.addAttribute("totalPages", 0);
+			model.addAttribute("totalElements", 0);
+			model.addAttribute("currentPage", 0);
+			model.addAttribute("pageSize", pageable.getPageSize());
+			model.addAttribute("hasNext", false);
+			model.addAttribute("hasPrevious", false);
+			model.addAttribute("startPage", 0);
+			model.addAttribute("endPage", 0);
 		}
-
-		model.addAttribute("list", page.getContent());
-		model.addAttribute("totalPages", totalPages);
-		model.addAttribute("totalElements", page.getTotalElements());
-		model.addAttribute("currentPage", currentPage);
-		model.addAttribute("pageSize", page.getSize());
-		model.addAttribute("hasNext", page.hasNext());
-		model.addAttribute("hasPrevious", page.hasPrevious());
-		model.addAttribute("startPage", startPage);
-		model.addAttribute("endPage", endPage);
-
-		return "/board/openForum";
-	}
-
-	@RequestMapping("/enterpriseForum")
-	public String enterpriseForum(
-			@PageableDefault(page = 0, size = 10, sort = "eccode", direction = Sort.Direction.DESC) Pageable pageable,
-			Model model){
-
-			Page<EnterpriseCommunity> page = enterRepo.findAll(pageable);
+		else{
 			int currentPage = page.getNumber();
 			int totalPages = page.getTotalPages();
-
+	
 			// 페이지 번호 계산
 			int startPage, endPage;
 			if (totalPages <= 5) {
@@ -123,7 +100,8 @@ public class BoardController {
 					endPage = currentPage + 2;
 				}
 			}
-
+			
+	
 			model.addAttribute("list", page.getContent());
 			model.addAttribute("totalPages", totalPages);
 			model.addAttribute("totalElements", page.getTotalElements());
@@ -133,7 +111,65 @@ public class BoardController {
 			model.addAttribute("hasPrevious", page.hasPrevious());
 			model.addAttribute("startPage", startPage);
 			model.addAttribute("endPage", endPage);
+		}
 
+		return "/board/openForum";
+	}
+
+	@RequestMapping("/enterpriseForum")
+	public String enterpriseForum(
+			@PageableDefault(page = 0, size = 10, sort = "eccode", direction = Sort.Direction.DESC) Pageable pageable,
+			Model model){
+
+			Page<EnterpriseCommunity> page = enterRepo.findAll(pageable);
+			int currentPage = page.getNumber();
+			int totalPages = page.getTotalPages();
+
+			// 각 게시글 별 댓글 수 
+			List<String> reply_cnt_ = enterRepo.countReplys(pageable);
+			model.addAttribute("enterReply_cnt", reply_cnt_);
+
+			if (page.isEmpty()) {
+				model.addAttribute("list", null);
+				model.addAttribute("totalPages", 0);
+				model.addAttribute("totalElements", 0);
+				model.addAttribute("currentPage", 0);
+				model.addAttribute("pageSize", pageable.getPageSize());
+				model.addAttribute("hasNext", false);
+				model.addAttribute("hasPrevious", false);
+				model.addAttribute("startPage", 0);
+				model.addAttribute("endPage", 0);
+			}
+			else{
+				// 페이지 번호 계산
+				int startPage, endPage;
+				if (totalPages <= 5) {
+					startPage = 0;
+					endPage = totalPages - 1;
+				} else {
+					if (currentPage <= 2) {
+						startPage = 0;
+						endPage = 4;
+					} else if (currentPage >= totalPages - 3) {
+						startPage = totalPages - 5;
+						endPage = totalPages - 1;
+					} else {
+						startPage = currentPage - 2;
+						endPage = currentPage + 2;
+					}
+				}
+				
+				model.addAttribute("list", page.getContent());
+				model.addAttribute("totalPages", totalPages);
+				model.addAttribute("totalElements", page.getTotalElements());
+				model.addAttribute("currentPage", currentPage);
+				model.addAttribute("pageSize", page.getSize());
+				model.addAttribute("hasNext", page.hasNext());
+				model.addAttribute("hasPrevious", page.hasPrevious());
+				model.addAttribute("startPage", startPage);
+				model.addAttribute("endPage", endPage);
+				
+			}
 			return "/board/enterpriseForum";
 	}
 
@@ -156,9 +192,9 @@ public class BoardController {
 	public String forumDetail(@RequestParam("cmcode") Long cmcode, Model model) {
 
 		Community community = communityRepo.findByCmcode(cmcode);
-		List<CommunityReply> reply = communityReplyRepo.findByCmcode(community);
+		List<CommunityReply> replyList = communityReplyRepo.findByCmcode(community);
 		
-		model.addAttribute("reply",reply);
+		model.addAttribute("reply",replyList);
 		model.addAttribute("community", community);
 
 		return "/board/forumDetail";
@@ -169,9 +205,9 @@ public class BoardController {
 	public String forumDetail2(@RequestParam("eccode") Long eccode, Model model) {
 
 		EnterpriseCommunity entcommunity = enterRepo.findByEccode(eccode);
-		List<EnterCommu_reply> enterReply = enterReplyRepo.findByEccode(entcommunity);
+		List<EnterCommu_reply> enterReplyList = enterReplyRepo.findByEccode(entcommunity);
 		
-		model.addAttribute("reply", enterReply);
+		model.addAttribute("reply", enterReplyList);
 		model.addAttribute("community", entcommunity);
 
 		return "/board/forumDetail2";
@@ -186,78 +222,110 @@ public class BoardController {
 
 			Page<Community> searchPage = communityRepo.findByTitleContaining(keyword, pageable);
 
+			// 각 게시글 별 댓글 수 
+			List<String> reply_cnt_ = communityRepo.countReplySearch(keyword,pageable);
+			model.addAttribute("reply_cnt", reply_cnt_);
+
 			int currentPage = searchPage.getNumber();
 			int totalPages = searchPage.getTotalPages();
 
 			// 페이지 번호 계산
-			int startPage, endPage;
-			if (totalPages <= 5) {
-				startPage = 0;
-				endPage = totalPages - 1;
-			} else {
-				if (currentPage <= 2) {
+			if (searchPage.isEmpty()) {
+				model.addAttribute("list", null);
+				model.addAttribute("totalPages", 0);
+				model.addAttribute("totalElements", 0);
+				model.addAttribute("currentPage", 0);
+				model.addAttribute("pageSize", pageable.getPageSize());
+				model.addAttribute("hasNext", false);
+				model.addAttribute("hasPrevious", false);
+				model.addAttribute("startPage", 0);
+				model.addAttribute("endPage", 0);
+			}
+			else{
+				int startPage, endPage;
+				if (totalPages <= 5) {
 					startPage = 0;
-					endPage = 4;
-				} else if (currentPage >= totalPages - 3) {
-					startPage = totalPages - 5;
 					endPage = totalPages - 1;
 				} else {
-					startPage = currentPage - 2;
-					endPage = currentPage + 2;
+					if (currentPage <= 2) {
+						startPage = 0;
+						endPage = 4;
+					} else if (currentPage >= totalPages - 3) {
+						startPage = totalPages - 5;
+						endPage = totalPages - 1;
+					} else {
+						startPage = currentPage - 2;
+						endPage = currentPage + 2;
+					}
 				}
+
+				model.addAttribute("searchList", searchPage.getContent());
+				model.addAttribute("totalPages", totalPages);
+				model.addAttribute("totalElements", searchPage.getTotalElements());
+				model.addAttribute("currentPage", currentPage);
+				model.addAttribute("pageSize", searchPage.getSize());
+				model.addAttribute("hasNext", searchPage.hasNext());
+				model.addAttribute("hasPrevious", searchPage.hasPrevious());
+				model.addAttribute("startPage", startPage);
+				model.addAttribute("endPage", endPage);
+				model.addAttribute("keyword", keyword);
+				model.addAttribute("searchPage", searchPage);
 			}
-
-			model.addAttribute("searchList", searchPage.getContent());
-			model.addAttribute("totalPages", totalPages);
-			model.addAttribute("totalElements", searchPage.getTotalElements());
-			model.addAttribute("currentPage", currentPage);
-			model.addAttribute("pageSize", searchPage.getSize());
-			model.addAttribute("hasNext", searchPage.hasNext());
-			model.addAttribute("hasPrevious", searchPage.hasPrevious());
-			model.addAttribute("startPage", startPage);
-			model.addAttribute("endPage", endPage);
-			model.addAttribute("keyword", keyword);
-			model.addAttribute("searchPage", searchPage);
-
 			return "/board/openForum";
 		} else if (boardtype == 2) {
 			// pageable = PageRequest.of(0, 10, Sort.by("eccode").descending());
 
 			Page<EnterpriseCommunity> searchPage = enterRepo.findByTitleContaining(keyword, pageable);
+			
+			// 각 게시글 별 댓글 수 
+			List<String> reply_cnt_ = enterRepo.countReplySearch(keyword, pageable);
+			model.addAttribute("enterReply_cnt", reply_cnt_);
 
 			int currentPage = searchPage.getNumber();
 			int totalPages = searchPage.getTotalPages();
 
-			// 페이지 번호 계산
-			int startPage, endPage;
-			if (totalPages <= 5) {
-				startPage = 0;
-				endPage = totalPages - 1;
-			} else {
-				if (currentPage <= 2) {
+			if (searchPage.isEmpty()) {
+				model.addAttribute("list", null);
+				model.addAttribute("totalPages", 0);
+				model.addAttribute("totalElements", 0);
+				model.addAttribute("currentPage", 0);
+				model.addAttribute("pageSize", pageable.getPageSize());
+				model.addAttribute("hasNext", false);
+				model.addAttribute("hasPrevious", false);
+				model.addAttribute("startPage", 0);
+				model.addAttribute("endPage", 0);
+			}
+			else{
+				// 페이지 번호 계산
+				int startPage, endPage;
+				if (totalPages <= 5) {
 					startPage = 0;
-					endPage = 4;
-				} else if (currentPage >= totalPages - 3) {
-					startPage = totalPages - 5;
 					endPage = totalPages - 1;
 				} else {
-					startPage = currentPage - 2;
-					endPage = currentPage + 2;
+					if (currentPage <= 2) {
+						startPage = 0;
+						endPage = 4;
+					} else if (currentPage >= totalPages - 3) {
+						startPage = totalPages - 5;
+						endPage = totalPages - 1;
+					} else {
+						startPage = currentPage - 2;
+						endPage = currentPage + 2;
+					}
 				}
+
+				model.addAttribute("searchList", searchPage.getContent());
+				model.addAttribute("totalPages", totalPages);
+				model.addAttribute("totalElements", searchPage.getTotalElements());
+				model.addAttribute("currentPage", currentPage);
+				model.addAttribute("pageSize", searchPage.getSize());
+				model.addAttribute("hasNext", searchPage.hasNext());
+				model.addAttribute("hasPrevious", searchPage.hasPrevious());
+				model.addAttribute("startPage", startPage);
+				model.addAttribute("endPage", endPage);
+				model.addAttribute("keyword", keyword);
+				model.addAttribute("searchPage", searchPage);
 			}
-
-			model.addAttribute("searchList", searchPage.getContent());
-			model.addAttribute("totalPages", totalPages);
-			model.addAttribute("totalElements", searchPage.getTotalElements());
-			model.addAttribute("currentPage", currentPage);
-			model.addAttribute("pageSize", searchPage.getSize());
-			model.addAttribute("hasNext", searchPage.hasNext());
-			model.addAttribute("hasPrevious", searchPage.hasPrevious());
-			model.addAttribute("startPage", startPage);
-			model.addAttribute("endPage", endPage);
-			model.addAttribute("keyword", keyword);
-			model.addAttribute("searchPage", searchPage);
-
 			return "/board/enterpriseForum";
 
 		}

@@ -256,7 +256,7 @@ input[type="submit"] {
 			</div>
 
 			<div id="list_area">
-				<c:forEach var="comm" items="${list }">
+				<c:forEach var="comm" items="${list }" varStatus="stat">
 					<a href="forumDetail?cmcode=${comm.cmcode }">
 						<p>${f:formatLocalDateTime(comm.regdate, 'yyyy-MM-dd HH:mm:ss')}</p>
 						<h2>${comm.title }</h2>
@@ -273,7 +273,7 @@ input[type="submit"] {
 										<img src="/resource/img/view_icon.png"> <span>11</span>
 									</p>
 									<p>
-										<img src="/resource/img/reply_icon.png"> <span>22</span>
+										<img src="/resource/img/reply_icon.png"> <span>${reply_cnt[stat.index]}</span>
 									</p>
 								</div>
 							</div>
@@ -281,7 +281,7 @@ input[type="submit"] {
 					</a>
 				</c:forEach>
 				
-				<c:forEach var="search" items="${searchList }">
+				<c:forEach var="search" items="${searchList }" varStatus="stat">
 					<a href="forumDetail?cmcode=${search.cmcode }">
 						<p>${f:formatLocalDateTime(search.regdate, 'yyyy-MM-dd HH:mm:ss')}</p>
 						<h2>${search.title }</h2>
@@ -295,14 +295,13 @@ input[type="submit"] {
 										<img src="/resource/img/view_icon.png"> <span>11</span>
 									</p>
 									<p>
-										<img src="/resource/img/reply_icon.png"> <span>22</span>
+										<img src="/resource/img/reply_icon.png"> <span>${reply_cnt[stat.index]}</span>
 									</p>
 								</div>
 							</div>
 						</h4>
 					</a>
 				</c:forEach>
-				
 			</div>
 
 			<c:if test="${sessionScope.logged ne null }">
