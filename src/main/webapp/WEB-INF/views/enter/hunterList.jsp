@@ -17,6 +17,10 @@
     align-items: center;
     flex-direction: column; 
   }
+  td {
+            padding: 15px; /* 셀 내부 패딩 설정 */
+            text-align: center; /* 텍스트 가운데 정렬 */
+        }
 </style>
 </head>
 <body>
@@ -26,10 +30,19 @@
 <section>
     <h2> hunterList page </h2>
     <br>
-    <c:forEach var="resume" items="${resume}">
-    	${resume.resumecode }
-    	${resume.title}
-    </c:forEach>
+    <div class="container">
+    <table border="1">
+	    <c:forEach var="resume" items="${resume}">
+    	<tr>
+    		<td>${resume.resumecode }</td>
+    		<td>${hunter.username }</td>
+    		<td>${resume.title}</td>
+    		<td>${resume.eduname }</td>
+    		<td>${resume.edumajor }</td>
+    	</tr>
+	    </c:forEach>
+    </table>
+    </div>	
 </section>
 <footer>
 
