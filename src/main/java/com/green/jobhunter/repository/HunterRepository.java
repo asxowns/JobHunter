@@ -2,6 +2,7 @@ package com.green.jobhunter.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.green.jobhunter.entity.Hunter;
@@ -12,5 +13,8 @@ public interface HunterRepository extends JpaRepository<Hunter,Long>{
 	Hunter findByHid(Member hid);
 	
 	@Query(value = "SELECT h FROM hunter h WHERE r.hid = :hid", nativeQuery=true)
-	public Hunter findOneHunter(String memberid);
+	public Hunter findOneHunter(@Param("hid")Member hid);
+	
+	@Query(value = "SELECT h FROM hunter h WHERE r.hid = :hid", nativeQuery=true)
+	public Hunter findByHuntercode(@Param("hid")Member hid);
 }

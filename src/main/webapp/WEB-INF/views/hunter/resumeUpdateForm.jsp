@@ -2,11 +2,12 @@
 	pageEncoding="UTF-8"%>
 <%-- JSTL Core --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>이력서 등록</title>
+<title>이력서 수정</title>
 <style>
 </style>
 </head>
@@ -29,40 +30,40 @@
 						value="${hunter.username }"> 생년월일<input type="date"
 						name="birth" value="${hunter.birth }"> 
 					<select name="gender">
-						<option value="m" ${hunter.gender == 'm' ? 'selected' : '' }>남자</option>
-						<option value="f" ${hunter.gender == 'f' ? 'selected' : ''}>여자</option>
+						<option value="m" <c:if test="${fn:trim(hunter.gender) == 'm'}">selected</c:if>>남자</option>
+						<option value="f" <c:if test="${fn:trim(hunter.gender) == 'f'}">selected</c:if>>여자</option>
 					</select> 
 					<input type="text" name="email" placeholder="이메일" value="${hunter.email}"><br> 
-					<input type="text" name="tel1" placeholder="휴대폰번호" value="${hunter.tel1}"> <br>
+					<input type="text" name="tel" placeholder="휴대폰번호" value="${hunter.tel}"> <br>
 					<input type="text" name="tel2" placeholder="비상연락처" value="${hunter.tel2}"><br>
-					<input type="text" name="newOrExp" placeholder="신입or경력" value="${hunter.newOrExp}"><br>
+					<input type="text" name="newOrExp" placeholder="신입or경력" value="${resume.newOrExp}"><br>
 					<select name="military">
-						<option value="o"  ${hunter.military == 'o' ? 'selected' : ''}>군필/면제/해당없음</option>
-						<option value="x" ${hunter.military == 'x' ? 'selected' : ''}>미필</option>
+						<option value="o"  ${fn:trim(hunter.military) == 'o' ? 'selected' : ''}>군필/면제/해당없음</option>
+						<option value="x" ${fn:trim(hunter.military) == 'x' ? 'selected' : ''}>미필</option>
 					</select> 
 						<input type="text" name="address" placeholder="주소"	value="${hunter.address}">
 					<iframe id="photo" title="photo" width="100" height="120"
-						src="${hunter.photoUrl}"></iframe>
-					<input type="file" id="photo" name="photoUrl" src="${hunter.photoUrl}">
+						src="${resume.photourl}"></iframe>
+					<input type="file" id="photo" name="photoUrl" src="${resume.photourl}">
 				</div>
 				<div class="public_type">
 					<span>이력서 공개여부</span><br> 
-					<input type="radio" name="public_type" id="public_type" value="1" ${resume.public_type == 1 ? 'checked' : ''}>공개
-					<input type="radio" name="public_type" id="public_type" value="0" ${resume.public_type == 0 ? 'checked' : ''}>비공개
+					<input type="radio" name="publictype" id="public_type" value="1" ${fn:trim(resume.publictype) == 1 ? 'checked' : ''}>공개
+					<input type="radio" name="publictype" id="public_type" value="0" ${fn:trim(resume.publictype) == 0 ? 'checked' : ''}>비공개
 				</div>
 				<div class="education">
 					학력 <br> 학력 구분 
-					<select name="education">
-						<option value="초졸" ${resume.education == '초졸' ? 'selected' : ''}>초졸</option>
-						<option value="중졸" ${resume.education == '중졸' ? 'selected' : ''}>중졸</option>
-						<option value="고졸" ${resume.education == '고졸' ? 'selected' : ''}>고졸</option>
-						<option value="초대졸" ${resume.education == '초대졸' ? 'selected' : ''}>초대졸</option>
-						<option value="대졸" ${resume.education == '대졸' ? 'selected' : ''}>대졸</option>
-						<option value="대학원" ${resume.education == '대학원' ? 'selected' : ''}>대학원</option>
-						<option value="검정고시" ${resume.education == '검정고시' ? 'selected' : ''}>검정고시</option>
+					<select name="edutype">
+						<option value="초졸" ${resume.edutype == '초졸' ? 'selected' : ''}>초졸</option>
+						<option value="중졸" ${resume.edutype == '중졸' ? 'selected' : ''}>중졸</option>
+						<option value="고졸" ${resume.edutype == '고졸' ? 'selected' : ''}>고졸</option>
+						<option value="초대졸" ${resume.edutype == '초대졸' ? 'selected' : ''}>초대졸</option>
+						<option value="대졸" ${resume.edutype == '대졸' ? 'selected' : ''}>대졸</option>
+						<option value="대학원" ${resume.edutype == '대학원' ? 'selected' : ''}>대학원</option>
+						<option value="검정고시" ${resume.edutype == '검정고시' ? 'selected' : ''}>검정고시</option>
 					</select> 
 						학교이름<input type="text" name="eduname" placeholder="학교이름" value="${resume.eduname}"> 
-						전공<input type="text" name="major" placeholder="전공" value="${resume.major}"> 
+						전공<input type="text" name="edumajor" placeholder="전공" value="${resume.edumajor}"> 
 						졸업년도<input type="date" name="graduatedate" value="${resume.graduatedate}">
 					<!-- 졸업상태가 졸업이면 졸업년도 입력가능하게 하기 -->
 					<p>학력 상태</p>
@@ -84,12 +85,12 @@
 					<p>
 						대분류 <select name="industry" class="mainSelect" required size="10" onchange="fetchSubList()">
 							<c:forEach var="main" items="${mainList}">
-								<option id="${mainList.mccode}" value="${mainList.mccode}" ${di.mainCategory == mainList.mccode ? 'selected' : ''}>${mainList.main}</option>
+								<option id="${main.mccode}" value="${main.mccode}" ${di.mainCategory == main.main ? 'selected' : ''}>${main.main}</option>
 							</c:forEach>
 						</select> 
 						소분류 <select name="middleCategory" id="subSelect">
 							<c:forEach var="sub" items="${subList }">
-								<option value="${sub}" ${di.middleCategory == mainList.mccode ? 'selected' : ''}>${subList.sub}</option>
+								<option value="${sub}" ${di.middleCategory == sub.sub ? 'selected' : ''}>${sub.sub}</option>
 							</c:forEach>
 						</select>
 					</p>
@@ -100,8 +101,7 @@
 				</div>
 				<div class="career">
 					<p>
-						경력 <input type="text" name="companyname" placeholder="회사명"
-							value="${c.companyname}"> 
+						경력 <input type="text" name="companyname" placeholder="회사명" value="${c.companyname}"> 
 						입사일 <input type="date"	name="cardate" value="${c.cardate}"> 
 						퇴사일 <input type="date" name="enddate" value="${c.enddate}"> 
 						재직중 : <input type="checkbox" name="working" value=${c.working? 'checked' : ''}><br>
@@ -118,9 +118,9 @@
 				</div>
 				<div class="certificate">
 					<p>
-						자격증 <input type="text" name="stack" placeholder="자격증 명" value="${ctf.stack}"> 
-						발급처<input type="text" name="issuer" placeholder="발급처" value="${ctf.issuer}"> 
-						취득일 <input type="date" name="optaindate" value="${ctf.optaindate}">
+						자격증 명 <input type="text" name="stack" placeholder="자격증 명" value="${ctf.stack}"> 
+						발급처<input type="text" name="pulisher" placeholder="발급처" value="${ctf.pulisher}"> 
+						취득일 <input type="date" name="issuedate" value="${ctf.issuedate}">
 					</p>
 				</div>
 				<div class="coverLetter" id="resumeForm">
@@ -128,7 +128,7 @@
 						자기소개서 <br> 
 						성장과정 <textarea name="growth" placeholder="성장과정 기술">${cl.growth}</textarea><br> 
 						지원동기 <textarea name="motive" placeholder="지원동기 기술">${cl.motive}</textarea><br> 
-						성격의 장˙단점 : <textarea name="prosAndCons" placeholder="성격의 장˙단점 기술 ">{cl.prosAndCons}</textarea>
+						성격의 장˙단점 : <textarea name="prosAndCons" placeholder="성격의 장˙단점 기술 ">${cl.prosAndCons}</textarea>
 					</p>
 				</div>
 				<input type="submit" value="등록">
