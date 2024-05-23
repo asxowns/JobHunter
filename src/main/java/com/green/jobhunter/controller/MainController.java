@@ -54,12 +54,30 @@ public class MainController {
 	@RequestMapping("/")
 	public String root(Model model) {
 
-		List<Posting> list = postingrepository.findAll();
-		model.addAttribute("list", list);
+		List<Posting> list1 = postingrepository.findAll();
+		List<Enterprise> list2 = enterrepository.findAll();
+		System.out.println(list2);
+		model.addAttribute("list1", list1);
+		model.addAttribute("list2", list2);
 
 		return "/main/postList";
 	}
 
+	@RequestMapping("/enterpriseList")
+	public String enterpriseList() {
+
+
+		return "/main/enterpriseList";
+	}
+	
+	@RequestMapping("/enterpriseDetail")
+	public String enterpriseDetail() {
+
+	
+
+		return "/main/enterpriseDetail";
+	}
+	
 	@RequestMapping("/registForm")
 	public String regForm() {
 
@@ -173,7 +191,7 @@ public class MainController {
 	}
 
 	@RequestMapping("/postDetail")
-	public String postDetail(@RequestParam("postcode") long postcode, @RequestParam("posteid") long posteid,
+	public String postDetail(@RequestParam("postcode") long postcode, @RequestParam("posteid") String posteid,
 			Model model) {
 		Posting posting = postingrepository.findByPostcode(postcode);
 		model.addAttribute("dto", posting);
@@ -226,14 +244,14 @@ public class MainController {
 
 			Member eid = memberrepository.findByMemberid(memid);
 
-			List<Posting> list = postingrepository.findByEidAndAreaAndCareerAndEdutype(eid, area, career, edutype);
+			List<Posting> list1 = postingrepository.findByEidAndAreaAndCareerAndEdutype(eid, area, career, edutype);
 			List<Posting> list2 = postingrepository.findByEid(eid);
-			model.addAttribute("list", list);
+			model.addAttribute("list1", list1);
 
 		} else if (companyname_.isEmpty()) {
 
-			List<Posting> list = postingrepository.findByEidAndAreaAndCareerAndEdutype(eid, area, career, edutype);
-			model.addAttribute("list", list);
+			List<Posting> list1 = postingrepository.findByEidAndAreaAndCareerAndEdutype(eid, area, career, edutype);
+			model.addAttribute("list1", list1);
 		}
 		return "/main/postList";
 	}
@@ -251,27 +269,39 @@ public class MainController {
 	}
 
 	@RequestMapping("/subscribe")
-	public String subscribe(@RequestParam("posteid") String posteid, Model model) {
-		cnt ++;
-		HttpSession session = request.getSession();
-		String sessionId = (String) session.getAttribute("logged");
-		System.out.println("=====================sessionId: "+sessionId);
-		// 세션에서 멤버 객체 가져오기
-		Member member = memberrepository.findByMemberid(sessionId);
-		System.out.println("=====================member: "+member);
+	@ResponseBody
+	public String subscribe(@RequestParam("posteid") String posteid,@RequestParam("isFilled") Boolean isFilled, HttpSession session,Model model) {
+	    cnt++;
+	    String sessionId = (String) session.getAttribute("logged");
+	    System.out.println("=====================sessionId: " + sessionId);
+	    
+	    // 세션에서 멤버 객체 가져오기
+	    Member member = memberrepository.findByMemberid(sessionId);
+	    System.out.println("=====================member: " + member);
 
-		// 기업 객체 생성 (현재 코드에서는 주석 처리)
-		// Enterprise enterprise = enterpriseRepository.findByEid(posteid);
+	    // 기업 객체 생성 (현재 코드에서는 주석 처리)
+	    // Enterprise enterprise = enterpriseRepository.findByEid(posteid);
 
-		// 새로운 기업 및 구독 정보 생성
-		Enterprise enterprise = enterrepository.findByEid(posteid);
-		System.out.println("=====================enterprise: "+enterprise);
-	
-		Subscribe subscribe = new Subscribe(cnt,enterprise,member);
-	
-		// 구독 정보 데이터베이스에 저장
-		subscriberepostory.save(subscribe);
-		 return "redirect:/main/postDetail";
+	    // 새로운 기업 및 구독 정보 생성
+	    Enterprise enterprise = enterrepository.findByEid(posteid);
+	    System.out.println("=====================posteid: " + posteid);
+	    System.out.println("=====================enterprise: " + enterprise);
+	    System.out.println("=====================enterprisegetMemberid(): " + enterprise.getEid().getMemberid());
+	    System.out.println("=====================isFilled: "+isFilled);
+	    Subscribe subscribe = new Subscribe(enterprise, member);
+	    if (isFilled) {
+	    // 구독 정보 데이터베이스에 저장
+	    subscriberepostory.save(subscribe);
+	    model.addAttribute("isFilled",true );
+	    }else {
+	    	System.out.println("==========trydelete==========");
+	    	System.out.println("============================"+enterprise.getEid());
+	    	System.out.println("=====================enterprisegetMemberid(): " + enterprise.getEid().getMemberid());
+		    subscriberepostory.deleteByEntercode(enterprise.getEntercode());
+
+	    }
+	    // 수정: 응답으로 빈 문자열 반환
+	    return "";
 	}
 
 }

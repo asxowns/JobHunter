@@ -1,6 +1,7 @@
 package com.green.jobhunter.entity;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,10 +20,12 @@ import lombok.ToString;
 @NoArgsConstructor
 public class Subscribe {
 	@Id
-	private long subs_code;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private long sub_scode;
 
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="eid")
+	@JoinColumn(name="entercode")
+    //@JoinColumn(name="eid", referencedColumnName="eid") // eid를 외래 키로 사용
 	@ToString.Exclude
 	private Enterprise eid;
 	// 하나의 기업에 하나의 
@@ -31,4 +34,10 @@ public class Subscribe {
 	@JoinColumn(name="hid")
 	@ToString.Exclude
 	private Member hid;
+	
+	
+	 public Subscribe(Enterprise eid, Member hid) {
+	        this.eid = eid;
+	        this.hid = hid;
+	    }
 }

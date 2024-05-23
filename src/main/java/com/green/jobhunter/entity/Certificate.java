@@ -35,6 +35,7 @@ public class Certificate{
 	@JoinColumn(name="hid")
 	@ToString.Exclude
 	private Member hid;
+	private String stack;
 	private String publisher;
 	
 	@Column(columnDefinition = "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP",  nullable = false)
