@@ -11,11 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.green.jobhunter.entity.Application;
 import com.green.jobhunter.entity.Enterprise;
 import com.green.jobhunter.entity.Hunter;
 import com.green.jobhunter.entity.Member;
 import com.green.jobhunter.entity.Posting;
 import com.green.jobhunter.entity.Subscribe;
+import com.green.jobhunter.repository.ApplicationRepository;
 import com.green.jobhunter.repository.EnterpriseRepository;
 import com.green.jobhunter.repository.HunterRepository;
 import com.green.jobhunter.repository.MemberRepository;
@@ -26,7 +28,6 @@ import jakarta.persistence.EntityManager;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import jakarta.transaction.Transactional;
 
 @Controller
 public class MainController {
@@ -44,7 +45,9 @@ public class MainController {
 	private EntityManager entityManager;
 	@Autowired
 	HunterRepository hunterrepository;
-
+	@Autowired
+	ApplicationRepository  applicationrepository;
+	
 	@Autowired
 	PostingRepository postingrepository;
 
@@ -141,11 +144,11 @@ public class MainController {
 		return "/main/loginForm";
 	}
 
-	@RequestMapping("/aplication")
-	public String aplication(@RequestParam("postcode") long postode, Model model) {
-
-		model.addAttribute("postode", postode);
-		return "";
+	@RequestMapping("/applicate")
+	public String aplication(Application application, Model model ) {
+		System.out.println("=======================application : "+application);
+		applicationrepository.save(application);
+		return "/main/postDetail";
 	}
 
 //	@RequestMapping("/enterregist")
