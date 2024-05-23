@@ -10,41 +10,39 @@
 <meta charset="UTF-8">
 <title></title>
 <style>
-*{
-	margin:0;
-	padding:0;
-}
-body{
-	color:#333;
-	font-size:16px;
-}
-a{
-	text-decoration:none;
-}
-ul{
-	list-style:none;
+* {
+	margin: 0;
+	padding: 0;
 }
 
-section{
-	width:1240px;
-	margin:150px auto;
+body {
+	color: #333;
+	font-size: 16px;
 }
 
+a {
+	text-decoration: none;
+}
+
+ul {
+	list-style: none;
+}
+
+section {
+	width: 1240px;
+	margin: 150px auto;
+}
 </style>
 </head>
 <body>
 	<header>
 		<%@ include file="../sub/header.jsp"%>
 	</header>
-	
+
 	<section>
 		<h2>추천공고</h2>
-		<a href="">1</a>
-		<a href="">2</a>
-		<a href="">3</a>
-		<a href="">4</a><br>
-		<span>직무전체</span>
-		<span>직무를 선택해주세요</span><br>
+		<a href="">1</a> <a href="">2</a> <a href="">3</a> <a href="">4</a><br>
+		<span>직무전체</span> <span>직무를 선택해주세요</span><br>
 
 
 
@@ -52,42 +50,42 @@ section{
 
 
 
-	<form id="searhForm" action="searchFilter" method="post">
-		<div class="search-container">
-			<select id="area" name="area_">
-				<option value="">지역</option>
-				<option value="seoul">서울</option>
-				<option value="busan">부산</option>
-			</select> <select id="career" name="career_">
-				<option value="">경력</option>
-				<option value="new">신입</option>
-				<option value="twoyear">2년이상</option>
-			</select> <select id="edutype" name="edutype_">
-				<option value="">학력</option>
-				<option value="uni">대졸</option>
-				<option value="high">고졸</option>
-			</select> <input type="text" id="search" name="companyname_"
-				placeholder="기업명 공고명 검색"> 
-				<input type="submit" id="search-button" value="검색">
-		</div>
-	</form>
+		<form id="searhForm" action="searchFilter" method="post">
+			<div class="search-container">
+				<select id="area" name="area_">
+					<option value="">지역</option>
+					<option value="seoul">서울</option>
+					<option value="busan">부산</option>
+				</select> <select id="career" name="career_">
+					<option value="">경력</option>
+					<option value="new">신입</option>
+					<option value="twoyear">2년이상</option>
+				</select> <select id="edutype" name="edutype_">
+					<option value="">학력</option>
+					<option value="uni">대졸</option>
+					<option value="high">고졸</option>
+				</select> <input type="text" id="search" name="companyname_"
+					placeholder="기업명 공고명 검색"> <input type="submit"
+					id="search-button" value="검색">
+			</div>
+		</form>
 		<hr>
 		<article class="post_area">
-			<c:forEach var="dto" items="${list}">
+			<c:forEach var="dto" items="${list1}" varStatus="status">
 				<div class="post_box">
-					<a href="postDetail?postcode=${dto.postcode}&posteid=${dto.eid.memberid}">
+					<a
+						href="postDetail?postcode=${dto.postcode}&posteid=${dto.eid.memberid}">
 						<div class="post_img">
 							<img src="">
 						</div>
 						<div class="post_info">
+
+							<h4>${list2.get(status.index).companyname}</h4>
 							<h4>${dto.title }</h4>
 							<h4>${dto.job }</h4>
 							<h4>${dto.area }</h4>
 							<h4>${dto.career }</h4>
 							<h4>${dto.edutype }</h4>
-							<p>
-								<span>asd</span><span>asd</span>
-							</p>
 						</div>
 						<div>
 							<b>날짜</b>
@@ -121,11 +119,10 @@ section{
 		}
 
 		// select 요소의 변경 이벤트 처리
-		document.getElementById("area").addEventListener("change",
-				function() {
-					// 서블릿 호출을 위해 form을 submit
-					document.getElementById("searhForm").submit();
-				});
+		document.getElementById("area").addEventListener("change", function() {
+			// 서블릿 호출을 위해 form을 submit
+			document.getElementById("searhForm").submit();
+		});
 
 		document.getElementById("career").addEventListener("change",
 				function() {
