@@ -324,7 +324,14 @@ public class HunterController {
 		
 		return "redirect:/hunter/resumeList";
 	}
+
 	
+
+	@RequestMapping("/resumeList")
+	public String goResumeList(HttpServletRequest req, Model model) {
+		
+	
+
 
 	@RequestMapping("/resumeList")
 	public String goResumeList(HttpServletRequest req, Model model) {
@@ -333,6 +340,7 @@ public class HunterController {
 		List<Resume> resume = resumeRepository.findByHid(member);
 		model.addAttribute("resume", resume);
 		
+
 
 		return "/hunter/resumeList";
 	}

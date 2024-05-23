@@ -15,6 +15,7 @@ import com.green.jobhunter.entity.Enterprise;
 import com.green.jobhunter.entity.MainCategory;
 import com.green.jobhunter.entity.Member;
 import com.green.jobhunter.entity.Posting;
+import com.green.jobhunter.entity.Resume;
 import com.green.jobhunter.repository.ApplicationRepository;
 import com.green.jobhunter.repository.EnterpriseRepository;
 import com.green.jobhunter.repository.HunterRepository;
@@ -180,7 +181,7 @@ public class EnterpriseController {
     	Posting posting = postingRepository.findByPostcode(postcode_);
         posting.setPostcode(postcode_);
         
-        posting.setTitle("title");
+        posting.setTitle(request.getParameter("title"));
             
         int headcount_ = Integer.parseInt(request.getParameter("headcount"));
         posting.setHeadcount(headcount_);
@@ -224,6 +225,7 @@ public class EnterpriseController {
     public String root5(Model model){
     	List<TalentInfoDto> talentInfo = resumeRepository.findAllWithTalentInfo();
     	model.addAttribute("talentInfo", talentInfo);
+    	
     	return "/enter/hunterList";  
     }
     
