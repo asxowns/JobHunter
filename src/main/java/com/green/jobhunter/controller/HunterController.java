@@ -19,7 +19,6 @@ import com.green.jobhunter.dto.HunterDto;
 import com.green.jobhunter.dto.MemberDto;
 import com.green.jobhunter.dto.ResumeDto;
 import com.green.jobhunter.dto.ResumeSkillDto;
-import com.green.jobhunter.entity.Application;
 import com.green.jobhunter.entity.Career;
 import com.green.jobhunter.entity.Certificate;
 import com.green.jobhunter.entity.CoverLetter;
@@ -28,7 +27,6 @@ import com.green.jobhunter.entity.DesiredIndustry;
 import com.green.jobhunter.entity.Hunter;
 import com.green.jobhunter.entity.MainCategory;
 import com.green.jobhunter.entity.Member;
-import com.green.jobhunter.entity.Posting;
 import com.green.jobhunter.entity.Resume;
 import com.green.jobhunter.entity.ResumeSkill;
 import com.green.jobhunter.entity.SubCategory;
@@ -82,8 +80,7 @@ public class HunterController {
 	EnterpriseRepository enterpriseRepository;
 	@Autowired
 	ApplicationRepository applicationRepository;
-	
-	
+
 	@RequestMapping("/")
 	public String goHunterPage() {
 		return "/hunter/hunterPage";
@@ -103,26 +100,26 @@ public class HunterController {
 
 		model.addAttribute("mainList", mainList);
 		model.addAttribute("subList", subList);
-		
+
 		return "/hunter/resumeWriteForm";
 	}
 
-	//이력서를 실제로 등록하는 기능
+	// 이력서를 실제로 등록하는 기능
 	@RequestMapping("/resumeWrite")
 	public String addResume(HttpServletRequest req,
-			HunterDto h, 
-		    ResumeDto r, 
-		    DesiredAreaDto da, 
-		    DesiredIndustryDto di, 
-		    CareerDto c, 
-		    CoverLetterDto cl, 
-		    ResumeSkillDto rs, 
-		    CertificateDto ctf, 
-		    Model model) {
-		
+			HunterDto h,
+			ResumeDto r,
+			DesiredAreaDto da,
+			DesiredIndustryDto di,
+			CareerDto c,
+			CoverLetterDto cl,
+			ResumeSkillDto rs,
+			CertificateDto ctf,
+			Model model) {
+
 		Member member = memberRepository.findByMemId((String) req.getSession().getAttribute("logged"));
 		Hunter hunter = hunterRepository.findByHid(member);
-		if(hunter == null) {
+		if (hunter == null) {
 			hunter = new Hunter();
 		}
 		// hunter 정보
@@ -137,7 +134,7 @@ public class HunterController {
 		hunter.setMilitary(h.getMilitary());
 		hunter.setReportnum(h.getReportnum());
 		hunterRepository.save(hunter);
-		
+
 		// resume 정보
 		Resume resume = new Resume();
 		resume.setHid(member);
@@ -152,24 +149,27 @@ public class HunterController {
 		resume.setDesiredpay(r.getDesiredpay());
 		resume.setPublictype(r.getPublictype());
 		resumeRepository.save(resume);
-		
+
 		// desiredArea 정보
 		DesiredArea dArea = new DesiredArea();
 		dArea.setResumecode(resume);
+		dArea.setHid(member);
 		dArea.setArea1(da.getArea1());
 		dArea.setArea2(da.getArea2());
 		desiredAreaRepository.save(dArea);
-		
+
 		// desiredIndustry 정보
 		DesiredIndustry dIndustry = new DesiredIndustry();
 		dIndustry.setResumecode(resume);
+		dIndustry.setHid(member);
 		dIndustry.setMainCategory(di.getMainCategory());
 		dIndustry.setMiddleCategory(di.getMiddleCategory());
 		desiredIndustryRepository.save(dIndustry);
-		
+
 		// career 정보
 		Career career = new Career();
 		career.setResumecode(resume);
+		career.setHid(member);
 		career.setCompanyname(c.getCompanyname());
 		career.setCardate(c.getCardate());
 		career.setEnddate(c.getEnddate());
@@ -179,13 +179,14 @@ public class HunterController {
 		career.setWork(c.getWork());
 		career.setSalary(c.getSalary());
 		careerRepository.save(career);
-		
+
 		// resumeSkill 정보
 		ResumeSkill resumeSkill = new ResumeSkill();
+		resumeSkill.setHid(member);
 		resumeSkill.setResumecode(resume);
 		resumeSkill.setStack(rs.getStack());
 		resumeSkillRepository.save(resumeSkill);
-		
+
 		// coverLetter 정보
 		CoverLetter coverLetter = new CoverLetter();
 		coverLetter.setResumecode(resume);
@@ -193,30 +194,29 @@ public class HunterController {
 		coverLetter.setMotive(cl.getMotive());
 		coverLetter.setProsAndCons(cl.getProsAndCons());
 		coverLetterRepository.save(coverLetter);
-		
+
 		// certificate 정보
 		Certificate cer = new Certificate();
+		cer.setHid(member);
 		cer.setResumecode(resume);
 		cer.setPublisher(ctf.getPublisher());
 		cer.setIssuedate(ctf.getIssuedate());
 		certificateRepository.save(cer);
-		
-		//memberRepository.save();
-		
+
+		// memberRepository.save();
+
 		return "redirect:/hunter/resumeList";
 	}
-	
-	
+
 	// 이력서수정폼
 	@RequestMapping("/resumeUpdateForm")
 	public String updateResumeForm(HttpServletRequest req, Model model) {
-	
-		Long resumecode_ =  Long.parseLong(req.getParameter("resumecode"));
+
+		Long resumecode_ = Long.parseLong(req.getParameter("resumecode"));
 		List<MainCategory> mainList = mainCategoryRepository.findAll();
 		List<SubCategory> subList = subCategoryRepository.findAll();
 		HttpSession session = req.getSession();
-		
-		
+
 		Member member = memberRepository.findByMemberid((String) session.getAttribute("logged"));
 		Hunter hunter = hunterRepository.findByHid(member);
 		Resume resume = resumeRepository.findByResumecode(resumecode_);
@@ -226,8 +226,7 @@ public class HunterController {
 		CoverLetter coverLetter = coverLetterRepository.findByResumecode(resume);
 		ResumeSkill resumeSkill = resumeSkillRepository.findByResumecode(resume);
 		Certificate certificate = certificateRepository.findByResumecode(resume);
-		
-		
+
 		model.addAttribute("mainList", mainList);
 		model.addAttribute("subList", subList);
 		model.addAttribute("hunter", hunter);
@@ -238,20 +237,19 @@ public class HunterController {
 		model.addAttribute("cl", coverLetter);
 		model.addAttribute("rs", resumeSkill);
 		model.addAttribute("ctf", certificate);
-		System.out.println( " ========================= 여기3번째 실행 완료 =========================");
-		
+		System.out.println(" ========================= 여기3번째 실행 완료 =========================");
+
 		return "/hunter/resumeUpdateForm";
 	}
-	
+
 	// 이력서를 실제로 수정하는 기능
 	@RequestMapping("/resumeUpdate")
-	public String updateResume(Member m, Hunter h, Resume r, DesiredArea da, DesiredIndustry di, 
+	public String updateResume(Member m, Hunter h, Resume r, DesiredArea da, DesiredIndustry di,
 			Career c, CoverLetter cl, ResumeSkill rs, Certificate ctf, HttpServletRequest req) {
-		
+
 		HttpSession session = req.getSession();
-		String memberid = (String)session.getId();
-		
-		
+		String memberid = (String) session.getId();
+
 		System.out.println("=========================------------------=======================");
 		System.out.println(memberid);
 		System.out.println(memberid);
@@ -259,11 +257,11 @@ public class HunterController {
 		System.out.println(memberid);
 		System.out.println(memberid);
 		System.out.println("=========================------------------=======================");
-		
+
 		Member member = memberRepository.findByMemberid((String) session.getAttribute("logged"));
 		String resumecode_ = req.getParameter("resumecode");
 		Long resumecode = Long.parseLong(resumecode_);
-				// hunter 정보
+		// hunter 정보
 		Hunter hunter = hunterRepository.findByHid(member);
 		hunter.setUsername(h.getUsername());
 		hunter.setBirth(h.getBirth());
@@ -288,21 +286,21 @@ public class HunterController {
 		resume.setPhotourl(r.getPhotourl());
 		resume.setDesiredpay(r.getDesiredpay());
 		resume.setPublictype(r.getPublictype());
-		
+
 		// desiredArea 정보
 		DesiredArea dArea = desiredAreaRepository.findByResumecode(resume);
 		dArea.setResumecode(resume);
 		dArea.setHid(member);
 		dArea.setArea1(da.getArea1());
 		dArea.setArea2(da.getArea2());
-		
+
 		// desiredIndustry 정보
 		DesiredIndustry dIndustry = desiredIndustryRepository.findByResumecode(resume);
 		dIndustry.setHid(member);
 		dIndustry.setResumecode(resume);
 		dIndustry.setMainCategory(di.getMainCategory());
 		dIndustry.setMiddleCategory(di.getMiddleCategory());
-		 
+
 		// career 정보
 		Career career = careerRepository.findByResumecode(resume);
 		career.setHid(member);
@@ -315,28 +313,27 @@ public class HunterController {
 		career.setJob(c.getJob());
 		career.setWork(c.getWork());
 		career.setSalary(c.getSalary());
-		
+
 		// resumeSkill 정보
 		ResumeSkill resumeSkill = resumeSkillRepository.findByResumecode(resume);
 		resumeSkill.setResumecode(resume);
 		resumeSkill.setHid(member);
 		resumeSkill.setStack(rs.getStack());
-		
+
 		// coverLetter 정보
 		CoverLetter coverLetter = coverLetterRepository.findByResumecode(resume);
 		coverLetter.setResumecode(resume);
 		coverLetter.setGrowth(cl.getGrowth());
 		coverLetter.setMotive(cl.getMotive());
 		coverLetter.setProsAndCons(cl.getProsAndCons());
-		
+
 		// certificate 정보
 		Certificate cer = certificateRepository.findByResumecode(resume);
 		cer.setResumecode(resume);
 		cer.setCerticode(resumecode);
 		cer.setPublisher(ctf.getPublisher());
 		cer.setIssuedate(ctf.getIssuedate());
-		
-		
+
 		hunterRepository.save(hunter);
 		resumeRepository.save(resume);
 		desiredAreaRepository.save(dArea);
@@ -345,31 +342,30 @@ public class HunterController {
 		careerRepository.save(career);
 		coverLetterRepository.save(coverLetter);
 		resumeSkillRepository.save(resumeSkill);
-		//memberRepository.save();
-		
+		// memberRepository.save();
+
 		return "redirect:/hunter/resumeList";
 	}
 
-
-	//이력서목록페이지 
+	// 이력서목록페이지
 	@RequestMapping("/resumeList")
 	public String goResumeList(HttpServletRequest req, Model model) {
 		HttpSession session = req.getSession();
 		Member member = memberRepository.findByMemberid((String) session.getAttribute("logged"));
 		System.out.println(member);
 		List<Resume> resume = resumeRepository.findByHid(member);
-		
+
 		System.out.println("====================================");
 		System.out.println(resume);
 		System.out.println("====================================");
 		model.addAttribute("resume", resume);
-		
+
 		return "/hunter/resumeList";
 	}
-	
+
 	@RequestMapping("/resumeList2")
 	public String goResumeList2(HttpServletRequest request, Model model) {
-		//해당인재의 이력서목록
+		// 해당인재의 이력서목록
 		String hid = request.getParameter("hid");
 		List<Resume> resume2 = resumeRepository.findByHid(hid);
 		model.addAttribute("resume", resume2);
@@ -401,33 +397,34 @@ public class HunterController {
 	public String jobApplication(HttpServletRequest req, Model model) {
 
 		// 로그인된(logged) 사용자가 필요. (Member memberid 이용?)
-		String logged_id = (String)req.getSession().getAttribute("logged");
-		
+		String logged_id = (String) req.getSession().getAttribute("logged");
+
 		// 로그인된 사용자가 없으면 로그인 페이지로 보내기
-		if(logged_id == null) {
+		if (logged_id == null) {
 			return "redirect:/main/loginForm";
 		}
-		
+
 		// 세션에서 로그인된 사용자 정보를 가져옴
 		Member member = memberRepository.findByMemId(logged_id);
-		if(member == null) {
+		if (member == null) {
 			return "redirect:/main/";
 		}
-		
+
 		// hunter 객체를 가져옴 (내가(hunter)가 입사지원한 입사지원 리스트를 갖고 와야 하니까)
 		Hunter hunter = hunterRepository.findByHid(member);
-		//없으면 그냥 메인으로 보내
-		if(hunter == null) {
+		// 없으면 그냥 메인으로 보내
+		if (hunter == null) {
 			return "redirect:/main/";
 		}
-		
+
 		// 로그인한 구직자가 입사지원한 채용공고 리스트 가져오기
-		//List<Application> appList = applicationRepository.findByHid(member);
+		// List<Application> appList = applicationRepository.findByHid(member);
 		// 수정해야함> Application application = applicationRepository.findByHid2(member);
-		//수정해야함> String hid = application.getHid();
-		//수정해야함> List<Posting> postList= postingRepository.findMyApplyList(application.getHid());
-		//model.addAttribute("postList", postList );
-		
+		// 수정해야함> String hid = application.getHid();
+		// 수정해야함> List<Posting> postList=
+		// postingRepository.findMyApplyList(application.getHid());
+		// model.addAttribute("postList", postList );
+
 		return "/hunter/jobApplication";
 	}
 
@@ -454,24 +451,24 @@ public class HunterController {
 
 		return "/hunter/informList";
 	}
-	
+
 	@RequestMapping("/hunterForm")
 	public String hunterForm(HttpServletRequest req, MemberDto m, HunterDto h, Model model) {
 		HttpSession session = req.getSession();
-		String logged_id =(String) session.getAttribute("logged");
+		String logged_id = (String) session.getAttribute("logged");
 		Member member = memberRepository.findByMemId(logged_id);
 		Hunter hunter = hunterRepository.findByHid(member);
-		model.addAttribute("hunter",hunter);
-		model.addAttribute("meme",member);
+		model.addAttribute("hunter", hunter);
+		model.addAttribute("meme", member);
 		return "/hunter/hunterForm";
 	}
-	
+
 	@RequestMapping("/saveHunterForm")
 	public String saveHunterForm(HttpServletRequest req, HunterDto h, Member m) {
 		HttpSession session = req.getSession();
 		Member member = memberRepository.findByMemId((String) session.getAttribute("logged"));
 		Hunter hunter = hunterRepository.findByHid(member);
-		if(hunter == null) {
+		if (hunter == null) {
 			hunter = new Hunter();
 		}
 		member.setPassword(m.getPassword());
@@ -482,13 +479,11 @@ public class HunterController {
 		hunter.setEmail(h.getEmail());
 		hunter.setTel(h.getTel());
 		hunter.setTel2(h.getTel2());
-		
+
 		hunterRepository.save(hunter);
 		memberRepository.save(member);
-		
+
 		return "redirect:/hunter/";
 	}
-	
-	
 
 }
