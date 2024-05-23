@@ -55,9 +55,7 @@ public interface ResumeRepository extends JpaRepository<Resume, Long>{
             dtos.add(dto);
         }
         return dtos;
-    }
-    
-    @Query(value = "SELECT * FROM resume WHERE hid = :hid", nativeQuery=true)
-	public List<Resume> findByHid(@Param("hid") String hid);
-    
+
+    } 
+
 }

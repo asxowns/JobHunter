@@ -290,7 +290,7 @@ public class HunterController {
 		dIndustry.setResumecode(resume);
 		dIndustry.setMainCategory(di.getMainCategory());
 		dIndustry.setMiddleCategory(di.getMiddleCategory());
-		
+		 
 		// career 정보
 		Career career = careerRepository.findByResumecode(resume);
 		career.setResumecode(resume);
