@@ -17,6 +17,15 @@
     align-items: center;
     flex-direction: column; 
   }
+  ul {
+            display: flex;
+            flex-direction: row;
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin: 0 10px; /* 각 리스트 아이템 간의 간격을 추가 */
+        }
   
   canvas {
             max-width: 700px;
@@ -51,14 +60,16 @@
     <div class="container"> <!-- 지원자 리스트 -->
     	<p>지원자 리스트</p>
     	<br>
-    	<table border="1">
-    		<c:forEach var="app" items="${application }">
-    		<tr>
-	    		<td>${app.appcode }</td> 
-	    		<td>${app.hid.memberid }</td>
-    		</tr>
+    		<c:forEach var="app" items="${applicantDto }">
+    		<ul>
+	    		<li>${app.username }</li> 
+	    		<li>${app.title }</li>
+	    		<li>${app.gender }</li>
+	    		<li>${app.birth }</li>
+	    		<li>${app.edutype }</li>
+	    		<li>${app.employmenttype }</li>
+    		</ul>
     		</c:forEach>
-    	</table>
     	
     </div>
     <br>
