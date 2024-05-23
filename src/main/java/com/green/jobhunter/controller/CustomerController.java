@@ -161,32 +161,32 @@ public class CustomerController {
         return "redirect:/cs/csList";
     }
 
-	@PostMapping("/chat")
-    public String saveChat(@RequestParam("message") String message, HttpSession session,Model model) {
+//	@PostMapping("/chat")
+//    public String saveChat(@RequestParam("message") String message, HttpSession session,Model model) {
+//
+//		String logged = (String) session.getAttribute("logged");
+//		Member logged_Hid = memberRepository.findByMemberid(logged);
+//		Chat chat = new Chat();
+//		LocalDateTime timelog = LocalDateTime.now();
+//		List<Chat> list = chatRepository.findAll();
+//		chat.setMessage(message);
+//		chat.setHid(logged_Hid);
+//		chat.setTimelog(timelog);
+//		
+//		chatRepository.save(chat);
+//		model.addAttribute("list", list);
+//		return "/";
+//    }
 
-		String logged = (String) session.getAttribute("logged");
-		Member logged_Hid = memberRepository.findByMemberid(logged);
-		Chat chat = new Chat();
-		LocalDateTime timelog = LocalDateTime.now();
-		List<Chat> list = chatRepository.findAll();
-		chat.setMessage(message);
-		chat.setHid(logged_Hid);
-		chat.setTimelog(timelog);
-		
-		chatRepository.save(chat);
-		model.addAttribute("list", list);
-		return "/";
-    }
-
-	@RequestMapping("/chatList")
-	@ResponseBody
-	public String chatList(Model model){
-		List<Chat> list = chatRepository.findAll();
-		model.addAttribute("list", list);
-		System.out.println(list + "@@@@@@@@@@@@@@@============@@@@@@@");
-	
-		return list.toString();
-	}
+//	@RequestMapping("/chatList")
+//	@ResponseBody
+//	public String chatList(Model model){
+//		List<Chat> list = chatRepository.findAll();
+//		model.addAttribute("list", list);
+//		System.out.println(list + "@@@@@@@@@@@@@@@============@@@@@@@");
+//	
+//		return list.toString();
+//	}
 
 
 	@RequestMapping("/regReply")

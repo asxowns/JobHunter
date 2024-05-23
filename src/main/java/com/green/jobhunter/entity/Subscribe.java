@@ -1,6 +1,8 @@
 package com.green.jobhunter.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -16,8 +18,9 @@ import lombok.ToString;
 @NoArgsConstructor
 public class Subscribe {
 	@Id
-	private long subs_code;
-
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private long subscode;
+	
 	@ManyToOne
 	@JoinColumn(name="eid")
 	@ToString.Exclude
