@@ -115,9 +115,10 @@ table th {
 		</div>
 		<div id="demo"></div>
 
-		<form action="aplication?postcode=${postcode}">
-			<input type="hidden" value=>
-			<input type="button" value="즉시지원">
+		<form action="applicate" method="get">
+			<input type="hidden" name="postcode" value="${dto.postcode}">
+			<input type="hidden" name="hid" value="<%= session.getAttribute("logged") %>">
+			<input type="submit" value="즉시지원">
 		</form>
 		<form action="">
 			<input type="button" value="스크랩">
@@ -155,51 +156,55 @@ table th {
 
 </body>
 <script type="text/javascript">
-    const btn1 = document.querySelector("[data-tab='tab-1']");
-    const btn2 = document.querySelector("[data-tab='tab-2']");
-    const tabContent1 = document.getElementById("tab-1");
-    const tabContent2 = document.getElementById("tab-2");
+	const btn1 = document.querySelector("[data-tab='tab-1']");
+	const btn2 = document.querySelector("[data-tab='tab-2']");
+	const tabContent1 = document.getElementById("tab-1");
+	const tabContent2 = document.getElementById("tab-2");
 
-    const heartLink = document.getElementById("heartLink");
-    const heartImg = document.getElementById("heartImg");
-    let isFilled = false;
+	const heartLink = document.getElementById("heartLink");
+	const heartImg = document.getElementById("heartImg");
+	let isFilled = false;
 
-    var posteid = "${posteid}";
+	var posteid = "${posteid}";
 
-    btn1.addEventListener("click", function() {
-        btn1.classList.add("current");
-        btn2.classList.remove("current");
-        tabContent1.classList.add("current");
-        tabContent2.classList.remove("current");
-    });
+	btn1.addEventListener("click", function() {
+		btn1.classList.add("current");
+		btn2.classList.remove("current");
+		tabContent1.classList.add("current");
+		tabContent2.classList.remove("current");
+	});
 
-    btn2.addEventListener("click", function() {
-        btn2.classList.add("current");
-        btn1.classList.remove("current");
-        tabContent2.classList.add("current");
-        tabContent1.classList.remove("current");
-    });
+	btn2.addEventListener("click", function() {
+		btn2.classList.add("current");
+		btn1.classList.remove("current");
+		tabContent2.classList.add("current");
+		tabContent1.classList.remove("current");
+	});
 
- 
-	
-    document.getElementById("heartLink").addEventListener("click", function(event) {
-        event.preventDefault(); // 기본 이벤트 동작 방지
-        if (isFilled) {
-            heartImg.src = "/resource/img/heartempty.png";
-        } else {
-            heartImg.src = "/resource/img/heartfill.png";
-        }
-        isFilled = !isFilled;
-        var outputDivPw = document.getElementById('outputDivPw');
-      
-        const xhttp = new XMLHttpRequest();
-        xhttp.onload = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                document.getElementById("demo").innerHTML = this.responseText;
-            }
-        };
-        xhttp.open("GET", "/subscribe?posteid=" + posteid + "&isFilled=" + isFilled, true);
-        xhttp.send();
-    });
+	document
+			.getElementById("heartLink")
+			.addEventListener(
+					"click",
+					function(event) {
+						event.preventDefault(); // 기본 이벤트 동작 방지
+						if (isFilled) {
+							heartImg.src = "/resource/img/heartempty.png";
+						} else {
+							heartImg.src = "/resource/img/heartfill.png";
+						}
+						isFilled = !isFilled;
+						var outputDivPw = document
+								.getElementById('outputDivPw');
+
+						const xhttp = new XMLHttpRequest();
+						xhttp.onload = function() {
+							if (this.readyState == 4 && this.status == 200) {
+								document.getElementById("demo").innerHTML = this.responseText;
+							}
+						};
+						xhttp.open("GET", "/subscribe?posteid=" + posteid
+								+ "&isFilled=" + isFilled, true);
+						xhttp.send();
+					});
 </script>
 </html>
