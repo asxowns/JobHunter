@@ -1,7 +1,6 @@
 package com.green.jobhunter.controller;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +19,12 @@ import com.green.jobhunter.dto.HunterDto;
 import com.green.jobhunter.dto.MemberDto;
 import com.green.jobhunter.dto.ResumeDto;
 import com.green.jobhunter.dto.ResumeSkillDto;
+import com.green.jobhunter.entity.Application;
 import com.green.jobhunter.entity.Career;
 import com.green.jobhunter.entity.Certificate;
 import com.green.jobhunter.entity.CoverLetter;
 import com.green.jobhunter.entity.DesiredArea;
 import com.green.jobhunter.entity.DesiredIndustry;
-import com.green.jobhunter.entity.Enterprise;
 import com.green.jobhunter.entity.Hunter;
 import com.green.jobhunter.entity.MainCategory;
 import com.green.jobhunter.entity.Member;
@@ -33,6 +32,7 @@ import com.green.jobhunter.entity.Posting;
 import com.green.jobhunter.entity.Resume;
 import com.green.jobhunter.entity.ResumeSkill;
 import com.green.jobhunter.entity.SubCategory;
+import com.green.jobhunter.repository.ApplicationRepository;
 import com.green.jobhunter.repository.CareerRepository;
 import com.green.jobhunter.repository.CertificateRepository;
 import com.green.jobhunter.repository.CoverLetterRepository;
@@ -80,6 +80,9 @@ public class HunterController {
 	PostingRepository postingRepository;
 	@Autowired
 	EnterpriseRepository enterpriseRepository;
+	@Autowired
+	ApplicationRepository applicationRepository;
+	
 	
 	@RequestMapping("/")
 	public String goHunterPage() {
@@ -289,17 +292,20 @@ public class HunterController {
 		// desiredArea 정보
 		DesiredArea dArea = desiredAreaRepository.findByResumecode(resume);
 		dArea.setResumecode(resume);
+		dArea.setHid(member);
 		dArea.setArea1(da.getArea1());
 		dArea.setArea2(da.getArea2());
 		
 		// desiredIndustry 정보
 		DesiredIndustry dIndustry = desiredIndustryRepository.findByResumecode(resume);
+		dIndustry.setHid(member);
 		dIndustry.setResumecode(resume);
 		dIndustry.setMainCategory(di.getMainCategory());
 		dIndustry.setMiddleCategory(di.getMiddleCategory());
 		 
 		// career 정보
 		Career career = careerRepository.findByResumecode(resume);
+		career.setHid(member);
 		career.setResumecode(resume);
 		career.setCompanyname(c.getCompanyname());
 		career.setCardate(c.getCardate());
@@ -313,6 +319,7 @@ public class HunterController {
 		// resumeSkill 정보
 		ResumeSkill resumeSkill = resumeSkillRepository.findByResumecode(resume);
 		resumeSkill.setResumecode(resume);
+		resumeSkill.setHid(member);
 		resumeSkill.setStack(rs.getStack());
 		
 		// coverLetter 정보
@@ -325,6 +332,7 @@ public class HunterController {
 		// certificate 정보
 		Certificate cer = certificateRepository.findByResumecode(resume);
 		cer.setResumecode(resume);
+		cer.setCerticode(resumecode);
 		cer.setPublisher(ctf.getPublisher());
 		cer.setIssuedate(ctf.getIssuedate());
 		
@@ -380,21 +388,37 @@ public class HunterController {
 		return "/hunter/resumeManagement";
 	}
 
+	// 입사지원 리스트 페이지
 	@RequestMapping("/jobApplication")
 	public String jobApplication(HttpServletRequest req, Model model) {
 
-		// 로그인된(logged) 사용자가 필요. (Member memberid 이용)
-		Member member = memberRepository.findByMemId((String)req.getSession().getAttribute("logged"));
+		// 로그인된(logged) 사용자가 필요. (Member memberid 이용?)
+		String logged_id = (String)req.getSession().getAttribute("logged");
+		
+		// 로그인된 사용자가 없으면 로그인 페이지로 보내기
+		if(logged_id == null) {
+			return "redirect:/main/loginForm";
+		}
+		
+		// 세션에서 로그인된 사용자 정보를 가져옴
+		Member member = memberRepository.findByMemId(logged_id);
+		if(member == null) {
+			return "redirect:/main/";
+		}
+		
+		// hunter 객체를 가져옴 (내가(hunter)가 입사지원한 입사지원 리스트를 갖고 와야 하니까)
 		Hunter hunter = hunterRepository.findByHid(member);
-		// 사용자가 입사지원을 한 채용공고리스트를 받아와야 함. : postcode 필요
+		//없으면 그냥 메인으로 보내
+		if(hunter == null) {
+			return "redirect:/main/";
+		}
 		
-		List<Posting> postList = postingRepository.findByEid(member);
-		
-		// 채용공고(posting)의 postcode 받아오기
-		
-		// Member hid 받아오기
-		
-		
+		// 로그인한 구직자가 입사지원한 채용공고 리스트 가져오기
+		//List<Application> appList = applicationRepository.findByHid(member);
+		// 수정해야함> Application application = applicationRepository.findByHid2(member);
+		//수정해야함> String hid = application.getHid();
+		//수정해야함> List<Posting> postList= postingRepository.findMyApplyList(application.getHid());
+		//model.addAttribute("postList", postList );
 		
 		return "/hunter/jobApplication";
 	}

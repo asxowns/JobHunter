@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import com.green.jobhunter.entity.Application;
 import com.green.jobhunter.entity.Member;
 import com.green.jobhunter.entity.Posting;
 
@@ -15,6 +16,8 @@ public interface PostingRepository extends JpaRepository<Posting, Long> {
 	List<Posting> findByEid(@Param("eid") String eid);
 	
 	Posting findByPostcode(Long postcode);
+	
+	Posting findByPostcode(Posting posting);
 	//해당 채용공고 삭제
 	@Query(value = "DELETE FROM application WHERE postcode = :postcode", nativeQuery = true)
 	void deleteBypostcode(@Param("postcode") Long postcode);
@@ -34,5 +37,10 @@ public interface PostingRepository extends JpaRepository<Posting, Long> {
 		        @Param("career") String career, 
 		        @Param("edutype") String edutype);
 	List<Posting> findByEid(Member eid);
+	
+	   @Query(value ="SELECT * FROM posting p WHERE p.postcode in (SELECT a.postcode from application a JOIN member m ON m.memberid = a.hid WHERE a.hid = :hid)",nativeQuery = true)
+	   List<Posting> findMyApplyList(@Param("hid") String hid);
+
+	
 
 }
