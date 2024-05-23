@@ -10,25 +10,24 @@
 <meta charset="UTF-8">
 <title></title>
 <style>
-*{
-	margin:0;
-	padding:0;
-}
-body{
-	color:#333;
-	font-size:16px;
-}
-a{
-	text-decoration:none;
-}
-ul{
-	list-style:none;
+* {
+	margin: 0;
+	padding: 0;
 }
 
-section{
-	width:1240px;
-	margin:150px auto;
+body {
+	color: #333;
+	font-size: 16px;
 }
+
+a {
+	text-decoration: none;
+}
+
+ul {
+	list-style: none;
+}
+
 
 .choose_job{
 	margin:10px 0;
@@ -151,6 +150,7 @@ section{
 	font-size:13px;
 	color:#888;
 	font-weight:400;
+
 }
 </style>
 </head>
@@ -158,9 +158,10 @@ section{
 	<header>
 		<%@ include file="../sub/header.jsp"%>
 	</header>
-	
+
 	<section>
 		<h2>추천공고</h2>
+
 		<a href="">1</a>
 		<a href="">2</a>
 		<a href="">3</a>
@@ -174,6 +175,7 @@ section{
 	<form id="searhForm" action="searchFilter" method="post">
 		<div class="search-container">
 			<div class="search-select-filter">
+
 				<select id="area" name="area_">
 					<option value="">지역</option>
 					<option value="seoul">서울</option>
@@ -186,6 +188,7 @@ section{
 					<option value="">학력</option>
 					<option value="uni">대졸</option>
 					<option value="high">고졸</option>
+
 				</select> 
 			</div>
 			<div class="search-input-filter">
@@ -197,15 +200,17 @@ section{
 			</div>
 		</div>
 	</form>
-	
+
 		<article class="post_area">
-			<c:forEach var="dto" items="${list}">
+			<c:forEach var="dto" items="${list1}" varStatus="status">
 				<div class="post_box">
-					<a href="postDetail?postcode=${dto.postcode}&posteid=${dto.eid.memberid}">
+					<a
+						href="postDetail?postcode=${dto.postcode}&posteid=${dto.eid.memberid}">
 						<div class="post_img">
 							<img src="/resource/img/${dto.mainurl }">
 						</div>
 						<div class="post_info">
+
 							<h1 class="ent_name">삼성전자</h1>
 							<h2 class="post_title">채용공고 제목</h2>
 							<h3 class="industry">채용직군<span class="line">|</span><span class="area">지역</span></h3>
@@ -243,11 +248,10 @@ section{
 		}
 
 		// select 요소의 변경 이벤트 처리
-		document.getElementById("area").addEventListener("change",
-				function() {
-					// 서블릿 호출을 위해 form을 submit
-					document.getElementById("searhForm").submit();
-				});
+		document.getElementById("area").addEventListener("change", function() {
+			// 서블릿 호출을 위해 form을 submit
+			document.getElementById("searhForm").submit();
+		});
 
 		document.getElementById("career").addEventListener("change",
 				function() {

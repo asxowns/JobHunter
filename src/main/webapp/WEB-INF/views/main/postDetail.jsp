@@ -107,9 +107,9 @@ table th{
     
     기업정보
   
-     <a href="subscribe?posteid=${posteid}" id="heartLink">
+     <div id ="heartLink">
     	<img id="heartImg" src="/resource/img/heartempty.png">
-	</a>
+	</div>
     <div id="demo"></div>
     
     <form action="">
@@ -176,13 +176,26 @@ table th{
         tabContent1.classList.remove("current");
     });
 
-    heartLink.addEventListener("click", function() {
+ 
+	
+    document.getElementById("heartLink").addEventListener("click", function(event) {
+        event.preventDefault(); // 기본 이벤트 동작 방지
         if (isFilled) {
             heartImg.src = "/resource/img/heartempty.png";
         } else {
             heartImg.src = "/resource/img/heartfill.png";
         }
         isFilled = !isFilled;
+        var outputDivPw = document.getElementById('outputDivPw');
+      
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("demo").innerHTML = this.responseText;
+            }
+        };
+        xhttp.open("GET", "/subscribe?posteid=" + posteid + "&isFilled=" + isFilled, true);
+        xhttp.send();
     });
 </script>
 </html>

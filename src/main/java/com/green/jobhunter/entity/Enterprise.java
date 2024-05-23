@@ -1,6 +1,7 @@
 package com.green.jobhunter.entity;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,8 +25,8 @@ public class Enterprise{
 	private Long entercode;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="eid")
-	@ToString.Exclude
+	@JoinColumn(name="eid",unique = true)
+	//@ToString.Exclude
 	private Member eid;
 	private String companyname;
 	private String size;
