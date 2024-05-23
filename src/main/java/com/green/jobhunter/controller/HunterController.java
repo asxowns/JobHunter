@@ -27,6 +27,7 @@ import com.green.jobhunter.entity.DesiredIndustry;
 import com.green.jobhunter.entity.Hunter;
 import com.green.jobhunter.entity.MainCategory;
 import com.green.jobhunter.entity.Member;
+import com.green.jobhunter.entity.Posting;
 import com.green.jobhunter.entity.Resume;
 import com.green.jobhunter.entity.ResumeSkill;
 import com.green.jobhunter.entity.SubCategory;
@@ -398,33 +399,33 @@ public class HunterController {
 
 		// 로그인된(logged) 사용자가 필요. (Member memberid 이용?)
 		String logged_id = (String) req.getSession().getAttribute("logged");
+		String result = (String) req.getParameter("result");
+		if (result == null) {
+			result = "대기";
+		}
 
 		// 로그인된 사용자가 없으면 로그인 페이지로 보내기
 		if (logged_id == null) {
-			return "redirect:/main/loginForm";
+			return "/main/loginForm";
 		}
 
 		// 세션에서 로그인된 사용자 정보를 가져옴
 		Member member = memberRepository.findByMemId(logged_id);
 		if (member == null) {
-			return "redirect:/main/";
+			return "redirect:/";
 		}
 
 		// hunter 객체를 가져옴 (내가(hunter)가 입사지원한 입사지원 리스트를 갖고 와야 하니까)
 		Hunter hunter = hunterRepository.findByHid(member);
 		// 없으면 그냥 메인으로 보내
 		if (hunter == null) {
-			return "redirect:/main/";
+			return "redirect:/";
 		}
 
 		// 로그인한 구직자가 입사지원한 채용공고 리스트 가져오기
-		// List<Application> appList = applicationRepository.findByHid(member);
-		// 수정해야함> Application application = applicationRepository.findByHid2(member);
-		// 수정해야함> String hid = application.getHid();
-		// 수정해야함> List<Posting> postList=
-		// postingRepository.findMyApplyList(application.getHid());
-		// model.addAttribute("postList", postList );
-
+		List<Posting> appPostList = postingRepository.findMyApplyList(logged_id, result);
+		model.addAttribute("appPostList", appPostList);
+		model.addAttribute("result", result);
 		return "/hunter/jobApplication";
 	}
 
@@ -484,6 +485,14 @@ public class HunterController {
 		memberRepository.save(member);
 
 		return "redirect:/hunter/";
+	}
+
+	@RequestMapping("/postDetail")
+	public String postDetail(@RequestParam("postcode") long postcode, Model model) {
+		Posting posting = postingRepository.findByPostcode(postcode);
+		model.addAttribute("dto", posting);
+		model.addAttribute("postcode", postcode);
+		return "/main/postDetail";
 	}
 
 }
