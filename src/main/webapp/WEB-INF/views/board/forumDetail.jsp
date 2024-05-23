@@ -240,9 +240,7 @@ main b {
 				</div>
 			</div>
 				<h1 class="detailtitle">${community.title }</h1>
-				<h4 class="detailcontent">
-					${community.content }
-				</h4>
+				<h4 class="detailcontent">${community.content }</h4>
 			
 		</main>
 		
@@ -259,6 +257,7 @@ main b {
 				</form>
 			</div>
 		</div>
+		
 		<c:forEach var="reply" items="${reply }">
 			<div id="reply_list">
 				<div class="reply_myinfo">

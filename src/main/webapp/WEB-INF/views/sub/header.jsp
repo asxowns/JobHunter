@@ -23,7 +23,8 @@ a{
 }
 
 header {
-	width: 100%;
+	min-width:1240px;
+	margin:0 auto;
 	height: 150px;
 	border-bottom: 1px solid #eee;
 	box-shadow:0px 2px 10px #eee;

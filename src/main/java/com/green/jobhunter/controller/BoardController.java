@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.green.jobhunter.entity.Community;
 import com.green.jobhunter.entity.CommunityReply;
+import com.green.jobhunter.entity.EnterCommu_reply;
 import com.green.jobhunter.entity.EnterpriseCommunity;
 import com.green.jobhunter.repository.Commu_replyRepository;
 import com.green.jobhunter.repository.CommunityRepository;
+import com.green.jobhunter.repository.EnterCommu_replyRepository;
 import com.green.jobhunter.repository.EnterpriseCommunityRepository;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -42,6 +44,9 @@ public class BoardController {
 	
 	@Autowired
 	EnterpriseCommunityRepository enterRepo;
+	
+	@Autowired
+	EnterCommu_replyRepository enterReplyRepo;
 
 	@RequestMapping("/forumWriteForm")
 	public String forumWriteForm(@RequestParam("boardtype") int boardtype, Model model) {
@@ -54,7 +59,8 @@ public class BoardController {
 	@RequestMapping("/openForum")
 	public String openForum(
 			@PageableDefault(page = 0, size = 10, sort = "cmcode", direction = Sort.Direction.DESC) Pageable pageable,
-			Model model) {
+			Model model
+			) {
 
 		Page<Community> page = communityRepo.findAll(pageable);
 		int currentPage = page.getNumber();
@@ -94,14 +100,7 @@ public class BoardController {
 	@RequestMapping("/enterpriseForum")
 	public String enterpriseForum(
 			@PageableDefault(page = 0, size = 10, sort = "eccode", direction = Sort.Direction.DESC) Pageable pageable,
-			Model model, @RequestParam("boardtype") int boardtype) throws Exception {
-
-		response.setContentType("text/html; charset=utf-8");
-		request.setCharacterEncoding("UTF-8");
-		PrintWriter out = response.getWriter();
-		HttpSession session = request.getSession();
-
-		Character role = (Character) session.getAttribute("role");
+			Model model){
 
 			Page<EnterpriseCommunity> page = enterRepo.findAll(pageable);
 			int currentPage = page.getNumber();
@@ -144,10 +143,10 @@ public class BoardController {
 
 		if (boardtype == 1) {
 			communityRepo.save(community);
-			return ":openForum";
+			return "redirect:openForum";
 		} else if (boardtype == 2) {
 			enterRepo.save(entcommunity);
-			return ":enterpriseForum";
+			return "redirect:enterpriseForum";
 		}
 		return "/board/forumWriteForm";
 
@@ -157,8 +156,8 @@ public class BoardController {
 	public String forumDetail(@RequestParam("cmcode") Long cmcode, Model model) {
 
 		Community community = communityRepo.findByCmcode(cmcode);
-		Community commu = communityRepo.findByCmcode(cmcode);
-		List<CommunityReply> reply = communityReplyRepo.findByCmcode(commu);
+		List<CommunityReply> reply = communityReplyRepo.findByCmcode(community);
+		
 		model.addAttribute("reply",reply);
 		model.addAttribute("community", community);
 
@@ -170,7 +169,9 @@ public class BoardController {
 	public String forumDetail2(@RequestParam("eccode") Long eccode, Model model) {
 
 		EnterpriseCommunity entcommunity = enterRepo.findByEccode(eccode);
-
+		List<EnterCommu_reply> enterReply = enterReplyRepo.findByEccode(entcommunity);
+		
+		model.addAttribute("reply", enterReply);
 		model.addAttribute("community", entcommunity);
 
 		return "/board/forumDetail2";
@@ -290,15 +291,28 @@ public class BoardController {
 	}
 
 	@RequestMapping("update")
-	public String update(@RequestParam("cmcode") Long cmcode, @RequestParam("title") String title,
-			@RequestParam("content") String content, @RequestParam("boardtype") int boardtype) {
+	public String update(@RequestParam("cmcode") Long cmcode,
+			@RequestParam("eccode") Long eccode,
+			@RequestParam("title") String title,
+			@RequestParam("content") String content,
+			@RequestParam("boardtype") int boardtype) {
 
-		Community community = communityRepo.findByCmcode(cmcode);
-		community.setTitle(title);
-		community.setContent(content);
-		communityRepo.save(community);
+		if(boardtype == 1) {
+			Community community = communityRepo.findByCmcode(cmcode);
+			community.setTitle(title);
+			community.setContent(content);
+			communityRepo.save(community);
+			
+			return "redirect:openForum";
+		}else {
+			EnterpriseCommunity entCommunity = enterRepo.findByEccode(eccode);
+			entCommunity.setTitle(title);
+			entCommunity.setContent(content);
+			enterRepo.save(entCommunity);
+			
+			return "redirect:enterpriseForum";
+		}
 
-		return "redirect:openForum";
 
 	}
 
@@ -316,6 +330,14 @@ public class BoardController {
 		communityReplyRepo.save(communityReply);
 		
 		return "redirect:/board/forumDetail?cmcode="+cmcode;
+	}
+	
+	@RequestMapping("/enterCommuReply")
+	public String enterCommuReply(EnterCommu_reply enterCommuReply, @RequestParam("eccode") Long eccode) {
+		
+		enterReplyRepo.save(enterCommuReply);
+		
+		return "redirect:/board/forumDetail2?eccode="+eccode;
 	}
 
 }
