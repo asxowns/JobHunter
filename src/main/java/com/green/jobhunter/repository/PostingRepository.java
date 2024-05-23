@@ -1,11 +1,15 @@
 package com.green.jobhunter.repository;
 
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import com.green.jobhunter.dto.ApplicantDto;
+import com.green.jobhunter.dto.TalentInfoDto;
 import com.green.jobhunter.entity.Member;
 import com.green.jobhunter.entity.Posting;
 
@@ -34,5 +38,5 @@ public interface PostingRepository extends JpaRepository<Posting, Long> {
 		        @Param("career") String career, 
 		        @Param("edutype") String edutype);
 	List<Posting> findByEid(Member eid);
-
+	
 }
