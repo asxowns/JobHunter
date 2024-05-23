@@ -39,7 +39,7 @@ public class Resume{
 	private String edustate;
 	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
 	private LocalDate graduatedate;
-	private String newOrExp;
+	private String employmenttype;
 	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
 	@Column(columnDefinition = "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP",  nullable = false)
 	private LocalDate modifydate;

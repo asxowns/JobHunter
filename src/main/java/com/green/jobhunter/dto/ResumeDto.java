@@ -13,7 +13,7 @@ public class ResumeDto {
 	private String edumajor;
 	private String edustate;
 	private LocalDate graduatedate;
-	private String newOrExp;
+	private String employmenttype;
 	private LocalDate modifydate;
 	private String photourl;
 	private int desiredpay;

@@ -11,8 +11,5 @@ import com.green.jobhunter.entity.Resume;
 @Repository
 public interface DesiredAreaRepository extends JpaRepository<DesiredArea, Long>{
 	
-	@Query(value = "SELECT da FROM desiredArea da WHERE da.resumecode = :r", nativeQuery=true)
-	public DesiredArea findOneDa(@Param("r")Resume r);
-	
 	public DesiredArea findByResumecode(Resume resume);
 }

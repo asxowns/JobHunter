@@ -19,7 +19,7 @@
 		<div class="container">
 			<h2>이력서 수정</h2>
 			<br>
-			<form action="/hunter/resumeUpdate" method="post">
+			<form action="/hunter/resumeUpdate?resumecode=${resume.resumecode}" method="post">
 				<div class="title">
 					<input type="text" name="title" placeholder="이력서 제목 ,한줄소개"
 						value="${resume.title}">
@@ -33,16 +33,16 @@
 						<option value="m" <c:if test="${fn:trim(hunter.gender) == 'm'}">selected</c:if>>남자</option>
 						<option value="f" <c:if test="${fn:trim(hunter.gender) == 'f'}">selected</c:if>>여자</option>
 					</select> 
-					<input type="text" name="email" placeholder="이메일" value="${hunter.email}"><br> 
-					<input type="text" name="tel" placeholder="휴대폰번호" value="${hunter.tel}"> <br>
-					<input type="text" name="tel2" placeholder="비상연락처" value="${hunter.tel2}"><br>
-					<input type="text" name="newOrExp" placeholder="신입or경력" value="${resume.newOrExp}"><br>
+					이메일<input type="text" name="email" placeholder="이메일" value="${hunter.email}"><br> 
+					휴대폰 번호<input type="text" name="tel" placeholder="휴대폰번호" value="${hunter.tel}"> <br>
+					비상 연락처<input type="text" name="tel2" placeholder="비상연락처" value="${hunter.tel2}"><br>
+					신입/경력<input type="text" name="employmenttype" placeholder="신입or경력" value="${resume.employmenttype}"><br>
 					<select name="military">
 						<option value="o"  ${fn:trim(hunter.military) == 'o' ? 'selected' : ''}>군필/면제/해당없음</option>
 						<option value="x" ${fn:trim(hunter.military) == 'x' ? 'selected' : ''}>미필</option>
 					</select> 
-						<input type="text" name="address" placeholder="주소"	value="${hunter.address}">
-					<iframe id="photo" title="photo" width="100" height="120"
+					주소<input type="text" name="address" placeholder="주소"	value="${hunter.address}">
+					증명사진<iframe id="photo" title="photo" width="100" height="120"
 						src="${resume.photourl}"></iframe>
 					<input type="file" id="photo" name="photoUrl" src="${resume.photourl}">
 				</div>
@@ -83,9 +83,9 @@
 				<div class="desiredIndustry">
 					<p>희망 직무(산업군)</p>
 					<p>
-						대분류 <select name="industry" class="mainSelect" required size="10" onchange="fetchSubList()">
+						대분류 <select name="mainCategory" class="mainSelect" required onchange="fetchSubList()">
 							<c:forEach var="main" items="${mainList}">
-								<option id="${main.mccode}" value="${main.mccode}" ${di.mainCategory == main.main ? 'selected' : ''}>${main.main}</option>
+								<option id="${main.mccode}" value="${main.mccode}" ${di.mainCategory == main.mccode ? 'selected' : ''}>${main.main}</option>
 							</c:forEach>
 						</select> 
 						소분류 <select name="middleCategory" id="subSelect">
@@ -104,7 +104,7 @@
 						경력 <input type="text" name="companyname" placeholder="회사명" value="${c.companyname}"> 
 						입사일 <input type="date"	name="cardate" value="${c.cardate}"> 
 						퇴사일 <input type="date" name="enddate" value="${c.enddate}"> 
-						재직중 : <input type="checkbox" name="working" value=${c.working? 'checked' : ''}><br>
+						재직중 : <input type="checkbox" name="working" value=${c.enddate? '' : 'checked'}><br>
 						직급/직책<input type="text" name="position" placeholder="직급/직책" value="${c.position}">
 						담당직무<input type="text" name="job" placeholder="담당직무" value="${c.job}"> 
 						연봉<input type="text" name="salary" placeholder="연봉" value="${c.salary}"> 
@@ -114,20 +114,20 @@
 				</div>
 				<div class="resumeSkill">
 					<p>기술 스택</p>
-					<textarea name="resumeSkill" cols="100" rows="7">${rs.skills}</textarea>
+					<textarea name="resumeSkill" cols="100" rows="7">${rs.stack}</textarea>
 				</div>
 				<div class="certificate">
 					<p>
 						자격증 명 <input type="text" name="stack" placeholder="자격증 명" value="${ctf.stack}"> 
-						발급처<input type="text" name="pulisher" placeholder="발급처" value="${ctf.pulisher}"> 
+						발급처<input type="text" name="pulisher" placeholder="발급처" value="${ctf.publisher}"> 
 						취득일 <input type="date" name="issuedate" value="${ctf.issuedate}">
 					</p>
 				</div>
 				<div class="coverLetter" id="resumeForm">
 					<p>
 						자기소개서 <br> 
-						성장과정 <textarea name="growth" placeholder="성장과정 기술">${cl.growth}</textarea><br> 
-						지원동기 <textarea name="motive" placeholder="지원동기 기술">${cl.motive}</textarea><br> 
+						성장과정 : <textarea name="growth" placeholder="성장과정 기술">${cl.growth}</textarea><br> 
+						지원동기 : <textarea name="motive" placeholder="지원동기 기술">${cl.motive}</textarea><br> 
 						성격의 장˙단점 : <textarea name="prosAndCons" placeholder="성격의 장˙단점 기술 ">${cl.prosAndCons}</textarea>
 					</p>
 				</div>

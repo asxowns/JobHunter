@@ -27,7 +27,7 @@ public interface ResumeRepository extends JpaRepository<Resume, Long>{
 	
 	public Resume findByResumecode(Long resumecode);
 	
-	public List<Resume> findByHid(Member member);
+	public List<Resume> findByHid(Member hid);
 
   @Query(value = "SELECT r FROM resume r WHERE r.hid = :hid", nativeQuery=true)
 	public Resume findOneResume(String memberid);

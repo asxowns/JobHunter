@@ -37,15 +37,16 @@ public class Career{
 	private Member hid;
 	private String companyname;
 
-	@Column(columnDefinition = "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP",  nullable = false)
+	//@Column(columnDefinition = "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP",  nullable = false)
 	private LocalDate cardate;
 	
-	@Column(columnDefinition = "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP",  nullable = false)
+	//@Column(columnDefinition = "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP",  nullable = false)
 	private LocalDate enddate;
 	
 	private String industry;
 	private String position;
 	private String job;
+	private String working;
 	private String work;
 	private String salary;
 	
