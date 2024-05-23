@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%-- JSTL Core --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib  prefix="f" uri="http://kr.pe.skyer9.warehouseweb/functions"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -255,9 +257,9 @@ input[type="submit"] {
 			</div>
 
 			<div id="list_area">
-				<c:forEach var="comm" items="${list }">
+				<c:forEach var="comm" items="${list }" varStatus="stat">
 					<a href="forumDetail2?eccode=${comm.eccode }">
-						<p>${comm.regdate }</p>
+						<p>${f:formatLocalDateTime(comm.regdate, 'yyyy-MM-dd HH:mm:ss')}</p>
 						<h2>${comm.title }</h2>
 						<h4>
 							<div class="list_bottom">
@@ -272,7 +274,7 @@ input[type="submit"] {
 										<img src="/resource/img/view_icon.png"> <span>11</span>
 									</p>
 									<p>
-										<img src="/resource/img/reply_icon.png"> <span>22</span>
+										<img src="/resource/img/reply_icon.png"> <span>${enterReply_cnt[stat.index]}</span>
 									</p>
 								</div>
 							</div>
@@ -280,9 +282,9 @@ input[type="submit"] {
 					</a>
 				</c:forEach>
 
-				<c:forEach var="search" items="${searchList }">
-					<a href="forumDetail?eccode=${search.eccode }">
-						<p>${search.regdate }</p>
+				<c:forEach var="search" items="${searchList }" varStatus="stat">
+					<a href="forumDetail2?eccode=${search.eccode }">
+						<p>${f:formatLocalDateTime(search.regdate, 'yyyy-MM-dd HH:mm:ss')}</p>
 						<h2>${search.title }</h2>
 						<h4>
 							<div class="list_bottom">
@@ -291,10 +293,10 @@ input[type="submit"] {
 								</div>
 								<div class="list_bottom_info">
 									<p>
-										<img src="/resource/img/view_icon.png"> <span>11</span>
+										<img src="/resource/img/view_icon.png"> <span>10</span>
 									</p>
 									<p>
-										<img src="/resource/img/reply_icon.png"> <span>22</span>
+										<img src="/resource/img/reply_icon.png"> <span>${enterReply_cnt[stat.index]}</span>
 									</p>
 								</div>
 							</div>
