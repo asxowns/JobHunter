@@ -134,7 +134,6 @@ public class HunterController {
 		hunter.setGender(h.getGender());
 		hunter.setMilitary(h.getMilitary());
 		hunter.setReportnum(h.getReportnum());
-		hunter.setNewOrExp(h.getNewOrExp());
 
 		// resume 정보
 		Resume resume = new Resume();

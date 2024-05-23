@@ -51,6 +51,5 @@ public class Hunter{
 	private char gender;
 	private char military;
 	private int reportnum;
-	private String newOrExp;
 	
 }
