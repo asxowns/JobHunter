@@ -9,13 +9,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.green.jobhunter.dto.ApplicantDto;
 import com.green.jobhunter.dto.TalentInfoDto;
-import com.green.jobhunter.entity.Application;
 import com.green.jobhunter.entity.Enterprise;
 import com.green.jobhunter.entity.MainCategory;
 import com.green.jobhunter.entity.Member;
 import com.green.jobhunter.entity.Posting;
-import com.green.jobhunter.entity.Resume;
 import com.green.jobhunter.repository.ApplicationRepository;
 import com.green.jobhunter.repository.EnterpriseRepository;
 import com.green.jobhunter.repository.HunterRepository;
@@ -123,8 +122,8 @@ public class EnterpriseController {
     	model.addAttribute("posting", posting);
     	
     	//지원자리스트 (구직자정보 / 해당공고정보)
-    	List<Application> applications = applicationRepository.findByPostcode(posting);
-        model.addAttribute("application", applications);
+    	List<ApplicantDto> applicantDto = applicationRepository.findAllWithApplicantDto();
+        model.addAttribute("applicantDto", applicantDto);
         
     	return "/enter/hunterPerPostList";
     }

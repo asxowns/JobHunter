@@ -126,7 +126,7 @@ h3{
         <ul class="hunterList_info">
             <li>${t.username}</li> 
             <li>${t.gender} / ${t.birth} / ${t.edutype} / ${t.employmenttype}</li>
-            <li><a href="/hunter/resumeList?hid=${t.hid}">이력서 보기</a></li>
+            <li><a href="/hunter/resumeList2?hid=${t.hid}">이력서 보기</a></li>
         </ul>
         </c:forEach>
     </div>
