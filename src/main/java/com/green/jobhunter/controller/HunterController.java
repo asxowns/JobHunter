@@ -75,6 +75,7 @@ public class HunterController {
 		return "/hunter/hunterPage";
 	}
 
+	// 이력서등록
 	@RequestMapping("/resumeWriteForm")
 	public String writeResume(Model model) {
 		// DesiredIndustry desiredIndustry;
@@ -88,13 +89,39 @@ public class HunterController {
 
 		model.addAttribute("mainList", mainList);
 		model.addAttribute("subList", subList);
-
+		
 		return "/hunter/resumeWriteForm";
 	}
 
+	// 이력서수정
+	@RequestMapping("/resumeUpdateForm")
+	public String updateResume(Hunter hunter, Resume resume, DesiredArea da, DesiredIndustry di, 
+			Career c, CoverLetter cl, ResumeSkill rs, Certificate ctf,  Model model) {
+		List<MainCategory> mainList = mainCategoryRepository.findAll();
+		List<String> subList = subCategoryRepository.findSubCategory();
+		
+		model.addAttribute("mainList", mainList);
+		model.addAttribute("subList", subList);
+		
+		model.addAttribute("hunter", hunter);
+		model.addAttribute("resume", resume);
+		model.addAttribute("da", da);
+		model.addAttribute("di", di);
+		model.addAttribute("c", c);
+		model.addAttribute("cl", cl);
+		model.addAttribute("rs", rs);
+		model.addAttribute("ctf", ctf);
+		
+		
+		return "/hunter/resumeWrite";
+	}
+	
+	
+	
+	
 	@RequestMapping("/resumeWrite")
 	public String addResume(HunterDto h, ResumeDto r, DesiredAreaDto da, DesiredIndustryDto di, 
-			CareerDto c, CoverLetterDto cl, ResumeSkillDto rs, CertificateDto ctf,  Model model) {
+			CareerDto c, CoverLetterDto cl, ResumeSkillDto rs, CertificateDto ctf, Model model) {
 
 		// hunter 정보
 		Hunter hunter = new Hunter();
@@ -264,6 +291,7 @@ public class HunterController {
 		Hunter hunter = new Hunter();
 		Member member = new Member();
 		member.setPassword(m.getPassword());
+		hunter.setHid(m);
 		hunter.setUsername(h.getUsername());
 		hunter.setBirth(h.getBirth());
 		hunter.setAddress(h.getAddress());
@@ -274,7 +302,7 @@ public class HunterController {
 		hunterRepository.save(hunter);
 		memberRepository.save(member);
 		
-		return "redirect:/hunter/hunterForm";
+		return "redirect:/hunter/hunterPage";
 	}
 	
 	
