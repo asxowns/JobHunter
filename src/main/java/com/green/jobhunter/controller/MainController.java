@@ -32,7 +32,7 @@ import jakarta.transaction.Transactional;
 public class MainController {
 	static Enterprise enterprise = null;
 	static Member eid = null;
-	static long cnt=0;
+	static long cnt = 0;
 	@Autowired
 	MemberRepository memberrepository;
 	@Autowired
@@ -69,18 +69,15 @@ public class MainController {
 	@RequestMapping("/enterpriseList")
 	public String enterpriseList() {
 
-
 		return "/main/enterpriseList";
 	}
-	
+
 	@RequestMapping("/enterpriseDetail")
 	public String enterpriseDetail() {
 
-	
-
 		return "/main/enterpriseDetail";
 	}
-	
+
 	@RequestMapping("/registForm")
 	public String regForm() {
 
@@ -92,51 +89,36 @@ public class MainController {
 		return "/main/loginForm";
 	}
 
-	@RequestMapping("/enterregist1")
-	public String enterregist1(Enterprise enterprise) {
-		System.out.println("==============================enterprise "+ enterprise);
-		System.out.println("==============================enterprise "+ enterprise);
-		Member member = new Member();
-		member.setMemberid("test");
-		enterprise.setEid(member);
-		enterrepository.save(enterprise);
-
-	
-		return "/main/registForm";
-	}
-
 	@RequestMapping("/hunterregist")
 	public String regist(Hunter hunter, Member member, Model model) {
-		Member m =new Member();
+		Member m = new Member();
 		Hunter h = new Hunter();
 
 		m.setMemberid(member.getMemberid());
 		m.setPassword(member.getPassword());
 		m.setRole('h');
 		h.setHid(m);
-		
+
 		h.setUsername(hunter.getUsername());
 		h.setBirth(hunter.getBirth());
 		h.setTel(hunter.getTel());
 		h.setEmail(hunter.getEmail());
-	    hunterrepository.save(h);
-	    
-		
+		hunterrepository.save(h);
+
 		return "/main/loginForm";
 	}
 
 	@RequestMapping("/enterregist")
 	public String regist(Member member, Enterprise enterprise) {
-		
-		Member m =new Member();
+
+		Member m = new Member();
 		Enterprise e = new Enterprise();
-		System.out.println("====================================member "+member);
 		m.setMemberid(member.getMemberid());
 		m.setPassword(member.getPassword());
 		m.setRole('e');
 		e.setEid(m);
-		
-		//Member savedmember = memberrepository.save(member);
+
+		// Member savedmember = memberrepository.save(member);
 		e.setEid(m);
 		e.setCompanyname(enterprise.getCompanyname());
 		e.setCeo(enterprise.getCeo());
@@ -151,21 +133,21 @@ public class MainController {
 		e.setManagername(enterprise.getManagername());
 		e.setManagertel(enterprise.getManagertel());
 		e.setManageremail(enterprise.getManageremail());
-		
+
 		entityManager.clear();
 
-		System.out.println("==============================enterprise "+ e);
-	    enterrepository.save(e);
-	    
+		enterrepository.save(e);
+
 		return "/main/loginForm";
 	}
-	
-	
-	
-	
-	
-	
-	
+
+	@RequestMapping("/aplication")
+	public String aplication(@RequestParam("postcode") long postode, Model model) {
+
+		model.addAttribute("postode", postode);
+		return "";
+	}
+
 //	@RequestMapping("/enterregist")
 //	public String regist(Member member, Enterprise enterprise) {
 //	    System.out.println("=================================member:"+ member);
@@ -312,6 +294,7 @@ public class MainController {
 		Posting posting = postingrepository.findByPostcode(postcode);
 		model.addAttribute("dto", posting);
 		model.addAttribute("posteid", posteid);
+		model.addAttribute("postcode", postcode);
 		return "/main/postDetail";
 	}
 
@@ -384,41 +367,41 @@ public class MainController {
 
 	}
 
-
 	@RequestMapping("/subscribe")
 	@ResponseBody
-	public String subscribe(@RequestParam("posteid") String posteid,@RequestParam("isFilled") Boolean isFilled, HttpSession session,Model model) {
-	    cnt++;
-	    String sessionId = (String) session.getAttribute("logged");
-	    System.out.println("=====================sessionId: " + sessionId);
-	    
-	    // 세션에서 멤버 객체 가져오기
-	    Member member = memberrepository.findByMemberid(sessionId);
-	    System.out.println("=====================member: " + member);
+	public String subscribe(@RequestParam("posteid") String posteid, @RequestParam("isFilled") Boolean isFilled,
+			HttpSession session, Model model) {
+		cnt++;
+		String sessionId = (String) session.getAttribute("logged");
+		System.out.println("=====================sessionId: " + sessionId);
 
-	    // 기업 객체 생성 (현재 코드에서는 주석 처리)
-	    // Enterprise enterprise = enterpriseRepository.findByEid(posteid);
+		// 세션에서 멤버 객체 가져오기
+		Member member = memberrepository.findByMemberid(sessionId);
+		System.out.println("=====================member: " + member);
 
-	    // 새로운 기업 및 구독 정보 생성
-	    Enterprise enterprise = enterrepository.findByEid(posteid);
-	    System.out.println("=====================posteid: " + posteid);
-	    System.out.println("=====================enterprise: " + enterprise);
-	    System.out.println("=====================enterprisegetMemberid(): " + enterprise.getEid().getMemberid());
-	    System.out.println("=====================isFilled: "+isFilled);
-	    Subscribe subscribe = new Subscribe(enterprise, member);
-	    if (isFilled) {
-	    // 구독 정보 데이터베이스에 저장
-	    subscriberepostory.save(subscribe);
-	    model.addAttribute("isFilled",true );
-	    }else {
-	    	System.out.println("==========trydelete==========");
-	    	System.out.println("============================"+enterprise.getEid());
-	    	System.out.println("=====================enterprisegetMemberid(): " + enterprise.getEid().getMemberid());
-		    subscriberepostory.deleteByEntercode(enterprise.getEntercode());
+		// 기업 객체 생성 (현재 코드에서는 주석 처리)
+		// Enterprise enterprise = enterpriseRepository.findByEid(posteid);
 
-		    model.addAttribute("isFilled",false );
-	    }
-	    // 수정: 응답으로 빈 문자열 반환
-	    return "";
+		// 새로운 기업 및 구독 정보 생성
+		Enterprise enterprise = enterrepository.findByEid(posteid);
+		System.out.println("=====================posteid: " + posteid);
+		System.out.println("=====================enterprise: " + enterprise);
+		System.out.println("=====================enterprisegetMemberid(): " + enterprise.getEid().getMemberid());
+		System.out.println("=====================isFilled: " + isFilled);
+		Subscribe subscribe = new Subscribe(enterprise, member);
+		if (isFilled) {
+			// 구독 정보 데이터베이스에 저장
+			subscriberepostory.save(subscribe);
+			model.addAttribute("isFilled", true);
+		} else {
+			System.out.println("==========trydelete==========");
+			System.out.println("============================" + enterprise.getEid());
+			System.out.println("=====================enterprisegetMemberid(): " + enterprise.getEid().getMemberid());
+			subscriberepostory.deleteByEntercode(enterprise.getEntercode());
+
+			model.addAttribute("isFilled", false);
+		}
+		// 수정: 응답으로 빈 문자열 반환
+		return "";
 	}
 }
