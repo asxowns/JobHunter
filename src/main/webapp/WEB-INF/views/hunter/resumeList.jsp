@@ -45,7 +45,7 @@
 					<th>제목</th>
 					<th>작성일/최종수정일</th>
 				</tr>
-				<c:forEach var="resume" items="${resume}" varStatus="status">
+				<c:forEach var="resume" items="${resume }" varStatus="status">
 					<tr>
 						<td><a href="/hunter/resumeUpdateForm?resumecode=${resume.resumecode}"> ${status.count} </a></td>
 						<td><a href="/hunter/resumeUpdateForm?resumecode=${resume.resumecode}">${resume.title  }</a></td>

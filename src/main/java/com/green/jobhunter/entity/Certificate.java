@@ -38,7 +38,7 @@ public class Certificate{
 	private String stack;
 	private String publisher;
 	
-	@Column(columnDefinition = "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP",  nullable = false)
+	//@Column(columnDefinition = "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP",  nullable = false)
 	private LocalDate issuedate;
 	
 }

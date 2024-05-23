@@ -19,32 +19,35 @@
 		<div class="container">
 		<!--------------------이력서 등록--------------------->
 			
-				<form action="/hunter/resumeWrite" method="post">
+				<form action="sta" method="post">
 					<div class="title">
 						<input type="text" name="title" placeholder="이력서 제목 ,한줄소개">
 					</div>
 					<div class="personal_info">
 						<p>인적사항</p>
-						<input type="text" name="username" placeholder="이름"> 생년월일<input
-							type="date" name="birth"> <select name="gender">
+						<input type="text" name="username" placeholder="이름"> 
+						생년월일<input type="date" name="birth"> 
+						<select name="gender">
 							<option value="m">남자</option>
 							<option value="f">여자</option>
-						</select> <input type="text" name="email" placeholder="이메일"><br>
-						<input type="text" name="tel" placeholder="휴대폰번호"> <input
-							type="text" name="emergency_contact" placeholder="비상연락처">
-						<input type="text" name="employmenttype" placeholder="신입or경력">
+						</select> 
+						이메일<input type="text" name="email" placeholder="이메일"><br>
+						휴대폰 번호<input type="text" name="tel" placeholder="휴대폰번호"> 
+						비상 연락처<input type="text" name="tel2" placeholder="비상연락처">
+						신입/경력<input type="text" name="employmenttype" placeholder="신입or경력"><br>
 						<select name="military">
 							<option value="o">군필/면제/해당없음</option>
 							<option value="x">미필</option>
-						</select> <input type="text" name="address" placeholder="주소">
-						<iframe id="photo" title="photo" width="100" height="120"
+						</select> 
+						주소<input type="text" name="address" placeholder="주소">
+						증명사진<iframe id="photo" title="photo" width="100" height="120"
 							src="photoUrl"></iframe>
 						<input type="file" id="photo" name="photoUrl">
 					</div>
 					<div class="public_type">
 						<span>이력서 공개여부</span><br> 
-						<input type="radio" name="public_type" id="public_type" value="1" >공개
-						<input type="radio" name="public_type" id="public_type" value="0" >비공개
+						<input type="radio" name="publictype" id="public_type" value="1" >공개
+						<input type="radio" name="publictype" id="public_type" value="0" >비공개
 					</div>
 					<div class="education">
 						학력 <br> 
@@ -58,8 +61,8 @@
 							<option value="검정고시">검정고시</option>
 						</select> 
 							학교이름<input type="text" name="eduname" placeholder="학교이름"> 
-							전공<input type="text" name="eduname" placeholder="전공"> 
-							졸업년도<input	 type="date" name="eduname">
+							전공<input type="text" name="edumajor" placeholder="전공"> 
+							졸업년도<input	 type="date" name="graduatedate">
 						<!-- 졸업상태가 졸업이면 졸업년도 입력가능하게 하기 -->
 						<p>학력 상태</p>
 						<select name="edustate">
@@ -78,11 +81,13 @@
 					<div class="desiredIndustry">
 						<p>희망 직무(산업군)</p>
 						<p>
-							대분류 <select name="industry" class="mainSelect" required size="10" onchange="fetchSubList()">
-								<c:forEach var="main" items="${mainList}">
-									<option id="${main.mccode}" value="${main.main}">${main.main}</option>
-								</c:forEach>
+							대분류 <select name="industry" class="mainSelect" onchange="fetchSubList()">
+							<option value="">대분류</option>
+							<c:forEach var="main" items="${mainList}">
+								<option id="${main.mccode}" value="${main.main}">${main.main}</option>
+							</c:forEach>
 							</select> 소분류 <select name="middleCategory" id="subSelect">
+								<option value="">소분류</option>
 								<c:forEach var="sub" items="${subList }">
 									<option value="${sub}">${sub}</option>
 								</c:forEach>
@@ -96,14 +101,14 @@
 					<div class="career">
 						<p>
 							경력 <input type="text" name="companyname" placeholder="회사명">
-							입사일 <input type="date" name="cardate"> 퇴사일 <input
-								type="date" name="enddate"> 재직중 : <input type="checkbox"
-								name="working"><br> <input type="text"
-								name="position" placeholder="직급/직책"> <input type="text"
-								name="job" placeholder="담당직무"> <input type="text"
-								name="salary" placeholder="연봉"> <input type="text"
-								name="industry" placeholder="산업군"><br>
-							<textarea name="work" cols="80">담당업무</textarea>
+							입사일 <input type="date" name="cardate"> 
+							퇴사일 <input type="date" name="enddate"> 
+							재직중 : <input type="checkbox" name="working"><br> 
+							직급/직책<input type="text" name="position" placeholder="직급/직책"> 
+							담당직무<input type="text" name="job" placeholder="담당직무"> 
+							연봉<input type="text" name="salary" placeholder="연봉"> 
+							산업군<input type="text" name="industry" placeholder="산업군"><br>
+							담당업무<textarea name="work" cols="80">담당업무</textarea>
 						</p>
 					</div>
 					<div class="resumeSkill">
@@ -112,17 +117,17 @@
 					</div>
 					<div class="certificate">
 						<p>
-							자격증 <input type="text" name="certificate" placeholder="자격증 명">
-							<input type="text" name="issuer" placeholder="발급처"> 취득일 <input
-								type="date" name="optaindate">
+							자격증 <input type="text" name="stack" placeholder="자격증 명">
+							발급처<input type="text" name="pulisher" placeholder="발급처"> 
+							취득일 <input type="date" name="issuedate">
 						</p>
 					</div>
 					<div class="coverLetter" id="resumeForm">
 						<p>
-							자기소개서 <br> 성장과정 : <input type="text" name="growth"
-								placeholder="성장과정 기술"><br> 지원동기 : <input type="text"
-								name="ji" placeholder="지원동기 기술"> <br> 성격의 장˙단점 : <input
-								type="text" name="jang" placeholder="성격의 장˙단점 기술 ">
+							자기소개서 <br> 
+							성장과정 : <textarea name="growth" placeholder="성장과정 기술"></textarea><br> 
+							지원동기 : <textarea name="motive" placeholder="지원동기 기술"></textarea><br> 
+							성격의 장˙단점 : <textarea name="prosAndCons" placeholder="성격의 장˙단점 기술 "></textarea>
 						</p>
 					</div>
 					<input type="submit" value="등록">
