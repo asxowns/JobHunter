@@ -177,7 +177,7 @@ body {
                 var chat_messages = "";
                 chatContentDiv.innerHTML = chat_messages;
                 
-                for(var i = 0 ; i< chatList.length ; i++){
+                for(var i = chatList.length-1 ; i >= 0; i--){
                     if(chatList[i].type == 'r'){
                         chat_messages = '<div class="line"><span class="chat-box"> '+ chatList[i].message +' </span></div>';
                     }
@@ -201,7 +201,7 @@ body {
                 var chat_messages = "";
                 chatContentDiv.innerHTML = chat_messages;
                 
-                for(var i = 0 ; i< chatList.length ; i++){
+                for(var i = chatList.length-1 ; i >= 0; i--){
                     if(chatList[i].type == 'r'){
                         chat_messages = '<div class="line"><span class="chat-box"> '+ chatList[i].message +' </span></div>';
                     }

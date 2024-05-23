@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%-- JSTL Core --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib  prefix="f" uri="http://kr.pe.skyer9.warehouseweb/functions"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -19,7 +19,6 @@
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
-        width: 100%;
         height: 50px;
         border-bottom: 1px solid black;
         padding-left: 10px;
@@ -34,6 +33,42 @@
         color: black;
         cursor: pointer;
     }
+    #notice-item-1{
+        padding-left:20px;
+        width:10%;
+        text-align:left;
+    }
+    #notice-item-2{
+        width:74%;
+        text-align: center;
+    }
+    #notice-item-3{
+        width:8%;
+        text-align:right;
+    }
+    #notice-item-a{
+        width: 105px;
+        height: 35px;
+        background-color: blue;
+        color: white;
+        font-weight: bold;
+        border: none;
+        font-size: 16px;
+        cursor: pointer;
+        margin: 20px 0;
+    }
+    #notice-item-b{
+        width: 105px;
+        height: 35px;
+        background-color: #D44958;
+        color: white;
+        font-weight: bold;
+        border: none;
+        font-size: 16px;
+        cursor: pointer;
+        margin: 20px 0;
+    }
+    
 </style>
 <%@ include file="./managerCheck.jsp" %>
 </head>
@@ -45,15 +80,22 @@
     <h2 style="text-align:center; margin:24px 0;"> 문의/신고 답변 처리 </h2>
     <div id="csList-list-table">
         <li class="csList-list-item">
-            <span> 번호 </span> <span> 제목 </span> <span> 날짜 </span>
+            <span id="notice-item-1"> 유형 </span> <span id="notice-item-2"> 제목 </span> <span id="notice-item-3"> 작성된 날짜 </span><span id="notice-item-3"> 경과일 </span>
         </li>
-        <c:forEach var="cs" items="${csList}"> 
-            <a class="a-nodecoration" href="/manage/csDetail?ntcode=${cs.cscode}" varStatus="stat">
+        <c:forEach var="cs" items="${csDtoList}" varStatus="stat"> 
+            <a class="a-nodecoration" href="/manage/csDetail?ntcode=${cs.getCscode()}" >
             <li class="csList-list-item">
-                <span>${stat.count}</span>
-                <span> ${cs.title} </span>
-                <span> ${cs.title} </span>
-                <span> ${f:formatLocalDateTime(cs.csdate, 'yyyy-MM-dd HH:mm:ss')}</span>
+
+                <c:if test="${fn:trim(cs.getType()) == 'A' }"> 
+                    <span id="notice-item-a"> 문의 </span>
+                </c:if>
+                <c:if test="${fn:trim(cs.getType()) == 'B' }"> 
+                    <span id="notice-item-b"> 신고 </span>
+                </c:if>
+
+                <span id="notice-item-2"> ${cs.getTitle()} </span>
+                <span id="notice-item-3"> ${cs.getCsdate()}</span>
+                <span id="notice-item-3"> ${cs.getBetween()}일 경과 </span>
             </li>
             </a>
         </c:forEach>
