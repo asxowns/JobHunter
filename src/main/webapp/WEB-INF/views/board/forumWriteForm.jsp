@@ -105,10 +105,10 @@ a{
     	<h1>게시물 작성</h1>
     </div>
     
-    <c:if test="${community.cmcode ne null }">
+    <c:if test="${community.cmcode ne null || community.eccode ne null }">
     	<form action="update?boardtype=${boardtype }" method="post">
     </c:if>
-    <c:if test="${community.cmcode eq null }">
+    <c:if test="${community.cmcode eq null || community.eccode eq null}">
     	<form action="write?boardtype=${boardtype }" method="post">
     </c:if>
     	<div class="write_container">

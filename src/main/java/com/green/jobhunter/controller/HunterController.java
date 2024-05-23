@@ -93,36 +93,11 @@ public class HunterController {
 		return "/hunter/resumeWriteForm";
 	}
 
-	// 이력서수정
-	@RequestMapping("/resumeUpdateForm")
-	public String updateResume(Hunter hunter, Resume resume, DesiredArea da, DesiredIndustry di, 
-			Career c, CoverLetter cl, ResumeSkill rs, Certificate ctf,  Model model) {
-		List<MainCategory> mainList = mainCategoryRepository.findAll();
-		List<String> subList = subCategoryRepository.findSubCategory();
-		
-		model.addAttribute("mainList", mainList);
-		model.addAttribute("subList", subList);
-		
-		model.addAttribute("hunter", hunter);
-		model.addAttribute("resume", resume);
-		model.addAttribute("da", da);
-		model.addAttribute("di", di);
-		model.addAttribute("c", c);
-		model.addAttribute("cl", cl);
-		model.addAttribute("rs", rs);
-		model.addAttribute("ctf", ctf);
-		
-		
-		return "/hunter/resumeWrite";
-	}
-	
-	
-	
-	
+	//이력서를 실제로 등록하는 기능
 	@RequestMapping("/resumeWrite")
 	public String addResume(HunterDto h, ResumeDto r, DesiredAreaDto da, DesiredIndustryDto di, 
 			CareerDto c, CoverLetterDto cl, ResumeSkillDto rs, CertificateDto ctf, Model model) {
-
+		
 		// hunter 정보
 		Hunter hunter = new Hunter();
 		hunter.setUsername(h.getUsername());
@@ -134,7 +109,7 @@ public class HunterController {
 		hunter.setGender(h.getGender());
 		hunter.setMilitary(h.getMilitary());
 		hunter.setReportnum(h.getReportnum());
-
+		
 		// resume 정보
 		Resume resume = new Resume();
 		resume.setTitle(r.getTitle());
@@ -143,7 +118,6 @@ public class HunterController {
 		resume.setEdumajor(r.getEdumajor());
 		resume.setEdustate(r.getEdustate());
 		resume.setGraduatedate(r.getGraduatedate());
-		resume.setEmploymenttype(r.getEmploymenttype());
 		resume.setModifydate(r.getModifydate());
 		resume.setPhotourl(r.getPhotourl());
 		resume.setDesiredpay(r.getDesiredpay());
@@ -204,6 +178,124 @@ public class HunterController {
 		
 		return "redirect:/hunter/resumeList";
 	}
+	
+	
+	// 이력서수정폼
+	@RequestMapping("/resumeUpdateForm")
+	public String updateResumeForm(Hunter hunter, Resume resume, DesiredArea desiredArea, DesiredIndustry desiredIndustry, 
+			Career career, CoverLetter coverLetter, ResumeSkill resumeSkill, Certificate certificate,  Model model) {
+		
+		List<MainCategory> mainList = mainCategoryRepository.findAll();
+		List<String> subList = subCategoryRepository.findSubCategory();
+		
+		resume.setResumecode(resume.getResumecode());
+		model.addAttribute("mainList", mainList);
+		model.addAttribute("subList", subList);
+		
+		model.addAttribute("hunter", hunter);
+		model.addAttribute("resume", resume);
+		model.addAttribute("da", desiredArea);
+		model.addAttribute("di", desiredIndustry);
+		model.addAttribute("c", career);
+		model.addAttribute("cl", coverLetter);
+		model.addAttribute("rs", resumeSkill);
+		model.addAttribute("ctf", certificate);
+		
+		
+		return "/hunter/resumeUpdateForm";
+	}
+	
+	// 이력서를 실제로 수정하는 기능
+	@RequestMapping("/resumeUpdate")
+	public String updateResume(HunterDto h, ResumeDto r, DesiredAreaDto da, DesiredIndustryDto di, 
+			CareerDto c, CoverLetterDto cl, ResumeSkillDto rs, CertificateDto ctf, Model model, HttpServletRequest req) {
+		
+		HttpSession session = req.getSession();
+		String memberid = (String)session.getId();
+		
+		// hunter 정보
+		Hunter hunter = hunterRepository.findOneHunter(memberid);
+		hunter.setUsername(h.getUsername());
+		hunter.setBirth(h.getBirth());
+		hunter.setTel(h.getTel());
+		hunter.setTel2(h.getTel2());
+		hunter.setAddress(h.getAddress());
+		hunter.setEmail(h.getEmail());
+		hunter.setGender(h.getGender());
+		hunter.setMilitary(h.getMilitary());
+		hunter.setReportnum(h.getReportnum());
+
+		// resume 정보
+		Resume resume = resumeRepository.findOneResume(memberid);
+		resume.setNewOrExp(r.getNewOrExp());
+		resume.setTitle(r.getTitle());
+		resume.setEduname(r.getEduname());
+		resume.setEdutype(r.getEdutype());
+		resume.setEdumajor(r.getEdumajor());
+		resume.setEdustate(r.getEdustate());
+		resume.setGraduatedate(r.getGraduatedate());
+		resume.setModifydate(r.getModifydate());
+		resume.setPhotourl(r.getPhotourl());
+		resume.setDesiredpay(r.getDesiredpay());
+		resume.setPublictype(r.getPublictype());
+		
+		// desiredArea 정보
+		DesiredArea dArea = desiredAreaRepository.findOneDa(memberid);
+		dArea.setResumecode(resume);
+		dArea.setArea1(da.getArea1());
+		dArea.setArea2(da.getArea2());
+		
+		// desiredIndustry 정보
+		DesiredIndustry dIndustry = desiredIndustryRepository.findOneDi(memberid);
+		dIndustry.setResumecode(resume);
+		dIndustry.setMainCategory(di.getMainCategory());
+		dIndustry.setMiddleCategory(di.getMiddleCategory());
+		
+		// career 정보
+		Career career = careerRepository.findOneCareer(memberid);
+		career.setResumecode(resume);
+		career.setCompanyname(c.getCompanyname());
+		career.setCardate(c.getCardate());
+		career.setEnddate(c.getEnddate());
+		career.setIndustry(c.getIndustry());
+		career.setPosition(c.getPosition());
+		career.setJob(c.getJob());
+		career.setWork(c.getWork());
+		career.setSalary(c.getSalary());
+		
+		// resumeSkill 정보
+		ResumeSkill resumeSkill = resumeSkillRepository.findOneResumeSkill(memberid);
+		resumeSkill.setResumecode(resume);
+		resumeSkill.setStack(rs.getStack());
+		
+		// coverLetter 정보
+		CoverLetter coverLetter = coverLetterRepository.findOneCoverLetter(memberid);
+		coverLetter.setResumecode(resume);
+		coverLetter.setGrowth(cl.getGrowth());
+		coverLetter.setMotive(cl.getMotive());
+		coverLetter.setProsAndCons(cl.getProsAndCons());
+		
+		// certificate 정보
+		Certificate cer = certificateRepository.findOneCertificate(memberid);
+		cer.setResumecode(resume);
+		cer.setPublisher(ctf.getPublisher());
+		cer.setIssuedate(ctf.getIssuedate());
+		
+		
+		hunterRepository.save(hunter);
+		resumeRepository.save(resume);
+		desiredAreaRepository.save(dArea);
+		desiredIndustryRepository.save(dIndustry);
+		certificateRepository.save(cer);
+		careerRepository.save(career);
+		coverLetterRepository.save(coverLetter);
+		resumeSkillRepository.save(resumeSkill);
+		//memberRepository.save();
+		
+		return "redirect:/hunter/resumeList";
+	}
+	
+	
 
 
 	@RequestMapping("/resumeList")

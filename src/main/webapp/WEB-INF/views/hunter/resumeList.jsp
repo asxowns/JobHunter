@@ -47,9 +47,9 @@
 				</tr>
 				<c:forEach var="resume" items="${resume}" varStatus="status">
 					<tr>
-						<td><a href="/hunter/resumeWriteForm?resumcode=${resume.resumecode}"> ${status.count} </a></td>
-						<td><a href="/hunter/resumeWriteForm?resumcode=${resume.resumecode}">${resume.title  }</a></td>
-						<td><a href="/hunter/resumeWriteForm?resumcode=${resume.resumecode}">${resume.modifydate }</a></td>
+						<td><a href="/hunter/resumeUpdateForm?resumecode=${resume.resumecode}"> ${status.count} </a></td>
+						<td><a href="/hunter/resumeUpdateForm?resumecode=${resume.resumecode}">${resume.title  }</a></td>
+						<td><a href="/hunter/resumeUpdateForm?resumecode=${resume.resumecode}">${resume.modifydate }</a></td>
 					</tr>
 				</c:forEach>
 			</table>

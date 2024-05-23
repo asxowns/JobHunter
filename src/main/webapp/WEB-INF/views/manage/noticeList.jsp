@@ -34,6 +34,19 @@
         color: black;
         cursor: pointer;
     }
+    #notice-item-1{
+        padding-left:20px;
+        width:20%;
+        text-align:left;
+    }
+    #notice-item-2{
+        width:60%;
+        text-align: center;
+    }
+    #notice-item-3{
+        width:20%;
+        text-align:right;
+    }
 </style>
 </head>
 <body>
@@ -50,9 +63,9 @@
         <c:forEach var="notice" items="${noticeList}"> 
             <a class="a-nodecoration" href="/manage/noticeDetail?ntcode=${notice.ntcode}">
             <li class="notice-list-item">
-                <span>${notice.ntcode}</span>
-                <span> ${notice.title} </span>
-                <span> <fmt:formatDate value="${notice.regdate}" pattern="yyyy-MM-dd"/> </span>
+                <span id="notice-item-1">${notice.ntcode}</span>
+                <span id="notice-item-2"> ${notice.title} </span>
+                <span id="notice-item-3"> <fmt:formatDate value="${notice.regdate}" pattern="yyyy-MM-dd hh:mm"/> </span>
             </li>
             </a>
         </c:forEach>
