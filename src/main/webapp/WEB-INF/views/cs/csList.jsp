@@ -130,8 +130,13 @@ th, td {
     font-weight: bold;
     display:flex;
     align-items:center;
+    
 }
-
+.cs_box:hover {
+    background-color: lightgray;
+    color: black;
+    font-weight: bold;
+}
 .my_box_name{
     width:1100px;
     height:55px;
@@ -174,7 +179,11 @@ th, td {
     align-items:center;
 
 }
-
+.my_box:hover {
+    background-color: lightgray;
+    color: black;
+    font-weight: bold;
+}
 .active{
     display:none;
 }

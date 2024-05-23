@@ -108,7 +108,6 @@ public class CustomerController {
 		model.addAttribute("cs", cs);
 		
 		LocalDate csdate = LocalDate.now();
-
 		cs.setTitle(title);
 		cs.setContent(content);
 		cs.setCsdate(csdate);
@@ -118,8 +117,7 @@ public class CustomerController {
     
 	@RequestMapping("/delete")
 	public String delete(@RequestParam("cscode") Long cscode, Model model){
-		Cs cs = csRepository.findByCscode(cscode);
-		csRepository.delete(cs);
+		csRepository.deleteByCscode(cscode);
 
 		return "redirect:/cs/csList";
 	}
