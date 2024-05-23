@@ -25,31 +25,31 @@ import lombok.ToString;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Hunter{
+public class Hunter {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long huntercode;
 
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="hid")
+	@JoinColumn(name = "hid")
 	@ToString.Exclude
 	private Member hid;
-  
+
 	private String username;
-  
+
 	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
 	private LocalDate birth;
-  
+
 	private int age;
 	private String tel;
-  
-	@Column(nullable=true)
+
+	@Column(nullable = true)
 	private String tel2;
-  
+
 	private String address;
 	private String email;
 	private char gender;
 	private char military;
 	private int reportnum;
-	
+
 }

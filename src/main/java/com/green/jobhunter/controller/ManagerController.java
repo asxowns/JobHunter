@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.green.jobhunter.entity.Cs;
 import com.green.jobhunter.entity.Member;
 import com.green.jobhunter.entity.Notice;
+import com.green.jobhunter.repository.CsRepository;
 import com.green.jobhunter.repository.MemberRepository;
 import com.green.jobhunter.repository.NoticeRepository;
 
@@ -26,6 +28,9 @@ public class ManagerController {
     
     @Autowired
     private MemberRepository memberRepo;
+
+    @Autowired
+    private CsRepository csRepository;
 
     @RequestMapping("/manageLoginForm")
     public String manageLoginForm(HttpServletRequest req) {
@@ -179,8 +184,9 @@ public class ManagerController {
     }
 
     @RequestMapping("/managerCSList")
-    public String managerCSList(){
-
+    public String managerCSList(Model model){
+        List<Cs> csList = csRepository.findAll();
+        model.addAttribute("csList", csList);
         return "/manage/managerCSList";
     }
     @RequestMapping("/managerCSDetail")

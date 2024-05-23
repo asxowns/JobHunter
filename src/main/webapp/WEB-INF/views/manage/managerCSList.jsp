@@ -1,20 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%-- JSTL Core --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@taglib  prefix="f" uri="http://kr.pe.skyer9.warehouseweb/functions"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <title></title>
 <style>
-    #notice-list-table{
+    #csList-list-table{
         display: flex;
         flex-direction: column;
         max-width: 75%;
         margin : 0 auto;
     }
-    .notice-list-item{
+    .csList-list-item{
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -43,16 +43,17 @@
 </header>
 <section>
     <h2 style="text-align:center; margin:24px 0;"> 문의/신고 답변 처리 </h2>
-    <div id="notice-list-table">
-        <li class="notice-list-item">
+    <div id="csList-list-table">
+        <li class="csList-list-item">
             <span> 번호 </span> <span> 제목 </span> <span> 날짜 </span>
         </li>
-        <c:forEach var="notice" items="${noticeList}"> 
-            <a class="a-nodecoration" href="/manage/noticeDetail?ntcode=${notice.ntcode}">
-            <li class="notice-list-item">
-                <span>${notice.ntcode}</span>
-                <span> ${notice.title} </span>
-                <span> <fmt:formatDate value="${notice.regdate}" pattern="yyyy-MM-dd"/> </span>
+        <c:forEach var="cs" items="${csList}"> 
+            <a class="a-nodecoration" href="/manage/csDetail?ntcode=${cs.cscode}" varStatus="stat">
+            <li class="csList-list-item">
+                <span>${stat.count}</span>
+                <span> ${cs.title} </span>
+                <span> ${cs.title} </span>
+                <span> ${f:formatLocalDateTime(cs.csdate, 'yyyy-MM-dd HH:mm:ss')}</span>
             </li>
             </a>
         </c:forEach>
