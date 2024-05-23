@@ -1,5 +1,7 @@
 package com.green.jobhunter.repository;
 
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -7,6 +9,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.green.jobhunter.entity.Application;
+import com.green.jobhunter.dto.ApplicantDto;
+import com.green.jobhunter.dto.TalentInfoDto;
+
 import com.green.jobhunter.entity.Member;
 import com.green.jobhunter.entity.Posting;
 
@@ -32,15 +37,13 @@ public interface PostingRepository extends JpaRepository<Posting, Long> {
 		       "(:area IS NULL OR p.area = :area) AND " +
 		       "(:career IS NULL OR p.career = :career) AND " +
 		       "(:edutype IS NULL OR p.edutype = :edutype)")
-		List<Posting> findByEidAndAreaAndCareerAndEdutype(@Param("eid") Member eid, 
+  List<Posting> findByEidAndAreaAndCareerAndEdutype(@Param("eid") Member eid, 
 		        @Param("area") String area, 
 		        @Param("career") String career, 
 		        @Param("edutype") String edutype);
-	List<Posting> findByEid(Member eid);
-	
-	   @Query(value ="SELECT * FROM posting p WHERE p.postcode in (SELECT a.postcode from application a JOIN member m ON m.memberid = a.hid WHERE a.hid = :hid)",nativeQuery = true)
-	   List<Posting> findMyApplyList(@Param("hid") String hid);
+  List<Posting> findByEid(Member eid);
 
-	
+  @Query(value ="SELECT * FROM posting p WHERE p.postcode in (SELECT a.postcode from application a JOIN member m ON m.memberid = a.hid WHERE a.hid = :hid)",nativeQuery = true)
+  List<Posting> findMyApplyList(@Param("hid") String hid);
 
 }

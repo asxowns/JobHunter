@@ -1,5 +1,6 @@
 package com.green.jobhunter.controller;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.green.jobhunter.dto.CsDto;
 import com.green.jobhunter.entity.Cs;
 import com.green.jobhunter.entity.Member;
 import com.green.jobhunter.entity.Notice;
@@ -187,6 +189,21 @@ public class ManagerController {
     public String managerCSList(Model model){
         List<Cs> csList = csRepository.findAll();
         model.addAttribute("csList", csList);
+        List<CsDto> csDtoList = new ArrayList<>();
+        for(int i = 0; i < csList.size(); i++){
+            CsDto cs = new CsDto(csList.get(i).getCsdate());
+            cs.setCscode(csList.get(i).getCscode());
+            cs.setTitle(csList.get(i).getTitle());
+            cs.setContent(csList.get(i).getContent());
+            cs.setCsdate(csList.get(i).getCsdate());
+            cs.setHid(csList.get(i).getHid().getMemberid());
+            cs.setType(csList.get(i).getType());
+            cs.setPublictype(csList.get(i).getPublictype());
+            cs.setResult(csList.get(i).getResult());
+
+            csDtoList.add(cs);
+        }
+        model.addAttribute("csDtoList",csDtoList);
         return "/manage/managerCSList";
     }
     @RequestMapping("/managerCSDetail")

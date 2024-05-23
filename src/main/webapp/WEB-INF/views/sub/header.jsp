@@ -78,9 +78,10 @@ header {
 	
 }
 .search_bar_select{
+	height:25px;
 	position: absolute;
 	left:10px;
-	top:5px;
+	top:1px;
 	border:none;
 	width:65px;
 	color:#D44958;
@@ -127,9 +128,9 @@ header {
 	display:flex;
 }
 .user_log_list ul li a{
-	padding:0px 10px;
-	margin:0px 5px;
-	font-size:18px;
+	padding:0px 5px;
+	margin:0px 4px;
+	font-size:16px;
 	font-weight:600;
 }
 

@@ -351,7 +351,7 @@ public class HunterController {
 	}
 
 
-
+	//이력서목록페이지 
 	@RequestMapping("/resumeList")
 	public String goResumeList(HttpServletRequest req, Model model) {
 		HttpSession session = req.getSession();
@@ -364,7 +364,10 @@ public class HunterController {
 		System.out.println("====================================");
 		model.addAttribute("resume", resume);
 		
-
+		//해당인재의 이력서목록
+		String hid = req.getParameter("hid");
+		List<Resume> resume2 = resumeRepository.findByHid(hid);
+		model.addAttribute("resume", resume2);
 
 		return "/hunter/resumeList";
 	}

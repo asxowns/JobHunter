@@ -18,7 +18,8 @@ body{
 }
 section{
 	width:1240px;
-	margin:0 auto;
+	margin:100px auto;
+	padding-bottom:200px;
 }
 h1{
 	text-align:center;
@@ -38,6 +39,7 @@ select{
 	padding-left:5px;
 	border:1px solid #ddd;
 	box-sizing:border-box;
+	color:#888;
 }
 #photo::-webkit-scrollbar{
 	display:none;
@@ -45,6 +47,7 @@ select{
 
 .title input[type="text"]{
 	width:100%;
+	height:55px;
 	font-size:19px;
 	padding-left:10px;
 }
@@ -77,10 +80,13 @@ select{
 .personal_info_content input[name="email"]{
 	width:200px;
 }
+
 .photolabel{
 	cursor:pointer;
 }
-
+input[type="date"]:valid{
+	color:#333;
+}
 .personal_info_photo{
 	position:relative;
 }
@@ -94,7 +100,7 @@ input[type="file"]{
 	text-align:center;
 }
 .personal_info input[name="address"]{
-	width:300px;
+	width:420px;
 }
 .personal_info input[name="employmenttype"]{
 	width:120px;
@@ -108,9 +114,170 @@ select[name="military"]{
 	border:1px solid #ddd;
 	background:#fff;
 	padding:20px;
+	box-sizing:border-box;
 }
 select[name="edutype"]{
 	width:120px;
+}
+
+.desiredArea{
+	width:800px;
+	border:1px solid #ddd;
+	background:#fff;
+	padding:20px;
+	box-sizing:border-box;
+}
+.desiredArea input[type="text"]{
+	width:120px;
+}
+
+.desiredIndustry{
+	width:800px;
+	border:1px solid #ddd;
+	background:#fff;
+	padding:20px;
+	box-sizing:border-box;
+}
+.desiredIndustry select{
+	width:200px;
+}
+
+.desiredpay{
+	width:800px;
+	border:1px solid #ddd;
+	background:#fff;
+	padding:20px;
+	box-sizing:border-box;
+}
+.desiredpay input[type="text"]{
+	width:120px;
+}
+.career{
+	width:800px;
+	display:flex;
+	justify-content:space-between;
+	flex-wrap:wrap;
+	border:1px solid #ddd;
+	background:#fff;
+	padding:20px;
+	box-sizing:border-box;
+	gap:10px;
+}
+.career_in{
+	display:flex;
+	gap:10px;
+	align-items:center;
+}
+.career_in label::checked{
+	color:#d44958;
+}
+input[name="working"]{
+	accent-color: red;
+}
+
+.career textarea{
+	width:650px;
+	height:50px;
+	padding:5px;
+	box-sizing:border-box;
+	border:1px solid #ddd;
+	line-height:35px;
+	resize: none;
+}
+.career input[name="companyname"]{
+	width:360px;
+}
+.career input[name="position"],
+.career input[name="job"]{
+	width:175px;
+}
+.career input[name="salary"],
+.career input[name="industry"]{
+	width:135px;
+}
+
+.resumeSkill textarea{
+	width:800px;
+	padding:10px;
+	border:1px solid #ddd;
+	box-sizing:border-box;
+	font-size:18px;
+	font-weight:500;
+	resize: none;
+}
+
+.certificate{
+	width:800px;
+	border:1px solid #ddd;
+	background:#fff;
+	padding:20px;
+	box-sizing:border-box;
+}
+.certificate input[name="stack"],
+.certificate input[name="pulisher"]{
+	width:200px;
+}
+
+.coverLetter{
+	width:800px;
+	border:1px solid #ddd;
+	background:#fff;
+	padding:20px;
+	box-sizing:border-box;
+}
+.coverLetter textarea{
+	width:760px;
+	height:350px;
+	padding:10px;
+	border:1px solid #ddd;
+	box-sizing:border-box;
+	resize: none;
+	margin-bottom:10px;
+}
+.coverLetter .personal_info_title{
+	width:760px;
+	border:1px solid #ddd;
+	border-bottom:none;
+	padding:15px;
+	padding-left:15px;
+	box-sizing:border-box;
+	font-size:17px;
+}
+.coverLetter textarea:last-child{
+	margin-bottom:0;
+}
+
+.public_type{
+	display:flex;
+	justify-content:flex-start;
+	border:1px solid #ddd;
+	background:#fff;
+	padding:20px;
+	font-size:18px;
+}
+.public_type input{
+	border:1px solid #ddd;
+	background:#fff;
+}
+.public_type label{
+	margin-right:20px;
+}
+.submit_btn{
+	text-align:center;
+	margin:80px 0;
+}
+input[type="submit"]{
+	width:160px;
+	color:#fff;
+	background:#d44958;
+	padding:15px 0;
+	border:0;
+	font-size:18px;
+}
+
+.upload-name{
+	width:105px;
+	height:30px !important;
 }
 </style>
 </head>
@@ -125,9 +292,10 @@ select[name="edutype"]{
 			
 				<form action="sta" method="post">
 					<div class="title">
-						<input type="text" name="title" placeholder="이력서 제목 ,한줄소개">
+						<input type="text" name="title" placeholder="이력서 제목, 한줄소개">
 					</div>
 					
+					<!-- 인적사항 -->
 					<p class="personal_info_title">인적사항</p>
 					<div class="personal_info">
 						<div class="personal_info_content">
@@ -137,7 +305,7 @@ select[name="edutype"]{
 								<option value="m">남자</option>
 								<option value="f">여자</option>
 							</select> 
-							<input type="text" name="email" placeholder="이메일"><br>
+							<input type="text" name="email" placeholder="이메일">
 							<input type="text" name="tel" placeholder="휴대폰번호"> 
 							<input type="text" name="tel2" placeholder="비상연락처">
 							<input type="text" name="employmenttype" placeholder="신입or경력">
@@ -151,18 +319,14 @@ select[name="edutype"]{
 							<label for="photo" class="photolabel">
 								<iframe id="photoFrame" title="photo" width="100" height="120"
 									src="photoUrl"></iframe>
-								<input type="file" id="photo" name="photoUrl">
-								<p class="photoadd">사진추가</p>
+								<input type="text" class="upload-name" placeholder="파일추가" readonly>
+								<input type="file" class="file" id="photo" name="photoUrl">
+								<p class="photoadd">파일 추가</p>
 							</label>
 						</div>
 					</div>
 					
-					<div class="public_type">
-						<span>이력서 공개여부</span><br> 
-						<input type="radio" name="publictype" id="public_type" value="1" >공개
-						<input type="radio" name="publictype" id="public_type" value="0" >비공개
-					</div>
-					
+					<!-- 학력 -->
 					<p class="personal_info_title">학력</p>
 					<div class="education">
 						<select name="edutype">
@@ -186,66 +350,109 @@ select[name="edutype"]{
 							<option value="수료">수료</option>
 						</select>
 					</div>
+					
+					<!-- 희망근무지역 -->
+					<p class="personal_info_title">희망 근무 지역</p>
 					<div class="desiredArea">
-						<p>희망 근무 지역</p>
-						<input type="text" name="area1" placeholder="희망 지역1"> <input
-							type="text" name="area2" placeholder="희망 지역2">
+						<input type="text" name="area1" placeholder="희망 지역1">
+						<input type="text" name="area2" placeholder="희망 지역2">
 					</div>
+					
+					<!-- 희망 직무(산업군) -->
+					<p class="personal_info_title">희망 직무(산업군)</p>
 					<div class="desiredIndustry">
-						<p>희망 직무(산업군)</p>
 						<p>
-							대분류 <select name="industry" class="mainSelect" onchange="fetchSubList()">
-							<option value="">대분류</option>
+							<select name="industry" class="mainSelect" onchange="fetchSubList()">
+							<option value="">희망 산업군(대분류)</option>
 							<c:forEach var="main" items="${mainList}">
 								<option id="${main.mccode}" value="${main.main}">${main.main}</option>
 							</c:forEach>
-							</select> 소분류 <select name="middleCategory" id="subSelect">
-								<option value="">소분류</option>
+							</select>
+							<select name="middleCategory" id="subSelect">
+								<option value="">희망 산업군(소분류)</option>
 								<c:forEach var="sub" items="${subList }">
 									<option value="${sub}">${sub}</option>
 								</c:forEach>
 							</select>
 						</p>
 					</div>
+					
+					<!-- 희망 연봉 -->
+					<p class="personal_info_title">희망 연봉</p>
 					<div class="desiredpay">
-						<span>희망연봉</span> <input type="text" name="desiredpay"
-							placeholder="희망연봉">
+						<input type="text" name="desiredpay" placeholder="희망연봉 (만원)">
 					</div>
+					
+					<!-- 경력 -->
+					<p class="personal_info_title">경력</p>
 					<div class="career">
-						<p>
-							경력 <input type="text" name="companyname" placeholder="회사명">
-							입사일 <input type="date" name="cardate"> 
-							퇴사일 <input type="date" name="enddate"> 
-							재직중 : <input type="checkbox" name="working"><br> 
-							직급/직책<input type="text" name="position" placeholder="직급/직책"> 
-							담당직무<input type="text" name="job" placeholder="담당직무"> 
-							연봉<input type="text" name="salary" placeholder="연봉"> 
-							산업군<input type="text" name="industry" placeholder="산업군"><br>
-							담당업무<textarea name="work" cols="80">담당업무</textarea>
-						</p>
+						<div class="career_in">
+							<input type="text" name="companyname" placeholder="회사명">
+							<input type="date" name="cardate"> 
+							<input type="date" name="enddate">
+							<label for="working">
+								<input type="checkbox" name="working" id="working">
+								재직중
+							</label>
+						</div>
+						<div class="career_in">
+							<input type="text" name="position" placeholder="직급/직책"> 
+							<input type="text" name="job" placeholder="담당직무"> 
+							<input type="text" name="salary" placeholder="연봉"> 
+							<input type="text" name="industry" placeholder="산업군">
+						</div>
+						<div class="career_in">
+							<textarea name="work" cols="80" placeholder="담당업무"></textarea>
+						</div>
 					</div>
+					
+					<!-- 기술 스택 -->
+					<p class="personal_info_title">기술 스택</p>
 					<div class="resumeSkill">
-						<p>기술 스택</p>
-						<textarea name="resumeSkill" cols="100" rows="7"> ex) JAVA, Python, C# </textarea>
+						<textarea name="resumeSkill" cols="100" rows="7" placeholder=" ex) JAVA, Python, C# "></textarea>
 					</div>
+					
+					<!-- 자격증 -->
+					<p class="personal_info_title">자격증</p>
 					<div class="certificate">
-						<p>
-							자격증 <input type="text" name="stack" placeholder="자격증 명">
-							발급처<input type="text" name="pulisher" placeholder="발급처"> 
-							취득일 <input type="date" name="issuedate">
-						</p>
+						<div>
+							<input type="text" name="stack" placeholder="자격증 명">
+							<input type="text" name="pulisher" placeholder="발급처"> 
+							<input type="date" name="issuedate">
+						</div>
 					</div>
+					
+					<!-- 자기 소개서 -->
+					<p class="personal_info_title">자기 소개서</p>
 					<div class="coverLetter" id="resumeForm">
-						<p>
-							자기소개서 <br> 
-							성장과정 : <textarea name="growth" placeholder="성장과정 기술"></textarea><br> 
-							지원동기 : <textarea name="motive" placeholder="지원동기 기술"></textarea><br> 
-							성격의 장˙단점 : <textarea name="prosAndCons" placeholder="성격의 장˙단점 기술 "></textarea>
-						</p>
+						<div>
+							<p class="personal_info_title">성장 과정</p>
+							<textarea name="growth" placeholder="항목 내용을 입력해주세요."></textarea>
+							<p class="personal_info_title">지원 동기</p> 
+							<textarea name="motive" placeholder="항목 내용을 입력해주세요."></textarea>
+							<p class="personal_info_title">성격의 장단점</p>
+							<textarea name="prosAndCons" placeholder="항목 내용을 입력해주세요."></textarea>
+						</div>
 					</div>
-					<input type="submit" value="등록">
+					
+					<!-- 이력서 공개여부 -->
+					<p class="personal_info_title">이력서 공개여부</p>
+					<div class="public_type">
+						<label for="public_type1">
+							<input type="radio" name="publictype" id="public_type1" value="1">
+							공개
+						</label>
+						<label for="public_type2">
+							<input type="radio" name="publictype" id="public_type2" value="0">
+							비공개
+						</label>
+					</div>
+					<div class="submit_btn">
+						<input type="submit" value="등록">
+					</div>
 				</form>
 		</div>
+		
 	</section>
 	<script>
       function fetchSubList() {
@@ -277,6 +484,19 @@ select[name="edutype"]{
          })
          .catch(error => console.error('Error fetching sub list:', error));
       }
+   </script>
+   
+   <script>
+   
+   let fileInput = document.querySelector('.file');
+   let nameInput = document.querySelector('.upload-name');
+   fileInput.addEventListener('change', function(e){
+     const input = e.target.closest('.file');
+     if (!input) return;
+     let fileName = input.value.split('/').pop().split('\\').pop();
+     nameInput.value = fileName;
+   });
+   
    </script>
 </body>
 </html>
