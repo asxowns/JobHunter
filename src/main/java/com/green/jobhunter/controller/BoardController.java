@@ -144,10 +144,10 @@ public class BoardController {
 
 		if (boardtype == 1) {
 			communityRepo.save(community);
-			return "redirect:openForum";
+			return ":openForum";
 		} else if (boardtype == 2) {
 			enterRepo.save(entcommunity);
-			return "redirect:enterpriseForum";
+			return ":enterpriseForum";
 		}
 		return "/board/forumWriteForm";
 

@@ -206,7 +206,7 @@ article{
 						<p>생년월일</p>
 					</div>
 					<div>
-						<input type="text" id = "inputFieldBirth" name="birth">
+						<input type="text" id = "inputFieldBirth" name="birth" placeholder="ex) 2024-01-01">
 					</div>
 					<div>
 						<p>휴대폰번호</p>

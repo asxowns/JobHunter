@@ -107,10 +107,9 @@ table th{
     
     기업정보
   
-    
-     <a href="" id ="heartLink">
-        <img id="heartImg" src="/resource/img/heartempty.png">
-     </a>
+     <a href="subscribe?posteid=${posteid}" id="heartLink">
+    	<img id="heartImg" src="/resource/img/heartempty.png">
+	</a>
     <div id="demo"></div>
     
     <form action="">
@@ -152,47 +151,38 @@ table th{
 
 </body>
 <script type="text/javascript">
-	const btn1 = document.querySelector("[data-tab='tab-1']");
-	const btn2 = document.querySelector("[data-tab='tab-2']");
-	const tabContent1 = document.getElementById("tab-1");
-	const tabContent2 = document.getElementById("tab-2");
-	var posteid = "${posteid}";
-	btn1.addEventListener("click", function() {
-		btn1.classList.add("current");
-		btn2.classList.remove("current");
-		tabContent1.classList.add("current");
-		tabContent2.classList.remove("current");
-	});
+    const btn1 = document.querySelector("[data-tab='tab-1']");
+    const btn2 = document.querySelector("[data-tab='tab-2']");
+    const tabContent1 = document.getElementById("tab-1");
+    const tabContent2 = document.getElementById("tab-2");
 
-	btn2.addEventListener("click", function() {
-		btn2.classList.add("current");
-		btn1.classList.remove("current");
-		tabContent2.classList.add("current");
-		tabContent1.classList.remove("current");
-	});
-	
+    const heartLink = document.getElementById("heartLink");
+    const heartImg = document.getElementById("heartImg");
+    let isFilled = false;
 
-    
-    
-    document.getElementById("heartLink").addEventListener("click", function(event) {
-        event.preventDefault(); // 기본 동작 방지
+    var posteid = "${posteid}";
 
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                document.getElementById("result").innerHTML = this.responseText; // 서버 응답을 결과 요소에 표시
-            }
-        };
-        xhttp.open("GET", "your-server-endpoint", true); // AJAX 요청 보내기
-        xhttp.send();
+    btn1.addEventListener("click", function() {
+        btn1.classList.add("current");
+        btn2.classList.remove("current");
+        tabContent1.classList.add("current");
+        tabContent2.classList.remove("current");
     });
-    
-    
-    
-    
-    
-    
 
-	
+    btn2.addEventListener("click", function() {
+        btn2.classList.add("current");
+        btn1.classList.remove("current");
+        tabContent2.classList.add("current");
+        tabContent1.classList.remove("current");
+    });
+
+    heartLink.addEventListener("click", function() {
+        if (isFilled) {
+            heartImg.src = "/resource/img/heartempty.png";
+        } else {
+            heartImg.src = "/resource/img/heartfill.png";
+        }
+        isFilled = !isFilled;
+    });
 </script>
 </html>
