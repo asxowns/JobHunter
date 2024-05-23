@@ -107,13 +107,13 @@ label{
 		
 		<div class="input-row">
 				<label for="">기업전화번호</label>
-				<input type="text" id="" name="" value="">
+				<input type="text" id="tel" name="tel" value="${enterprise.tel }">
 		</div>
 		
 		<div class="box1 box2">
 			<div class="input-row">
 				<label for="">기업크기</label>
-				<input type="text" id="" name="" value="">
+				<input type="text" id="size" name="size" value="${enterprise.size }">
 			</div>
 			<div class="input-row">
 				<label for="corporatetype">기업형태</label>
@@ -123,7 +123,7 @@ label{
 		
 			<div class="input-row">
 				<label for="">산업</label>
-				<input type="text" id="" name="" value="">
+				<input type="text" id="businessitem" name="businessitem" value="${enterprise.businessitem }">
 			</div>
 		
 			<div class="input-row">
@@ -138,11 +138,11 @@ label{
 			<div class="box1 box2">
 				<div class="input-row">
 					<label for="">사원수</label>
-					<input type="text" id="" name="" value="">
+					<input type="text" id="empnum" name="empnum" value="${enterprise.empnum }">
 				</div>
 				<div class="input-row">
 					<label for="">매출액</label>
-					<input type="text" id="" name="" value="${enterprise.corporatetype }">
+					<input type="text" id="sales" name="sales" value="${enterprise.sales }">
 				</div>
 		</div>
 			
@@ -160,7 +160,7 @@ label{
 			
 			<div class="input-row">
 				<label for="">담당자 이름</label>
-				<input type="text" id="" name="" value="">
+				<input type="text" id="managername" name="managername" value="${enterprise.managername }">
 			</div>
 			<div class="input-row">
 				<label for="managertel">담당자 연락처</label>

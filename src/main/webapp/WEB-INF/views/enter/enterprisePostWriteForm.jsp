@@ -140,7 +140,7 @@
 				<div class="input-row">
 				<label>산업군</label>
 				<select id="industry" name="industry" class="mainSelect" onchange="fetchSubList()">
-        			<option value="">대분류</option>
+        			<option value="">${posting.industry }</option>
         			<c:forEach var="main" items="${mainList}">
                         <option id="${main.mccode}" value="${main.main}">${main.main}</option>
                     </c:forEach>
@@ -149,7 +149,7 @@
 				<div class="input-row">
 				<label>직무</label>
 				<select name="job" id="subSelect">
-        			<option value="">소분류</option>
+        			<option value="">${posting.job }</option>
         			 <c:forEach var="sub" items="${subList }">
                         <option value="${sub}">${sub}</option>
                      </c:forEach>
