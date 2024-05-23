@@ -117,7 +117,7 @@ input[type="text"] {
 	width: 380px;
 	height: 100%;
 	border: 1px solid #969696;
-	padding-left: 100px;
+	padding-left: 100px !important;
 	box-sizing: border-box;
 	cursor: pointer;
 	border-radius: 5px;
@@ -125,10 +125,6 @@ input[type="text"] {
 
 input[type="submit"] {
 	display: none;
-}
-
-#list_area {
-	
 }
 
 #list_area a {

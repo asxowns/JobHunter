@@ -1,9 +1,7 @@
 package com.green.jobhunter.controller;
 
-import java.io.PrintWriter;
 import java.util.List;
 
-import org.hibernate.engine.internal.Collections;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

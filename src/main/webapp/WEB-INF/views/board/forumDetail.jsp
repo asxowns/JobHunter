@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%-- JSTL Core --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib  prefix="f" uri="http://kr.pe.skyer9.warehouseweb/functions"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -236,7 +238,7 @@ main b {
 					</p>
 				</div>
 				<div class="regdate">
-						<p>${community.regdate }</p>
+						<p>${f:formatLocalDateTime(community.regdate, 'yyyy-MM-dd HH:mm:ss')}</p>
 				</div>
 			</div>
 				<h1 class="detailtitle">${community.title }</h1>
@@ -268,7 +270,7 @@ main b {
 				</div>
 				<div class="reply_content">
 					<h4>${reply.comment }</h4>
-					<h5>${reply.regdate }</h5>
+					<h5>${f:formatLocalDateTime(reply.regdate, 'yyyy-MM-dd HH:mm:ss')}</h5>
 				</div>
 			</div>
 		</c:forEach>
