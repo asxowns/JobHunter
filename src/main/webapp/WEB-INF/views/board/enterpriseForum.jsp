@@ -304,10 +304,11 @@ input[type="submit"] {
 
 			</div>
 
-			<div class="write_btn">
-				<a href="/board/forumWriteForm?boardtype=2">글쓰기</a>
-			</div>
-
+			<c:if test="${sessionScope.logged ne null }">
+				<div class="write_btn">
+					<a href="/board/forumWriteForm?boardtype=2">글쓰기</a>
+				</div>
+			</c:if>
 			<!-- 페이지 네비게이션 -->
 			<div class="page_navi">
 				<!-- 이전 페이지 링크 -->

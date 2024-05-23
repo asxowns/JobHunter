@@ -1,8 +1,9 @@
 package com.green.jobhunter.entity;
 
-import java.sql.Date;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,7 +27,7 @@ public class Posting{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long postcode;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="eid")
 	@ToString.Exclude
 	private Member eid;
@@ -45,6 +46,7 @@ public class Posting{
 	private String mainurl;
 
 	@Column(columnDefinition = "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP" , nullable = false)
-    private Date regdate;
+	private LocalDate regdate;
+
 	
 }

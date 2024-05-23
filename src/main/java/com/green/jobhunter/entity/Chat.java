@@ -2,6 +2,8 @@ package com.green.jobhunter.entity;
 
 import java.time.LocalDateTime;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,15 +26,15 @@ public class Chat{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long chcode;
 	
-	@ManyToOne
-	@JoinColumn(name="hid")
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="hid" ,nullable = false)
 	@ToString.Exclude
 	private Member hid;
 	private String message;
 	
-	@ManyToOne
-	@JoinColumn(name="writermanager")
-	@ToString.Exclude
-	private Member writermanager;
+	@Column(length = 1)
+	private String type;
+	
+	@Column(columnDefinition = "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP",  nullable = false)
 	private LocalDateTime timelog;
 }

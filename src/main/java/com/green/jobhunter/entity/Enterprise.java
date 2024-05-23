@@ -1,18 +1,17 @@
 package com.green.jobhunter.entity;
 
-import java.sql.Date;
-
-import jakarta.persistence.Column;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Data
@@ -24,9 +23,9 @@ public class Enterprise{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long entercode;
 	
-	@OneToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="eid")
-	//@ToString.Exclude
+	@ToString.Exclude
 	private Member eid;
 	private String companyname;
 	private String size;
