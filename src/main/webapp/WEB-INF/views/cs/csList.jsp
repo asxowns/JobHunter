@@ -35,6 +35,11 @@ th, td {
     width:800px;
     margin:0 auto;
 }
+#tab-2{
+    width:1100px;
+    height:500px;
+    margin:0 auto;
+}
 .tabs {
     list-style-type: none;
     display: flex;
@@ -84,9 +89,52 @@ th, td {
     color: gray;
     font-weight: bold;
 }
-
+.cs_box_name{
+    width:1100px;
+    height:55px;
+    padding:12px;
+    box-sizing:border-box;
+    border:1px solid rgb(255, 236, 250);
+    background-color:rgb(255, 236, 250);
+    font-weight: bold;
+}
+.cs_box{
+    width:1100px;
+    height:70px;
+    padding:25px;
+    box-sizing:border-box;
+    cursor:pointer;
+    border:1px solid #ccc;
+    color: gray;
+    font-weight: bold;
+}
 .active{
     display:none;
+}
+.cs_num, .cs_num2{
+    margin-right:100px;
+}
+.cs_title, .cs_title2{
+    margin-right:200px;
+}
+.cs_user, .cs_user2{
+    margin-right:100px;
+}
+.cs_situation, .cs_situation2{
+    margin-right:100px;
+}
+#writeButton {
+    width:105px;
+    height:35px;
+    background-color: #D44958;
+    color: white;
+    font-weight: bold;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    margin:20px 0;
+    right: 10%;
+    position:right;
 }
 </style>
 </head>
@@ -105,38 +153,32 @@ th, td {
         <li class="tab-link" data-tab="tab-3">나의 문의</li>
     </ul><br><br><br>
     <div id="tab-1">
-            <c:forEach var="faq" items="${list}" varStatus="stat">
-                <div class="faq_box">
-                    <p class="title_area"><span class="title_Q">Q.&nbsp;&nbsp;</span>${faq.getTitle()}</p>
-                    <div class="faq_content active">
-                        <span class="title_A">A.&nbsp;&nbsp;</span>${faq.getContent()}
-                    </div>
+        <c:forEach var="faq" items="${list}" varStatus="stat">
+            <div class="faq_box">
+                <p class="title_area"><span class="title_Q">Q.&nbsp;&nbsp;</span>${faq.getTitle()}</p>
+                <div class="faq_content active">
+                    <span class="title_A">A.&nbsp;&nbsp;</span>${faq.getContent()}
                 </div>
+            </div>
         </c:forEach>
     </div>
 
-     <table id="tab-2">
-        <thead>
-            <tr>
-                <th>문의 번호</th>
-                <th>제목</th>
-                <th>상태</th>
-                <th>작성자</th>
-                <th>날짜</th>
-            </tr>
-        </thead>
-        <tbody>
-            <c:forEach var="cs" items="${list2}"  varStatus="stat">
-                <tr>
-                    <td>${stat.count}</td>
-                    <td><a href="/cs/forumDetail?cscode=${cs.cscode}">${cs.title}</a></td>
-                    <td>${cs.getResult()}</td>
-                    <td>${cs.getHid().getMemberid()}</td>
-                    <td>${cs.getCsdate()}</td>
-                <tr>
-            </c:forEach>
-        </tbody>
-    </table>
+    <div id="tab-2">
+        <div class="writeForm"><button id="writeButton">문의하기</button></div>
+        <div class="cs_box_name">
+            <p><span class="cs_num">번호</span><span class="cs_title">제목</span><span class="cs_user">작성자</span><span class="cs_situation">상태</span><span>날짜</span></p>
+        </div>
+        <c:forEach var="cs" items="${list2}"  varStatus="stat">
+            <div class="cs_box" onclick="location.href='/cs/forumDetail?cscode=${cs.cscode}'">
+                <input type="hidden" name="cscode" value="${cs.cscode}">
+                <p><span class="cs_num2">${stat.count}</span>
+                <span class="cs_title2">${cs.title}</span>
+                <span class="cs_user2">${cs.getHid().getMemberid()}${cs.getResult()}</span>
+                <span class="cs_situation">${cs.getResult()}</span>
+                <span>${cs.getCsdate()}</span><p>
+            </div>
+        </c:forEach>
+    </div>
      <table id="tab-3">
         <thead>
             <tr>
@@ -170,6 +212,9 @@ th, td {
     
 </body>
 <script type="text/javascript">
+    document.getElementById("writeButton").addEventListener("click", function() {
+        window.location.href = "/cs/forumWriteForm";
+    });
 
     document.querySelectorAll(".faq_box").forEach(faqbox => {
         faqbox.addEventListener("click", () => {
