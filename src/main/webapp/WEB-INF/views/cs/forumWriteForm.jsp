@@ -73,7 +73,7 @@ section {
                 <option id="aa" value="A">문의</option>
                 <option id="bb" value="B">신고</option>
             </select>
-            <input type="radio" id="public" name="public_type" value="Y">
+            <input type="radio" id="public" name="public_type" value="Y" checked>
             <label for="public">공개</label><br>
             <input type="radio" id="private" name="public_type" value="N">
             <label for="private">비공개</label><br>
@@ -87,9 +87,10 @@ section {
 </footer>
 <script>
     document.getElementById("type").addEventListener("change", function() {
-    var type = document.getElementById("type").value;
-    var publicRadio = document.getElementById("public");
-    var privateRadio = document.getElementById("private");
+    const type = document.getElementById("type").value;
+    const publicRadio = document.getElementById("public");
+    const privateRadio = document.getElementById("private");
+
 
     if (type === "B") {
         publicRadio.checked = false;
