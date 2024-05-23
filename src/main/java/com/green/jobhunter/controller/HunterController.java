@@ -1,7 +1,6 @@
 package com.green.jobhunter.controller;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +24,6 @@ import com.green.jobhunter.entity.Certificate;
 import com.green.jobhunter.entity.CoverLetter;
 import com.green.jobhunter.entity.DesiredArea;
 import com.green.jobhunter.entity.DesiredIndustry;
-import com.green.jobhunter.entity.Enterprise;
 import com.green.jobhunter.entity.Hunter;
 import com.green.jobhunter.entity.MainCategory;
 import com.green.jobhunter.entity.Member;
@@ -343,7 +341,7 @@ public class HunterController {
 	}
 
 
-
+	//이력서목록페이지 
 	@RequestMapping("/resumeList")
 	public String goResumeList(HttpServletRequest req, Model model) {
 		HttpSession session = req.getSession();
@@ -356,7 +354,10 @@ public class HunterController {
 		System.out.println("====================================");
 		model.addAttribute("resume", resume);
 		
-
+		//해당인재의 이력서목록
+		String hid = req.getParameter("hid");
+		List<Resume> resume2 = resumeRepository.findByHid(hid);
+		model.addAttribute("resume", resume2);
 
 		return "/hunter/resumeList";
 	}
