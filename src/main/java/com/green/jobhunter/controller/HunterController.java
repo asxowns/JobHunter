@@ -297,22 +297,10 @@ public class HunterController {
 	
 	
 
-
 	@RequestMapping("/resumeList")
 	public String goResumeList(HttpServletRequest req, Model model) {
-		HttpSession session = req.getSession();
-		//String logged = (String) session.getAttribute("logged");
 		
-		// Long resumecode = Long.parseLong(req.getParameter("resumecode"));
-		// Member member = memberRepository.findByMemberid(logged);
-		// String title = resumeRepository.findTitle(member);
-		
-		
-		//if (!logged.isEmpty()) {
-			List<Resume> resume = resumeRepository.findAll();
-			model.addAttribute("resume", resume);
-		//}
-
+	
 		return "/hunter/resumeList";
 	}
 

@@ -40,6 +40,7 @@
     		<td>${t.gender}</td>
     		<td>${t.edutype }</td>
     		<td>${t.employmenttype }</td>
+    		<td><a href="/hunter/resumeList?/huntercode=${t.huntercode }"><button>이력서 보기</button></a></td>
     	</tr>
 	    </c:forEach>
     </table>

@@ -21,10 +21,10 @@ public interface ResumeRepository extends JpaRepository<Resume, Long>{
 	@Query(value = "SELECT r.title FROM resume r WHERE r.hid = :hid", nativeQuery=true)
 	public String findTitle( @Param("hid") Member hid);
   
-  @Query(value = "SELECT r FROM resume r WHERE r.hid = :hid", nativeQuery=true)
+	@Query(value = "SELECT r FROM resume r WHERE r.hid = :hid", nativeQuery=true)
 	public Resume findOneResume(String memberid);
 
-  @Query(value = "SELECT h.huntercode, h.hid, h.username, h.birth, h.gender, r.edutype, r.employmenttype FROM Hunter h JOIN Resume r ON r.hid = h.hid", nativeQuery = true)
+	@Query(value = "SELECT h.huntercode, h.hid, h.username, h.birth, h.gender, r.edutype, r.employmenttype FROM Hunter h JOIN Resume r ON r.hid = h.hid", nativeQuery = true)
     List<Object[]> findAllWithTalentInfoAsArray();
 
     default List<TalentInfoDto> findAllWithTalentInfo() {
@@ -43,5 +43,8 @@ public interface ResumeRepository extends JpaRepository<Resume, Long>{
         }
         return dtos;
     }
-
+    
+    @Query(value = "SELECT * FROM resume WHERE hid = :hid", nativeQuery=true)
+	public List<Resume> findByHid(@Param("hid") String hid);
+    
 }
