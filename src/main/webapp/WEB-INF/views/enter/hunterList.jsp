@@ -125,7 +125,7 @@ h3{
 		<ul class="hunterList_info">
 			<li>김태준</li>
 			<li>남자 / 1994 / 대졸(4년) / 신입</li>
-			<li><a href="">이력서 보기</a></li>
+			<li><a href="hunterResumeList">이력서 보기</a></li>
 		</ul>
 		<ul class="hunterList_info">
 			<li>오승헌</li>
