@@ -290,7 +290,7 @@ input[type="submit"]{
 		<div class="container">
 		<!--------------------이력서 등록--------------------->
 			
-				<form action="sta" method="post">
+				<form action="/hunter/resumeWrite" method="post">
 					<div class="title">
 						<input type="text" name="title" placeholder="이력서 제목, 한줄소개">
 					</div>
@@ -362,7 +362,7 @@ input[type="submit"]{
 					<p class="personal_info_title">희망 직무(산업군)</p>
 					<div class="desiredIndustry">
 						<p>
-							<select name="industry" class="mainSelect" onchange="fetchSubList()">
+							<select name="mainCategory" class="mainSelect" onchange="fetchSubList()">
 							<option value="">희망 산업군(대분류)</option>
 							<c:forEach var="main" items="${mainList}">
 								<option id="${main.mccode}" value="${main.main}">${main.main}</option>
