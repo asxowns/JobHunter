@@ -30,6 +30,128 @@ section{
 	margin:150px auto;
 }
 
+.choose_job{
+	margin:10px 0;
+}
+.choose_job span{
+	padding:0px 5px;
+	color:#aaa;
+}
+.choose_job span:nth-child(1){
+	font-weight:bold;
+	color:#333;
+	font-size:20px;
+}
+
+.search-container{
+	display:flex;
+	justify-content:space-between;
+	align-items:center;
+	height:40px;
+	border-bottom:1px solid #ccc;
+	margin-bottom:40px;
+	padding-bottom:15px;
+}
+
+.search-select-filter{
+	height:auto;
+}
+.search-select-filter select{
+	width:80px;
+	height:35px;
+	border:1px solid #666;
+	border-radius:5px;
+	padding:5px;
+	color:#666;
+}
+
+.search-input-filter{
+	position:relative;
+}
+.search-input-filter input[type="text"]{
+	width:300px;
+	height:40px;
+	border:1px solid #666;
+	border-radius:5px;
+	color:#666;
+	padding-left:5px;
+	box-sizing:border-box;
+}
+.search-input-filter input[type="submit"]{
+	display:none;
+}
+.search-input-filter img{
+	position:absolute;
+	right:5px;
+	bottom:5px;
+	cursor:pointer;
+}
+
+.post_area{
+	width:100%;
+	display:flex;
+	justify-content:space-between;
+	flex-wrap:wrap;
+	gap:20px;
+}
+.post_box{
+	width:290px;
+	height:350px;
+	border:1px solid #eee;
+	border-radius:10px;
+	box-shadow: 2px 2px 10px rgba(0, 0, 0, .05);
+	overflow:hidden;
+	transition:all 0.3s;
+}
+.post_box:hover{
+	transform: translateY(-10px);
+}
+.post_img{
+	height:150px;
+}
+.post_img img{
+	width:100%;
+	height:100%;
+	object-fit:cover;
+}
+
+.post_info{
+	padding:20px;
+	overflow: hidden;
+}
+.post_info .ent_name{
+	font-size:15px;
+	font-weight:bold;
+	padding-bottom:20px;
+}
+.post_info .post_title{
+	font-size:16px;
+	padding-bottom:15px;
+	font-weight:400;
+}
+.post_info .industry{
+	font-size:13px;
+	display:flex;
+	color:#6a6a6a;
+	font-weight:400;
+}
+.post_info .industry .line{
+	padding:0 5px;
+}
+
+.post_info_bot{
+	font-size:14px;
+	display:flex;
+	justify-content:space-between;
+	border-top:1px solid #ccc;
+	margin-top:30px;
+	padding-top:10px;
+}
+.post_info .endDate{
+	font-size:13px;
+	color:#888;
+	font-weight:400;
+}
 </style>
 </head>
 <body>
@@ -43,54 +165,54 @@ section{
 		<a href="">2</a>
 		<a href="">3</a>
 		<a href="">4</a><br>
-		<span>직무전체</span>
-		<span>직무를 선택해주세요</span><br>
-
-
-
-
-
-
+		<div class="choose_job">
+			<span>직무전체</span>
+			<span>|</span>
+			<span>직무를 선택해주세요</span>
+		</div>
 
 	<form id="searhForm" action="searchFilter" method="post">
 		<div class="search-container">
-			<select id="area" name="area_">
-				<option value="">지역</option>
-				<option value="seoul">서울</option>
-				<option value="busan">부산</option>
-			</select> <select id="career" name="career_">
-				<option value="">경력</option>
-				<option value="new">신입</option>
-				<option value="twoyear">2년이상</option>
-			</select> <select id="edutype" name="edutype_">
-				<option value="">학력</option>
-				<option value="uni">대졸</option>
-				<option value="high">고졸</option>
-			</select> <input type="text" id="search" name="companyname_"
-				placeholder="기업명 공고명 검색"> 
-				<input type="submit" id="search-button" value="검색">
+			<div class="search-select-filter">
+				<select id="area" name="area_">
+					<option value="">지역</option>
+					<option value="seoul">서울</option>
+					<option value="busan">부산</option>
+				</select> <select id="career" name="career_">
+					<option value="">경력</option>
+					<option value="new">신입</option>
+					<option value="twoyear">2년이상</option>
+				</select> <select id="edutype" name="edutype_">
+					<option value="">학력</option>
+					<option value="uni">대졸</option>
+					<option value="high">고졸</option>
+				</select> 
+			</div>
+			<div class="search-input-filter">
+				<input type="text" id="search" name="companyname_" placeholder="기업명 공고명 검색">
+				<label for="search-button">
+					<img src="resource/img/search_gray.png">
+					<input type="submit" id="search-button" value="검색">
+				</label>
+			</div>
 		</div>
 	</form>
-		<hr>
+	
 		<article class="post_area">
 			<c:forEach var="dto" items="${list}">
 				<div class="post_box">
 					<a href="postDetail?postcode=${dto.postcode}&posteid=${dto.eid.memberid}">
 						<div class="post_img">
-							<img src="">
+							<img src="/resource/img/${dto.mainurl }">
 						</div>
 						<div class="post_info">
-							<h4>${dto.title }</h4>
-							<h4>${dto.job }</h4>
-							<h4>${dto.area }</h4>
-							<h4>${dto.career }</h4>
-							<h4>${dto.edutype }</h4>
-							<p>
-								<span>asd</span><span>asd</span>
-							</p>
-						</div>
-						<div>
-							<b>날짜</b>
+							<h1 class="ent_name">삼성전자</h1>
+							<h2 class="post_title">채용공고 제목</h2>
+							<h3 class="industry">채용직군<span class="line">|</span><span class="area">지역</span></h3>
+							<div class="post_info_bot">
+								<p>💰합격 축하금 100만원<p>
+								<h4 class="endDate">${dto.deadline }</h4>
+							</div>
 						</div>
 					</a>
 				</div>
