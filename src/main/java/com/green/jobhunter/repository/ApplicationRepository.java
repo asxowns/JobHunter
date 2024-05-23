@@ -47,6 +47,4 @@ public interface ApplicationRepository extends JpaRepository<Application, Long> 
 	//hid가 현재 로그인된 구직자의 member_id와 같을 때 입사지원 리스트 불러오기 
 	List<Application> findByHid(Member member);
 	
-	@Query(value="SELECT * FROM application  WHERE postcode = :posting.postcode", nativeQuery = true)
-	Application  findByPostcode(@Param("posting") List<Posting> posting);
 }
