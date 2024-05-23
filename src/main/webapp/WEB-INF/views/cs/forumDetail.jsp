@@ -153,20 +153,23 @@ main b {
 .reply_content h5{
 	font-weight:400;
 	color:#aaa;
+
 }
-.admin {
-    margin-top: 10px;
-    display: flex;
-    justify-content: flex-end;
+.Update-delete-btn {
+    margin-top: 20px; /* 수정 및 삭제 버튼과 댓글 상자 사이의 간격을 설정합니다. */
+    text-align: right; /* 버튼을 오른쪽으로 정렬합니다. */
 }
-.admin a {
+
+.Update-delete-btn a {
     margin-left: 10px;
     padding: 5px 10px;
     border: 1px solid #D44958;
     border-radius: 3px;
     color: #D44958;
+    
 }
-.admin a:hover {
+
+.Update-delete-btn a:hover {
     background-color: #D44958;
     color: white;
 }
@@ -211,13 +214,13 @@ main b {
                 <input type="hidden" name="cscode" value="${cs.getCscode()}">
                 <input type="submit" value="댓글 작성">
             </form> 
-            <div class="admin">
-                <c:if test="${sessionScope.logged eq cs.hid.memberid || fn:trim(sessionScope.role) eq 'm'}">
-                    <a href="/cs/forumUpdateForm?cscode=${cs.cscode}">수정</a> 
-                    <a href="/cs/delete?cscode=${cs.cscode}" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</a>
-                </c:if>
-            <div>
         </div>
+		<div class="Update-delete-btn">
+            <c:if test="${sessionScope.logged eq cs.hid.memberid || fn:trim(sessionScope.role) eq 'm'}">
+                <a href="/cs/forumUpdateForm?cscode=${cs.cscode}">수정</a> 
+                <a href="/cs/delete?cscode=${cs.cscode}" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</a>
+            </c:if>
+        <div>
     <div>
     <c:forEach var="csreply" items="${list}" varStatus="stat">
 		<div id="reply-list">
