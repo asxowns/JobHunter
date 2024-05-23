@@ -1,5 +1,7 @@
 package com.green.jobhunter.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -16,5 +18,13 @@ public interface ResumeRepository extends JpaRepository<Resume, Long>{
 	public String findTitle( @Param("hid") Member hid);
 	
 	@Query(value = "SELECT r FROM resume r WHERE r.hid = :hid", nativeQuery=true)
-	public Resume findOneResume(String memberid);
+	public Resume findOneResume(@Param("hid") Member hid);
+	
+	public Resume findByResumecode(Long resumecode);
+	
+	//@Query(value = "SELECT * FROM resume r WHERE r.hid = :hid", nativeQuery=true)
+	//public List<Resume> findByHid(@Param("hid")String hid);
+	
+	public List<Resume> findByHid(Member member);
+	
 }
