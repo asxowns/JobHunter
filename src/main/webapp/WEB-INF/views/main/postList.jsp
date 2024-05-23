@@ -172,29 +172,31 @@ ul {
 			<span>직무를 선택해주세요</span>
 		</div>
 
-	<form id="searhForm" action="searchFilter" method="post">
+	<form id="searhForm" action="searchFilter" method="get">
 		<div class="search-container">
 			<div class="search-select-filter">
 
 				<select id="area" name="area_">
 					<option value="">지역</option>
-					<option value="seoul">서울</option>
-					<option value="busan">부산</option>
+					<option value="서울">서울</option>
+					<option value="부산">부산</option>
+					<option value="경기">경기</option>
 				</select> <select id="career" name="career_">
 					<option value="">경력</option>
-					<option value="new">신입</option>
-					<option value="twoyear">2년이상</option>
+					<option value="신입">신입</option>
+					<option value="경력">경력</option>
 				</select> <select id="edutype" name="edutype_">
 					<option value="">학력</option>
-					<option value="uni">대졸</option>
-					<option value="high">고졸</option>
+					<option value="대졸">대졸</option>
+					<option value="초대졸">초대졸</option>
+					<option value="고졸">고졸</option>
 
 				</select> 
 			</div>
 			<div class="search-input-filter">
 				<input type="text" id="search" name="companyname_" placeholder="기업명 공고명 검색">
 				<label for="search-button">
-					<img src="resource/img/search_gray.png">
+					<img src="/resource/img/search_gray.png">
 					<input type="submit" id="search-button" value="검색">
 				</label>
 			</div>
