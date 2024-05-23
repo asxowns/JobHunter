@@ -42,7 +42,7 @@
         background-color: #D44958;
         color: #fff; 
     }
-    #text {
+    #chat-text {
         margin-left: 10px;
         margin-right: 5px;
         margin-bottom: 10px;
@@ -96,7 +96,7 @@
         --%>
     </div>
     <div id="chatForm" method="post" style="display: flex;">
-        <input type="text" id="text" name="message" placeholder="메시지를 입력하세요...">
+        <input type="text" id="chat-text" name="message" placeholder="메시지를 입력하세요...">
         <button type="button" id="send" onclick="chatSave()">전송</button>
     </div>
 </div>
@@ -126,7 +126,7 @@
     });
 
     function chatSave(){
-        var message = document.getElementById('text').value;
+        var message = document.getElementById('chat-text').value;
         fetch('/chat/send?msg='+ encodeURIComponent(message))
             .then(response => response.json())
             .then(chatList => {
