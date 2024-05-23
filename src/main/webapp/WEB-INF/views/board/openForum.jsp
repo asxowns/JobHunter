@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%-- JSTL Core --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib  prefix="f" uri="http://kr.pe.skyer9.warehouseweb/functions"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -256,7 +258,7 @@ input[type="submit"] {
 			<div id="list_area">
 				<c:forEach var="comm" items="${list }">
 					<a href="forumDetail?cmcode=${comm.cmcode }">
-						<p>${comm.regdate }</p>
+						<p>${f:formatLocalDateTime(comm.regdate, 'yyyy-MM-dd HH:mm:ss')}</p>
 						<h2>${comm.title }</h2>
 						<h4>
 							<div class="list_bottom">
@@ -281,7 +283,7 @@ input[type="submit"] {
 				
 				<c:forEach var="search" items="${searchList }">
 					<a href="forumDetail?cmcode=${search.cmcode }">
-						<p>${search.regdate }</p>
+						<p>${f:formatLocalDateTime(search.regdate, 'yyyy-MM-dd HH:mm:ss')}</p>
 						<h2>${search.title }</h2>
 						<h4>
 							<div class="list_bottom">
