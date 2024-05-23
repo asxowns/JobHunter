@@ -335,12 +335,6 @@ public class HunterController {
 		return "redirect:/hunter/resumeList";
 	}
 
-	
-
-	@RequestMapping("/resumeList")
-	public String goResumeList(HttpServletRequest req, Model model) {
-		
-	
 
 
 	@RequestMapping("/resumeList")
