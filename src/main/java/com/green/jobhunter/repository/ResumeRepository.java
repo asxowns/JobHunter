@@ -48,6 +48,9 @@ public interface ResumeRepository extends JpaRepository<Resume, Long>{
         }
         return dtos;
 
-    } 
+    }
+    //해당인재의 이력서목록 
+    @Query(value = "SELECT * FROM resume WHERE hid = :hid", nativeQuery = true)
+	List<Resume> findByHid(@Param("hid") String hid); 
 
 }
