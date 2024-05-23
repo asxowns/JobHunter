@@ -115,7 +115,8 @@ table th {
 		</div>
 		<div id="demo"></div>
 
-		<form action="">
+		<form action="aplication?postcode=${postcode}">
+			<input type="hidden" value=>
 			<input type="button" value="즉시지원">
 		</form>
 		<form action="">
