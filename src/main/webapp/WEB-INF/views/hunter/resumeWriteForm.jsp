@@ -8,6 +8,110 @@
 <meta charset="UTF-8">
 <title>이력서 등록</title>
 <style>
+*{
+	margin:0;
+	padding:0;
+}
+body{
+	color:#333;
+	background:#FFF8F8;
+}
+section{
+	width:1240px;
+	margin:0 auto;
+}
+h1{
+	text-align:center;
+	margin:75px 0 100px;
+}
+
+.container{
+	width:800px;
+	margin:0 auto;
+}
+
+
+input[type="text"],
+input[type="date"],
+select{
+	height:50px;
+	padding-left:5px;
+	border:1px solid #ddd;
+	box-sizing:border-box;
+}
+#photo::-webkit-scrollbar{
+	display:none;
+}
+
+.title input[type="text"]{
+	width:100%;
+	font-size:19px;
+	padding-left:10px;
+}
+.personal_info_title{
+	font-size:20px;
+	font-weight:bold;
+	padding:38px 0 17px;
+}
+.personal_info{
+	width:800px;
+	display:flex;
+	justify-content:space-between;
+	border:1px solid #ddd;
+	background:#fff;
+	padding:20px;
+	box-sizing:border-box;
+	
+}
+.personal_info_content{
+	display:flex;
+	flex-wrap:wrap;
+	gap:10px;
+}
+.personal_info_content input{
+	width:140px;
+}
+.personal_info_content select{
+	width:120px;
+}
+.personal_info_content input[name="email"]{
+	width:200px;
+}
+.photolabel{
+	cursor:pointer;
+}
+
+.personal_info_photo{
+	position:relative;
+}
+input[type="file"]{
+	display:none;
+}
+#photoFrame{
+	background:#fff;
+}
+.photoadd{
+	text-align:center;
+}
+.personal_info input[name="address"]{
+	width:300px;
+}
+.personal_info input[name="employmenttype"]{
+	width:120px;
+}
+select[name="military"]{
+	width:200px;
+}
+
+.education{
+	width:800px;
+	border:1px solid #ddd;
+	background:#fff;
+	padding:20px;
+}
+select[name="edutype"]{
+	width:120px;
+}
 </style>
 </head>
 <body>
@@ -15,7 +119,7 @@
 		<%@ include file="../sub/header.jsp"%>
 	</header>
 	<section>
-		<h2>이력서 등록</h2><br>
+		<h1>이력서 등록</h1>
 		<div class="container">
 		<!--------------------이력서 등록--------------------->
 			
@@ -23,35 +127,45 @@
 					<div class="title">
 						<input type="text" name="title" placeholder="이력서 제목 ,한줄소개">
 					</div>
+					
+					<p class="personal_info_title">인적사항</p>
 					<div class="personal_info">
-						<p>인적사항</p>
-						<input type="text" name="username" placeholder="이름"> 
-						생년월일<input type="date" name="birth"> 
-						<select name="gender">
-							<option value="m">남자</option>
-							<option value="f">여자</option>
-						</select> 
-						이메일<input type="text" name="email" placeholder="이메일"><br>
-						휴대폰 번호<input type="text" name="tel" placeholder="휴대폰번호"> 
-						비상 연락처<input type="text" name="tel2" placeholder="비상연락처">
-						신입/경력<input type="text" name="employmenttype" placeholder="신입or경력"><br>
-						<select name="military">
-							<option value="o">군필/면제/해당없음</option>
-							<option value="x">미필</option>
-						</select> 
-						주소<input type="text" name="address" placeholder="주소">
-						증명사진<iframe id="photo" title="photo" width="100" height="120"
-							src="photoUrl"></iframe>
-						<input type="file" id="photo" name="photoUrl">
+						<div class="personal_info_content">
+							<input type="text" name="username" placeholder="이름"> 
+							<input type="date" name="birth"> 
+							<select name="gender">
+								<option value="m">남자</option>
+								<option value="f">여자</option>
+							</select> 
+							<input type="text" name="email" placeholder="이메일"><br>
+							<input type="text" name="tel" placeholder="휴대폰번호"> 
+							<input type="text" name="tel2" placeholder="비상연락처">
+							<input type="text" name="employmenttype" placeholder="신입or경력">
+							<select name="military">
+								<option value="o">군필/면제/해당없음</option>
+								<option value="x">미필</option>
+							</select> 
+							<input type="text" name="address" placeholder="주소">
+						</div>
+						<div class="personal_info_photo">
+							<label for="photo" class="photolabel">
+								<iframe id="photoFrame" title="photo" width="100" height="120"
+									src="photoUrl"></iframe>
+								<input type="file" id="photo" name="photoUrl">
+								<p class="photoadd">사진추가</p>
+							</label>
+						</div>
 					</div>
+					
 					<div class="public_type">
 						<span>이력서 공개여부</span><br> 
 						<input type="radio" name="publictype" id="public_type" value="1" >공개
 						<input type="radio" name="publictype" id="public_type" value="0" >비공개
 					</div>
+					
+					<p class="personal_info_title">학력</p>
 					<div class="education">
-						학력 <br> 
-						학력 구분 <select name="edutype">
+						<select name="edutype">
 							<option value="초졸">초졸</option>
 							<option value="중졸">중졸</option>
 							<option value="고졸">고졸</option>
@@ -60,11 +174,10 @@
 							<option value="대학원">대학원</option>
 							<option value="검정고시">검정고시</option>
 						</select> 
-							학교이름<input type="text" name="eduname" placeholder="학교이름"> 
-							전공<input type="text" name="edumajor" placeholder="전공"> 
-							졸업년도<input	 type="date" name="graduatedate">
+							<input type="text" name="eduname" placeholder="학교이름"> 
+							<input type="text" name="edumajor" placeholder="전공"> 
+							<input	 type="date" name="graduatedate">
 						<!-- 졸업상태가 졸업이면 졸업년도 입력가능하게 하기 -->
-						<p>학력 상태</p>
 						<select name="edustate">
 							<option value="재학중">재학중</option>
 							<option value="휴학">휴학</option>
