@@ -63,6 +63,21 @@ public class MainController {
 		return "/main/postList";
 	}
 
+	@RequestMapping("/enterpriseList")
+	public String enterpriseList() {
+
+
+		return "/main/enterpriseList";
+	}
+	
+	@RequestMapping("/enterpriseDetail")
+	public String enterpriseDetail() {
+
+	
+
+		return "/main/enterpriseDetail";
+	}
+	
 	@RequestMapping("/registForm")
 	public String regForm() {
 
@@ -229,14 +244,14 @@ public class MainController {
 
 			Member eid = memberrepository.findByMemberid(memid);
 
-			List<Posting> list = postingrepository.findByEidAndAreaAndCareerAndEdutype(eid, area, career, edutype);
+			List<Posting> list1 = postingrepository.findByEidAndAreaAndCareerAndEdutype(eid, area, career, edutype);
 			List<Posting> list2 = postingrepository.findByEid(eid);
-			model.addAttribute("list", list);
+			model.addAttribute("list1", list1);
 
 		} else if (companyname_.isEmpty()) {
 
-			List<Posting> list = postingrepository.findByEidAndAreaAndCareerAndEdutype(eid, area, career, edutype);
-			model.addAttribute("list", list);
+			List<Posting> list1 = postingrepository.findByEidAndAreaAndCareerAndEdutype(eid, area, career, edutype);
+			model.addAttribute("list1", list1);
 		}
 		return "/main/postList";
 	}
