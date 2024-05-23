@@ -1,10 +1,10 @@
 package com.green.jobhunter.controller;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,9 +25,11 @@ import com.green.jobhunter.entity.Certificate;
 import com.green.jobhunter.entity.CoverLetter;
 import com.green.jobhunter.entity.DesiredArea;
 import com.green.jobhunter.entity.DesiredIndustry;
+import com.green.jobhunter.entity.Enterprise;
 import com.green.jobhunter.entity.Hunter;
 import com.green.jobhunter.entity.MainCategory;
 import com.green.jobhunter.entity.Member;
+import com.green.jobhunter.entity.Posting;
 import com.green.jobhunter.entity.Resume;
 import com.green.jobhunter.entity.ResumeSkill;
 import com.green.jobhunter.entity.SubCategory;
@@ -36,14 +38,15 @@ import com.green.jobhunter.repository.CertificateRepository;
 import com.green.jobhunter.repository.CoverLetterRepository;
 import com.green.jobhunter.repository.DesiredAreaRepository;
 import com.green.jobhunter.repository.DesiredIndustryRepository;
+import com.green.jobhunter.repository.EnterpriseRepository;
 import com.green.jobhunter.repository.HunterRepository;
 import com.green.jobhunter.repository.MainCategoryRepository;
 import com.green.jobhunter.repository.MemberRepository;
+import com.green.jobhunter.repository.PostingRepository;
 import com.green.jobhunter.repository.ResumeRepository;
 import com.green.jobhunter.repository.ResumeSkillRepository;
 import com.green.jobhunter.repository.SubCategoryRepository;
 
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
@@ -73,7 +76,11 @@ public class HunterController {
 	MainCategoryRepository mainCategoryRepository;
 	@Autowired
 	SubCategoryRepository subCategoryRepository;
-
+	@Autowired
+	PostingRepository postingRepository;
+	@Autowired
+	EnterpriseRepository enterpriseRepository;
+	
 	@RequestMapping("/")
 	public String goHunterPage() {
 		return "/hunter/hunterPage";
@@ -363,7 +370,6 @@ public class HunterController {
 		if (mccode != null) {
 			subList = subCategoryRepository.findSubCategoryBymccode(mccodeLong);
 			System.out.println(subList);
-
 		}
 		return subList;
 	}
@@ -375,8 +381,21 @@ public class HunterController {
 	}
 
 	@RequestMapping("/jobApplication")
-	public String jobApplication() {
+	public String jobApplication(HttpServletRequest req, Model model) {
 
+		// 로그인된(logged) 사용자가 필요. (Member memberid 이용)
+		Member member = memberRepository.findByMemId((String)req.getSession().getAttribute("logged"));
+		Hunter hunter = hunterRepository.findByHid(member);
+		// 사용자가 입사지원을 한 채용공고리스트를 받아와야 함. : postcode 필요
+		
+		List<Posting> postList = postingRepository.findByEid(member);
+		
+		// 채용공고(posting)의 postcode 받아오기
+		
+		// Member hid 받아오기
+		
+		
+		
 		return "/hunter/jobApplication";
 	}
 

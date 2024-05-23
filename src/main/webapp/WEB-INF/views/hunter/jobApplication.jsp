@@ -15,7 +15,12 @@
     <%@ include file="../sub/header.jsp" %>
 </header>
 <section>
-    <h2> 입사 지원 관리 </h2>
+    <h2> 입사 지원 현황 </h2>
+    <div class="btn">
+    	<input type="button" value="대기">
+    	<input type="button" value="합격">
+    	<input type="button" value="불합격">
+    </div>
     
 </section>
 <footer>
