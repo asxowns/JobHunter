@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%-- JSTL Core --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -32,14 +33,23 @@
 				비밀번호 <input type="password" name ="password" value="${meme.password}"><br>
 				이름 <input type="text" name ="username" value="${hunter.username}"><br>
 				생년월일 <input type="text" name ="birth" value="${hunter.birth}"><br>
-				주소 <input type="text" name ="address" placeholder="주소를 입력해주세요."><br>
+				주소 <input type="text" name ="address" placeholder="주소를 입력해주세요." value="${hunter.address}"><br>
+				<%-- 주소 value 안되어 있었음. --%>
 				전화번호 <input type="text" name ="tel1" value="${hunter.tel}"><br>
-				비상연락처 <input type="text" name ="tel2" placeholder="비상연락처를 입력해주세요."><br>
-				이메일 <input type="text" name ="email" placeholder="이메일을 입력해주세요."><br>
-				성별 <select name="gender">
-						<option value="m">남자</option>
-						<option value="f">여자</option>
-					</select><br>
+				비상연락처 <input type="text" name ="tel2" placeholder="비상연락처를 입력해주세요." value="${hunter.tel2}"><br>
+				<%-- 비상연락처 ( tel2 ) value 안되어 있었음 --%>
+				이메일 <input type="text" name ="email" placeholder="이메일을 입력해주세요." value="${hunter.email}"><br>
+				<%-- 이메일도 value 없었음 --%>
+				성별 
+				<c:if test="${fn:trim(hunter.gender) == 'f'}">  
+					<input type="hidden" name="gender" value="f">
+					<input value="여성">
+				</c:if>
+				<c:if test="${fn:trim(hunter.gender) == 'm'}"> 
+					<input type="hidden" name="gender" value="m">
+					<input value="남성">
+				</c:if>
+				<br>
 				<input type="submit" value="수정">
 			</form>
 		</div>
