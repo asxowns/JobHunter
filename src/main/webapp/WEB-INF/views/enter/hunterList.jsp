@@ -122,48 +122,39 @@ h3{
 	</form>
 
 	<div class="hunterList_area">
+		<c:forEach var="t" items="${talentInfo}">
 		<ul class="hunterList_info">
-			<li>김태준</li>
-			<li>남자 / 1994 / 대졸(4년) / 신입</li>
-			<li><a href="hunterResumeList">이력서 보기</a></li>
+			<li>${t.username }</li> <!-- 작업@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+			<li>남자 / 1994 / 대졸(4년) / 경력</li>
+			<li><a href="/hunter/resumeList?hid=${t.hid }">이력서 보기</a></li>
 		</ul>
 		<ul class="hunterList_info">
 			<li>오승헌</li>
-			<li>남자 / 1994 / 대졸(4년) / 신입</li>
-			<li><a href="">이력서 보기</a></li>
+			<li>남자 / 1992 / 대졸(4년) / 신입</li>
+			<li><a href="/hunter/resumeList?hid=${t.hid}">이력서 보기</a></li>
 		</ul>
 		<ul class="hunterList_info">
 			<li>이해창</li>
-			<li>남자 / 1994 / 대졸(4년) / 신입</li>
-			<li><a href="">이력서 보기</a></li>
+			<li>남자 / 1997 / 대졸(4년) / 경력</li>
+			<li><a href="/hunter/resumeList?hid=${t.hid}">이력서 보기</a></li>
 		</ul>
 		<ul class="hunterList_info">
 			<li>변지은</li>
-			<li>남자 / 1994 / 대졸(4년) / 신입</li>
-			<li><a href="">이력서 보기</a></li>
+			<li>여자 / 1994 / 대졸(4년) / 신입</li>
+			<li><a href="/hunter/resumeList?hid=${t.hid}">이력서 보기</a></li>
 		</ul>
 		<ul class="hunterList_info">
 			<li>이은지</li>
-			<li>남자 / 1994 / 대졸(4년) / 신입</li>
-			<li><a href="">이력서 보기</a></li>
+			<li>여자 / 1995 / 대졸(4년) / 신입</li>
+			<li><a href="/hunter/resumeList?hid=${t.hid}">이력서 보기</a></li>
 		</ul>
 		<ul class="hunterList_info">
 			<li>김동휘</li>
-			<li>남자 / 1994 / 대졸(4년) / 신입</li>
-			<li><a href="">이력서 보기</a></li>
+			<li>남자 / 1998 / 대졸(4년) / 신입</li>
+			<li><a href="/hunter/resumeList?hid=${t.hid}">이력서 보기</a></li>
 		</ul>
-		
+		</c:forEach>
 	</div>
-
-
-
-
-
-
-
-
-
-
 
 
 

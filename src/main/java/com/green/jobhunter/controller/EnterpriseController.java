@@ -75,7 +75,9 @@ public class EnterpriseController {
     public String enterpriseUpdate(@RequestParam("entercode") Long entercode,
     		@RequestParam("password") String password, @RequestParam("companyname") String companyname, 
     		@RequestParam("corporatetype") String corporatetype, @RequestParam("managertel") String managertel, 
-    		@RequestParam("manageremail") String manageremail, @RequestParam("businessnumber") String businessnumber) {
+    		@RequestParam("manageremail") String manageremail, @RequestParam("businessnumber") String businessnumber, 
+    		@RequestParam("managername") String managername, @RequestParam("sales") int sales, @RequestParam("empnum") int empnum,
+    		@RequestParam("address") String address, @RequestParam("businessitem") String businessitem, @RequestParam("tel") String tel) {
     	
     	Enterprise enter = enterpriseRepository.findByEntercode(entercode);
     	enter.setCompanyname(companyname);
@@ -83,6 +85,14 @@ public class EnterpriseController {
     	enter.setManagertel(managertel);
     	enter.setManageremail(manageremail);
     	enter.setBusinessnumber(businessnumber);
+    	//
+    	enter.setManagername(managername);
+    	enter.setSales(sales);
+    	enter.setEmpnum(empnum);
+    	enter.setAddress(address);
+    	enter.setBusinessitem(businessitem);
+    	enter.setTel(tel);
+    	
     	
     	String id = (String)session.getAttribute("logged");
     	Member member = memberRepository.findByMemberid(id);
