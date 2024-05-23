@@ -203,16 +203,34 @@ main b {
 
 		</main>
 
+		<!-- 댓글 -->
 		<div id="main_bottom">
 			<p class="reply_count">2개의 댓글</p>
 
 			<div class="reply_box">
-				<form action="" method="post">
-					<input type="text" name="reply">
+				<form action="enterCommuReply" method="post">
+					<input type="text" name="comment">
+					<input type="hidden" name="writer" value="${sessionScope.logged }">
+					<input type="hidden" name="eccode" value="${community.eccode }">
 					<input type="submit" value="댓글쓰기">
 				</form>
 			</div>
 		</div>
+		
+		<c:forEach var="reply" items="${reply }">
+			<div id="reply_list">
+				<div class="reply_myinfo">
+					<span class="img">
+						<img src="">
+					</span>
+					<p>${sessionScope.logged }</p>
+				</div>
+				<div class="reply_content">
+					<h4>${reply.comment }</h4>
+					<h5>${reply.regdate }</h5>
+				</div>
+			</div>
+		</c:forEach>
 
 		<div class="active_menu">
 			<div class="listup">
