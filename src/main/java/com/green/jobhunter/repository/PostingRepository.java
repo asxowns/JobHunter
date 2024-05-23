@@ -43,7 +43,7 @@ public interface PostingRepository extends JpaRepository<Posting, Long> {
 		        @Param("edutype") String edutype);
   List<Posting> findByEid(Member eid);
 
-  @Query(value ="SELECT * FROM posting p WHERE p.postcode in (SELECT a.postcode from application a JOIN member m ON m.memberid = a.hid WHERE a.hid = :hid)",nativeQuery = true)
-  List<Posting> findMyApplyList(@Param("hid") String hid);
+  @Query(value ="SELECT * FROM posting p WHERE p.postcode in (SELECT a.postcode from application a JOIN member m ON m.memberid = a.hid WHERE a.hid = :hid AND a.result = :result)",nativeQuery = true)
+  List<Posting> findMyApplyList(@Param("hid") String hid, @Param("result") String result);
 
 }
