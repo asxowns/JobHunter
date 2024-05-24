@@ -90,12 +90,14 @@ main {
 	left: 218px;
 	top: 28px;
 	border-right: 1px solid #969696;
-	padding-right:10px;
+	padding-right:5px;
+	padding-bottom:5px;
 }
 
 .search_area_select select {
 	border: none;
 	cursor: pointer;
+	text-align:center;
 }
 
 .search_area_select select:focus {
@@ -117,10 +119,13 @@ input[type="text"] {
 	width: 380px;
 	height: 100%;
 	border: 1px solid #969696;
-	padding-left: 100px !important;
+	padding-left: 100px;
 	box-sizing: border-box;
 	cursor: pointer;
 	border-radius: 5px;
+}
+.boardSearch{
+	padding-left:110px !important;
 }
 
 input[type="submit"] {
@@ -236,13 +241,13 @@ input[type="submit"] {
 			<div id="search_area">
 				<div class="search_area_select">
 					<select name="order">
-						<option value="titleAndContent">제목+내용</option>
 						<option value="title">제목</option>
 						<option value="content">내용</option>
+						<option value="titleAndContent">제목+내용</option>
 					</select>
 				</div>
 				<form action="search" method="get">
-					<input type="text" name="keyword">
+					<input type="text" name="keyword" class="boardSearch">
 						<label for="submit"	id="submit_label">
 							<img src="/resource/img/search_gray.png">
 							<input type="hidden" name="boardtype" value="1">

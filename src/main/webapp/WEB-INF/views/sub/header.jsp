@@ -56,18 +56,18 @@ header {
 	left:calc(50% - 206.5px);
 	
 }
-#search_input{
+#header_search_input{
 	width:413px;
 	height:47px;
 	border:2px solid #D44958;
 	border-radius:10px;
 	padding:10px;
-	padding-left:80px;
+	padding-left:80px !important;
 	box-sizing:border-box;
 	margin-right:0;
 	cursor: pointer;
 }
-#search_input:focus{
+#header_search_input:focus{
 	border-color:#D44958;
 	outline:none;
 }
@@ -78,19 +78,22 @@ header {
 	
 }
 .search_bar_select{
+	width:65px;
 	height:25px;
 	position: absolute;
 	left:10px;
 	top:1px;
-	border:none;
-	width:65px;
-	color:#D44958;
-	font-weight:600;
 	border-right:1px solid #D44958;
 	box-sizing:border-box;
+}
+.search_bar_select select{
+	border:none;
+	color:#D44958;
+	font-weight:600;
+	padding-right:10px;
 	cursor: pointer;
 }
-.search_bar_select:focus{
+.search_bar_select select:focus{
 	outline:none;
 }
 .search_glasses{
@@ -189,12 +192,14 @@ header {
 				<form action="" method="get">
 				<div class="search_bar">
 						<label for="search_input" class="search_label">
-							<input type="text" id="search_input" name="search">
-							<select class="search_bar_select">
-								<option value="전체">전체</option>
-								<option value="기업">기업</option>
-								<option value="공고">공고</option>
-							</select>
+							<input type="text" id="header_search_input" name="search">
+							<div class="search_bar_select">
+								<select>
+									<option value="전체">전체</option>
+									<option value="기업">기업</option>
+									<option value="공고">공고</option>
+								</select>
+							</div>
 							<label id="search_glass_label">
 								<input type="submit" value="">
 								<img src="/resource/img/search.png" class="search_glasses">

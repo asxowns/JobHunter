@@ -90,11 +90,14 @@ main {
 	left: 218px;
 	top: 28px;
 	border-right: 1px solid #969696;
+	padding-right:5px;
+	padding-bottom:5px;
 }
 
 .search_area_select select {
 	border: none;
 	cursor: pointer;
+	text-align:center;
 }
 
 .search_area_select select:focus {
@@ -237,9 +240,9 @@ input[type="submit"] {
 			<div id="search_area">
 				<div class="search_area_select">
 					<select name="order">
-						<option value="titleAndContent">제목+내용</option>
 						<option value="title">제목</option>
 						<option value="content">내용</option>
+						<option value="titleAndContent">제목+내용</option>
 					</select>
 				</div>
 				<form action="search" method="get">
