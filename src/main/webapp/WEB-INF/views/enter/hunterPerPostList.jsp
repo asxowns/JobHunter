@@ -1,87 +1,107 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%-- JSTL Core --%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <title></title>
+<meta charset="UTF-8">
+<title></title>
 <style>
-	body, html {
-    height: 100%;
-    margin: 0;
-  }
-  .container, h2 {
-    display: flex;
-    justify-content: center;
+body, html {
+	height: 100%;
+	margin: 0;
+}
+
+.container, h2 {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+ul {
+	display: flex;
+	flex-direction: row;
+	list-style-type: none;
+	padding: 0;
+}
+
+li {
+	margin: 0 10px; /* 각 리스트 아이템 간의 간격을 추가 */
+}
+
+canvas {
+	max-width: 700px;
+	width: 100%;
+	height: 200px;
+	margin: 20px 0; /* 그래프 위아래 여백 추가 */
+}
+
+section {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+#result-btn{
+	background-color:#d44958;
+	color:white;
+	padding:8px;
+}
+.app-list-items{
+	display:flex;
     align-items: center;
-    flex-direction: column; 
-  }
-  ul {
-            display: flex;
-            flex-direction: row;
-            list-style-type: none;
-            padding: 0;
-        }
-        li {
-            margin: 0 10px; /* 각 리스트 아이템 간의 간격을 추가 */
-        }
-  
-  canvas {
-            max-width: 700px;
-            width: 100%;
-            height: 200px;
-            margin: 20px 0; /* 그래프 위아래 여백 추가 */
-        }	
-    section {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }    
+	margin:16px 8px;
+}
 </style>
 
 <!-- Chart.js 라이브러리 추가 -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-<header>
-    <%@ include file="../sub/header.jsp" %>
-</header>
-<section>
-    <h2> hunterPerPostList page </h2> <!-- 해당공고의 지원자 관리 페이지(해당공고내용/지원자(구직자)리스트/해당공고의 통계 -->
-    <br>
-    <div class="container"> <!-- 해당공고내용 --> 
-    	${posting.postcode }
-    	${posting.title }
-    	${posting.regdate }
-    	모집인원 : ${posting.headcount }
-    </div>
-    <br>
-    <div class="container"> <!-- 지원자 리스트 -->
-    	<p>지원자 리스트</p>
-    	<br>
-    		<c:forEach var="app" items="${applicantDto }">
-    		<ul>
-	    		<li>${app.username }</li> 
-	    		<li>${app.title }</li>
-	    		<li>${app.gender }</li>
-	    		<li>${app.birth }</li>
-	    		<li>${app.edutype }</li>
-	    		<li>${app.employmenttype }</li>
-    		</ul>
-    		</c:forEach>
-    	
-    </div>
-    <br>
-    <div class="container">  <!-- 통계(해당채용공고의 지원자수, 성별, 나이대) -->
-    	<canvas id="genderApplicantsChart"></canvas>
-    
-    </div>
-</section>
-<footer>
+	<header>
+		<%@ include file="../sub/header.jsp"%>
+	</header>
+	<section>
+		<h2>hunterPerPostList page</h2>
+		<!-- 해당공고의 지원자 관리 페이지(해당공고내용/지원자(구직자)리스트/해당공고의 통계 -->
+		<br>
+		<div class="container">
+			<!-- 해당공고내용 -->
+			${posting.postcode } ${posting.title } ${posting.regdate } 모집인원 :
+			${posting.headcount }
+		</div>
+		<br>
+		<div class="container">
+			<!-- 지원자 리스트 -->
+			<p>지원자 리스트</p>
+			<br>
+			<c:forEach var="app" items="${applicantDto }">
+				<ul>
+					<li class="app-list-items">${app.username }</li>
+					<li class="app-list-items">${app.title }</li>
+					<li class="app-list-items">${app.gender }</li>
+					<li class="app-list-items">${app.birth }</li>
+					<li class="app-list-items">${app.edutype }</li>
+					<li class="app-list-items">${app.employmenttype }</li>
+					<li class="app-list-items">${app.result }</li>
+					<li class="app-list-items"><a id="result-btn"
+						href="/enter/jobApplication?result=합격&postcode=${posting.postcode}&appcode=${app.appcode}">합격</a></li>
+					<li class="app-list-items"><a id="result-btn"
+						href="/enter/jobApplication?result=불합격&postcode=${posting.postcode}&appcode=${app.appcode}">불합격</a></li>
+				</ul>
+			</c:forEach>
 
-</footer>
-<script>
+		</div>
+		<br>
+		<div class="container">
+			<!-- 통계(해당채용공고의 지원자수, 성별, 나이대) -->
+			<canvas id="genderApplicantsChart"></canvas>
+
+		</div>
+	</section>
+	<footer> </footer>
+	<script>
     document.addEventListener("DOMContentLoaded", function () {
         const ctx = document.getElementById('genderApplicantsChart').getContext('2d');
         const genderApplicantsChart = new Chart(ctx, {
