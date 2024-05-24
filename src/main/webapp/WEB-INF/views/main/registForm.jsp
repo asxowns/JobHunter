@@ -364,7 +364,9 @@ article {
 
 		</div>
 	</section>
-	<footer> </footer>
+	<footer> 
+		<%@ include file="../sub/footer.jsp" %>
+	</footer>
 
 	<script>
 		const btn1 = document.querySelector("[data-tab='tab-1']");
