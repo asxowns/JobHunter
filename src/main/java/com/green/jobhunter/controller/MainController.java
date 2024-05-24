@@ -222,6 +222,8 @@ public class MainController {
 			throws IOException {
 		Member member = memberrepository.findByMem(id, pw);
 		if (member == null) {
+			String msg = "아이디와 패스워드를 정확히 입력해주세요";
+			model.addAttribute("msg", msg);
 			return "/main/loginForm";
 		}
 
@@ -246,6 +248,8 @@ public class MainController {
 	public String loginEnterprise(@RequestParam("id") String id, @RequestParam("pw") String pw, Model model) {
 		Member member = memberrepository.findByMem(id, pw);
 		if (member == null) {
+			String msg = "아이디와 패스워드를 정확히 입력해주세요";
+			model.addAttribute("msg", msg);
 			return "/main/loginForm";
 		}
 
@@ -365,15 +369,24 @@ public class MainController {
 				System.out.println(" asdsadfsdf " + list1);
 				System.out.println(" asdsadfsdf " + list1);
 				System.out.println(" asdsadfsdf " + list1);
+				
 				model.addAttribute("list1", list1);
+				System.out.println("==============================="+list1.size());
+				if(list1.size()==0) {
+					 String msg="검색결과가 없습니다";
+//					
+					 model.addAttribute("msg", msg);
+				}
+
+				
 				// }else if(enterprise==null) {
 				// List<Posting> list1=null;
-				// String msg="검색결과가 없습니다";
-///				
-				// model.addAttribute("msg", msg);
-				// model.addAttribute("list1", list1);
+//				// String msg="검색결과가 없습니다";
+//				
+//				// model.addAttribute("msg", msg);
+//				// model.addAttribute("list1", list1);
 //			}
-
+			
 		} else if (companyname_.isEmpty()) {
 
 			List<Posting> list1 = postingrepository.findByCompanynameAndAreaAndCareerAndEdutype(companyname, area,
