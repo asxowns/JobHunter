@@ -104,7 +104,7 @@ table th{
 	display:none;
 }
 .toggleHPassword_active{
-position:relative;
+	position:relative;
 	top:-99px;
 	left:340px;
 }

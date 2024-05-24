@@ -22,7 +22,7 @@ ul {
 
 section {
 	width: 1240px;
-	margin: 73px auto 100px;
+	margin: 75px auto 100px;
 }
 
 h1 {
@@ -31,41 +31,6 @@ h1 {
 	margin-bottom: 105px;
 }
 
-.container {
-	width: 500px;
-	margin: 0 auto;
-}
-
-ul.tabs {
-	text-align: center;
-	margin-bottom: 30px;
-}
-
-ul.tabs li {
-	background: none;
-	color: #222;
-	display: inline-block;
-	padding: 0px 10px;
-	cursor: pointer;
-}
-
-.tabs .line {
-	color: #333;
-}
-
-ul.tabs li.current {
-	color: #d44958;
-	font-weight: bold;
-}
-
-.tab-content {
-	display: none;
-	padding: 15px;
-}
-
-.tab-content.current {
-	display: block;
-}
 
 input[type="text"] {
 	width: 280px;
@@ -80,20 +45,6 @@ input[type="text"] {
 	padding-left: 20px;
 }
 
-.login_area {
-	text-align: right;
-}
-
-.login_area input {
-	width: 280px;
-	height: 40px;
-	background: #d44958;
-	color: #fff;
-	border: none;
-	border-radius: 10px;
-	font-size: 16px;
-	font-weight: bold;
-}
 
 table {
 	border-collapse: separate;
@@ -103,6 +54,126 @@ table {
 table th {
 	padding-right: 10px;
 }
+
+.posting_info{
+	width:900px;
+	margin:0 auto;
+	display:flex;
+	border:1px solid #ddd;
+	border-top:2px solid #000;
+	box-sizing:border-box;
+}
+.posting_info_left{
+	width:75%;
+	border-right:1px solid #ddd;
+	padding:20px;
+	box-sizing:border-box;
+}
+.posting_info_right{
+	width:25%;
+	padding:20px;
+	box-sizing:border-box;
+}
+
+.posting_info_left_top{
+	border-bottom:1px solid #ddd;
+	padding-bottom:20px;
+}
+.posting_info_left_top p{
+	padding-bottom:10px;
+}
+
+.posting_info_left_bot{
+	display:flex;
+	padding-top:20px;
+	padding-bottom:30px;
+	gap:300px;
+}
+.posting_info_left_bot-left p,
+.posting_info_left_bot-right p{
+	padding:3px 0;
+	padding-left:20px;
+}
+
+.posting_info_right p{
+	padding:5px 0;
+}
+.posting_info_right h3{
+	padding-top:50px;
+}
+.posting_info_right #heartLink{
+	padding-top:20px;
+}
+
+.btns{
+	width:900px;
+	margin:40px auto 100px;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	gap:20px;
+}
+#submitnow{
+	background:#d44958;
+	color:#fff;
+	border:0;
+	padding:15px 45px;
+	font-size:18px;
+	font-weight:bold;
+	cursor:pointer;
+}
+#postscrap{
+	background:#d44958;
+	color:#fff;
+	border:0;
+	padding:15px 30px;
+	font-size:18px;
+	font-weight:bold;
+	cursor:pointer;
+}
+
+.container{
+	width:900px;
+	margin:0 auto;
+	border:1px solid #ddd;
+	border-top:2px solid #000;
+	position:relative;
+}
+
+ul.tabs {
+	text-align:left;
+	margin-bottom: 30px;
+}
+
+ul.tabs li {
+	background: none;
+	color: #222;
+	display: inline-block;
+	cursor: pointer;
+	background:#eee;
+	padding:15px 20px;
+	color:#888;
+}
+
+.tabs .line {
+	color: #333;
+}
+
+ul.tabs li.current {
+	color: #d44958;
+	font-weight: bold;
+	background:#fff;
+}
+
+.tab-content {
+	min-height:1000px;
+	display: none;
+	padding: 15px;
+}
+
+.tab-content.current {
+	display: block;
+}
 </style>
 </head>
 <body>
@@ -110,24 +181,54 @@ table th {
 		<%@ include file="../sub/header.jsp"%>
 	</header>
 	<section>
-		<h2>채용정보</h2>
-
-		채용제목${dto.title} <br> 근무조건 기업정보
-
-		<div id="heartLink">
-			<img id="heartImg" src="/resource/img/heartempty.png">
+		<h1>채용정보</h1>
+		<div class="posting_info">
+			<div class="posting_info_left">
+				<div class="posting_info_left_top">
+					<p>그린컴퓨터아카데미</p>
+					<h2>[서면 별관] 데스크 행정직원 채용</h2>
+				</div>
+				<div class="posting_info_left_bot">
+					<div class="posting_info_left_bot-left">
+						<h3>지원자격</h3>
+						<p>aaaaaa</p>							
+						<p>aaaaaa</p>							
+						<p>aaaaaa</p>							
+					</div>
+					<div class="posting_info_left_bot-right">
+						<h3>근무조건</h3>
+						<p>aaaaaa</p>
+						<p>aaaaaa</p>
+						<p>aaaaaa</p>
+						<p>aaaaaa</p>
+					</div>
+				</div>
+			</div>
+			<div class="posting_info_right">
+				<div id="heartLink">
+					<img id="heartImg" src="/resource/img/heartempty.png">
+				</div>
+			<div id="demo"></div>
+				<h3>기업정보</h3>
+				<p>bbbbbb</p>
+				<p>bbbbbb</p>
+				<p>bbbbbb</p>
+			</div>			
 		</div>
-		<div id="demo"></div>
 
-		<form action="applicate" method="get">
-			<input type="hidden" name="postcode" value="${dto.postcode}">
-			<input type="hidden" name="hid" value="<%= session.getAttribute("logged") %>">
-			<input type="submit" value="즉시지원">
-		</form>
-		<form action="">
-			<input type="button" value="스크랩">
-		</form>
+		<!-- 즉시지원 스크랩 버튼 -->
+		<div class="btns">
+			<form action="applicate" method="get">
+				<input type="hidden" name="postcode" value="${dto.postcode}">
+				<input type="hidden" name="hid" value="<%= session.getAttribute("logged") %>">
+				<input type="submit" id="submitnow" value="즉시지원">
+			</form>
+			<form action="">
+				<input type="button" id="postscrap" value="스크랩">
+			</form>
+		</div>
 
+		<!-- 기업 상세 요강 -->
 		<div class="container">
 			<ul class="tabs">
 				<li class="tab-link current" data-tab="tab-1">상세정보</li>
@@ -137,9 +238,7 @@ table th {
 			<div id="tab-1" class="tab-content current">
 				<form action="/loginEnterprise" method="post">
 					<div class="input_box">
-						<table>
-
-						</table>
+						
 					</div>
 				</form>
 			</div>
@@ -147,9 +246,7 @@ table th {
 			<div id="tab-2" class="tab-content">
 				<form action="/loginHunter" method="post">
 					<div class="input_box">
-						<table>
-
-						</table>
+						
 					</div>
 				</form>
 			</div>
