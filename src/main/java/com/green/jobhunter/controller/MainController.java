@@ -13,12 +13,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.green.jobhunter.entity.Application;
 import com.green.jobhunter.entity.Enterprise;
+import com.green.jobhunter.entity.Favorite;
 import com.green.jobhunter.entity.Hunter;
 import com.green.jobhunter.entity.Member;
 import com.green.jobhunter.entity.Posting;
 import com.green.jobhunter.entity.Subscribe;
 import com.green.jobhunter.repository.ApplicationRepository;
 import com.green.jobhunter.repository.EnterpriseRepository;
+import com.green.jobhunter.repository.FavoriteRepository;
 import com.green.jobhunter.repository.HunterRepository;
 import com.green.jobhunter.repository.MemberRepository;
 import com.green.jobhunter.repository.PostingRepository;
@@ -34,6 +36,7 @@ public class MainController {
 	static Enterprise enterprise = null;
 	static Member eid = null;
 	static long cnt = 0;
+	static long scrabcnt=0;
 	@Autowired
 	MemberRepository memberrepository;
 	@Autowired
@@ -45,6 +48,12 @@ public class MainController {
 	private EntityManager entityManager;
 	@Autowired
 	HunterRepository hunterrepository;
+	
+	@Autowired
+	FavoriteRepository favoriteRepository;
+	
+	
+	
 	@Autowired
 	ApplicationRepository applicationrepository;
 
@@ -453,6 +462,38 @@ public class MainController {
 			subscriberepostory.deleteByEntercode(enterprise.getEntercode());
 
 			model.addAttribute("isFilled", false);
+		}
+		// 수정: 응답으로 빈 문자열 반환
+		return "";
+	}
+	@RequestMapping("/scrab")
+	@ResponseBody
+	public String scrab(@RequestParam("postcode") long postcode,HttpSession session, Model model) {
+		
+		String sessionId = (String) session.getAttribute("logged");
+		System.out.println("=====================sessionId: " + sessionId);
+
+		// 세션에서 멤버 객체 가져오기
+		Member member = memberrepository.findByMemberid(sessionId);
+		System.out.println("=====================member: " + member);
+
+		// 기업 객체 생성 (현재 코드에서는 주석 처리)
+		// Enterprise enterprise = enterpriseRepository.findByEid(posteid);
+
+		// 새로운 기업 및 구독 정보 생성
+		System.out.println("=======================================postcode: "+postcode);
+		Posting posting = postingrepository.findByPostcode(postcode);
+		Favorite favorite = new Favorite();
+		favorite.setPostcode(posting);
+		favorite.setHid(member);
+		if (scrabcnt==0) {
+			// 구독 정보 데이터베이스에 저장
+			favoriteRepository.save(favorite);
+			scrabcnt=1;
+		} else {
+			System.out.println("==========trydelete==========");
+
+			scrabcnt=0;
 		}
 		// 수정: 응답으로 빈 문자열 반환
 		return "";

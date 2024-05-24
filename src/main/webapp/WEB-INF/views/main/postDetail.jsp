@@ -229,8 +229,10 @@ ul.tabs li.current {
 				<input type="hidden" name="hid" value="<%= session.getAttribute("logged") %>">
 				<input type="submit" id="submitnow" value="즉시지원">
 			</form>
-			<form action="">
-				<input type="button" id="postscrap" value="스크랩">
+			<form action="scrab" method="get">
+				<input type="hidden" name="postcode" value="${dto.postcode}">
+				<input type="hidden" name="hid" value="<%= session.getAttribute("logged") %>">
+				<input type="submit" id="postscrap" value="스크랩">
 			</form>
 		</div>
 
@@ -273,7 +275,7 @@ ul.tabs li.current {
 	const heartLink = document.getElementById("heartLink");
 	const heartImg = document.getElementById("heartImg");
 	let isFilled = false;
-
+	let isFilled2 = false;
 	var posteid = "${posteid}";
 
 	btn1.addEventListener("click", function() {
@@ -317,5 +319,23 @@ ul.tabs li.current {
 								+ "&isFilled=" + isFilled, true);
 						xhttp.send();
 					});
+	
+	
+	document
+	.getElementById("postscrap")
+	.addEventListener(
+			"click",
+			function(event) {
+				event.preventDefault(); // 기본 이벤트 동작 방지
+				if (isFilled2) {
+					heartImg.src = "/resource/img/heartempty.png";
+					alert("채용공고 스크랩이 해제되었습니다");
+				} else {
+					heartImg.src = "/resource/img/heartfill.png";
+					alert("채용공고 스크랩이 등록되었습니다");
+				}
+				isFilled2 = !isFilled2;
+				
+			});
 </script>
 </html>
