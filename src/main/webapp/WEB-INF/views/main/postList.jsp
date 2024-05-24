@@ -166,10 +166,31 @@ section{
 	<section>
 		<h2>추천공고</h2>
 
-		<a href="">1</a>
-		<a href="">2</a>
-		<a href="">3</a>
-		<a href="">4</a><br>
+		<article class="post_area">
+			<c:if test="${not empty msg}" >
+			<div>${msg}</div>
+			</c:if>
+			<c:forEach var="dto" items="${list1}" varStatus="status">
+				<div class="post_box">
+					<a
+						href="postDetail?postcode=${dto.postcode}&posteid=${dto.eid.memberid}">
+						<div class="post_img">
+							<img src="/resource/img/${dto.mainurl }">
+						</div>
+						<div class="post_info">
+
+							<h1 class="ent_name">삼성전자</h1>
+							<h2 class="post_title">채용공고 제목</h2>
+							<h3 class="industry">채용직군<span class="line">|</span><span class="area">지역</span></h3>
+							<div class="post_info_bot">
+								<p>💰합격 축하금 100만원<p>
+								<h4 class="endDate">${dto.deadline }</h4>
+							</div>
+						</div>
+					</a>
+				</div>
+			</c:forEach>
+		</article>
 		<div class="choose_job">
 			<span>직무전체</span>
 			<span>|</span>
