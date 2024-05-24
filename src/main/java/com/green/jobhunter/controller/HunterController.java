@@ -1,6 +1,7 @@
 package com.green.jobhunter.controller;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import com.green.jobhunter.dto.DesiredAreaDto;
 import com.green.jobhunter.dto.DesiredIndustryDto;
 import com.green.jobhunter.dto.HunterDto;
 import com.green.jobhunter.dto.MemberDto;
+import com.green.jobhunter.dto.OfferDto;
 import com.green.jobhunter.dto.ResumeDto;
 import com.green.jobhunter.dto.ResumeSkillDto;
 import com.green.jobhunter.entity.Career;
@@ -441,20 +443,13 @@ public class HunterController {
 		return "/hunter/subscribeList";
 	}
 
-	@RequestMapping("/offerList")
+	@RequestMapping("/positionList")
 	public String positionList(HttpServletRequest req, Model model, 
 			OfferDto offerDto) {
 		
 		String logged_id = (String) req.getSession().getAttribute("logged");
-		Member member = memberRepository.findByMemId(logged_id);	
-		// 회사 아이디를 가진 멤버 필요.
-		Enterprise enterprise = enterpriseRepository.findByEid(logged_id);
-		// 구직자 아이디를 가진 멤버 필요.
-		Hunter hunter = hunterRepository.findByHid(member);
-		// 회사 -> 구직자 : 채용공고 정보의 일부 managetel, deadline, result를 같이 전달함 -> offer 객체
-		String hid = member.getMemberid();
-		List<Offer> offerList = offerRepository.findByHid(hid);
-		
+		List<OfferDto> offerList = enterpriseRepository.findByHid(logged_id);
+
 		model.addAttribute("offList", offerList);
 
 		return "/hunter/positionList";

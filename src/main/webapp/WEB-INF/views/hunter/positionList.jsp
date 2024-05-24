@@ -99,6 +99,9 @@
 					<div class="toggle-container">
 						<button class="toggle-btn" onclick="toggleDetails(this)">▼</button>
 					</div>
+					<div class="companyname">
+						<input type="text" readonly value="${offer.companyname}">
+					</div>
 					<div class="details" style="display: none;">
 						<div class="managetel">
 							담당자 연락처<input type="text" readonly value="${offer.managetel}">
