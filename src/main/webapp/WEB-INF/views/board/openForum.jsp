@@ -339,7 +339,6 @@ input[type="submit"] {
 		</main>
 	</section>
 	<footer> 
-		<%@ include file="../sub/footer.jsp" %>
 	</footer>
 
 </body>

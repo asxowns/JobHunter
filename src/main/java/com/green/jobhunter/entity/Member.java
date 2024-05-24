@@ -1,5 +1,5 @@
 package com.green.jobhunter.entity;
-
+import java.time.LocalDate;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -22,6 +22,9 @@ public class Member{
     private String password;
     
     private char role;
+
+    @Column(columnDefinition = "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP", nullable = false)
+	private LocalDate regdate;
 
 	
 
