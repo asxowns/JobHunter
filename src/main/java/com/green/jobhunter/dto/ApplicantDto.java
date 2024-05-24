@@ -4,16 +4,9 @@ import java.sql.Date;
 
 import org.springframework.stereotype.Component;
 
-import com.green.jobhunter.entity.Member;
-import com.green.jobhunter.entity.Posting;
-
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @Data
 @AllArgsConstructor

@@ -122,7 +122,7 @@ public class EnterpriseController {
     	model.addAttribute("posting", posting);
     	
     	//지원자리스트 (구직자정보 / 해당공고정보)
-    	List<ApplicantDto> applicantDto = applicationRepository.findAllWithApplicantDto();
+    	List<ApplicantDto> applicantDto = applicationRepository.findAllWithApplicantDto(postcode);
         model.addAttribute("applicantDto", applicantDto);
         
     	return "/enter/hunterPerPostList";
@@ -203,7 +203,6 @@ public class EnterpriseController {
         posting.setArea(request.getParameter("area"));
         posting.setIndustry(request.getParameter("industry"));
         posting.setJob(request.getParameter("job"));
-            
         String deadline_ = request.getParameter("deadline");
         LocalDate deadline = LocalDate.parse(deadline_);
         posting.setDeadline(deadline);
