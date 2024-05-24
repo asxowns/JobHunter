@@ -289,7 +289,9 @@ main b {
 		</div>
 
 	</section>
-	<footer> </footer>
+	<footer>
+		<%@ include file="../sub/footer.jsp" %>	
+	</footer>
 
 </body>
 </html>

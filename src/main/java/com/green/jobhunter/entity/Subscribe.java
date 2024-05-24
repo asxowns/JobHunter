@@ -35,9 +35,4 @@ public class Subscribe {
 	@ToString.Exclude
 	private Member hid;
 	
-	
-	 public Subscribe(Enterprise eid, Member hid) {
-	        this.eid = eid;
-	        this.hid = hid;
-	    }
 }

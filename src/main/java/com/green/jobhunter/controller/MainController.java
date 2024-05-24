@@ -46,8 +46,8 @@ public class MainController {
 	@Autowired
 	HunterRepository hunterrepository;
 	@Autowired
-	ApplicationRepository  applicationrepository;
-	
+	ApplicationRepository applicationrepository;
+
 	@Autowired
 	PostingRepository postingrepository;
 
@@ -70,14 +70,21 @@ public class MainController {
 	}
 
 	@RequestMapping("/enterpriseList")
-	public String enterpriseList() {
-
+	public String enterpriseList(Model model) {
+		List<Enterprise> list = enterrepository.findAll();
+		
+		
+		model.addAttribute("list",list);
+		
 		return "/main/enterpriseList";
 	}
 
 	@RequestMapping("/enterpriseDetail")
-	public String enterpriseDetail() {
-
+	public String enterpriseDetail(@RequestParam("entercode") long entercode, Model model) {
+		enterprise = enterrepository.findByEntercode(entercode);
+		List<Posting> posting = postingrepository.findByEid(enterprise.getEid());
+		model.addAttribute("dtoEnter",enterprise);
+		model.addAttribute("list1",posting);
 		return "/main/enterpriseDetail";
 	}
 
@@ -145,8 +152,8 @@ public class MainController {
 	}
 
 	@RequestMapping("/applicate")
-	public String aplication(Application application, Model model ) {
-		System.out.println("=======================application : "+application);
+	public String aplication(Application application, Model model) {
+		System.out.println("=======================application : " + application);
 		applicationrepository.save(application);
 		return "/main/postDetail";
 	}
@@ -215,6 +222,8 @@ public class MainController {
 			throws IOException {
 		Member member = memberrepository.findByMem(id, pw);
 		if (member == null) {
+			String msg = "아이디와 패스워드를 정확히 입력해주세요";
+			model.addAttribute("msg", msg);
 			return "/main/loginForm";
 		}
 
@@ -239,6 +248,8 @@ public class MainController {
 	public String loginEnterprise(@RequestParam("id") String id, @RequestParam("pw") String pw, Model model) {
 		Member member = memberrepository.findByMem(id, pw);
 		if (member == null) {
+			String msg = "아이디와 패스워드를 정확히 입력해주세요";
+			model.addAttribute("msg", msg);
 			return "/main/loginForm";
 		}
 
@@ -342,17 +353,49 @@ public class MainController {
 
 		if (!companyname_.isEmpty()) {
 			enterprise = enterrepository.findByCompanyname(companyname);
-			String memid = enterprise.getEid().getMemberid();
+			System.out.println(enterprise);
+			System.out.println(enterprise);
+			System.out.println(enterprise);
+			System.out.println(enterprise);
+			System.out.println(enterprise);
+			System.out.println(enterprise);
 
-			Member eid = memberrepository.findByMemberid(memid);
+//			if (enterprise != null) {
+//				String memid = enterprise.getEid().getMemberid();
+//				Member eid = memberrepository.findByMemberid(memid);
+				List<Posting> list1 = postingrepository.findByCompanynameAndAreaAndCareerAndEdutype(companyname, area,
+						career, edutype);
+				List<Posting> list2 = postingrepository.findByEid(eid);
+				System.out.println(" asdsadfsdf " + list1);
+				System.out.println(" asdsadfsdf " + list1);
+				System.out.println(" asdsadfsdf " + list1);
+				
+				model.addAttribute("list1", list1);
+				System.out.println("==============================="+list1.size());
+				if(list1.size()==0) {
+					 String msg="검색결과가 없습니다";
+//					
+					 model.addAttribute("msg", msg);
+				}
 
-			List<Posting> list1 = postingrepository.findByEidAndAreaAndCareerAndEdutype(eid, area, career, edutype);
-			List<Posting> list2 = postingrepository.findByEid(eid);
-			model.addAttribute("list1", list1);
-
+				
+				// }else if(enterprise==null) {
+				// List<Posting> list1=null;
+//				// String msg="검색결과가 없습니다";
+//				
+//				// model.addAttribute("msg", msg);
+//				// model.addAttribute("list1", list1);
+//			}
+			
 		} else if (companyname_.isEmpty()) {
 
-			List<Posting> list1 = postingrepository.findByEidAndAreaAndCareerAndEdutype(eid, area, career, edutype);
+			List<Posting> list1 = postingrepository.findByCompanynameAndAreaAndCareerAndEdutype(companyname, area,
+					career, edutype);
+			if (list1.size() == 0) {
+				String msg = "검색결과가 없습니다";
+				model.addAttribute("msg", msg);
+
+			}
 			model.addAttribute("list1", list1);
 		}
 		return "/main/postList";
@@ -391,7 +434,9 @@ public class MainController {
 		System.out.println("=====================enterprise: " + enterprise);
 		System.out.println("=====================enterprisegetMemberid(): " + enterprise.getEid().getMemberid());
 		System.out.println("=====================isFilled: " + isFilled);
-		Subscribe subscribe = new Subscribe(enterprise, member);
+		Subscribe subscribe = new Subscribe();
+		subscribe.setEid(enterprise);
+		subscribe.setHid(member);
 		if (isFilled) {
 			// 구독 정보 데이터베이스에 저장
 			subscriberepostory.save(subscribe);

@@ -93,7 +93,6 @@ section{
 .post_area{
 	width:100%;
 	display:flex;
-	justify-content:space-between;
 	flex-wrap:wrap;
 	gap:20px;
 }
@@ -166,17 +165,64 @@ section{
 	<section>
 		<h2>추천공고</h2>
 
-		<a href="">1</a>
-		<a href="">2</a>
-		<a href="">3</a>
-		<a href="">4</a><br>
+		<article class="post_area">
+				<div class="post_box">
+					<a
+						href="">
+						<div class="post_img">
+							<img src="/resource/img/post_common.jpg">
+						</div>
+						<div class="post_info">
+
+							<h1 class="ent_name">삼성전자</h1>
+							<h2 class="post_title">영업 전산실 모집</h2>
+							<h3 class="industry">${dto.job}<span class="line">|</span><span class="area">부산</span></h3>
+							<div class="post_info_bot">
+								<p>💰합격 축하금 100만원<p>
+								<h4 class="endDate">~2024/05/30</h4>
+							</div>
+						</div>
+						<div class="post_info">
+
+							<h1 class="ent_name">라온소프트</h1>
+							<h2 class="post_title">영업 전산실 모집</h2>
+							<h3 class="industry">${dto.job}<span class="line">|</span><span class="area">부산</span></h3>
+							<div class="post_info_bot">
+								<p>💰합격 축하금 100만원<p>
+								<h4 class="endDate">~2024/05/30</h4>
+							</div>
+						</div>
+						<div class="post_info">
+
+							<h1 class="ent_name">시원</h1>
+							<h2 class="post_title">영업 전산실 모집</h2>
+							<h3 class="industry">${dto.job}<span class="line">|</span><span class="area">부산</span></h3>
+							<div class="post_info_bot">
+								<p>💰합격 축하금 100만원<p>
+								<h4 class="endDate">~2024/05/30</h4>
+							</div>
+						</div>
+						<div class="post_info">
+
+							<h1 class="ent_name">삼성전자</h1>
+							<h2 class="post_title">영업 전산실 모집</h2>
+							<h3 class="industry">${dto.job}<span class="line">|</span><span class="area">부산</span></h3>
+							<div class="post_info_bot">
+								<p>💰합격 축하금 100만원<p>
+								<h4 class="endDate">~2024/05/30</h4>
+							</div>
+						</div>
+					</a>
+				</div>
+				
+		</article>
 		<div class="choose_job">
 			<span>직무전체</span>
 			<span>|</span>
 			<span>직무를 선택해주세요</span>
 		</div>
 
-	<form id="searhForm" action="searchFilter" method="post">
+	<form id="searhForm" action="searchFilter" method="get">
 		<div class="search-container">
 			<div class="search-select-filter">
 
@@ -208,6 +254,9 @@ section{
 	</form>
 
 		<article class="post_area">
+			<c:if test="${not empty msg}" >
+			<div>${msg}</div>
+			</c:if>
 			<c:forEach var="dto" items="${list1}" varStatus="status">
 				<div class="post_box">
 					<a
@@ -217,9 +266,9 @@ section{
 						</div>
 						<div class="post_info">
 
-							<h1 class="ent_name">삼성전자</h1>
-							<h2 class="post_title">채용공고 제목</h2>
-							<h3 class="industry">채용직군<span class="line">|</span><span class="area">지역</span></h3>
+							<h1 class="ent_name">${list2[status.index].companyname}</h1>
+							<h2 class="post_title">${dto.title }</h2>
+							<h3 class="industry">${dto.industry }<span class="line">|</span><span class="area">${dto.area }</span></h3>
 							<div class="post_info_bot">
 								<p>💰합격 축하금 100만원<p>
 								<h4 class="endDate">${dto.deadline }</h4>
@@ -233,7 +282,9 @@ section{
 
 
 	</section>
-	<footer> </footer>
+	<footer> 
+		<%@ include file="../sub/footer.jsp" %>
+	</footer>
 
 </body>
 <script>
