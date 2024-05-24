@@ -185,7 +185,7 @@ header {
 	color:#D44958;
 }
 </style>
-	<header>
+	<div id="header">
 		<div class="head">
 			<div class="head_top">
 				<div class="logo">
@@ -265,8 +265,7 @@ header {
 					</ul>
 				</div>
 		</div>
-	</header>
-	
+	</div>
 <script>
 
 	const slide = document.getElementById("head_menu_slide_container");

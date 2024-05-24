@@ -10,9 +10,9 @@
         padding: 0; 
         box-sizing: border-box; 
     }
-    footer {
+    #footer {
         width: 100%;
-        margin: 0 auto;
+        margin: 150px auto 0;
         position: relative;
         bottom: 0;
         background-color: #d8d8da;
@@ -20,7 +20,8 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        padding:50px;
+        padding:30px;
+        z-index:-999;
     }
     #container {
         width: 1240px;
@@ -46,7 +47,7 @@
     }
     </style>
 </head>
-    <footer>
+    <div id="footer">
         <div id="container">
             <div class="linked">
                 <div class="link"><a href="#">이용 약관</a></div>
@@ -63,5 +64,5 @@
                 <p>ⓒ JobHunter. All rights reserved.</p>
             </div>
         </div>
-    </footer>
+    </div>
 </html>

@@ -518,6 +518,9 @@ input[type="submit"] {
 			</form>
 		</div>
 	</section>
+	<footer>
+		<%@ include file="../sub/footer.jsp" %>
+	</footer>
 	<script>
       function fetchSubList() {
          var mainSelect = document.querySelector('.mainSelect');

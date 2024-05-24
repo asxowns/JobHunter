@@ -134,7 +134,7 @@ textarea{
     </div>
 </section>
 <footer>
-
+    <%@ include file="../sub/footer.jsp" %>
 </footer>
 <script>
     document.getElementById("type").addEventListener("change", function() {

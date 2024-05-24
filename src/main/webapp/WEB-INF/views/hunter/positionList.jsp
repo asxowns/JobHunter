@@ -123,6 +123,9 @@
 			}
 		}
 	</script>
+	<footer>
+		<%@ include file="../sub/footer.jsp" %>
+	</footer>
 </body>
 </html>
 
