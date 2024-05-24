@@ -326,7 +326,6 @@ ul.tabs li.current {
 	.addEventListener(
 			"click",
 			function(event) {
-				event.preventDefault(); // 기본 이벤트 동작 방지
 				if (isFilled2) {
 					heartImg.src = "/resource/img/heartempty.png";
 					alert("채용공고 스크랩이 해제되었습니다");
