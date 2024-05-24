@@ -402,7 +402,9 @@ public class MainController {
 		System.out.println("=====================enterprise: " + enterprise);
 		System.out.println("=====================enterprisegetMemberid(): " + enterprise.getEid().getMemberid());
 		System.out.println("=====================isFilled: " + isFilled);
-		Subscribe subscribe = new Subscribe(enterprise, member);
+		Subscribe subscribe = new Subscribe();
+		subscribe.setEid(enterprise);
+		subscribe.setHid(member);
 		if (isFilled) {
 			// 구독 정보 데이터베이스에 저장
 			subscriberepostory.save(subscribe);
