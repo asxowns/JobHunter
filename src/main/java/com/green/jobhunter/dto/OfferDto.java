@@ -1,6 +1,6 @@
 package com.green.jobhunter.dto;
 
-import java.time.LocalDate;
+import java.sql.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,6 +15,6 @@ public class OfferDto {
 	private String msg;
 	private String managetel;
 	private String result;
-	private LocalDate deadline;
+	private Date deadline;
 	private String companyname;
 }
