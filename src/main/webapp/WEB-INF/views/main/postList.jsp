@@ -34,7 +34,7 @@ section{
 }
 
 .choose_job{
-	margin:10px 0;
+	margin:40px 0 15px;
 }
 .choose_job span{
 	padding:0px 5px;
@@ -155,6 +155,10 @@ section{
 	font-weight:400;
 
 }
+.recommend{
+	margin:50px 0;
+	font-size:22px;
+}
 </style>
 </head>
 <body>
@@ -163,7 +167,7 @@ section{
 	</header>
 
 	<section>
-		<h2>추천공고</h2>
+		<h2 class="recommend">추천공고</h2>
 
 		<article class="post_area">
 				<div class="post_box">
