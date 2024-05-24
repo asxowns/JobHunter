@@ -2,6 +2,7 @@
 <%-- JSTL Core --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -71,7 +72,9 @@
 </header>
 <section>
     <h2 style="text-align:center; margin:24px 0;"> 공지사항 </h2>
+    <c:if test="${fn:trim(sessionScope.role) == 'm'}">
     <div id="notice-write-btn"><a href="/manage/noticeWriteForm"> 공지사항 작성 </a> </div>
+    </c:if>
     <div id="notice-list-table">
         <li class="notice-list-item">
             <span id="notice-item-1"> 번호 </span> <span id="notice-item-2"> 제목 </span> <span id="notice-item-3"> 날짜 </span>
