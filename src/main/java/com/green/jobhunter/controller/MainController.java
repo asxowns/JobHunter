@@ -306,9 +306,14 @@ public class MainController {
 	public String postDetail(@RequestParam("postcode") long postcode, @RequestParam("posteid") String posteid,
 			Model model) {
 		Posting posting = postingrepository.findByPostcode(postcode);
+		eid = posting.getEid();
+		Enterprise enterprise = enterrepository.findByEid(eid.getMemberid());
+		System.out.println("=======================enterprise : "+enterprise.getCompanyname());
+		String companyname = enterprise.getCompanyname();
 		model.addAttribute("dto", posting);
 		model.addAttribute("posteid", posteid);
 		model.addAttribute("postcode", postcode);
+		model.addAttribute("companyname", companyname);
 		return "/main/postDetail";
 	}
 
