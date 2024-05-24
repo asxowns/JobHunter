@@ -40,7 +40,7 @@ public interface EnterpriseRepository extends JpaRepository<Enterprise, Long> {
 			dto.setManagetel((String) result[2]);
 			dto.setMsg((String) result[3]);
 			dto.setResult((String) result[4]);
-			dto.setCompanyname((String) result[5]);
+			dto.setCompanyname((String) result[7]);
 			dtos.add(dto);
 		}
 		return dtos;
