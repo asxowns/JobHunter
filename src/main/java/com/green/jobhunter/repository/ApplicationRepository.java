@@ -21,10 +21,10 @@ public interface ApplicationRepository extends JpaRepository<Application, Long> 
 	List<ApplicantDto> findByPostcode(Posting postcode);
 	
 	//해당공고의 지원자정보
-		@Query(value = "SELECT h.huntercode, h.hid, h.username, h.birth, h.gender, r.edutype, r.employmenttype, r.title, a.appcode, a.postcode, a.result FROM hunter h JOIN resume r ON h.hid = r.hid JOIN application a ON r.hid = a.hid", nativeQuery = true)
-	    List<Object[]> findAllWithApplicantDtoAsArray();
-	    default List<ApplicantDto> findAllWithApplicantDto() {
-	        List<Object[]> results = findAllWithApplicantDtoAsArray();
+		@Query(value = "SELECT h.huntercode, h.hid, h.username, h.birth, h.gender, r.edutype, r.employmenttype, r.title, a.appcode, a.postcode, a.result FROM hunter h JOIN resume r ON h.hid = r.hid JOIN application a ON r.hid = a.hid WHERE a.postcode = :postcode", nativeQuery = true)
+	    List<Object[]> findAllWithApplicantDtoAsArray(@Param("postcode") Long postcode);
+	    default List<ApplicantDto> findAllWithApplicantDto(Long postcode) {
+	        List<Object[]> results = findAllWithApplicantDtoAsArray(postcode);
 	        List<ApplicantDto> dtos = new ArrayList<>();
 	        for (Object[] result : results) {
 	        	ApplicantDto dto = new ApplicantDto();
