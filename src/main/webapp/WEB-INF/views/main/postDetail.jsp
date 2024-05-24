@@ -185,22 +185,26 @@ ul.tabs li.current {
 		<div class="posting_info">
 			<div class="posting_info_left">
 				<div class="posting_info_left_top">
-					<p>그린컴퓨터아카데미</p>
-					<h2>[서면 별관] 데스크 행정직원 채용</h2>
+					<p>${companyname}</p>
+					<h2>${dto.title}</h2>
 				</div>
 				<div class="posting_info_left_bot">
 					<div class="posting_info_left_bot-left">
 						<h3>지원자격</h3>
-						<p>aaaaaa</p>							
-						<p>aaaaaa</p>							
-						<p>aaaaaa</p>							
+						<p>경력2년이상</p>							
+						<p>고졸이상</p>							
+						<p>스킬: Java Script, React, 영어</p> 
+						<p>인공지능, AntDesign</p>
+						
+													
 					</div>
 					<div class="posting_info_left_bot-right">
 						<h3>근무조건</h3>
-						<p>aaaaaa</p>
-						<p>aaaaaa</p>
-						<p>aaaaaa</p>
-						<p>aaaaaa</p>
+						<p>정규직 수습 3개월</p>
+						<p>회사내규에 따름</p>
+						<p>서울시 영등포구</p>
+						<p>주 5일(월~금)</p>
+						<p>유연 근무제</p>
 					</div>
 				</div>
 			</div>
@@ -210,9 +214,11 @@ ul.tabs li.current {
 				</div>
 			<div id="demo"></div>
 				<h3>기업정보</h3>
-				<p>bbbbbb</p>
-				<p>bbbbbb</p>
-				<p>bbbbbb</p>
+				<p>산업(업종):솔루션 SI CRM</p>
+				<p>사원수 36명</p>
+				<p>설립년도</p>
+				<p>기업형태</p>
+				<p>홈페이지 www.happy.com</p>
 			</div>			
 		</div>
 
@@ -238,7 +244,51 @@ ul.tabs li.current {
 			<div id="tab-1" class="tab-content current">
 				<form action="/loginEnterprise" method="post">
 					<div class="input_box">
-						
+										기업명
+테크솔루션즈 (TecSolutions Inc.)
+
+설립연도
+2010년
+
+본사 위치
+서울특별시 강남구 테크로 123, 테크솔루션즈 타워
+
+CEO
+이민호 (Minho Lee)
+
+직원 수
+약 1,500명
+
+사업 분야
+소프트웨어 개발
+인공지능(AI) 및 머신러닝
+클라우드 컴퓨팅
+빅데이터 분석
+사이버 보안
+주요 제품 및 서비스
+클라우드 플랫폼 (CloudHub)
+
+대규모 데이터를 효율적으로 관리하고 분석할 수 있는 클라우드 솔루션.
+유연한 스케일링과 높은 보안성을 제공.
+인공지능 분석 툴 (AInalytics)
+
+머신러닝 알고리즘을 통해 데이터를 분석하고 예측하는 AI 기반 소프트웨어.
+다양한 산업군에서 활용 가능.
+사이버 보안 솔루션 (SecureNet)
+
+실시간 위협 감지 및 차단, 데이터 암호화 등 종합적인 보안 서비스 제공.
+모바일 애플리케이션 개발 (MobileCraft)
+
+사용자 친화적이고 고성능의 모바일 앱 개발 서비스.
+iOS 및 안드로이드 플랫폼 지원.
+최근 주요 성과
+2023년: 국내외 주요 기업들과 AI 협력 프로젝트 진행, 클라우드 플랫폼 사용 고객 수 50만 명 돌파.
+2022년: 글로벌 사이버 보안 어워드에서 최우수 보안 솔루션상 수상.
+2021년: 빅데이터 분석 소프트웨어 글로벌 판매량 1위 달성.
+기업 미션 및 비전
+미션: 혁신적인 기술을 통해 고객의 성공을 돕고, 사회에 긍정적인 변화를 만들어 나간다.
+
+비전: 글로벌 리더로서 IT 기술 혁신을 선도하고, 스마트하고 안전한 디지털 세상을 구축한다.	
 					</div>
 				</form>
 			</div>
@@ -246,7 +296,51 @@ ul.tabs li.current {
 			<div id="tab-2" class="tab-content">
 				<form action="/loginHunter" method="post">
 					<div class="input_box">
-						
+					기업명
+테크솔루션즈 (TecSolutions Inc.)
+
+설립연도
+2010년
+
+본사 위치
+서울특별시 강남구 테크로 123, 테크솔루션즈 타워
+
+CEO
+이민호 (Minho Lee)
+
+직원 수
+약 1,500명
+
+사업 분야
+소프트웨어 개발
+인공지능(AI) 및 머신러닝
+클라우드 컴퓨팅
+빅데이터 분석
+사이버 보안
+주요 제품 및 서비스
+클라우드 플랫폼 (CloudHub)
+
+대규모 데이터를 효율적으로 관리하고 분석할 수 있는 클라우드 솔루션.
+유연한 스케일링과 높은 보안성을 제공.
+인공지능 분석 툴 (AInalytics)
+
+머신러닝 알고리즘을 통해 데이터를 분석하고 예측하는 AI 기반 소프트웨어.
+다양한 산업군에서 활용 가능.
+사이버 보안 솔루션 (SecureNet)
+
+실시간 위협 감지 및 차단, 데이터 암호화 등 종합적인 보안 서비스 제공.
+모바일 애플리케이션 개발 (MobileCraft)
+
+사용자 친화적이고 고성능의 모바일 앱 개발 서비스.
+iOS 및 안드로이드 플랫폼 지원.
+최근 주요 성과
+2023년: 국내외 주요 기업들과 AI 협력 프로젝트 진행, 클라우드 플랫폼 사용 고객 수 50만 명 돌파.
+2022년: 글로벌 사이버 보안 어워드에서 최우수 보안 솔루션상 수상.
+2021년: 빅데이터 분석 소프트웨어 글로벌 판매량 1위 달성.
+기업 미션 및 비전
+미션: 혁신적인 기술을 통해 고객의 성공을 돕고, 사회에 긍정적인 변화를 만들어 나간다.
+
+비전: 글로벌 리더로서 IT 기술 혁신을 선도하고, 스마트하고 안전한 디지털 세상을 구축한다.
 					</div>
 				</form>
 			</div>
@@ -292,8 +386,10 @@ ul.tabs li.current {
 						event.preventDefault(); // 기본 이벤트 동작 방지
 						if (isFilled) {
 							heartImg.src = "/resource/img/heartempty.png";
+							alert("관심기업이 해제되었습니다");
 						} else {
 							heartImg.src = "/resource/img/heartfill.png";
+							alert("관심기업이 등록되었습니다");
 						}
 						isFilled = !isFilled;
 						var outputDivPw = document
