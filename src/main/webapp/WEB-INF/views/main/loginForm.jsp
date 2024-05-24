@@ -105,7 +105,7 @@ table th{
 }
 .toggleHPassword_active{
 position:relative;
-	top:-102px;
+	top:-99px;
 	left:340px;
 }
 </style>
@@ -163,8 +163,6 @@ position:relative;
 								<th>비밀번호</th>
 								<td><input type="password" id =  "inputFieldEpw" name="pw"></td>
 							</tr>
-							<tr></button></tr>
-							
 							<tr class="login_area">
 								<td colspan="2"><input type="submit" value="기업로그인"></td>
 							</tr>
