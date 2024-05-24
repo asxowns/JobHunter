@@ -1,6 +1,6 @@
 package com.green.jobhunter.entity;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -28,7 +28,7 @@ public class Notice{
 	@Column(columnDefinition = "TEXT", nullable = false)
 	private String content;
 
-	@Column(columnDefinition = "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP", nullable = false)
-    private Date regdate;
+	@Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", nullable=false)
+    private LocalDate regdate;
 
 }

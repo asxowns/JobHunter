@@ -81,15 +81,12 @@
             <li class="notice-list-item">
                 <span id="notice-item-1">${notice.ntcode}</span>
                 <span id="notice-item-2"> ${notice.title} </span>
-                <span id="notice-item-3"> <fmt:formatDate value="${notice.regdate}" pattern="yyyy-MM-dd hh:mm"/> </span>
+                <span id="notice-item-3"> ${notice.regdate}</span>
             </li>
             </a>
         </c:forEach>
     </div>
 </section>
-<footer>
-    <%@ include file="../sub/footer.jsp" %>
-</footer>
 
 </body>
 </html>
