@@ -46,29 +46,24 @@
         width:8%;
         text-align:right;
     }
-    #notice-item-a{
+    .notice-item-span{
+        display:flex;
+        align-items:center;
+        justify-content:center;
         width: 105px;
         height: 35px;
-        background-color: blue;
         color: white;
         font-weight: bold;
         border: none;
         font-size: 16px;
         cursor: pointer;
         margin: 20px 0;
-        text-align: center;
     }
-    #notice-item-b{
-        width: 105px;
-        height: 35px;
+    #qeust{
+        background-color: cornflowerblue;
+    }
+    #report{
         background-color: #D44958;
-        color: white;
-        font-weight: bold;
-        border: none;
-        font-size: 16px;
-        cursor: pointer;
-        margin: 20px 0;
-        text-align: center;
     }
     
 </style>
@@ -89,10 +84,10 @@
             <li class="csList-list-item">
 
                 <c:if test="${fn:trim(cs.getType()) == 'A' }"> 
-                    <span id="notice-item-a"> 문의 </span>
+                    <span class="notice-item-span"id="qeust"> 문의 </span>
                 </c:if>
                 <c:if test="${fn:trim(cs.getType()) == 'B' }"> 
-                    <span id="notice-item-b"> 신고 </span>
+                    <span class="notice-item-span"id="report"> 신고 </span>
                 </c:if>
 
                 <span id="notice-item-2"> ${cs.getTitle()} </span>
