@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.green.jobhunter.dto.CsDto;
+import com.green.jobhunter.entity.Chat;
 import com.green.jobhunter.entity.Cs;
 import com.green.jobhunter.entity.Member;
 import com.green.jobhunter.entity.Notice;
+import com.green.jobhunter.repository.ChatRepository;
 import com.green.jobhunter.repository.CsRepository;
 import com.green.jobhunter.repository.MemberRepository;
 import com.green.jobhunter.repository.NoticeRepository;
@@ -34,6 +36,9 @@ public class ManagerController {
     @Autowired
     private CsRepository csRepository;
 
+    @Autowired
+    private ChatRepository chatRepo;
+
     @RequestMapping("/manageLoginForm")
     public String manageLoginForm(HttpServletRequest req) {
         HttpSession session = req.getSession();
@@ -42,7 +47,7 @@ public class ManagerController {
         if(logged_id != null){
             Member loggedMember = memberRepo.findByMemId(logged_id);
             if(loggedMember.getRole() == 'm' || loggedMember.getRole() == 'M'){
-                view = "/manage/managerPage";
+                view = "redirect:/manage/";
             }
         }
         
@@ -82,6 +87,12 @@ public class ManagerController {
         String logged = (String) session.getAttribute("logged");
         if (logged == null) {
             view = "redirect:/";
+        }
+        else {
+            List<String> weekRegistdate = memberRepo.weekRegistDate();
+            List<String> weekRegistCount = memberRepo.weekRegistCount();
+            model.addAttribute("weekRegistdate", weekRegistdate);
+            model.addAttribute("weekRegistCount", weekRegistCount);
         }
         return view;
     }
@@ -212,8 +223,9 @@ public class ManagerController {
     }
 
     @RequestMapping("/chat")
-    public String chat(){
-
+    public String chat(Model model){
+        List<Chat> chatList = chatRepo.findAllGroupByHid();
+        model.addAttribute("chatList", chatList);
         return "/manage/chatInquiryList";
     }
 
@@ -223,8 +235,14 @@ public class ManagerController {
     }
 
     @RequestMapping("/managerDashBoard")
-    public void managerDashBoard(){
+    public String managerDashBoard(Model model){
 
+        List<String> weekRegistdate = memberRepo.weekRegistDate();
+        List<String> weekRegistCount = memberRepo.weekRegistCount();
+        model.addAttribute("weekRegistdate", weekRegistdate);
+        model.addAttribute("weekRegistCount", weekRegistCount);
+
+        return "/manage/managerDashBoard";
     }
 
     @RequestMapping("/checkRole")

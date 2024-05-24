@@ -77,16 +77,16 @@
         const lineChart = new Chart(lineCtx, {
             type: 'line',
             data: {
-                labels: ['05-13', '05-14', '05-15', '05-16', '05-17','05-18', '05-19'],
+                labels: ['${weekRegistdate[0]}','${weekRegistdate[1]}','${weekRegistdate[2]}','${weekRegistdate[3]}','${weekRegistdate[4]}','${weekRegistdate[5]}',' ${weekRegistdate[6]}'],
                 datasets: [{
                     label: '신규 가입 회원 수',
-                    data: [65, 59, 99, 81, 56, 81, 41],
+                    data: [${weekRegistCount[0]},${weekRegistCount[1]},${weekRegistCount[2]},${weekRegistCount[3]},${weekRegistCount[4]},${weekRegistCount[5]},${weekRegistCount[6]}],
                     borderColor: 'rgba(75, 192, 192, 1)',
                     borderWidth: 2,
                     fill: false
                 },{
                     label: '접속자 수',
-                    data: [200,189,301,227,208,156,71],
+                    data: [6,9,14,16,8,12,8],
                     borderColor: 'rgba(200, 75, 100, 1)',
                     borderWidth: 2,
                     fill: false
