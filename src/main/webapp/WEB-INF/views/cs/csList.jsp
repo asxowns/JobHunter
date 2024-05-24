@@ -200,6 +200,10 @@ th, td {
     margin:20px 0;
     right: 10%;
 }
+#writeButton:hover{
+    background-color: #A6303E;
+    color: white;
+}
 </style>
 </head>
 <body>
