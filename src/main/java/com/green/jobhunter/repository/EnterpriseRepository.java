@@ -1,6 +1,6 @@
 package com.green.jobhunter.repository;
 
-import java.time.LocalDate;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,10 +36,10 @@ public interface EnterpriseRepository extends JpaRepository<Enterprise, Long> {
 		for( Object[] result : results) {
 			OfferDto dto = new OfferDto();
 			dto.setOffercode((Long)result[0]);
-			dto.setMsg((String) result[1]);
+			dto.setDeadline((Date)result[1]);
 			dto.setManagetel((String) result[2]);
-			dto.setResult((String) result[3]);
-			dto.setDeadline((LocalDate) result[4]);
+			dto.setMsg((String) result[3]);
+			dto.setResult((String) result[4]);
 			dto.setCompanyname((String) result[5]);
 			dtos.add(dto);
 		}
