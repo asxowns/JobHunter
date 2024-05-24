@@ -237,7 +237,7 @@ header {
 									<li><a href="/enter/">${sessionScope.logged } 님 </a></li>
 								</c:if>
 								<c:if test="${fn:trim(sessionScope.role) eq 'm'}">
-									<li><a href="/manage/">${sessionScope.logged } 님 </a></li>
+									<li><a href="/manage/">관리자 님 </a></li>
 								</c:if>
 								<li><a href="/logout">로그아웃</a></li>
 							</c:if>
