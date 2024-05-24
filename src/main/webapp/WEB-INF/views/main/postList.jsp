@@ -93,7 +93,6 @@ section{
 .post_area{
 	width:100%;
 	display:flex;
-	justify-content:space-between;
 	flex-wrap:wrap;
 	gap:20px;
 }
