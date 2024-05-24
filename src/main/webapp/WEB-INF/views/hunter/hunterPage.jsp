@@ -62,7 +62,7 @@
  				</a>
  			</li>
  			<li>
- 				<a href="/hunter/positionList">
+ 				<a href="/hunter/offerList">
  					<img src="/resource/img/mypage4.png">
  				</a>
  			</li>
