@@ -218,7 +218,7 @@ header {
 						<ul id="menu_list_item">
 							<li><a href="/">채용공고</a></li>
 							<li><a href="/enter/hunterList">기업·인재</a></li>
-							<li><a href="/board/openForumList">커뮤니티</a></li>
+							<li><a href="/board/openForum">커뮤니티</a></li>
 							<li><a href="/cs/csList">고객센터</a></li>
 						</ul>
 					</div>
