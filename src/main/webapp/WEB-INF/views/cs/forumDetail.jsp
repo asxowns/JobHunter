@@ -156,8 +156,8 @@ main b {
 
 }
 .Update-delete-btn {
-    margin-top: 20px; /* 수정 및 삭제 버튼과 댓글 상자 사이의 간격을 설정합니다. */
-    text-align: right; /* 버튼을 오른쪽으로 정렬합니다. */
+    margin-top: 20px; 
+    text-align: right; 
 }
 
 .Update-delete-btn a {
@@ -170,7 +170,7 @@ main b {
 }
 
 .Update-delete-btn a:hover {
-    background-color: #D44958;
+    background-color: #A6303E;
     color: white;
 }
 </style>

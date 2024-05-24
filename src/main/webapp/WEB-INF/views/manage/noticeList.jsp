@@ -19,7 +19,6 @@
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
-        width: 100%;
         height: 50px;
         border-bottom: 1px solid black;
         padding-left: 10px;
@@ -47,6 +46,23 @@
         width:20%;
         text-align:right;
     }
+    #notice-write-btn {
+        width:1140px; 
+        text-align: right; 
+        margin: 10px auto;
+        margin-bottom: 10px; 
+
+    }
+    #notice-write-btn a{
+        padding: 5px 10px;
+        border: 1px solid #D44958;
+        background-color: #D44958;
+        color: white;
+    }
+    #notice-write-btn a:hover {
+        background-color: #A6303E;
+        color: white;
+    }
 </style>
 </head>
 <body>
@@ -55,10 +71,10 @@
 </header>
 <section>
     <h2 style="text-align:center; margin:24px 0;"> 공지사항 </h2>
-    <h4><a href="/manage/noticeWriteForm"> 공지사항 작성 </a> </h4>
+    <div id="notice-write-btn"><a href="/manage/noticeWriteForm"> 공지사항 작성 </a> </div>
     <div id="notice-list-table">
         <li class="notice-list-item">
-            <span> 번호 </span> <span> 제목 </span> <span> 날짜 </span>
+            <span id="notice-item-1"> 번호 </span> <span id="notice-item-2"> 제목 </span> <span id="notice-item-3"> 날짜 </span>
         </li>
         <c:forEach var="notice" items="${noticeList}"> 
             <a class="a-nodecoration" href="/manage/noticeDetail?ntcode=${notice.ntcode}">
