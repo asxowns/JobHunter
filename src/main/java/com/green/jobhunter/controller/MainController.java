@@ -342,22 +342,33 @@ public class MainController {
 
 		if (!companyname_.isEmpty()) {
 			enterprise = enterrepository.findByCompanyname(companyname);
+			if(enterprise!=null) {
 			String memid = enterprise.getEid().getMemberid();
-
 			Member eid = memberrepository.findByMemberid(memid);
-
 			List<Posting> list1 = postingrepository.findByEidAndAreaAndCareerAndEdutype(eid, area, career, edutype);
 			List<Posting> list2 = postingrepository.findByEid(eid);
 			model.addAttribute("list1", list1);
+			}else if(enterprise==null) {
+				List<Posting> list1=null;
+				String msg="검색결과가 없습니다";
+				
+				model.addAttribute("msg", msg);
+				model.addAttribute("list1", list1);
+			}
+
 
 		} else if (companyname_.isEmpty()) {
 
 			List<Posting> list1 = postingrepository.findByEidAndAreaAndCareerAndEdutype(eid, area, career, edutype);
+			if (list1.size()==0) {
+				String msg="검색결과가 없습니다";
+				model.addAttribute("msg",msg);
+				
+			}
 			model.addAttribute("list1", list1);
 		}
 		return "/main/postList";
 	}
-
 //	로그아웃
 	@GetMapping("/logout")
 	public String logout(HttpServletRequest request) {

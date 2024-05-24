@@ -208,6 +208,9 @@ section{
 	</form>
 
 		<article class="post_area">
+			<c:if test="${not empty msg}" >
+			<div>${msg}</div>
+			</c:if>
 			<c:forEach var="dto" items="${list1}" varStatus="status">
 				<div class="post_box">
 					<a

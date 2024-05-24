@@ -179,6 +179,20 @@ article {
 .arti1 input[type="text"] {
 	width: 240px;
 }
+#inputFieldPw{
+	width:100%;
+	height: 40px;
+	border: 1px solid #ddd;
+	padding-left: 5px;
+	box-sizing: border-box;
+}
+#inputFieldPwCheck{
+	width:100%;
+	height: 40px;
+	border: 1px solid #ddd;
+	padding-left: 5px;
+	box-sizing: border-box;
+}
 </style>
 </head>
 <body>
@@ -201,7 +215,6 @@ article {
 						</div>
 						<div>
 							<input type="text" id="inputFieldName" name="username">
-							<div id="outputDivName"></div>
 						</div>
 						<div>
 							<p>아이디</p>
@@ -217,16 +230,14 @@ article {
 							<input type="password" id="inputFieldPw" name="password"
 								oninput="checkPasswordMatch()">
 							<div id="outputDivPw" class="check"></div>
-							
-
 						</div>
 						<div>
 							<p>비밀번호 확인</p>
 						</div>
 						<div>
 							<input type="password" id="inputFieldPwCheck"
-								name="passwordCheck" oninput="checkPasswordMatch()"> <span
-								id="passwordMatchMessage"></span>
+								name="passwordCheck" oninput="checkPasswordMatch()"> 
+								<div id="passwordMatchMessage"></div>
 						</div>
 						<div>
 							<p>생년월일</p>
@@ -427,6 +438,9 @@ article {
 				messageSpan.style.color = "red";
 			}
 		}
+		
+				
+		
 	</script>
 	<!--  
 <body>
