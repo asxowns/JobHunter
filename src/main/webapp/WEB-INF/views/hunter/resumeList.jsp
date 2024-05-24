@@ -8,27 +8,82 @@
 <meta charset="UTF-8">
 <title></title>
 <style>
-	.container{
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		text-align: center;
-		background-color: #d44958;
-		padding: 20px;
-		border-radius: 10px;
-	}
-	#addResume{
-		position: absolute;
-		top: 35%;
-		left: 60%;
-		transform: translate(-50%, -50%);
-		text-align: center;
-		background-color: #d44958;
-		padding: 20px;
-		border-radius: 10px;
-	}
+* {
+	margin: 0;
+	padding: 0;
+}
 
+body {
+	color: #333;
+}
+
+section {
+	width: 1240px;
+	margin: 0 auto;
+}
+
+h1 {
+	text-align: center;
+	margin: 75px 0;
+}
+
+.container {
+	width: 800px;
+	margin: 0 auto;
+	border-top: 1px solid #ddd;
+	margin-top:40px;
+	
+}
+.container ul li{
+	padding-bottom:10px;
+}
+
+.resume_write {
+	width: 800px;
+	margin: 0 auto;
+	text-align: right;
+}
+
+.resume_write_btn {
+	display: inline-block;
+	background: #ddd;
+	border:1px solid #ddd;
+	padding: 10px 17px;
+}
+.resume_write_btn:hover{
+	border:1px solid #d44958;
+	color:#d44958;
+	background:#fff;
+}
+
+.resume_list{
+	width:800px;
+	margin:0 auto;
+	border-bottom:1px solid #ddd;
+	display:flex;
+	align-items:center;
+	justify-content:space-between;
+	padding:20px;
+	box-sizing:border-box;
+}
+
+.resume_title {
+	font-size: 30px;
+}
+
+.resume_date {
+	color: #aaa;
+}
+.modify_btn{
+	display:inline-block;
+	border:1px solid #aaa;
+	padding:10px 20px;
+}
+.modify_btn:hover{
+	background:#d44958;
+	border:1px solid #d44958;
+	color:#fff;
+}
 </style>
 </head>
 <body>
@@ -36,23 +91,31 @@
 		<%@ include file="../sub/header.jsp"%>
 	</header>
 	<section>
-		<h2>내 이력서</h2>
-		<span id="addResume"><a href="/hunter/resumeWriteForm">이력서등록</a></span>
+		<h1>이력서 관리</h1>
+		<div class="resume_write">
+			<a href="/hunter/resumeWriteForm" class="resume_write_btn">이력서등록</a>
+		</div>
 		<div class="container">
-			<table border="1">
-				<tr>
-					<th>번호</th>
-					<th>제목</th>
-					<th>작성일/최종수정일</th>
-				</tr>
-				<c:forEach var="resume" items="${resume }" varStatus="status">
-					<tr>
-						<td><a href="/hunter/resumeUpdateForm?resumecode=${resume.resumecode}"> ${status.count} </a></td>
-						<td><a href="/hunter/resumeUpdateForm?resumecode=${resume.resumecode}">${resume.title  }</a></td>
-						<td><a href="/hunter/resumeUpdateForm?resumecode=${resume.resumecode}">${resume.modifydate }</a></td>
-					</tr>
-				</c:forEach>
-			</table>
+			<c:forEach var="resume" items="${resume }" varStatus="status">
+				<div class="resume_list">
+					<ul>
+						<li>${sessionScope.logged } 님의 이력서</li>
+						<li class="resume_title">${resume.title  }</li>
+						<li class="resume_date">${resume.modifydate }</li>
+					</ul>
+					<a href="/hunter/resumeUpdateForm?resumecode=${resume.resumecode}"
+						class="modify_btn">수정</a>
+				</div>
+				<div class="resume_list">
+					<ul>
+						<li>${sessionScope.logged } 님의 이력서</li>
+						<li class="resume_title">${resume.title  }</li>
+						<li class="resume_date">${resume.modifydate }</li>
+					</ul>
+					<a href="/hunter/resumeUpdateForm?resumecode=${resume.resumecode}"
+						class="modify_btn">수정</a>
+				</div>
+			</c:forEach>
 		</div>
 	</section>
 	<footer> </footer>
