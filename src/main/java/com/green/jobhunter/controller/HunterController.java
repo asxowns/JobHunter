@@ -410,7 +410,7 @@ public class HunterController {
 		// 로그인된(logged) 사용자가 필요. (Member memberid 이용?)
 		String logged_id = (String) req.getSession().getAttribute("logged");
 		String result = (String) req.getParameter("result");
-		if (result == null) {
+		if (result == null || result =="") {
 			result = "대기";
 		}
 
