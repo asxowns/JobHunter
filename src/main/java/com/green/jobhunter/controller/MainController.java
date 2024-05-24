@@ -46,8 +46,8 @@ public class MainController {
 	@Autowired
 	HunterRepository hunterrepository;
 	@Autowired
-	ApplicationRepository  applicationrepository;
-	
+	ApplicationRepository applicationrepository;
+
 	@Autowired
 	PostingRepository postingrepository;
 
@@ -70,14 +70,21 @@ public class MainController {
 	}
 
 	@RequestMapping("/enterpriseList")
-	public String enterpriseList() {
-
+	public String enterpriseList(Model model) {
+		List<Enterprise> list = enterrepository.findAll();
+		
+		
+		model.addAttribute("list",list);
+		
 		return "/main/enterpriseList";
 	}
 
 	@RequestMapping("/enterpriseDetail")
-	public String enterpriseDetail() {
-
+	public String enterpriseDetail(@RequestParam("entercode") long entercode, Model model) {
+		enterprise = enterrepository.findByEntercode(entercode);
+		List<Posting> posting = postingrepository.findByEid(enterprise.getEid());
+		model.addAttribute("dtoEnter",enterprise);
+		model.addAttribute("list1",posting);
 		return "/main/enterpriseDetail";
 	}
 
@@ -145,8 +152,8 @@ public class MainController {
 	}
 
 	@RequestMapping("/applicate")
-	public String aplication(Application application, Model model ) {
-		System.out.println("=======================application : "+application);
+	public String aplication(Application application, Model model) {
+		System.out.println("=======================application : " + application);
 		applicationrepository.save(application);
 		return "/main/postDetail";
 	}
@@ -342,33 +349,45 @@ public class MainController {
 
 		if (!companyname_.isEmpty()) {
 			enterprise = enterrepository.findByCompanyname(companyname);
-			if(enterprise!=null) {
-			String memid = enterprise.getEid().getMemberid();
-			Member eid = memberrepository.findByMemberid(memid);
-			List<Posting> list1 = postingrepository.findByEidAndAreaAndCareerAndEdutype(eid, area, career, edutype);
-			List<Posting> list2 = postingrepository.findByEid(eid);
-			model.addAttribute("list1", list1);
-			}else if(enterprise==null) {
-				List<Posting> list1=null;
-				String msg="검색결과가 없습니다";
-				
-				model.addAttribute("msg", msg);
-				model.addAttribute("list1", list1);
-			}
+			System.out.println(enterprise);
+			System.out.println(enterprise);
+			System.out.println(enterprise);
+			System.out.println(enterprise);
+			System.out.println(enterprise);
+			System.out.println(enterprise);
 
+//			if (enterprise != null) {
+//				String memid = enterprise.getEid().getMemberid();
+//				Member eid = memberrepository.findByMemberid(memid);
+				List<Posting> list1 = postingrepository.findByCompanynameAndAreaAndCareerAndEdutype(companyname, area,
+						career, edutype);
+				List<Posting> list2 = postingrepository.findByEid(eid);
+				System.out.println(" asdsadfsdf " + list1);
+				System.out.println(" asdsadfsdf " + list1);
+				System.out.println(" asdsadfsdf " + list1);
+				model.addAttribute("list1", list1);
+				// }else if(enterprise==null) {
+				// List<Posting> list1=null;
+				// String msg="검색결과가 없습니다";
+///				
+				// model.addAttribute("msg", msg);
+				// model.addAttribute("list1", list1);
+//			}
 
 		} else if (companyname_.isEmpty()) {
 
-			List<Posting> list1 = postingrepository.findByEidAndAreaAndCareerAndEdutype(eid, area, career, edutype);
-			if (list1.size()==0) {
-				String msg="검색결과가 없습니다";
-				model.addAttribute("msg",msg);
-				
+			List<Posting> list1 = postingrepository.findByCompanynameAndAreaAndCareerAndEdutype(companyname, area,
+					career, edutype);
+			if (list1.size() == 0) {
+				String msg = "검색결과가 없습니다";
+				model.addAttribute("msg", msg);
+
 			}
 			model.addAttribute("list1", list1);
 		}
 		return "/main/postList";
 	}
+
 //	로그아웃
 	@GetMapping("/logout")
 	public String logout(HttpServletRequest request) {
