@@ -10,9 +10,6 @@
 	href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap"
 	rel="stylesheet">
 <style>
-body {
-	height: 2000px;
-}
 
 #chat-container {
 	position: fixed;
