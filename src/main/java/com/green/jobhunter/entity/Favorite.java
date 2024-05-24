@@ -24,7 +24,7 @@ public class Favorite{
 	private Long favorcode;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="post_code")
+	@JoinColumn(name="postcode")
 	@ToString.Exclude
 	private Posting postcode;
 	

@@ -2,6 +2,7 @@ package com.green.jobhunter.controller;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.green.jobhunter.dto.ApplicantDto;
 import com.green.jobhunter.dto.TalentInfoDto;
+import com.green.jobhunter.entity.Application;
 import com.green.jobhunter.entity.Enterprise;
 import com.green.jobhunter.entity.MainCategory;
 import com.green.jobhunter.entity.Member;
@@ -235,6 +237,32 @@ public class EnterpriseController {
     	model.addAttribute("talentInfo", talentInfo);
     	
     	return "/enter/hunterList";  
+    }
+    
+    @RequestMapping("/jobApplication")
+    public String jobapply(HttpServletRequest req) {
+    	String result = req.getParameter("result");
+    	String postcode = req.getParameter("postcode");
+    	String appcode_ =req.getParameter("appcode");
+    	Long appcode = Long.parseLong(appcode_);
+    	
+    	Optional<Application> app = applicationRepository.findById(appcode);
+    	
+    	if (app.isPresent()) {
+    	    Application application = app.get();
+    	    
+    	    // 여기에서 application 객체의 속성을 수정합니다.
+    	    // 예를 들어, application.setResult("새로운 결과"); 처럼 수정할 수 있습니다.
+    	    application.setResult(result);
+    	    
+    	    // 수정된 객체를 저장합니다.
+    	    applicationRepository.save(application);
+    	} else {
+    	    // Application 객체가 존재하지 않는 경우의 처리 로직을 여기에 작성합니다.
+    	    System.out.println("Application not found with appcode: " + appcode);
+    	}
+    	
+    	return "redirect:/enter/hunterPerPostList?postcode="+postcode;
     }
     
 }

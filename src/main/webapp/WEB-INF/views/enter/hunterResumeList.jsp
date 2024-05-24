@@ -24,7 +24,7 @@
     <%@ include file="../sub/header.jsp" %>
 </header>
 <section>
-    <h2> hunterResumeList page </h2>
+    <h2> hunterResumeList page </h2>   <!-- 해당 인재의 이력서 리스트에서 클릭한 이력서 디테일 페이지 이동, 포지션 제안 버튼 -->
     
 </section>
 <footer>

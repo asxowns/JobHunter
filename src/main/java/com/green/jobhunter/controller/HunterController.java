@@ -15,6 +15,7 @@ import com.green.jobhunter.dto.CertificateDto;
 import com.green.jobhunter.dto.CoverLetterDto;
 import com.green.jobhunter.dto.DesiredAreaDto;
 import com.green.jobhunter.dto.DesiredIndustryDto;
+import com.green.jobhunter.dto.FavoriteDto;
 import com.green.jobhunter.dto.HunterDto;
 import com.green.jobhunter.dto.MemberDto;
 import com.green.jobhunter.dto.ResumeDto;
@@ -40,6 +41,7 @@ import com.green.jobhunter.repository.CoverLetterRepository;
 import com.green.jobhunter.repository.DesiredAreaRepository;
 import com.green.jobhunter.repository.DesiredIndustryRepository;
 import com.green.jobhunter.repository.EnterpriseRepository;
+import com.green.jobhunter.repository.FavoriteRepository;
 import com.green.jobhunter.repository.HunterRepository;
 import com.green.jobhunter.repository.MainCategoryRepository;
 import com.green.jobhunter.repository.MemberRepository;
@@ -84,9 +86,11 @@ public class HunterController {
 	@Autowired
 	ApplicationRepository applicationRepository;
 	@Autowired
+
+	FavoriteRepository favoriteRepository;
+
 	OfferRepository offerRepository;
-	
-	
+
 	
 	@RequestMapping("/")
 	public String goHunterPage() {
@@ -459,10 +463,16 @@ public class HunterController {
 
 		return "/hunter/positionList";
 	}
-
+	
+	//해당채용공고 스크랩 목록 페이지 
 	@RequestMapping("/favorList")
-	public String favorList() {
-
+	public String favorList(HttpServletRequest request, Model model) {
+		HttpSession session = request.getSession();
+		String hid = (String)session.getAttribute("logged");
+		System.out.println(hid+"=========================");
+		List<FavoriteDto> favorite = favoriteRepository.findByHid(hid);
+		
+		model.addAttribute("favor", favorite);
 		return "/hunter/favorList";
 	}
 
