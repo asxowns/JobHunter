@@ -182,12 +182,28 @@ select[name="edutype"] {
 	padding: 20px;
 	box-sizing: border-box;
 	gap: 10px;
+	position:relative;
 }
 
 .career_in {
 	display: flex;
 	gap: 10px;
 	align-items: center;
+}
+
+.cardate_text{
+	position:absolute;
+	top:22px;
+	right:370px;
+	font-size:11px;
+	color:#bbb;
+}
+.enddate_text{
+	position:absolute;
+	top:22px;
+	right:245px;
+	font-size:11px;
+	color:#bbb;
 }
 
 .career_in label::checked {
@@ -199,7 +215,7 @@ input[name="working"] {
 }
 
 .career textarea {
-	width: 650px;
+	width: 690px;
 	height: 50px;
 	padding: 5px;
 	box-sizing: border-box;
@@ -217,7 +233,7 @@ input[name="working"] {
 }
 
 .career input[name="salary"], .career input[name="industry"] {
-	width: 135px;
+	width: 114px;
 }
 
 .resumeSkill textarea {
@@ -339,12 +355,12 @@ input[type="submit"] {
 							<option value="f"
 								<c:if test="${fn:trim(hunter.gender) == 'f'}">selected</c:if>>여자</option>
 						</select> <input type="text" name="email" placeholder="이메일"
-							value="${hunter.email}"><br> <input type="text"
-							name="tel" placeholder="휴대폰번호" value="${hunter.tel}"> <br>
+							value="${hunter.email}"><input type="text"
+							name="tel" placeholder="휴대폰번호" value="${hunter.tel}">
 						<input type="text" name="tel2" placeholder="비상연락처"
-							value="${hunter.tel2}"><br> <input type="text"
+							value="${hunter.tel2}"><input type="text"
 							name="employmenttype" placeholder="신입or경력"
-							value="${resume.employmenttype}"><br> <select
+							value="${resume.employmenttype}"><select
 							name="military">
 							<option value="o"
 								${fn:trim(hunter.military) == 'o' ? 'selected' : ''}>군필/면제/해당없음</option>
@@ -404,7 +420,7 @@ input[type="submit"] {
 				<p class="personal_info_title">희망 직무(산업군)</p>
 				<div class="desiredIndustry">
 					<p>
-						<select name="mainCategory" class="mainSelect" required
+						<select name="mainCategory" class="mainSelect" 
 							onchange="fetchSubList()">
 							<c:forEach var="main" items="${mainList}">
 								<option id="${main.mccode}" value="${main.mccode}"
@@ -431,20 +447,22 @@ input[type="submit"] {
 				<div class="career">
 					<div class="career_in">
 						<input type="text" name="companyname" placeholder="회사명"
-							value="${c.companyname}"> <input type="date"
-							name="cardate" value="${c.cardate}"> <input type="date"
-							name="enddate" value="${c.enddate}"> <label for="working">
+							value="${c.companyname}">
+							<span class="cardate_text">입사일</span>
+							<input type="date" name="cardate" value="${c.cardate}">
+							<span class="enddate_text">퇴사일</span>
+							<input type="date" name="enddate" value="${c.enddate}">
+							<label for="working">
 							<input type="checkbox" id="wroking" name="working"
-							value=${c.enddate? '' : 'checked'}>
+							${c.enddate == null ? 'checked' : ''}>
+							재직중
 						</label>
 					</div>
 					<div class="career_in">
-						<input type="text" name="position" placeholder="직급/직책"
-							value="${c.position}"> <input type="text" name="job"
-							placeholder="담당직무" value="${c.job}"> <input type="text"
-							name="salary" placeholder="연봉" value="${c.salary}"> <input
-							type="text" name="industry" placeholder="산업군"
-							value="${c.industry}">
+						<input type="text" name="position" placeholder="직급/직책"	value="${c.position}">
+						<input type="text" name="job" placeholder="담당직무" value="${c.job}">
+						<input type="text" name="salary" placeholder="연봉" value="${c.salary}">
+						<input type="text" name="industry" placeholder="산업군" value="${c.industry}">
 					</div>
 					<div class="career_in">
 						<textarea name="work" cols="80" placeholder="담당업무">${c.work }</textarea>

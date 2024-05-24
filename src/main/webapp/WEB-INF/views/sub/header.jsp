@@ -77,7 +77,7 @@ header {
 	justify-content:space-between;
 	
 }
-.search_bar_select{
+.header_search_bar_select{
 	width:65px;
 	height:25px;
 	position: absolute;
@@ -85,15 +85,17 @@ header {
 	top:1px;
 	border-right:1px solid #D44958;
 	box-sizing:border-box;
+	padding-right:0px !important;
 }
-.search_bar_select select{
+.header_search_bar_select select{
+	height:22px;
 	border:none;
 	color:#D44958;
 	font-weight:600;
 	padding-right:10px;
 	cursor: pointer;
 }
-.search_bar_select select:focus{
+.header_search_bar_select select:focus{
 	outline:none;
 }
 .search_glasses{
@@ -193,7 +195,7 @@ header {
 				<div class="search_bar">
 						<label for="search_input" class="search_label">
 							<input type="text" id="header_search_input" name="search">
-							<div class="search_bar_select">
+							<div class="header_search_bar_select">
 								<select>
 									<option value="전체">전체</option>
 									<option value="기업">기업</option>
