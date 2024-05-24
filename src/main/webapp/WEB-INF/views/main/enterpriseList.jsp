@@ -89,24 +89,19 @@ h1{
     <div class="entList_area">
     	<p>총 <span>3</span>건</p>
     	<ul>
+    	<c:forEach var="dto" items="${list}">
+    	
     		<li>
-    			<a href="enterpriseDetail">
-	    			<h5>삼성전자(주)</h5>
-	    			<h5>전기·전자</h5>
-	    			<h5>매출액 130조2천억원</h5>
-	    			<h5>사원수 124,000명</h5>
-	    			<h5>10,377<span>만원</span></h5>
+    			<a href="enterpriseDetail?entercode=${dto.entercode}">
+	    			<h5>${dto.companyname}</h5>
+	    			<h5>${dto.businessitem}</h5>
+	    			<h5>${dto.sales}억원</h5>
+	    			<h5>사원수 ${dto.empnum}명</h5>
+	    			<h5>담당자명 <span>${dto.managername}</span></h5>
     			</a>
     		</li>
-    		<li>
-    			<a href="">
-	    			<h5>삼성전자(주)</h5>
-	    			<h5>전기·전자</h5>
-	    			<h5>매출액 130조2천억원</h5>
-	    			<h5>사원수 124,000명</h5>
-	    			<h5>10,377<span>만원</span></h5>
-	    		</a>
-    		</li>
+    	</c:forEach>
+    		
     	</ul>
     </div>
 </section>
