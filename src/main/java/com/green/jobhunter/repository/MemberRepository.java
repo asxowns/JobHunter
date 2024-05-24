@@ -1,6 +1,7 @@
 package com.green.jobhunter.repository;
 
 import java.util.List;
+import java.time.LocalDate;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -24,4 +25,13 @@ public interface MemberRepository extends JpaRepository<Member, String>{
 	@Query(value = "select * from Member where memberid LIKE %:memberid%", nativeQuery = true)
 	List<Member> searchByMemberid(@Param("memberid") String memberid);
 	
+	@Query(value = "SELECT COUNT(*) AS count FROM member "
+	+" WHERE regdate >= NOW() - INTERVAL 7 DAY AND regdate <= NOW() "
+	+" GROUP BY DATE(regdate) ORDER BY DATE(regdate);", nativeQuery = true)
+	List<String> weekRegistCount();
+
+	@Query(value = "SELECT DATE(regdate) AS date FROM member "
+	+" WHERE regdate >= NOW() - INTERVAL 7 DAY AND regdate <= NOW() "
+	+" GROUP BY DATE(regdate) ORDER BY DATE(regdate);", nativeQuery = true)
+	List<String> weekRegistDate();
 }
