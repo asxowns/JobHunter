@@ -18,7 +18,7 @@
     }
     .chart-container {
         display: flex;
-        justify-content: space-around;
+        justify-content: space-evenly;
     }
     .chart {
         margin: 10px;
@@ -132,7 +132,7 @@
 
 </section>
 <footer>
-
+    <%@ include file="../sub/footer.jsp" %>
 </footer>
 
 </body>

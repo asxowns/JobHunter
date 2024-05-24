@@ -102,6 +102,7 @@ section {
 	</section>
 	<footer> </footer>
 	<script>
+
     document.addEventListener("DOMContentLoaded", function () {
         const ctx = document.getElementById('genderApplicantsChart').getContext('2d');
         const genderApplicantsChart = new Chart(ctx, {

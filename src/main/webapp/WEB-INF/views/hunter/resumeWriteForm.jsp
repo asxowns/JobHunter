@@ -162,12 +162,30 @@ select[name="edutype"]{
 	padding:20px;
 	box-sizing:border-box;
 	gap:10px;
+	position:relative;
 }
 .career_in{
 	display:flex;
 	gap:10px;
 	align-items:center;
 }
+
+.cardate_text{
+	position:absolute;
+	top:22px;
+	right:370px;
+	font-size:11px;
+	color:#bbb;
+}
+.enddate_text{
+	position:absolute;
+	top:22px;
+	right:245px;
+	font-size:11px;
+	color:#bbb;
+}
+
+
 .career_in label::checked{
 	color:#d44958;
 }
@@ -176,7 +194,7 @@ input[name="working"]{
 }
 
 .career textarea{
-	width:650px;
+	width:690px;
 	height:50px;
 	padding:5px;
 	box-sizing:border-box;
@@ -193,7 +211,7 @@ input[name="working"]{
 }
 .career input[name="salary"],
 .career input[name="industry"]{
-	width:135px;
+	width:114px;
 }
 
 .resumeSkill textarea{
@@ -388,7 +406,9 @@ input[type="submit"]{
 					<div class="career">
 						<div class="career_in">
 							<input type="text" name="companyname" placeholder="회사명">
-							<input type="date" name="cardate"> 
+							<span class="cardate_text">입사일</span>
+							<input type="date" name="cardate">
+							<span class="enddate_text">퇴사일</span> 
 							<input type="date" name="enddate">
 							<label for="working">
 								<input type="checkbox" name="working" id="working">
@@ -454,6 +474,9 @@ input[type="submit"]{
 		</div>
 		
 	</section>
+	<footer>
+		<%@ include file="../sub/footer.jsp" %>
+	</footer>
 	<script>
       function fetchSubList() {
          var mainSelect = document.querySelector('.mainSelect');

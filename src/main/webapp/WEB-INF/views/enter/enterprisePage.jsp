@@ -70,7 +70,7 @@
 	<canvas id="applicantsChart"></canvas>
 </section>
 <footer>
-
+    <%@ include file="../sub/footer.jsp" %>
 </footer>
 <script>
     document.addEventListener("DOMContentLoaded", function () {

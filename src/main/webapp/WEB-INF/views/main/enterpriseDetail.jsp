@@ -141,49 +141,42 @@
 	<div class="ent_area">
 		<div class="ent_name">
 			<div class="ent_name_top">
-				<h1>삼성전자(주)</h1>
+				<h1>${dtoEnter.companyname}</h1>
 				<h2><img src="/resource/img/heartfill.png"></h2>
 			</div>
 			<p><img src="/resource/img/star.png"></p>
 		</div>
 		<div class="ent_info">
 			<div class="ent_info1">
-				<p>대표 : 홍길동</p>
-				<p>전기·전자<span>대기업</span></p>
-				<p>서울특별시 중구 세종대로 67 (태평로2가)</p>
+				<p>대표 : ${dtoEnter.managername}</p>
+				<p>${dtoEnter.businessitem}<span>${dtoEnter.corporatetype}</span></p>
+				<p>${dtoEnter.address}</p>
 			</div>
 			<div class="ent_info2">
 				<p>매출액</p>
-				<p>170조 3천억원</p>
+				<p>${dtoEnter.sales}억원</p>
 			</div>
 			<div class="ent_info3">
 				<p>사원수</p>
-				<p>124,000명</p>
+				<p>${dtoEnter.empnum}명</p>
 			</div>
 		</div>
 	</div>
-	
 	<div class="postList">
 		<p>채용 공고</p>
+	<c:forEach var="dto" items="${list1}" varStatus="status">
 		<div class="post_info">
 			<a href="#">
-				<h3>경력사원 채용(글로벌마케팅실) - 캠페인 전략 개발 및 실행</h3>
-				<h3>기간 (~2024-06-11)</h3>
+				<h3>${dto.title}</h3>
+				<h3>기간 ~${dto.regdate}</h3>
 				<h3 class="posting">채용중</h3>
 			</a>
 		</div>
-		<div class="post_info">
-			<a href="#">
-				<h3>경력사원 채용(글로벌마케팅실) - 캠페인 전략 개발 및 실행</h3>
-				<h3>기간 (~2024-06-11)</h3>
-				<h3 class="posting_end">마감</h3>
-			</a>
-		</div>
+    </c:forEach>
 	</div>
-    
 </section>
 <footer>
-
+	<%@ include file="../sub/footer.jsp" %>
 </footer>
 
 </body>

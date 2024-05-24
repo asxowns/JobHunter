@@ -25,9 +25,11 @@ import com.green.jobhunter.entity.Certificate;
 import com.green.jobhunter.entity.CoverLetter;
 import com.green.jobhunter.entity.DesiredArea;
 import com.green.jobhunter.entity.DesiredIndustry;
+import com.green.jobhunter.entity.Enterprise;
 import com.green.jobhunter.entity.Hunter;
 import com.green.jobhunter.entity.MainCategory;
 import com.green.jobhunter.entity.Member;
+import com.green.jobhunter.entity.Offer;
 import com.green.jobhunter.entity.Posting;
 import com.green.jobhunter.entity.Resume;
 import com.green.jobhunter.entity.ResumeSkill;
@@ -84,7 +86,11 @@ public class HunterController {
 	@Autowired
 	ApplicationRepository applicationRepository;
 	@Autowired
+
 	FavoriteRepository favoriteRepository;
+
+	OfferRepository offerRepository;
+
 	
 	@RequestMapping("/")
 	public String goHunterPage() {
@@ -439,8 +445,21 @@ public class HunterController {
 		return "/hunter/subscribeList";
 	}
 
-	@RequestMapping("/positionList")
-	public String positionList() {
+	@RequestMapping("/offerList")
+	public String positionList(HttpServletRequest req, Model model, 
+			OfferDto offerDto) {
+		
+		String logged_id = (String) req.getSession().getAttribute("logged");
+		Member member = memberRepository.findByMemId(logged_id);	
+		// 회사 아이디를 가진 멤버 필요.
+		Enterprise enterprise = enterpriseRepository.findByEid(logged_id);
+		// 구직자 아이디를 가진 멤버 필요.
+		Hunter hunter = hunterRepository.findByHid(member);
+		// 회사 -> 구직자 : 채용공고 정보의 일부 managetel, deadline, result를 같이 전달함 -> offer 객체
+		String hid = member.getMemberid();
+		List<Offer> offerList = offerRepository.findByHid(hid);
+		
+		model.addAttribute("offList", offerList);
 
 		return "/hunter/positionList";
 	}

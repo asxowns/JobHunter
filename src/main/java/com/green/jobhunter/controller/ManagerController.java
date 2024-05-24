@@ -64,7 +64,7 @@ public class ManagerController {
                     HttpSession session = req.getSession();
                     session.setAttribute("logged", id);
                     session.setAttribute("role",role);
-                    view = "/manage/managerPage";
+                    view = "redirect:/manage/";
                 } else {
                     view = "redirect:/";
                 }

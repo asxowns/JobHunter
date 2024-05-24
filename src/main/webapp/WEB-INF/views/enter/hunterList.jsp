@@ -187,7 +187,9 @@ h3{
     </table>
     </div>	 --%>
 	</section>
-	<footer> </footer>
+	<footer> 
+		<%@ include file="../sub/footer.jsp" %>
+	</footer>
 
 </body>
 </html>
