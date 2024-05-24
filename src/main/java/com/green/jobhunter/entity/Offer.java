@@ -1,6 +1,6 @@
 package com.green.jobhunter.entity;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -38,5 +38,5 @@ public class Offer{
 	private String managetel;
 	private String result;
 
-	private LocalDateTime deadline;
+	private LocalDate deadline;
 }

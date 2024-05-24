@@ -1,7 +1,6 @@
 package com.green.jobhunter.controller;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,11 +25,9 @@ import com.green.jobhunter.entity.Certificate;
 import com.green.jobhunter.entity.CoverLetter;
 import com.green.jobhunter.entity.DesiredArea;
 import com.green.jobhunter.entity.DesiredIndustry;
-import com.green.jobhunter.entity.Enterprise;
 import com.green.jobhunter.entity.Hunter;
 import com.green.jobhunter.entity.MainCategory;
 import com.green.jobhunter.entity.Member;
-import com.green.jobhunter.entity.Offer;
 import com.green.jobhunter.entity.Posting;
 import com.green.jobhunter.entity.Resume;
 import com.green.jobhunter.entity.ResumeSkill;
@@ -45,6 +42,7 @@ import com.green.jobhunter.repository.EnterpriseRepository;
 import com.green.jobhunter.repository.HunterRepository;
 import com.green.jobhunter.repository.MainCategoryRepository;
 import com.green.jobhunter.repository.MemberRepository;
+import com.green.jobhunter.repository.OfferRepository;
 import com.green.jobhunter.repository.PostingRepository;
 import com.green.jobhunter.repository.ResumeRepository;
 import com.green.jobhunter.repository.ResumeSkillRepository;
@@ -444,11 +442,18 @@ public class HunterController {
 	}
 
 	@RequestMapping("/positionList")
-	public String positionList(HttpServletRequest req, Model model, 
-			OfferDto offerDto) {
+	public String positionList(HttpServletRequest req, Model model) {
+		HttpSession session = req.getSession();
+		String logged_id = (String)session.getAttribute("logged");
 		
-		String logged_id = (String) req.getSession().getAttribute("logged");
-		List<OfferDto> offerList = enterpriseRepository.findByHid(logged_id);
+		List<OfferDto> offerList = enterpriseRepository.findByOfferDto(logged_id);
+		System.out.println(offerList);
+		System.out.println(offerList);
+		System.out.println(offerList);
+		System.out.println(offerList);
+		System.out.println(offerList);
+		System.out.println(offerList);
+		System.out.println(offerList);
 
 		model.addAttribute("offList", offerList);
 

@@ -1,5 +1,7 @@
 package com.green.jobhunter.repository;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -25,11 +27,24 @@ public interface EnterpriseRepository extends JpaRepository<Enterprise, Long> {
 	@Query("SELECT e FROM Enterprise e WHERE e.eid.memberid = :eid")
     Enterprise findByEid2(@Param("eid") String eid);
 	
-	@Query(value = "SELECT o.*,e.companyname FROM offer o JOIN enterprise e ON o.eid = e.eid WHERE e.eid = o.eid AND o.hid = ':o.hid'", nativeQuery = true)
-	List<OfferDto> findByHid(@Param("hid") String hid);
+	@Query(value = "SELECT o.*,e.companyname FROM offer o JOIN enterprise e ON o.eid = e.eid WHERE e.eid = o.eid AND o.hid = :hid", nativeQuery = true)
+	List<Object[]> findByOfferDtoAsArray(@Param("hid") String hid);
 
-
-
-
+	default List<OfferDto> findByOfferDto(String hid){
+		List<Object[]> results = findByOfferDtoAsArray(hid);
+		List<OfferDto> dtos = new ArrayList<>();
+		for( Object[] result : results) {
+			OfferDto dto = new OfferDto();
+			dto.setOffercode((Long)result[0]);
+			dto.setMsg((String) result[1]);
+			dto.setManagetel((String) result[2]);
+			dto.setResult((String) result[3]);
+			dto.setDeadline((LocalDate) result[4]);
+			dto.setCompanyname((String) result[5]);
+			dtos.add(dto);
+		}
+		return dtos;
+	}
+	
 
 }
