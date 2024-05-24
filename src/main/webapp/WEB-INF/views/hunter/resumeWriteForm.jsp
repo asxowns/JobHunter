@@ -475,7 +475,7 @@ input[type="submit"]{
 		
 	</section>
 	<footer>
-		<%@ include file="../sub/footer.jsp" %>
+
 	</footer>
 	<script>
       function fetchSubList() {
