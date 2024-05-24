@@ -10,12 +10,18 @@
         padding: 0; 
         box-sizing: border-box; 
     }
+    body{
+    	
+    }
+    section{
+    	min-height:900px;
+    }
     #footer {
         width: 100%;
         margin: 150px auto 0;
         position: relative;
         bottom: 0;
-        background-color: #d8d8da;
+        background-color: #eee;
         padding-bottom: 80px;
         display: flex;
         justify-content: center;

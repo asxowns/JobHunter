@@ -8,6 +8,10 @@
 <meta charset="UTF-8">
 <title></title>
 <style>
+*{
+	margin:0;
+	padding:0;
+}
 body {
 	color: #333;
 }
