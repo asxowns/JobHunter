@@ -79,7 +79,7 @@
     </div>
 </section>
 <footer>
-
+    <%@ include file="../sub/footer.jsp" %>
 </footer>
 <script>
     document.addEventListener("DOMContentLoaded", function () {

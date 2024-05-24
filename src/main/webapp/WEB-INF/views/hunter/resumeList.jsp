@@ -118,7 +118,9 @@ h1 {
 			</c:forEach>
 		</div>
 	</section>
-	<footer> </footer>
+	<footer> 
+		<%@ include file="../sub/footer.jsp" %>
+	</footer>
 
 </body>
 </html>
