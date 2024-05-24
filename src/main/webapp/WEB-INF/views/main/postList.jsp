@@ -256,7 +256,9 @@ section{
 
 
 	</section>
-	<footer> </footer>
+	<footer> 
+		<%@ include file="../sub/footer.jsp" %>
+	</footer>
 
 </body>
 <script>

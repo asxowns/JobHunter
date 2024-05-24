@@ -253,7 +253,9 @@ ul.tabs li.current {
 		</div>
 
 	</section>
-	<footer> </footer>
+	<footer> 
+		<%@ include file="../sub/footer.jsp" %>
+	</footer>
 
 </body>
 <script type="text/javascript">
