@@ -106,15 +106,6 @@ h1 {
 					<a href="/hunter/resumeUpdateForm?resumecode=${resume.resumecode}"
 						class="modify_btn">수정</a>
 				</div>
-				<div class="resume_list">
-					<ul>
-						<li>${sessionScope.logged } 님의 이력서</li>
-						<li class="resume_title">${resume.title  }</li>
-						<li class="resume_date">${resume.modifydate }</li>
-					</ul>
-					<a href="/hunter/resumeUpdateForm?resumecode=${resume.resumecode}"
-						class="modify_btn">수정</a>
-				</div>
 			</c:forEach>
 		</div>
 	</section>
