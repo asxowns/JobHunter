@@ -40,12 +40,6 @@
 		<div id="favor-list">
 			<h2>스크랩한 채용 공고</h2>
 
-			<ul class="favor-list-flex">
-				<li>기업 이름</li>
-				<li>공고 제목</li>
-				<li>스크랩한 여부</li>
-				<li>버튼(a태그)</li>
-			</ul>
 			<c:forEach var="favor" items="${favor }">
 				<ul class="favor-list-flex">
 					<li>${favor.companyname }</li>
