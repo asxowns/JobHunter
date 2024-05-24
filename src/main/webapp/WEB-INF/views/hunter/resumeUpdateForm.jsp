@@ -331,7 +331,7 @@ input[type="submit"] {
 				<div class="personal_info">
 					<div class="personal_info_content">
 						<input type="text" name="username" placeholder="이름"
-							value="${hunter.username }"> 생년월일<input type="date"
+							value="${hunter.username }"><input type="date"
 							name="birth" value="${hunter.birth }"> <select
 							name="gender">
 							<option value="m"
