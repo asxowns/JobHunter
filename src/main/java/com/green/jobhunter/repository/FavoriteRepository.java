@@ -29,4 +29,7 @@ public interface FavoriteRepository extends JpaRepository<Favorite, Long> {
 		return dtos;
 	}
 	
+	@Query(value = "DELETE FROM subscribe WHERE entercode = :entercode", nativeQuery = true)
+	void deleteByPostCode(@Param("entercode") Long entercode);
+	
 }
