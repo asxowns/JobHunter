@@ -77,7 +77,7 @@ main {
 
 #search_area {
 	width: 100%;
-	height: 80px;
+	height: 40px;
 	margin: 0 auto;
 	display: flex;
 	padding: 20px 0;
