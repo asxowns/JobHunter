@@ -91,6 +91,23 @@ table th{
 	padding-right:10px;
 }
 
+#toggleHPassword{
+	position:relative;
+	top:-100px;
+	left:300px;
+	display:none;
+}
+#toggleEPassword{
+	position:relative;
+	top:-100px;
+	left:300px;
+	display:none;
+}
+.toggleHPassword_active{
+position:relative;
+	top:-102px;
+	left:340px;
+}
 </style>
 </head>
 <body>
@@ -126,6 +143,10 @@ table th{
 					</table>
 				</div>
 			</form>
+			<label for="toggleHPassword">
+							<img id ="eyeimg" src = "/resource/img/Vector.png" class="toggleHPassword_active">
+					<button id="toggleHPassword">비밀번호 보기</button>
+					</label>
 		</div>
 
 		<div id="tab-2" class="tab-content">
@@ -140,9 +161,9 @@ table th{
 							</tr>
 							<tr>
 								<th>비밀번호</th>
-								<td><input type="password" name="pw"></td>
+								<td><input type="password" id =  "inputFieldEpw" name="pw"></td>
 							</tr>
-							<tr><button id="togglePassword">비밀번호 보기/숨기기</button></tr>
+							<tr></button></tr>
 							
 							<tr class="login_area">
 								<td colspan="2"><input type="submit" value="기업로그인"></td>
@@ -150,6 +171,10 @@ table th{
 						</table>
 					</div>
 				</form>
+				<label for="toggleEPassword">
+							<img id ="eyeimg" src = "/resource/img/Vector.png" class="toggleHPassword_active">
+					<button id="toggleEPassword">비밀번호 보기</button>
+					</label>
 			</div>
 		</div>
 </section>
@@ -184,7 +209,35 @@ table th{
 		tabContent1.classList.remove("current");
 	});
 	
-	 
+	
+	document.getElementById("toggleHPassword").addEventListener("click", function() {
+	    var passwordField = document.getElementById("inputFieldHpw");
+	    var img = document.getElementById("eyeimg")
+	    if (passwordField.type === "password") {
+	        passwordField.type = "text";
+	        img.src = "/resource/img/Vector.png";
+	        this.textContent = "비밀번호 숨기기";
+	    } else {
+	    	img.src = "/resource/img/eye.png";
+	        passwordField.type = "password";
+	        this.textContent = "비밀번호 보기";
+	    }
+	});
+	
+	
+	document.getElementById("toggleEPassword").addEventListener("click", function() {
+	    var passwordField = document.getElementById("inputFieldEpw");
+	    var img = document.getElementById("eyeimg")
+	    if (passwordField.type === "password") {
+	        passwordField.type = "text";
+	        img.src = "/resource/img/Vector.png";
+	        this.textContent = "비밀번호 숨기기";
+	    } else {
+	        img.src = "/resource/img/eye.png";
+	        passwordField.type = "password";
+	        this.textContent = "비밀번호 보기";
+	    }
+	});
 	
 </script>
 </html>
