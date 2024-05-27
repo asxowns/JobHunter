@@ -253,5 +253,14 @@ public class ManagerController {
         String role_ = Character.toString(role);
         return role_ != null ? role_ : "";
     }
+
+
+    @RequestMapping("/access")
+    @ResponseBody
+    public String access(){
+        
+        
+        return "";
+    }
     
 }
