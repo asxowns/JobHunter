@@ -261,6 +261,7 @@ article {
 								<input type="text" id="inputFieldEmail" name="email">
 							</p>
 						</div>
+						<input type="hidden" name="regdate" value="${currentDate}"/>
 						<div class="regbtn">
 							<input type="submit" value="회원가입">
 						</div>
@@ -351,6 +352,7 @@ article {
 							<input type="text" name="manageremail">
 							<div id="outputDivId"></div>
 						</div>
+						<input type="hidden" name="regdate" value="${currentDate}"/>
 						<div class="regbtn">
 							<input type="submit" value="회원가입">
 						</div>

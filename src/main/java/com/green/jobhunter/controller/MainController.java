@@ -30,6 +30,10 @@ import jakarta.persistence.EntityManager;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.Date;
+import java.text.SimpleDateFormat; 
+
+
 
 @Controller
 public class MainController {
@@ -98,8 +102,11 @@ public class MainController {
 	}
 
 	@RequestMapping("/registForm")
-	public String regForm() {
-
+	public String regForm(Model model) {
+		Date now = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String currentDate = sdf.format(now);
+		model.addAttribute("currentDate", currentDate);
 		return "/main/registForm";
 	}
 
@@ -116,6 +123,7 @@ public class MainController {
 		m.setMemberid(member.getMemberid());
 		m.setPassword(member.getPassword());
 		m.setRole('h');
+		m.setRegdate(member.getRegdate());
 		h.setHid(m);
 
 		h.setUsername(hunter.getUsername());
@@ -135,6 +143,7 @@ public class MainController {
 		m.setMemberid(member.getMemberid());
 		m.setPassword(member.getPassword());
 		m.setRole('e');
+		m.setRegdate(member.getRegdate());
 		e.setEid(m);
 
 		// Member savedmember = memberrepository.save(member);

@@ -278,7 +278,16 @@ header {
 		slide.classList.add("active");
 	});
 	
-	
+	function accessCount(){
+		// 접속자 수 증가 함수
+		// fetch('/manage/access');
+	}
+
+	// 페이지가 로드될 때 함수 실행
+	document.addEventListener('DOMContentLoaded', (event) => {
+        accessCount();
+    });
+
 	
 </script>
 <%@ include file="./chat.jsp" %>
