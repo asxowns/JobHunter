@@ -414,6 +414,7 @@ input[type="submit"] {
 					<input type="text" name="area1" placeholder="희망 지역1"
 						value="${da.area1}"> <input type="text" name="area2"
 						placeholder="희망 지역2" value="${da.area2}">
+						<input type="hidden" name="dacode" value="${da.dacode}"/>
 				</div>
 
 				<!-- 희망 직무(산업군) -->
@@ -505,10 +506,10 @@ input[type="submit"] {
 				<div class="public_type">
 					<label for="public_type1"> <input type="radio"
 						name="publictype" id="public_type1" value="1"
-						${fn:trim(resume.publictype) == 1 ? 'checked' : ''}>공개
+						${fn:trim(resume.publictype) == 'o' ? 'checked' : ''}>공개
 					</label> <label for="public_type2"> <input type="radio"
 						name="publictype" id="public_type2" value="0"
-						${fn:trim(resume.publictype) == 0 ? 'checked' : ''}>비공개
+						${fn:trim(resume.publictype) == 'x' ? 'checked' : ''}>비공개
 					</label>
 				</div>
 

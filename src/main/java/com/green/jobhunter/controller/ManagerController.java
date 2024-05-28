@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,13 +17,17 @@ import com.green.jobhunter.entity.Chat;
 import com.green.jobhunter.entity.Cs;
 import com.green.jobhunter.entity.Member;
 import com.green.jobhunter.entity.Notice;
+import com.green.jobhunter.entity.Servicedata;
 import com.green.jobhunter.repository.ChatRepository;
 import com.green.jobhunter.repository.CsRepository;
 import com.green.jobhunter.repository.MemberRepository;
 import com.green.jobhunter.repository.NoticeRepository;
+import com.green.jobhunter.repository.ServicedataRepository;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import java.util.Date;
+import java.text.SimpleDateFormat; 
 
 @Controller
 @RequestMapping("/manage")
@@ -38,6 +43,8 @@ public class ManagerController {
 
     @Autowired
     private ChatRepository chatRepo;
+    @Autowired
+    private ServicedataRepository servicedataRepo;
 
     @RequestMapping("/manageLoginForm")
     public String manageLoginForm(HttpServletRequest req) {
@@ -131,8 +138,12 @@ public class ManagerController {
     }
 
     @RequestMapping("/noticeWriteForm")
-    public void noticeWriteForm() {
+    public void noticeWriteForm(Model model) {
 
+        Date now = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String currentDate = sdf.format(now);
+        model.addAttribute("currentDate", currentDate);
     }
 
     @RequestMapping("/noticeUpdate")
@@ -145,13 +156,14 @@ public class ManagerController {
     }
 
     @RequestMapping("/noticeWrite")
-    public String noticeWrite(HttpServletRequest req) {
+    public String noticeWrite(HttpServletRequest req, Notice nt) {
         Notice notice = new Notice();
         String title = req.getParameter("title");
         String content = req.getParameter("content");
+        
         notice.setContent(content);
         notice.setTitle(title);
-        // notice.setRegdate(Date.now());
+        notice.setRegdate(nt.getRegdate());
         noticeRepo.save(notice);
         return "redirect:/manage/noticeList";
     }
@@ -257,10 +269,15 @@ public class ManagerController {
 
     @RequestMapping("/access")
     @ResponseBody
-    public String access(){
-        
-        
-        return "";
+    public int access(){
+        Optional<Servicedata> servicedata = servicedataRepo.findById(1L);
+        if(servicedata.isPresent()){
+            Servicedata accessData = servicedata.get();
+            accessData.setAccesscount(accessData.getAccesscount() + 1);
+            servicedataRepo.save(accessData);
+            return accessData.getAccesscount();
+        }
+        return 0;
     }
     
 }

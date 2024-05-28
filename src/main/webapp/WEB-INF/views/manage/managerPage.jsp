@@ -86,7 +86,7 @@
                     fill: false
                 },{
                     label: '접속자 수',
-                    data: [6,9,14,16,8,12,8],
+                    data: [6,9,5,11,8,7,8],
                     borderColor: 'rgba(200, 75, 100, 1)',
                     borderWidth: 2,
                     fill: false

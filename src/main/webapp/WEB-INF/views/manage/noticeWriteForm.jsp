@@ -26,6 +26,7 @@
         공지사항 제목 : <input type="text" name="title" value="${notice.title}" /> <br>
         <label for="content"> 내용 : </label> <br>
         <textarea id="content" name="content" cols="100" rows="20">${notice.content} </textarea> <br>
+        <input type="hidden" name="regdate" value="${currentDate}"/>
         <input type="submit" value="등록">
         <input type="reset" value="reset">
     </form>
