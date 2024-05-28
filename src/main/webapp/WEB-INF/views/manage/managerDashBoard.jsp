@@ -28,7 +28,6 @@
     <%@ include file="../sub/header.jsp" %>
 </header>
 <section>
-    <h2> index page </h2>
     <div class="chart-container">
         <div class="chart">
             <h3>최근 7일간 접속자 / 신규 가입자 수</h3>
@@ -55,7 +54,7 @@
                     fill: false
                 },{
                     label: '접속자 수',
-                    data: [200,189,301,227,208,156,71],
+                    data: [6,9,5,11,8,7,8],
                     borderColor: 'rgba(200, 75, 100, 1)',
                     borderWidth: 2,
                     fill: false

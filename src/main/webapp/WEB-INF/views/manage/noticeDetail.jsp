@@ -60,7 +60,7 @@
     <hr>
     <div id="notice-head"><span class="notice-title"> ${notice.title} </span> <span class="notice-date">${notice.regdate} </span></div>
     <hr>
-    <div id="notice-content"> ${notice.content}</div>
+    <div id="notice-content"><pre> ${notice.content}</pre></div>
     <hr>
     <div id="notice-btns">
         <div id="btn-group1" class="notice-btn"><a class="notice-btn" href="/manage/noticeList">목록으로 돌아가기</a></div>

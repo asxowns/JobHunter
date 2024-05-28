@@ -96,10 +96,15 @@
         </c:if>
     </div>
     <div id="post-list-table">
-        <c:forEach var="post" items="${appPostList}"> 
+        <li class="post-list-item">
+            <span id="post-item-1">번호</span>
+            <span id="post-item-2"> 공고 제목 </span>
+            <span id="post-item-3"> 마감일 </span>
+        </li>
+        <c:forEach var="post" items="${appPostList}" varStatus="stat"> 
             <a class="a-nodecoration" href="/hunter/postDetail?postcode=${post.postcode}">
                 <li class="post-list-item">
-                    <span id="post-item-1">${post.postcode}</span>
+                    <span id="post-item-1">${stat.count}</span>
                     <span id="post-item-2"> ${post.title} </span>
                     <span id="post-item-3"> ${post.deadline} </span>
                 </li>

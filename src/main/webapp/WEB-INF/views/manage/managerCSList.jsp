@@ -80,7 +80,7 @@
             <span id="notice-item-1"> 유형 </span> <span id="notice-item-2"> 제목 </span> <span id="notice-item-3"> 작성된 날짜 </span><span id="notice-item-3"> 경과일 </span>
         </li>
         <c:forEach var="cs" items="${csDtoList}" varStatus="stat"> 
-            <a class="a-nodecoration" href="/hunter/csDetail?ntcode=${cs.getCscode()}" >
+            <a class="a-nodecoration" href="/cs/forumDetail?cscode=${cs.getCscode()}" >
             <li class="csList-list-item">
 
                 <c:if test="${fn:trim(cs.getType()) == 'A' }"> 

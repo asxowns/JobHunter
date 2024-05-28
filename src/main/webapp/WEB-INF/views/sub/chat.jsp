@@ -123,11 +123,7 @@
 </style>
 <div id="chat-container">
 	<div class="chat-content">
-		<%--
-        <div class="line">
-            <span class="chat-box">안녕하세요! 무엇을 도와드릴까요?</span>
-        </div>
-        --%>
+		<%-- 메세지 입력 파트 --%>
 	</div>
 	<div id="chatForm" method="post" style="display: flex; padding-top:5px;">
 		<input type="text" id="text" name="message"

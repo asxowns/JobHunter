@@ -184,6 +184,10 @@ header {
 #head_menu_slide ul li a:hover{
 	color:#D44958;
 }
+#access{
+	margin-top:10px;
+	margin-left:300px;
+}
 </style>
 	<div id="header">
 		<div class="head">
@@ -209,6 +213,9 @@ header {
 						</label>
 					</div>
 				</form>
+				<div id="access">
+					<%-- <span> 접속자 수 : </span> --%>
+				</div>
 				<div class="logo2">
 					<a href="/manage/manageLoginForm"><img src="/resource/img/logo2.png"></a>
 				</div>
@@ -278,14 +285,19 @@ header {
 		slide.classList.add("active");
 	});
 	
-	function accessCount(){
+	function accessPlus(){
 		// 접속자 수 증가 함수
-		// fetch('/manage/access');
+		fetch('/manage/access')
+            .then(response => response.json())
+            .then(accessCnt => {
+                var accessDiv = document.querySelector('#access');
+                accessDiv.innerHTML = "<span> 총 접속자 수 : "+ accessCnt+ "명 </span>";
+            });
 	}
 
 	// 페이지가 로드될 때 함수 실행
 	document.addEventListener('DOMContentLoaded', (event) => {
-        accessCount();
+        accessPlus();
     });
 
 	
