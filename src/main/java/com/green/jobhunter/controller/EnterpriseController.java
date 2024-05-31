@@ -265,4 +265,10 @@ public class EnterpriseController {
     	return "redirect:/enter/hunterPerPostList?postcode="+postcode;
     }
     
+    //구직자 이력서 상세페이지
+    
+    @RequestMapping("/hunterResumeDetail")
+    public String resume() {
+    	return "/enter/hunterResumeDetail";
+    }
 }

@@ -18,7 +18,11 @@ body, html {
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
+	
 }
+h2{padding: 30px;}
+#post-box{border: solid 1px black;
+			padding:40px;}
 
 ul {
 	display: flex;
@@ -63,32 +67,35 @@ section {
 		<%@ include file="../sub/header.jsp"%>
 	</header>
 	<section>
-		<h2>hunterPerPostList page</h2>
+		<h2> 지원자 관리 </h2>
 		<!-- 해당공고의 지원자 관리 페이지(해당공고내용/지원자(구직자)리스트/해당공고의 통계 -->
 		<br>
-		<div class="container">
+		<div class="container" id="post-box">
 			<!-- 해당공고내용 -->
-			${posting.postcode } ${posting.title } ${posting.regdate } 모집인원 :
-			${posting.headcount }
+			${posting.postcode } /
+			${posting.title } /
+			${posting.regdate } /
+			모집인원 : ${posting.headcount }
 		</div>
 		<br>
-		<div class="container">
+		<div class="container" id="post-box">
 			<!-- 지원자 리스트 -->
 			<p>지원자 리스트</p>
 			<br>
 			<c:forEach var="app" items="${applicantDto }">
 				<ul>
-					<li class="app-list-items">${app.username }</li>
-					<li class="app-list-items">${app.title }</li>
-					<li class="app-list-items">${app.gender }</li>
-					<li class="app-list-items">${app.birth }</li>
-					<li class="app-list-items">${app.edutype }</li>
+					<li class="app-list-items">${app.username } : </li>
+					<li class="app-list-items"><a href="/hunterResumeDetail">${app.title }</a>  / </li>
+					<li class="app-list-items">${app.gender } / </li>
+					<li class="app-list-items">${app.birth } / </li>
+					<li class="app-list-items">${app.edutype } / </li>
 					<li class="app-list-items">${app.employmenttype }</li>
-					<li class="app-list-items">${app.result }</li>
+					
 					<li class="app-list-items"><a id="result-btn"
 						href="/enter/jobApplication?result=합격&postcode=${posting.postcode}&appcode=${app.appcode}">합격</a></li>
 					<li class="app-list-items"><a id="result-btn"
 						href="/enter/jobApplication?result=불합격&postcode=${posting.postcode}&appcode=${app.appcode}">불합격</a></li>
+					<li class="app-list-items">(${app.result })</li>
 				</ul>
 			</c:forEach>
 

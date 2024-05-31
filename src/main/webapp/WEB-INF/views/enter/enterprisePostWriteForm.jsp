@@ -17,6 +17,7 @@
     align-items: center;
     flex-direction: column; 
   }
+  h2{padding:10px;}
   .container form .input-row {
     display: flex; 
     align-items: center; 
@@ -41,6 +42,8 @@
         border: 1px solid gray;
         padding: 20px; 
         text-align: center; 
+        background-color:#d44958;
+		color:white;
     }
     
 </style>

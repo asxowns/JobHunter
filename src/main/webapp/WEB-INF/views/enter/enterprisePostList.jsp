@@ -16,6 +16,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column; 
+    padding: 30px;
   }
   button {
     	width: 80px; /* 버튼 너비 조절 */
@@ -26,14 +27,21 @@
     	border: 1px solid black; /* 버튼 테두리 설정 */
     	border-radius: 5px; /* 버튼 모서리 둥글게 */
     	cursor: pointer; /* 커서 변경 */
+    	
+    	background-color:#d44958;
+		color:white;
+		padding:8px;
     }
     button:hover {
-    	background-color: #f0f0f0; /* 호버 시 버튼 배경 색상 변경 */
+    	background-color: #gray; /* 호버 시 버튼 배경 색상 변경 */
     }
     td {
             padding: 15px; /* 셀 내부 패딩 설정 */
             text-align: center; /* 텍스트 가운데 정렬 */
         }
+    #plus-btn{width: 120px; 
+    			magin:100px;}
+    #list-btn{width: 110px;}
 </style>
 </head>
 <body>
@@ -41,19 +49,20 @@
     <%@ include file="../sub/header.jsp" %>
 </header>
 <section>
-    <h2> enterprisePostList page </h2>
+    <h2> 채용공고 관리 </h2>
     <br>
     <div class="container">
-    <div><a href="/enter/enterprisePostWriteForm?formType=register"><button>채용공고등록</button></a></div>
+    <div><a href="/enter/enterprisePostWriteForm?formType=register"><button id="plus-btn">채용공고등록</button></a></div>
+    <br>
     <div>
     <table border="1">
     <c:forEach var="posting" items="${posting }">
     	<tr>
     		<td>${posting.postcode }</td>
     		<td>${posting.title }</td>   
-    		<td>${posting.regdate }
+    		<td>${posting.regdate }~
     		<td>
-    			<a href="/enter/hunterPerPostList?postcode=${posting.postcode }"><button>지원자보기</button></a>
+    			<a href="/enter/hunterPerPostList?postcode=${posting.postcode }"><button id="list-btn">지원자보기</button></a>
     			<a href="/enter/enterprisePostWriteForm?postcode=${posting.postcode }"><button>수정</button></a>
     			<a href="/enter/enterprisePostDelete?postcode=${posting.postcode }"><button>삭제</button></a>
     		</td>

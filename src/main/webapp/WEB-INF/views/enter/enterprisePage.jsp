@@ -48,7 +48,8 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-        }    
+        } 
+    h2{padding: 30px;}   
 </style>
 
 <!-- Chart.js 라이브러리 추가 -->
@@ -59,7 +60,7 @@
     <%@ include file="../sub/header.jsp" %>
 </header>
 <section>
-    <h2> enterprise page (${sessionScope.logged })</h2>
+    <h2> 기업 마이 페이지 </h2>
     <br>
     <div class="button-container">
 		<a href="/enter/enterprisePostList"><button>채용공고관리</button></a>
