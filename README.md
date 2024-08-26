@@ -17,5 +17,8 @@
 ## 공고 디테일
 <img width="926" alt="스크린샷 2024-08-26 오후 6 04 32" src="https://github.com/user-attachments/assets/00aa44ae-265e-4b48-8256-9160e91629c0">
 
+## 게시판
+<img width="1260" alt="스크린샷 2024-08-26 오후 7 41 27" src="https://github.com/user-attachments/assets/6e0fe51f-2247-46f2-8aab-06697ded2795">
+<img width="1260" alt="스크린샷 2024-08-26 오후 7 41 41" src="https://github.com/user-attachments/assets/d6532200-da86-4934-bcdb-0a933818b7c8">
 
 
