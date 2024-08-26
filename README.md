@@ -8,7 +8,6 @@
 
 
 <img width="1289" alt="스크린샷 2024-08-26 오후 5 16 31" src="https://github.com/user-attachments/assets/b7ab8276-14cb-4a7a-9c65-fa19b8841661">
-
 <img width="1289" alt="스크린샷 2024-08-26 오후 5 15 19" src="https://github.com/user-attachments/assets/3cd92aa4-ff6f-4570-9252-f0c28c205a82">
 
 
