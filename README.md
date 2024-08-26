@@ -7,6 +7,7 @@
 ### 작업기간 - 2024.05.10 ~ 2024.05.24
 
 
+## 메인 화면
 <img width="1289" alt="스크린샷 2024-08-26 오후 5 16 31" src="https://github.com/user-attachments/assets/b7ab8276-14cb-4a7a-9c65-fa19b8841661">
 <img width="1260" alt="스크린샷 2024-08-26 오후 6 16 30" src="https://github.com/user-attachments/assets/1899f898-13e0-404e-9130-9951c4ed031a">
 
