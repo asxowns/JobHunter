@@ -21,4 +21,6 @@
 <img width="1260" alt="스크린샷 2024-08-26 오후 7 41 27" src="https://github.com/user-attachments/assets/6e0fe51f-2247-46f2-8aab-06697ded2795">
 <img width="1260" alt="스크린샷 2024-08-26 오후 7 41 41" src="https://github.com/user-attachments/assets/d6532200-da86-4934-bcdb-0a933818b7c8">
 
-
+## 공지사항
+<img width="1260" alt="스크린샷 2024-08-28 오후 3 21 48" src="https://github.com/user-attachments/assets/681e8837-f157-4744-9d77-c77ac24c00fd">
+<img width="846" alt="스크린샷 2024-08-28 오후 3 22 05" src="https://github.com/user-attachments/assets/595a8999-b6dd-4ac9-80c8-5c1e31968d50">
