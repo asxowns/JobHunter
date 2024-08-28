@@ -24,3 +24,7 @@
 ## 공지사항
 <img width="1260" alt="스크린샷 2024-08-28 오후 3 21 48" src="https://github.com/user-attachments/assets/681e8837-f157-4744-9d77-c77ac24c00fd">
 <img width="846" alt="스크린샷 2024-08-28 오후 3 22 05" src="https://github.com/user-attachments/assets/595a8999-b6dd-4ac9-80c8-5c1e31968d50">
+
+## 마이페이지
+<img width="846" alt="스크린샷 2024-08-28 오후 3 25 49" src="https://github.com/user-attachments/assets/c5c7167e-eed0-463e-b456-58c81f375e16">
+
